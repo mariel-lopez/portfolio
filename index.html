@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mariel Lopez</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700,300i,400i,500i,700i&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=recoleta@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-size: 16px;
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-weight: 300;
+      background: #f7eee5;
+      color: #2a2420;
+      min-height: 100vh;
+    }
+
+    .page {
+      padding: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 120px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      gap: 56px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    nav a {
+      font-size: 20px;
+      color: #000;
+      text-decoration: none;
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+    }
+
+    /* Active page indicator — soft warm pill rendered via pseudo-element so layout
+       stays identical across pages regardless of which item is current. */
+    nav a.is-current {
+      position: relative;
+      isolation: isolate;
+    }
+
+    nav a.is-current::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: calc(100% + 32px);
+      height: calc(100% + 12px);
+      background: rgba(42, 36, 32, 0.08);
+      border-radius: 100px;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+
+    .nav-brand-flower {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .nav-brand-name {
+      font-family: 'Recoleta', 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: #2a2420;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── KAMUSTA TOOLTIP ── */
+    .kamusta {
+      position: relative;
+      cursor: default;
+    }
+
+    .kamusta-tip {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fdf9f7;
+      border: 1px solid rgba(42,36,32,0.1);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      font-style: italic;
+      color: #6d6d6d;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+
+    .kamusta:hover .kamusta-tip { opacity: 1; }
+
+    /* ── NAV ETC TOOLTIP ── */
+    .nav-etc {
+      position: relative;
+    }
+
+    .nav-etc-tip {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fdf9f7;
+      border: 1px solid rgba(42,36,32,0.1);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      font-style: italic;
+      color: #6d6d6d;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      z-index: 10;
+    }
+
+    .nav-etc:hover .nav-etc-tip { opacity: 1; }
+
+    /* ── HERO ── */
+    .hero {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      gap: 40px;
+    }
+
+    .hero-text {
+      flex: 1 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .hero-greeting {
+      font-size: 28px;
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-weight: 300;
+    }
+
+    .hero-headline {
+      font-size: 48px;
+      font-family: 'Recoleta', 'Playfair Display', serif;
+      font-weight: 400;
+      line-height: 1.15;
+    }
+
+    .hero-sub {
+      font-size: 28px;
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-weight: 300;
+    }
+
+    .hero-floral-wrap {
+      position: relative;
+      width: min(500px, 46vw);
+      aspect-ratio: 1 / 1;
+      flex-shrink: 0;
+      overflow: visible;
+    }
+
+    .hero-floral {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      position: relative;
+      z-index: 0;
+    }
+
+    .hero-floral-caption {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      font-style: italic;
+      color: #2a2420;
+      background: rgba(247, 238, 229, 0.85);
+      padding: 6px 14px;
+      border-radius: 100px;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .hero-floral-wrap:hover .hero-floral-caption {
+      opacity: 1;
+    }
+
+    /* ── FEATURED WORK ── */
+    /* isolation keeps card stack predictable; flora uses screen so black PNG matte disappears on #f7eee5 */
+    .work-section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: relative;
+      isolation: isolate;
+      overflow: visible;
+      padding-inline: clamp(4px, 1.2vw, 16px);
+      box-sizing: border-box;
+    }
+
+    /* Side birds: fade in on card hover/focus */
+    .work-section::before,
+    .work-flora-flight {
+      content: '';
+      position: absolute;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-color: transparent;
+      background-blend-mode: normal;
+      mix-blend-mode: screen;
+      opacity: 0;
+      transform: scale(1);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Hummingbird floats top-right, near the design system card. Flipped to face outward (right). */
+    .work-section::before {
+      top: clamp(72px, 11%, 128px);
+      bottom: 50%;
+      width: clamp(96px, 18vw, 160px);
+      right: clamp(-118px, -10vw, -32px);
+      background-image: url('bird-hummingbird.png');
+      background-position: left center;
+      background-size: contain;
+      background-origin: border-box;
+      transform: scaleX(-1);
+      transform-origin: center;
+    }
+
+    /* Sunbird in flight, floating over the bottom-left near the "designed and launched" card. Flipped to face outward (left). */
+    .work-flora-flight {
+      bottom: clamp(-28px, -2vw, 0px);
+      top: auto;
+      width: clamp(96px, 14vw, 160px);
+      aspect-ratio: 766 / 612;
+      left: clamp(-56px, -5vw, -20px);
+      background-image: url('hero-sunbird-flight.png');
+      background-position: center;
+      background-size: contain;
+      transform: scaleX(-1);
+      transform-origin: center;
+    }
+
+    .work-section:has(.project-card:hover)::before,
+    .work-section:has(.project-card:focus-within)::before,
+    .work-section:has(.project-card:hover) .work-flora-flight,
+    .work-section:has(.project-card:focus-within) .work-flora-flight {
+      opacity: 1;
+    }
+
+    .work-title {
+      font-family: 'Recoleta', 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 400;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Solid stacking above flora in the gutters */
+    .work-section .projects-row {
+      display: flex;
+      gap: 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .project-card {
+      flex: 1 0 0;
+      position: relative;
+      z-index: 1;
+      isolation: isolate;
+      opacity: 1;
+      mix-blend-mode: normal;
+      background: #fdf9f7;
+      background-clip: padding-box;
+      border: 1px solid rgba(42, 36, 32, 0.06);
+      padding: 24px;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      text-decoration: none;
+      color: #000;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.07);
+    }
+
+    .project-card.no-hover {
+      cursor: default;
+    }
+
+    .project-card.no-hover:hover {
+      transform: none;
+      box-shadow: none;
+    }
+
+    .project-card.card-green:hover  { box-shadow: 0 12px 40px rgba(45,130,80,0.27); }
+    .project-card.card-purple:hover { box-shadow: 0 12px 40px rgba(80,40,130,0.27); }
+    .project-card.card-gold:hover   { box-shadow: 0 12px 40px rgba(180,140,40,0.27); }
+
+    .project-thumb-wrap {
+      position: relative;
+      height: 290px;
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .project-thumb {
+      height: 100%;
+      width: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+      display: block;
+      background: #e8e0d8;
+      transition: transform 0.45s ease, filter 0.45s ease;
+    }
+
+    /* Sharpen and slightly enlarge previews on hover (fine pointer — avoids sticky hover on touch). */
+    @media (hover: hover) and (pointer: fine) {
+      .project-card:hover .project-thumb,
+      .project-card:focus-within .project-thumb {
+        transform: scale(1.03);
+        filter: brightness(1.13) contrast(1.10) saturate(1.32);
+      }
+
+      /* Non-interactive cards stay static — no scale, no warm filter shift. */
+      .project-card.no-hover:hover .project-thumb,
+      .project-card.no-hover:focus-within .project-thumb {
+        transform: none;
+        filter: none;
+      }
+    }
+
+    .project-card-title {
+      font-family: 'Recoleta', 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 1.3;
+    }
+
+    /* ── CONTACT CARD ── */
+    .contact-card {
+      background: #fff7ef;
+      padding: 40px;
+      border-radius: 16px;
+      border: 1px solid rgba(42, 36, 32, 0.1);
+      width: 100%;
+      position: relative;
+      overflow: visible;
+    }
+
+    .contact-inner {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    .contact-floral {
+      position: absolute;
+      top: -145px;
+      right: 80px;
+      width: 160px;
+      height: auto;
+      object-fit: contain;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .contact-card:hover .contact-floral,
+    .contact-card.form-active .contact-floral {
+      opacity: 1;
+    }
+
+    .contact-text {
+      flex: 1 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .contact-heading {
+      font-family: 'Recoleta', 'Playfair Display', serif;
+      font-size: 40px;
+      font-weight: 400;
+    }
+
+    .email-copy-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .email-copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: 'Recoleta', 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: #2a2420;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(42,36,32,0.3);
+      transition: opacity 0.2s;
+    }
+
+    .email-copy-btn:hover { opacity: 0.6; }
+
+    .email-copy-btn svg {
+      width: 15px;
+      height: 15px;
+      opacity: 0.45;
+      flex-shrink: 0;
+      transition: opacity 0.2s;
+    }
+
+    .email-copy-btn:hover svg { opacity: 0.7; }
+
+    .copy-feedback {
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      font-style: italic;
+      color: #6d6d6d;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+
+    .copy-feedback.visible { opacity: 1; }
+
+    .contact-quote {
+      font-family: 'Recoleta', 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .contact-form {
+      flex: 1 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .form-field {
+      position: relative;
+      width: 100%;
+      padding-bottom: 2px;
+    }
+
+    .form-label {
+      position: absolute;
+      bottom: 8px;
+      left: 0;
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-size: 20px;
+      color: #6d6d6d;
+      font-style: italic;
+      font-weight: 300;
+      pointer-events: none;
+      transition: opacity 0.18s ease;
+    }
+
+    .form-field.has-value .form-label,
+    .form-field.focused .form-label {
+      opacity: 0;
+    }
+
+    .form-input {
+      display: block;
+      width: 100%;
+      background: none;
+      border: none;
+      border-bottom: 1px solid rgba(0,0,0,0.25);
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-size: 20px;
+      font-style: italic;
+      font-weight: 300;
+      color: #2a2420;
+      padding: 0 0 8px;
+      outline: none;
+    }
+
+    .form-input::placeholder { color: transparent; }
+
+    .form-submit {
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      font-style: italic;
+      color: #000;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      text-align: left;
+      transition: opacity 0.2s;
+    }
+
+    .form-submit:hover { opacity: 0.55; }
+
+    .form-error {
+      font-size: 16px;
+      color: #c0392b;
+      margin-top: 4px;
+      display: none;
+    }
+
+    @keyframes float-up-in {
+      0%   { opacity: 0; transform: translateY(12px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes check-pop {
+      0%   { transform: scale(0) rotate(-15deg); opacity: 0; }
+      60%  { transform: scale(1.25) rotate(4deg); opacity: 1; }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+
+    .contact-success {
+      display: none;
+      flex: 1 0 0;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-success.visible {
+      display: flex;
+      animation: float-up-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      position: relative;
+      z-index: 3;
+      padding-top: 80px;
+    }
+
+    .success-floral {
+      width: 100px;
+      height: 120px;
+      object-fit: contain;
+      animation: float-up-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .success-text-row {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .success-text {
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-size: 20px;
+      font-style: italic;
+      font-weight: 400;
+      color: #2a2420;
+      line-height: 1.5;
+    }
+
+    .form-reset-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      color: #6d6d6d;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: opacity 0.2s;
+      margin-top: 4px;
+    }
+
+    .form-reset-btn:hover { opacity: 0.55; }
+
+    /* ── FOOTER ── */
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .footer-copy {
+      font-size: 20px;
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      color: #000;
+      white-space: nowrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      margin-left: auto;
+      padding-right: 40px;
+    }
+
+    .footer-links a {
+      font-size: 20px;
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      color: #000;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .footer-links a:hover { opacity: 0.55; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .work-section::before,
+      .work-flora-flight {
+        transition-duration: 0.05s;
+      }
+
+      .project-thumb {
+        transition-duration: 0.05s;
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        .project-card:hover .project-thumb,
+        .project-card:focus-within .project-thumb {
+          transform: none;
+        }
+      }
+    }
+
+    @media (max-width: 900px) {
+      .page { padding: 40px 24px; gap: 60px; }
+
+      /* Nav */
+      nav { gap: 24px; flex-wrap: wrap; justify-content: center; }
+      nav a { font-size: 17px; }
+      .nav-brand { order: -1; flex-basis: 100%; justify-content: center; }
+      .nav-brand-flower { width: 40px; height: 40px; }
+      .nav-brand-name { font-size: 18px; }
+
+      /* Hero */
+      .hero { flex-direction: column; gap: 32px; }
+      .hero-floral-wrap {
+        width: 100%;
+        max-width: 420px;
+        margin-inline: auto;
+        aspect-ratio: auto;
+      }
+      .hero-floral {
+        width: 100%;
+        height: auto;
+        max-height: 340px;
+        object-fit: contain;
+      }
+      .hero-floral-caption { opacity: 1; }
+      .hero-headline { font-size: 34px; }
+      .hero-greeting, .hero-sub { font-size: 20px; }
+
+      /* Work — flatten the two .projects-row wrappers so all 4 cards live in a
+         single sticky stack instead of two stacks of two. Selector specificity
+         must match `.work-section .projects-row` from desktop. */
+      .work-section .projects-row { display: contents; }
+      .project-card {
+        position: sticky;
+        top: calc(16px + var(--card-i, 0) * 16px);
+        z-index: calc(var(--card-i, 0) + 1);
+        transform-origin: top center;
+        will-change: transform;
+        margin-bottom: 0;
+      }
+      .project-card:hover { transform: none; }
+      .work-title { font-size: 26px; text-align: left; }
+      .work-section { overflow: visible; align-self: stretch; }
+
+      /* Stagger florals vertically (hummingbird upper-right / sunbird lower-left); keep visible while scrolling —
+         touch screens rarely get :hover so show at full strength here. Both flipped to face outward. */
+      .work-section::before,
+      .work-flora-flight {
+        opacity: 0.93;
+        background-size: contain;
+      }
+
+      .work-section::before {
+        width: clamp(222px, 84vw, 420px);
+        top: clamp(44px, 7%, 80px);
+        bottom: 52%;
+        left: auto;
+        right: clamp(-200px, -32vw, -52px);
+        background-position: left center;
+        transform: scaleX(-1);
+      }
+
+      .work-flora-flight {
+        top: 52%;
+        bottom: clamp(-64px, -12vw, -16px);
+        width: clamp(240px, 86vw, 450px);
+        right: auto;
+        left: clamp(-185px, -27.5vw, -45px);
+        background-position: 55% 88%;
+        transform: scaleX(-1);
+      }
+
+      /* Contact */
+      .contact-card { padding: 28px 20px; }
+      .contact-inner { flex-direction: column; align-items: stretch; width: 100%; }
+      .contact-floral { width: 150px; top: -85px; right: 10px; }
+      .contact-heading { font-size: 32px; }
+      .email-copy-btn { font-size: 18px; }
+      .contact-quote { font-size: 18px; }
+
+      /* Footer */
+      footer { flex-direction: column; gap: 16px; align-items: flex-start; }
+      .footer-links { flex-wrap: wrap; gap: 16px; margin-left: 0; padding-right: 0; }
+    }
+
+    @media (max-width: 500px) {
+      .page { padding: 32px 16px; gap: 48px; }
+      .hero-headline { font-size: 28px; }
+      nav a { font-size: 15px; }
+      .contact-heading { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- NAV -->
+    <nav>
+      <a href="#" class="is-current">Work</a>
+      <a href="about.html">About</a>
+      <a href="index.html" class="nav-brand">
+        <span class="nav-brand-name">Mariel</span>
+        <img class="nav-brand-flower" src="favicon.png" alt="" />
+        <span class="nav-brand-name">Lopez</span>
+      </a>
+      <a href="#" class="nav-etc">Guides<span class="nav-etc-tip">Blooming soon</span></a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-text">
+        <p class="hero-greeting"><span class="kamusta">Kamusta<span class="kamusta-tip">Means "how are you" in Tagalog!</span></span>! I'm Mariel</p>
+        <p class="hero-headline">I'm a Product Designer who makes complex systems feel more human and intentional</p>
+        <p class="hero-sub">Currently designing @ <a href="https://www.ibm.com/consulting/ibmix" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">IBM iX</a></p>
+      </div>
+      <div class="hero-floral-wrap">
+        <img class="hero-floral" src="hero-img.png" alt="" />
+        <p class="hero-floral-caption">Sampaguita, the national flower of the Philippines</p>
+      </div>
+    </div>
+
+    <!-- FEATURED WORK -->
+    <div class="work-section">
+      <div class="work-flora-flight" aria-hidden="true"></div>
+      <p class="work-title">Featured work</p>
+
+      <div class="projects-row">
+        <a class="project-card protected-card card-green" href="sobeys.html" data-dest="sobeys.html" style="--card-i:0">
+          <div class="project-thumb-wrap">
+            <img class="project-thumb" src="sobeys-cover.png" alt="Sobeys" />
+          </div>
+          <p class="project-card-title">Redesigning the Sobeys homepage for 1M+ monthly users</p>
+        </a>
+        <a class="project-card protected-card card-purple" href="#" data-dest="https://www.figma.com/deck/Sec5BHYFpoc6wfvJEchXHn/Sobeys-%7C-Design-system--Public-?node-id=21-3087&viewport=401%2C246%2C0.24&t=h57Xp4S5bA1gz9wt-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1" data-external="true" style="--card-i:1">
+          <div class="project-thumb-wrap">
+            <img class="project-thumb" src="ds-cover.png" alt="Design System" />
+          </div>
+          <p class="project-card-title">Building a design system to unify 6 grocery brands</p>
+        </a>
+      </div>
+
+      <div class="projects-row">
+        <a class="project-card card-gold" href="https://onepacificbythebay.com/" target="_blank" rel="noopener" style="--card-i:2">
+          <div class="project-thumb-wrap">
+            <img class="project-thumb" src="onepacific-cover.png" alt="One Pacific" />
+          </div>
+          <p class="project-card-title">Designed and launched a website for a new real estate development</p>
+        </a>
+        <div class="project-card no-hover" style="--card-i:3">
+          <div class="project-thumb-wrap">
+            <img class="project-thumb" src="ac-bg.png" alt="Air Canada" />
+          </div>
+          <p class="project-card-title">Air Canada — Blooming soon</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACT CARD -->
+    <div class="contact-card" id="contact">
+      <img class="contact-floral" src="bird-contact form.png" alt="" />
+      <div class="contact-inner">
+        <div class="contact-text">
+          <div>
+            <p class="contact-heading">Say hi!</p>
+            <div class="email-copy-row">
+              <button class="email-copy-btn" id="email-copy-btn">
+                mariellopezdesign@gmail.com
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              </button>
+              <span class="copy-feedback" id="copy-feedback">Copied!</span>
+            </div>
+          </div>
+          <p class="contact-quote">Drop me a letter, I'd love to hear from you.</p>
+        </div>
+        <form class="contact-form" id="contact-form" action="https://formspree.io/f/xgoddvna" method="POST">
+          <div class="form-field" id="field-email">
+            <label class="form-label" for="email">Your email</label>
+            <input class="form-input" id="email" type="email" name="email" placeholder=" " autocomplete="off" required />
+            <span class="form-error" id="email-error">Please enter a valid email address.</span>
+          </div>
+          <div class="form-field" id="field-note">
+            <label class="form-label" for="note">Your note</label>
+            <input class="form-input" id="note" type="text" name="note" placeholder=" " required />
+            <span class="form-error" id="note-error">Please write a note.</span>
+          </div>
+          <button class="form-submit" type="submit">Send it up &amp; away →</button>
+        </form>
+        <div class="contact-success" id="contact-success">
+          <div class="success-text-row">
+            <p class="success-text">Sent up &amp; away… I'll be in touch soon!</p>
+            <button class="form-reset-btn" id="form-reset-btn">Send another →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <p class="footer-copy">© 2026 Mariel Lopez. Find me where the light is.</p>
+      <nav class="footer-links">
+        <a href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://luma.com/user/mariel" target="_blank" rel="noopener">Luma</a>
+        <a href="mailto:mariellopezdesign@gmail.com">Contact</a>
+      </nav>
+    </footer>
+
+  </div>
+  <!-- PASSWORD MODAL -->
+  <div id="pw-modal" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(42,36,32,0.45);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
+    <div style="background:#fdf9f7;border-radius:20px;padding:48px 40px;max-width:400px;width:90%;display:flex;flex-direction:column;gap:24px;box-shadow:0 24px 60px rgba(0,0,0,0.12);">
+      <p style="font-family:'Recoleta','Playfair Display',serif;font-size:28px;font-weight:400;color:#2a2420;">This project is private</p>
+      <p style="font-family:'Satoshi','DM Sans',sans-serif;font-size:16px;font-weight:300;color:#6d6d6d;margin-top:-12px;">Enter the password to continue.</p>
+      <div style="position:relative;padding-bottom:2px;">
+        <input id="pw-input" type="password" placeholder="Password" style="display:block;width:100%;background:none;border:none;border-bottom:1px solid rgba(0,0,0,0.25);font-family:'Satoshi','DM Sans',sans-serif;font-size:18px;font-weight:300;font-style:italic;color:#2a2420;padding:0 0 8px;outline:none;" />
+        <p id="pw-error" style="font-family:'Satoshi','DM Sans',sans-serif;font-size:14px;color:#c0392b;margin-top:6px;display:none;">Incorrect password.</p>
+      </div>
+      <div style="display:flex;gap:16px;align-items:center;">
+        <button id="pw-submit" style="font-family:'Satoshi','DM Sans',sans-serif;font-size:18px;font-weight:400;font-style:italic;color:#000;background:none;border:none;padding:0;cursor:pointer;transition:opacity 0.2s;">Enter →</button>
+        <button id="pw-cancel" style="font-family:'Satoshi','DM Sans',sans-serif;font-size:14px;font-weight:300;color:#6d6d6d;background:none;border:none;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px;transition:opacity 0.2s;">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Show bird on form interaction
+    const contactCard = document.querySelector('.contact-card');
+    document.querySelectorAll('.form-input').forEach(input => {
+      input.addEventListener('focus', () => contactCard.classList.add('form-active'));
+      input.addEventListener('blur', () => {
+        if (!document.querySelector('.form-input:focus')) contactCard.classList.remove('form-active');
+      });
+    });
+
+    // Floating label behaviour
+    document.querySelectorAll('.form-field').forEach(field => {
+      const input = field.querySelector('.form-input');
+      if (!input) return;
+      input.addEventListener('focus',  () => field.classList.add('focused'));
+      input.addEventListener('blur',   () => field.classList.remove('focused'));
+      input.addEventListener('input',  () => field.classList.toggle('has-value', input.value.length > 0));
+    });
+
+    // Copy email
+    document.getElementById('email-copy-btn').addEventListener('click', function() {
+      navigator.clipboard.writeText('mariellopezdesign@gmail.com').then(() => {
+        const feedback = document.getElementById('copy-feedback');
+        feedback.classList.add('visible');
+        setTimeout(() => feedback.classList.remove('visible'), 2000);
+      });
+    });
+
+    // Form submission
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const emailInput = document.getElementById('email');
+      const noteInput  = document.getElementById('note');
+      const emailErr   = document.getElementById('email-error');
+      const noteErr    = document.getElementById('note-error');
+      const emailRe    = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      let valid = true;
+
+      emailErr.style.display = 'none';
+      noteErr.style.display  = 'none';
+
+      if (!emailRe.test(emailInput.value.trim())) {
+        emailErr.style.display = 'block';
+        valid = false;
+      }
+      if (!noteInput.value.trim()) {
+        noteErr.style.display = 'block';
+        valid = false;
+      }
+      if (!valid) return;
+
+      // Send via Formspree
+      const form = this;
+      fetch('https://formspree.io/f/xgoddvna', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(response => {
+        if (response.ok) {
+          form.style.opacity = '0';
+          form.style.transition = 'opacity 0.3s ease';
+          setTimeout(() => {
+            form.style.display = 'none';
+            document.getElementById('contact-success').classList.add('visible');
+          }, 300);
+        }
+      });
+    });
+
+    // Reset form from success state
+    document.getElementById('form-reset-btn').addEventListener('click', function() {
+      const form    = document.getElementById('contact-form');
+      const success = document.getElementById('contact-success');
+      success.classList.remove('visible');
+      form.reset();
+      form.style.opacity = '0';
+      form.style.display = 'flex';
+      form.style.transition = 'opacity 0.3s ease';
+      // reset field state
+      document.querySelectorAll('.form-field').forEach(f => f.classList.remove('has-value', 'focused'));
+      requestAnimationFrame(() => { form.style.opacity = '1'; });
+    });
+
+    // Password protection for project cards
+    const PW_HASH = '143705b2daf4782f008a1fc7aedddf3ee66e8b42d295cf07cdc015ab93b90be9';
+    let pendingDest = null;
+    let pendingCard = null;
+
+    async function sha256(str) {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+    }
+
+    function openModal(dest, card) {
+      pendingDest = dest;
+      pendingCard = card;
+      document.getElementById('pw-input').value = '';
+      document.getElementById('pw-error').style.display = 'none';
+      const modal = document.getElementById('pw-modal');
+      modal.style.display = 'flex';
+      setTimeout(() => document.getElementById('pw-input').focus(), 50);
+    }
+
+    function closeModal() {
+      document.getElementById('pw-modal').style.display = 'none';
+      pendingDest = null;
+    }
+
+    const PW_EXPIRY_MS = 7 * 24 * 60 * 60 * 1000;
+
+    function isUnlocked() {
+      const ts = localStorage.getItem('pw_unlocked_at');
+      return ts && (Date.now() - parseInt(ts)) < PW_EXPIRY_MS;
+    }
+
+    document.querySelectorAll('.protected-card').forEach(card => {
+      card.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (isUnlocked()) {
+          const dest = this.dataset.dest;
+          if (dest && dest !== '#') {
+            if (this.dataset.external) window.open(dest, '_blank', 'noopener');
+            else window.location.href = dest;
+          }
+        } else {
+          openModal(this.dataset.dest, this);
+        }
+      });
+    });
+
+    document.getElementById('pw-submit').addEventListener('click', async function() {
+      const val = document.getElementById('pw-input').value;
+      const hash = await sha256(val);
+      if (hash === PW_HASH) {
+        localStorage.setItem('pw_unlocked_at', Date.now().toString());
+        const isExternal = pendingCard && pendingCard.dataset.external;
+        closeModal();
+        if (pendingDest && pendingDest !== '#') {
+          if (isExternal) window.open(pendingDest, '_blank', 'noopener');
+          else window.location.href = pendingDest;
+        }
+      } else {
+        document.getElementById('pw-error').style.display = 'block';
+        document.getElementById('pw-input').value = '';
+      }
+    });
+
+    document.getElementById('pw-input').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') document.getElementById('pw-submit').click();
+    });
+
+    document.getElementById('pw-cancel').addEventListener('click', closeModal);
+    document.getElementById('pw-modal').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+
+    // Card stack scale effect (mobile only)
+    function updateCardStack() {
+      if (window.innerWidth > 900) return;
+      document.querySelectorAll('.project-card').forEach((card, i) => {
+        const stickyY = 16 + i * 16;
+        const rect = card.getBoundingClientRect();
+        const over = Math.max(0, stickyY - rect.top);
+        if (over > 0) {
+          const progress = Math.min(1, over / 200);
+          card.style.transform = 'scale(' + (1 - progress * 0.05) + ')';
+        } else {
+          card.style.transform = '';
+        }
+      });
+    }
+    window.addEventListener('scroll', updateCardStack, { passive: true });
+    window.addEventListener('resize', updateCardStack, { passive: true });
+    updateCardStack();
+  </script>
+</body>
+</html>

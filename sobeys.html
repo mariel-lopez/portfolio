@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sobeys — Mariel Lopez</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700,300i,400i,500i,700i&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=recoleta@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-size: 16px;
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-weight: 300;
+      background: #f7eee5;
+      color: #2a2420;
+      min-height: 100vh;
+    }
+
+    .page {
+      padding: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      gap: 56px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    nav a {
+      font-size: 20px;
+      color: #000;
+      text-decoration: none;
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+    }
+
+    /* Active page indicator — soft warm pill rendered via pseudo-element so layout
+       stays identical across pages regardless of which item is current. */
+    nav a.is-current {
+      position: relative;
+      isolation: isolate;
+    }
+
+    nav a.is-current::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: calc(100% + 32px);
+      height: calc(100% + 12px);
+      background: rgba(42, 36, 32, 0.08);
+      border-radius: 100px;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+
+    .nav-brand-flower {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .nav-brand-name {
+      font-family: 'Recoleta', 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: #2a2420;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── NAV ETC TOOLTIP ── */
+    .nav-etc {
+      position: relative;
+    }
+
+    .nav-etc-tip {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fdf9f7;
+      border: 1px solid rgba(42,36,32,0.1);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      font-style: italic;
+      color: #6d6d6d;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      z-index: 10;
+    }
+
+    .nav-etc:hover .nav-etc-tip { opacity: 1; }
+
+    /* ── HERO ── */
+    .case-hero {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      align-items: center;
+      text-align: center;
+    }
+
+    .case-tags {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .tag {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #2a2420;
+      border: 1px solid rgba(42,36,32,0.3);
+      border-radius: 100px;
+      padding: 6px 16px;
+    }
+
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Satoshi', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #2a2420;
+      background: rgba(42,36,32,0.07);
+      border-radius: 100px;
+      padding: 6px 16px;
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #6dbf72;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .live-dot::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: #6dbf72;
+      animation: pulse-ring 2s ease-out infinite;
+    }
+
+    @keyframes pulse-ring {
+      0%   { transform: scale(1); opacity: 0.6; }
+      70%  { transform: scale(2.4); opacity: 0; }
+      100% { transform: scale(2.4); opacity: 0; }
+    }
+
+    .case-title {
+      font-family: 'Recoleta', sans-serif;
+      font-size: 56px;
+      font-weight: 400;
+      line-height: 1.1;
+      max-width: 900px;
+    }
+
+    .case-cover {
+      width: 100%;
+      border-radius: 20px;
+      object-fit: cover;
+      display: block;
+      aspect-ratio: 16 / 12;
+    }
+
+    /* ── OVERVIEW ROW ── */
+    .overview-row {
+      width: 100%;
+      display: flex;
+      gap: 0;
+      border-top: 1px solid rgba(42,36,32,0.15);
+      border-bottom: 1px solid rgba(42,36,32,0.15);
+      padding: 40px 0;
+    }
+
+    .overview-item {
+      flex: 1 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 0 40px;
+      border-right: 1px solid rgba(42,36,32,0.15);
+    }
+
+    .overview-item:first-child { padding-left: 0; }
+    .overview-item:last-child { border-right: none; padding-right: 0; }
+
+    .overview-label {
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #6d6d6d;
+    }
+
+    .overview-value {
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: #2a2420;
+    }
+
+    /* ── THREE-COL STAT CARDS ── */
+    .stat-cards {
+      width: 100%;
+      display: flex;
+      gap: 24px;
+    }
+
+    .stat-card {
+      flex: 1 0 0;
+      background: #fff7ef;
+      border-radius: 16px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .stat-card-label {
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #6d6d6d;
+    }
+
+    .stat-card-body {
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: #2a2420;
+    }
+
+    .stat-card-body strong { font-weight: 500; }
+    .stat-card-body em { font-style: italic; }
+
+    /* ── CONTENT ── */
+    .case-content {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 80px;
+    }
+
+    .section-label {
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #6d6d6d;
+      margin-bottom: 14px;
+    }
+
+    .section-heading {
+      font-family: 'Recoleta', sans-serif;
+      font-size: 36px;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .section-heading em {
+      font-style: italic;
+    }
+
+    .section-body {
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-size: 20px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: #2a2420;
+    }
+
+    .section-body p { margin-bottom: 1em; }
+    .section-body p:last-child { margin-bottom: 0; }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: rgba(42,36,32,0.15);
+    }
+
+    /* ── BEFORE/AFTER ── */
+    .visual-block {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(42,36,32,0.1);
+      margin-top: 24px;
+    }
+
+    .visual-tabs {
+      display: flex;
+      border-bottom: 1px solid rgba(42,36,32,0.1);
+      background: #fff7ef;
+    }
+
+    .tab-button {
+      flex: 1;
+      padding: 16px 20px;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      font-family: 'Satoshi', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: #6d6d6d;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+      letter-spacing: 0.01em;
+    }
+
+    .tab-button:hover { color: #2a2420; }
+
+    .tab-button.active {
+      color: #2a2420;
+      border-bottom-color: #2a2420;
+      font-weight: 500;
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .tab-image {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .visual-caption {
+      padding: 14px 20px;
+      font-family: 'Satoshi', sans-serif;
+      font-size: 14px;
+      font-weight: 300;
+      color: #6d6d6d;
+      border-top: 1px solid rgba(42,36,32,0.08);
+      background: #fff7ef;
+    }
+
+    /* ── CALLOUT ── */
+    .callout {
+      background: #fff7ef;
+      border-radius: 16px;
+      padding: 40px;
+    }
+
+    .callout-quote {
+      font-family: 'Recoleta', sans-serif;
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    /* ── LEARNING CARDS ── */
+    .learning-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 8px;
+    }
+
+    .learning-card {
+      background: #fff7ef;
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    .learning-card h4 {
+      font-family: 'Recoleta', sans-serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: #2a2420;
+      margin-bottom: 12px;
+    }
+
+    .learning-card p {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 18px;
+      font-weight: 300;
+      color: #2a2420;
+      line-height: 1.65;
+    }
+
+    /* ── RESULT NUMBERS ── */
+    .results-row {
+      display: flex;
+      gap: 40px;
+    }
+
+    .result-item {
+      flex: 1 0 0;
+    }
+
+    .result-number {
+      font-family: 'Recoleta', sans-serif;
+      font-size: 52px;
+      font-weight: 400;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .result-desc {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 18px;
+      font-weight: 300;
+      color: #2a2420;
+      line-height: 1.4;
+    }
+
+    /* ── CONTACT CARD ── */
+    .contact-card {
+      background: #fff7ef;
+      padding: 40px;
+      border-radius: 16px;
+      border: 1px solid rgba(42, 36, 32, 0.1);
+      width: 100%;
+      position: relative;
+      overflow: visible;
+    }
+
+    .contact-inner {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    .contact-floral {
+      position: absolute;
+      top: -145px;
+      right: 80px;
+      width: 220px;
+      height: auto;
+      object-fit: contain;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .contact-card:hover .contact-floral,
+    .contact-card.form-active .contact-floral {
+      opacity: 1;
+    }
+
+    .contact-text {
+      flex: 1 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .contact-heading {
+      font-family: 'Recoleta', sans-serif;
+      font-size: 40px;
+      font-weight: 400;
+    }
+
+    .email-copy-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .email-copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: 'Recoleta', sans-serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: #2a2420;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(42,36,32,0.3);
+      transition: opacity 0.2s;
+    }
+
+    .email-copy-btn:hover { opacity: 0.6; }
+
+    .email-copy-btn svg {
+      width: 15px;
+      height: 15px;
+      opacity: 0.45;
+      flex-shrink: 0;
+      transition: opacity 0.2s;
+    }
+
+    .email-copy-btn:hover svg { opacity: 0.7; }
+
+    .copy-feedback {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      font-style: italic;
+      color: #6d6d6d;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+
+    .copy-feedback.visible { opacity: 1; }
+
+    .contact-quote {
+      font-family: 'Recoleta', sans-serif;
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .success-floral {
+      width: 100px;
+      height: 120px;
+      object-fit: contain;
+      animation: float-up-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .contact-form {
+      flex: 1 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .form-field {
+      position: relative;
+      width: 100%;
+      padding-bottom: 2px;
+    }
+
+    .form-label {
+      position: absolute;
+      bottom: 8px;
+      left: 0;
+      font-family: 'Satoshi', sans-serif;
+      font-size: 20px;
+      color: #6d6d6d;
+      font-style: italic;
+      font-weight: 300;
+      pointer-events: none;
+      transition: opacity 0.18s ease;
+    }
+
+    .form-field.has-value .form-label,
+    .form-field.focused .form-label { opacity: 0; }
+
+    .form-input {
+      display: block;
+      width: 100%;
+      background: none;
+      border: none;
+      border-bottom: 1px solid rgba(0,0,0,0.25);
+      font-family: 'Satoshi', sans-serif;
+      font-size: 20px;
+      font-style: italic;
+      font-weight: 300;
+      color: #2a2420;
+      padding: 0 0 8px;
+      outline: none;
+    }
+
+    .form-input::placeholder { color: transparent; }
+
+    .form-submit {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      font-style: italic;
+      color: #000;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      text-align: left;
+      transition: opacity 0.2s;
+    }
+
+    .form-submit:hover { opacity: 0.55; }
+
+    .form-error {
+      font-size: 16px;
+      color: #c0392b;
+      margin-top: 4px;
+      display: none;
+    }
+
+    @keyframes float-up-in {
+      0%   { opacity: 0; transform: translateY(12px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .contact-success {
+      display: none;
+      flex: 1 0 0;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-success.visible {
+      display: flex;
+      animation: float-up-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      position: relative;
+      z-index: 3;
+      padding-top: 80px;
+    }
+
+    .success-text-row {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .success-text {
+      font-family: 'Satoshi', sans-serif;
+      font-size: 20px;
+      font-style: italic;
+      font-weight: 400;
+      color: #2a2420;
+      line-height: 1.5;
+    }
+
+    .form-reset-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: 'Satoshi', sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      color: #6d6d6d;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+
+    .form-reset-btn:hover { opacity: 0.55; }
+
+    /* ── FOOTER ── */
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .footer-copy {
+      font-size: 20px;
+      font-family: 'Satoshi', sans-serif;
+      color: #000;
+      white-space: nowrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      margin-left: auto;
+      padding-right: 40px;
+    }
+
+    .footer-links a {
+      font-size: 20px;
+      font-family: 'Satoshi', sans-serif;
+      color: #000;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .footer-links a:hover { opacity: 0.55; }
+
+    @media (max-width: 900px) {
+      .page { padding: 40px 24px; gap: 60px; }
+
+      /* Nav */
+      nav { gap: 24px; flex-wrap: wrap; justify-content: center; }
+      nav a { font-size: 17px; }
+      .nav-brand { order: -1; flex-basis: 100%; justify-content: center; }
+      .nav-brand-flower { width: 40px; height: 40px; }
+      .nav-brand-name { font-size: 18px; }
+
+      /* Hero */
+      .case-title { font-size: 36px; }
+      .case-cover { aspect-ratio: 4 / 3; }
+
+      /* Overview */
+      .overview-row { flex-direction: column; gap: 32px; border: none; padding: 0; }
+      .overview-item { border-right: none; border-bottom: 1px solid rgba(42,36,32,0.15); padding: 0 0 32px; }
+      .overview-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+      /* Stat cards */
+      .stat-cards { flex-direction: column; }
+
+      /* Content */
+      .section-heading { font-size: 28px; }
+      .callout-quote { font-size: 22px; }
+      .section-body { font-size: 18px; }
+      .results-row { flex-direction: column; gap: 24px; }
+      .learning-grid { grid-template-columns: 1fr; }
+      .result-number { font-size: 40px; }
+
+      /* Contact */
+      .contact-card { padding: 28px 20px; }
+      .contact-inner { flex-direction: column; align-items: stretch; width: 100%; }
+      .contact-floral { width: 150px; top: -85px; right: 10px; }
+      .contact-heading { font-size: 32px; }
+      .email-copy-btn { font-size: 18px; }
+      .contact-quote { font-size: 18px; }
+
+      /* Footer */
+      footer { flex-direction: column; gap: 16px; align-items: flex-start; }
+      .footer-links { flex-wrap: wrap; gap: 16px; margin-left: 0; padding-right: 0; }
+    }
+
+    @media (max-width: 500px) {
+      .page { padding: 32px 16px; gap: 48px; }
+      .case-title { font-size: 28px; }
+      nav a { font-size: 15px; }
+      .section-heading { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- NAV -->
+    <nav>
+      <a href="index.html" class="is-current">Work</a>
+      <a href="about.html">About</a>
+      <a href="index.html" class="nav-brand">
+        <span class="nav-brand-name">Mariel</span>
+        <img class="nav-brand-flower" src="favicon.png" alt="" />
+        <span class="nav-brand-name">Lopez</span>
+      </a>
+      <a href="#" class="nav-etc">Guides<span class="nav-etc-tip">Blooming soon</span></a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- HERO -->
+    <div class="case-hero">
+      <div class="case-tags">
+        <span class="live-badge"><span class="live-dot"></span>Live as of Sep 2025</span>
+      </div>
+      <h1 class="case-title">Scaling Sobeys' digital shopping experience for 1M+ monthly users</h1>
+      <img class="case-cover" src="sobeys-cover.png" alt="Sobeys homepage redesign" />
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="overview-row">
+      <div class="overview-item">
+        <p class="overview-label">Role</p>
+        <p class="overview-value">Senior Product Designer</p>
+      </div>
+      <div class="overview-item">
+        <p class="overview-label">Timeline</p>
+        <p class="overview-value">6 months</p>
+      </div>
+      <div class="overview-item">
+        <p class="overview-label">Team</p>
+        <p class="overview-value">Shannon M. · Valerie C.<br>Avinash R. · Justin C.</p>
+      </div>
+      <div class="overview-item">
+        <p class="overview-label">Tools</p>
+        <p class="overview-value">Figma, FigJam,<br>ChatGPT</p>
+      </div>
+    </div>
+
+    <!-- THREE-COL CARDS -->
+    <div class="stat-cards">
+      <div class="stat-card">
+        <p class="stat-card-label">Overview</p>
+        <p class="stat-card-body">Senior Product Designer working on key features to <strong>increase digital engagement</strong> &amp; <strong>drive in-store traffic</strong>. Empire hired IBM to redesign with a multichannel approach across Sobeys, IGA, Foodland, FreshCO, Safeway, and ThriftyFoods.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-card-label">Problem</p>
+        <p class="stat-card-body"><strong><em>Multiple fragmented flows</em> caused high drop-offs.</strong> Sobeys' online presence was falling behind its competitors. The time for change had come.</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-card-label">Outcome</p>
+        <p class="stat-card-body">Increased engagement by <strong>11</strong> percent month-over-month (Aug → Sep 2025). Shopping list now live on Sobeys and Safeway. Rolling out to IGA, ThriftyFoods, Foodland, and FreshCo soon.</p>
+      </div>
+    </div>
+
+    <!-- CASE STUDY CONTENT -->
+    <div class="case-content">
+
+      <!-- Identity & Trust -->
+      <div>
+        <p class="section-label">Identity &amp; Trust</p>
+        <h2 class="section-heading">Integrating <em>Scene+ loyalty</em> into the Sobeys account experience</h2>
+        <div class="section-body">
+          <p>Users lacked a clear pathway to view and connect their Scene+ account, limiting point accrual and reducing visibility into loyalty value.</p>
+        </div>
+        <div class="visual-block">
+          <div class="visual-tabs">
+            <button class="tab-button active" onclick="switchTab(this, 'id-after')">After</button>
+            <button class="tab-button" onclick="switchTab(this, 'id-before')">Before</button>
+          </div>
+          <div class="tab-content active" id="id-after">
+            <img src="identity-after.avif" alt="After: Scene+ loyalty integration redesign" class="tab-image">
+            <p class="visual-caption">After · Scene+ account experience redesign</p>
+          </div>
+          <div class="tab-content" id="id-before">
+            <img src="identity-before.webp" alt="Before: Scene+ account structure gaps" class="tab-image">
+            <p class="visual-caption">Before · Scene+ account structure gaps causing poor experience</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Conversion & Discovery -->
+      <div>
+        <p class="section-label">Conversion &amp; Discovery</p>
+        <h2 class="section-heading">Leveraging visual hierarchy to drive promotions and loyalty on the <em>product details page</em></h2>
+        <div class="section-body">
+          <p>The previous experience lacked a product catalogue, limiting discovery to static flyer browsing. The redesign introduced a structured product catalogue with optimized visual hierarchy to highlight key deals and Scene+ offers while streamlining add-to-list and pickup/delivery options.</p>
+        </div>
+        <div class="visual-block">
+          <div class="visual-tabs">
+            <button class="tab-button active" onclick="switchTab(this, 'conv-after')">After</button>
+            <button class="tab-button" onclick="switchTab(this, 'conv-before')">Before</button>
+          </div>
+          <div class="tab-content active" id="conv-after">
+            <img src="conversion-after.avif" alt="After: Product details page" class="tab-image">
+            <p class="visual-caption">After · Product details page with optimized visual hierarchy</p>
+          </div>
+          <div class="tab-content" id="conv-before">
+            <img src="conversion-before.webp" alt="Before: Sobeys lacked product pages" class="tab-image">
+            <p class="visual-caption">Before · Sobeys lacked a product catalogue, limiting discovery</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Discovery & Wayfinding -->
+      <div>
+        <p class="section-label">Discovery &amp; Wayfinding</p>
+        <h2 class="section-heading">Redesigning the <em>store locator</em> to improve pricing accuracy and inventory confidence</h2>
+        <div class="section-body">
+          <p>The original experience prioritized a dense results grid, requiring users to scan multiple store cards to find relevant details. The redesign shifts to a selected-store model, surfacing key information, services, and primary actions within a focused context panel to reduce friction and improve clarity.</p>
+        </div>
+        <div class="visual-block">
+          <div class="visual-tabs">
+            <button class="tab-button active" onclick="switchTab(this, 'disc-after')">After</button>
+            <button class="tab-button" onclick="switchTab(this, 'disc-before')">Before</button>
+          </div>
+          <div class="tab-content active" id="disc-after">
+            <img src="discovery-after.avif" alt="After: Redesigned store locator" class="tab-image">
+            <p class="visual-caption">After · Redesigned store locator with persistent store context</p>
+          </div>
+          <div class="tab-content" id="disc-before">
+            <img src="discovery-before.webp" alt="Before: Dense store locator" class="tab-image">
+            <p class="visual-caption">Before · Dense results grid causing high cognitive load</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Retention -->
+      <div>
+        <p class="section-label">Retention &amp; Habit Forming</p>
+        <h2 class="section-heading">Designing the <em>shopping list</em> for long-term loyalty and retention</h2>
+        <div class="section-body">
+          <p>With only 5% adoption, the static and unusable shopping list failed to drive meaningful engagement. I reimagined the experience around a deals-first strategy, enabling effortless item saving and seamless redirection to Voila.ca for pickup or delivery, while positioning the tool for continuous usage and long-term customer loyalty.</p>
+        </div>
+        <div class="visual-block">
+          <div class="visual-tabs">
+            <button class="tab-button active" onclick="switchTab(this, 'ret-after')">After</button>
+            <button class="tab-button" onclick="switchTab(this, 'ret-before')">Before</button>
+          </div>
+          <div class="tab-content active" id="ret-after">
+            <img src="retention-after.avif" alt="After: Redesigned shopping list" class="tab-image">
+            <p class="visual-caption">After · Shopping list redesigned as a deals-first, habit-forming experience</p>
+          </div>
+          <div class="tab-content" id="ret-before">
+            <img src="retention-before.webp" alt="Before: Static shopping list" class="tab-image">
+            <p class="visual-caption">Before · Static list with no inline deals, quantities, or actions</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- AI / Process -->
+      <div>
+        <p class="section-label">Process</p>
+        <h2 class="section-heading">Leveraging AI to move faster and think deeper</h2>
+        <div class="section-body">
+          <p>I leveraged AI throughout the design process to accelerate content creation, explore edge and error states, and stress-test user flows across complex scenarios.</p>
+          <p><strong>Main tool: ChatGPT</strong> — Used to rapidly generate copy variants, simulate edge cases, and pressure-test flow logic against real user scenarios at scale.</p>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Outcome callout -->
+      <div class="callout">
+        <p class="callout-quote">Increased engagement by <strong>11</strong> percent month-over-month. Shopping list now live on Sobeys and Safeway — rolling out across all six grocery brands.</p>
+      </div>
+
+      <!-- Key Learnings -->
+      <div>
+        <p class="section-label">Key Learnings &amp; Reflection</p>
+        <h2 class="section-heading">Main takeaways</h2>
+        <div class="learning-grid">
+          <div class="learning-card">
+            <h4>Engagement requires incentive</h4>
+            <p>Users didn't disengage because they didn't need a shopping list — they disengaged because the experience offered no immediate value. Without visible savings, loyalty rewards, or a clear path to purchase, there was little incentive to return. Designing for engagement meant embedding tangible benefits directly within the list experience.</p>
+          </div>
+          <div class="learning-card">
+            <h4>Loyalty is earned through utility</h4>
+            <p>Loyalty features must do more than exist — they must support real behaviours. By integrating pricing, rewards, and Voila.ca into the site, the experience became a functional bridge between browsing and purchase, reinforcing repeat engagement.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CONTACT CARD -->
+    <div class="contact-card" id="contact">
+      <img class="contact-floral" src="bird-contact form.png" alt="" />
+      <div class="contact-inner">
+        <div class="contact-text">
+          <div>
+            <p class="contact-heading">Say hi!</p>
+            <div class="email-copy-row">
+              <button class="email-copy-btn" id="email-copy-btn">
+                mariellopezdesign@gmail.com
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              </button>
+              <span class="copy-feedback" id="copy-feedback">Copied!</span>
+            </div>
+          </div>
+          <p class="contact-quote">Drop me a letter, I'd love to hear from you.</p>
+        </div>
+        <form class="contact-form" id="contact-form" action="https://formspree.io/f/xgoddvna" method="POST">
+          <div class="form-field" id="field-email">
+            <label class="form-label" for="email">Your email</label>
+            <input class="form-input" id="email" type="email" name="email" placeholder=" " autocomplete="off" required />
+            <span class="form-error" id="email-error">Please enter a valid email address.</span>
+          </div>
+          <div class="form-field" id="field-note">
+            <label class="form-label" for="note">Your note</label>
+            <input class="form-input" id="note" type="text" name="note" placeholder=" " required />
+            <span class="form-error" id="note-error">Please write a note.</span>
+          </div>
+          <button class="form-submit" type="submit">Send it up &amp; away →</button>
+        </form>
+        <div class="contact-success" id="contact-success">
+          <img class="success-floral" src="floral-success.png" alt="" />
+          <div class="success-text-row">
+            <p class="success-text">Sent up &amp; away… I'll be in touch soon!</p>
+            <button class="form-reset-btn" id="form-reset-btn">Send another →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <p class="footer-copy">© 2026 Mariel Lopez. Find me where the light is.</p>
+      <nav class="footer-links">
+        <a href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://luma.com/user/mariel" target="_blank" rel="noopener">Luma</a>
+        <a href="mailto:mariellopezdesign@gmail.com">Contact</a>
+      </nav>
+    </footer>
+
+  </div>
+  <script>
+    function switchTab(button, panelId) {
+      const block = button.closest('.visual-block');
+      block.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+      block.querySelectorAll('.tab-content').forEach(p => p.classList.remove('active'));
+      button.classList.add('active');
+      document.getElementById(panelId).classList.add('active');
+    }
+
+    // Show bird on form interaction
+    const contactCard = document.querySelector('.contact-card');
+    document.querySelectorAll('.form-input').forEach(input => {
+      input.addEventListener('focus', () => contactCard.classList.add('form-active'));
+      input.addEventListener('blur', () => {
+        if (!document.querySelector('.form-input:focus')) contactCard.classList.remove('form-active');
+      });
+    });
+
+    document.getElementById('email-copy-btn').addEventListener('click', function() {
+      navigator.clipboard.writeText('mariellopezdesign@gmail.com').then(() => {
+        const feedback = document.getElementById('copy-feedback');
+        feedback.classList.add('visible');
+        setTimeout(() => feedback.classList.remove('visible'), 2000);
+      });
+    });
+
+    document.querySelectorAll('.form-field').forEach(field => {
+      const input = field.querySelector('.form-input');
+      if (!input) return;
+      input.addEventListener('focus',  () => field.classList.add('focused'));
+      input.addEventListener('blur',   () => field.classList.remove('focused'));
+      input.addEventListener('input',  () => field.classList.toggle('has-value', input.value.length > 0));
+    });
+
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const emailInput = document.getElementById('email');
+      const noteInput  = document.getElementById('note');
+      const emailErr   = document.getElementById('email-error');
+      const noteErr    = document.getElementById('note-error');
+      const emailRe    = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      let valid = true;
+
+      emailErr.style.display = 'none';
+      noteErr.style.display  = 'none';
+
+      if (!emailRe.test(emailInput.value.trim())) { emailErr.style.display = 'block'; valid = false; }
+      if (!noteInput.value.trim()) { noteErr.style.display = 'block'; valid = false; }
+      if (!valid) return;
+
+      const form = this;
+      fetch('https://formspree.io/f/xgoddvna', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(response => {
+        if (response.ok) {
+          form.style.opacity = '0';
+          form.style.transition = 'opacity 0.3s ease';
+          setTimeout(() => {
+            form.style.display = 'none';
+            document.getElementById('contact-success').classList.add('visible');
+          }, 300);
+        }
+      });
+    });
+
+    document.getElementById('form-reset-btn').addEventListener('click', function() {
+      const form    = document.getElementById('contact-form');
+      const success = document.getElementById('contact-success');
+      success.classList.remove('visible');
+      form.reset();
+      form.style.opacity = '0';
+      form.style.display = 'flex';
+      form.style.transition = 'opacity 0.3s ease';
+      document.querySelectorAll('.form-field').forEach(f => f.classList.remove('has-value', 'focused'));
+      requestAnimationFrame(() => { form.style.opacity = '1'; });
+    });
+  </script>
+</body>
+</html>

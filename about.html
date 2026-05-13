@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Mariel Lopez</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700,300i,400i,500i,700i&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=recoleta@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-size: 16px;
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-weight: 300;
+      background: #f7eee5;
+      color: #2a2420;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .page {
+      padding: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 120px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      gap: 56px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    nav a {
+      font-size: 20px;
+      color: #000;
+      text-decoration: none;
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+    }
+
+    /* Active page indicator — soft warm pill rendered via pseudo-element so layout
+       stays identical across pages regardless of which item is current. */
+    nav a.is-current {
+      position: relative;
+      isolation: isolate;
+    }
+
+    nav a.is-current::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: calc(100% + 32px);
+      height: calc(100% + 12px);
+      background: rgba(42, 36, 32, 0.08);
+      border-radius: 100px;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* ── NAV GUIDES TOOLTIP ── */
+    .nav-etc {
+      position: relative;
+    }
+
+    .nav-etc-tip {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fdf9f7;
+      border: 1px solid rgba(42,36,32,0.1);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      font-style: italic;
+      color: #6d6d6d;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      z-index: 10;
+    }
+
+    .nav-etc:hover .nav-etc-tip { opacity: 1; }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+
+    .nav-brand-flower {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .nav-brand-name {
+      font-family: 'Recoleta', 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: #2a2420;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── KAMUSTA TOOLTIP ── */
+    .kamusta {
+      position: relative;
+      cursor: default;
+    }
+
+    .kamusta-tip {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fdf9f7;
+      border: 1px solid rgba(42,36,32,0.1);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      font-style: italic;
+      color: #6d6d6d;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+
+    .kamusta:hover .kamusta-tip { opacity: 1; }
+
+    /* ── CONTENT CONTAINER ── */
+    .content-container {
+      width: 100%;
+      max-width: 841px;
+      display: flex;
+      flex-direction: column;
+      gap: 64px;
+      position: relative;
+      isolation: isolate;
+    }
+
+    /* ── PHOTO + FLORALS ── */
+    .photo-area {
+      position: relative;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      z-index: 0;
+      padding: 60px 0;
+    }
+
+    .photo-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+    }
+
+    /* ── FAN PHOTOS ── */
+    .fan-photo {
+      position: absolute;
+      width: 90%;
+      top: 0%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+      pointer-events: none;
+      z-index: 0;
+      transition: opacity 0.4s ease, transform 0.65s cubic-bezier(0.34, 1.3, 0.64, 1);
+    }
+
+    .fan-left {
+      left: -80%;
+      opacity: 0;
+      transform: translateX(50%) scale(0.94);
+    }
+
+    .fan-right {
+      right: -80%;
+      opacity: 0;
+      transform: translateX(-50%) scale(0.94);
+    }
+
+    .photo-wrap:hover .fan-left {
+      opacity: 1;
+      transform: rotate(-22deg);
+    }
+
+    .photo-wrap:hover .fan-right {
+      opacity: 1;
+      transform: rotate(22deg);
+    }
+
+    .main-photo {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      aspect-ratio: 1086 / 1500;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+    }
+
+    /* Botanical overlay — top right */
+    .floral-tr {
+      position: absolute;
+      width: 43%;
+      top: -20%;
+      right: -25%;
+      transform-origin: bottom left;
+      pointer-events: none;
+      opacity: 0;
+      transform: rotate(20.35deg) scale(0.05);
+      transition: opacity 0.5s ease, transform 0.65s cubic-bezier(0.34, 1.5, 0.64, 1);
+      z-index: 3;
+    }
+
+    /* Botanical overlay — bottom left */
+    .floral-bl {
+      position: absolute;
+      width: 42%;
+      bottom: -18%;
+      left: -22%;
+      transform-origin: top right;
+      pointer-events: none;
+      opacity: 0;
+      transform: scale(0.05);
+      transition: opacity 0.5s ease, transform 0.7s cubic-bezier(0.34, 1.5, 0.64, 1) 0.1s;
+      z-index: 3;
+    }
+
+    .photo-wrap:hover .floral-tr {
+      opacity: 1;
+      transform: rotate(20.35deg) scale(1);
+    }
+
+    .photo-wrap:hover .floral-bl {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* ── TEXT ── */
+    .section-heading,
+    .bio-columns,
+    .quote-block {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-heading {
+      font-family: 'Recoleta', 'Playfair Display', serif;
+      font-size: 40px;
+      font-weight: 400;
+      text-align: center;
+      width: 100%;
+    }
+
+    .bio-columns {
+      display: flex;
+      gap: 40px;
+      width: 100%;
+      font-size: 20px;
+      line-height: 1.6;
+    }
+
+    .bio-col {
+      flex: 1 0 0;
+    }
+
+    .bio-col p {
+      margin-bottom: 1em;
+    }
+
+    .bio-col p:last-child { margin-bottom: 0; }
+
+    .bio-bold {
+      font-weight: 400;
+    }
+
+    .quote-block {
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-size: 20px;
+      font-style: italic;
+      text-align: center;
+      width: 100%;
+      line-height: 1.6;
+    }
+
+    /* ── TAGLINE ── */
+    .tagline {
+      font-family: 'Recoleta', 'Playfair Display', serif;
+      font-size: 40px;
+      font-weight: 400;
+      text-align: center;
+      width: 100%;
+    }
+
+    /* ── CONTACT CARD ── */
+    .contact-card {
+      background: #fff7ef;
+      padding: 40px;
+      border-radius: 16px;
+      border: 1px solid rgba(42, 36, 32, 0.1);
+      width: 100%;
+      position: relative;
+      overflow: visible;
+    }
+
+    .contact-inner {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    .contact-floral {
+      position: absolute;
+      top: -145px;
+      right: 80px;
+      width: 220px;
+      height: auto;
+      object-fit: contain;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .contact-card:hover .contact-floral,
+    .contact-card.form-active .contact-floral {
+      opacity: 1;
+    }
+
+    .contact-text {
+      flex: 1 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .contact-heading {
+      font-family: 'Recoleta', 'Playfair Display', serif;
+      font-size: 40px;
+      font-weight: 400;
+    }
+
+    .email-copy-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .email-copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: 'Recoleta', 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: #2a2420;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(42,36,32,0.3);
+      transition: opacity 0.2s;
+    }
+
+    .email-copy-btn:hover { opacity: 0.6; }
+
+    .email-copy-btn svg {
+      width: 15px;
+      height: 15px;
+      opacity: 0.45;
+      flex-shrink: 0;
+      transition: opacity 0.2s;
+    }
+
+    .email-copy-btn:hover svg { opacity: 0.7; }
+
+    .copy-feedback {
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      font-style: italic;
+      color: #6d6d6d;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+
+    .copy-feedback.visible { opacity: 1; }
+
+    .contact-quote {
+      font-family: 'Recoleta', 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .contact-form {
+      flex: 1 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .form-field {
+      position: relative;
+      width: 100%;
+      padding-bottom: 2px;
+    }
+
+    .form-label {
+      position: absolute;
+      bottom: 8px;
+      left: 0;
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-size: 20px;
+      color: #6d6d6d;
+      font-style: italic;
+      font-weight: 300;
+      pointer-events: none;
+      transition: opacity 0.18s ease;
+    }
+
+    .form-field.has-value .form-label,
+    .form-field.focused .form-label {
+      opacity: 0;
+    }
+
+    .form-input {
+      display: block;
+      width: 100%;
+      background: none;
+      border: none;
+      border-bottom: 1px solid rgba(0,0,0,0.25);
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-size: 20px;
+      font-style: italic;
+      font-weight: 300;
+      color: #2a2420;
+      padding: 0 0 8px;
+      outline: none;
+    }
+
+    .form-input::placeholder { color: transparent; }
+
+    .form-submit {
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      font-style: italic;
+      color: #000;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      text-align: left;
+      transition: opacity 0.2s;
+    }
+
+    .form-submit:hover { opacity: 0.55; }
+
+    .form-error {
+      font-size: 16px;
+      color: #c0392b;
+      margin-top: 4px;
+      display: none;
+    }
+
+    @keyframes float-up-in {
+      0%   { opacity: 0; transform: translateY(12px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes check-pop {
+      0%   { transform: scale(0) rotate(-15deg); opacity: 0; }
+      60%  { transform: scale(1.25) rotate(4deg); opacity: 1; }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+
+    .contact-success {
+      display: none;
+      flex: 1 0 0;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-success.visible {
+      display: flex;
+      animation: float-up-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      position: relative;
+      z-index: 3;
+      padding-top: 80px;
+    }
+
+    .success-floral {
+      width: 100px;
+      height: 120px;
+      object-fit: contain;
+      animation: float-up-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .success-text-row {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .success-text {
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-size: 20px;
+      font-style: italic;
+      font-weight: 400;
+      color: #2a2420;
+      line-height: 1.5;
+    }
+
+    .form-reset-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      color: #6d6d6d;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+
+    .form-reset-btn:hover { opacity: 0.55; }
+
+    /* ── FOOTER ── */
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .footer-copy {
+      font-size: 20px;
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      color: #000;
+      white-space: nowrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      margin-left: auto;
+    }
+
+    .footer-links a {
+      font-size: 20px;
+      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      color: #000;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .footer-links a:hover { opacity: 0.55; }
+
+    @media (max-width: 900px) {
+      .page { padding: 40px 24px; gap: 60px; }
+
+      /* Nav */
+      nav { gap: 24px; flex-wrap: wrap; justify-content: center; }
+      nav a { font-size: 17px; }
+      .nav-brand { order: -1; flex-basis: 100%; justify-content: center; }
+      .nav-brand-flower { width: 40px; height: 40px; }
+      .nav-brand-name { font-size: 18px; }
+
+      /* Photo */
+      .photo-wrap { max-width: 320px; }
+      .fan-left, .fan-right { display: none; }
+      .floral-tr, .floral-bl { display: none; }
+      .photo-area { padding: 20px 0; }
+
+      /* Content */
+      .content-container { gap: 40px; }
+      .section-heading, .tagline { font-size: 28px; }
+      .bio-columns { flex-direction: column; gap: 24px; }
+      .bio-columns { font-size: 18px; }
+      .quote-block { font-size: 18px; }
+
+      /* Contact */
+      .contact-card { padding: 28px 20px; }
+      .contact-inner { flex-direction: column; align-items: stretch; width: 100%; }
+      .contact-floral { width: 150px; top: -85px; right: 10px; }
+      .contact-heading { font-size: 32px; }
+      .email-copy-btn { font-size: 18px; }
+      .contact-quote { font-size: 18px; }
+
+      /* Footer */
+      footer { flex-direction: column; gap: 16px; align-items: flex-start; }
+      .footer-links { flex-wrap: wrap; gap: 16px; margin-left: 0; padding-right: 0; }
+    }
+
+    @media (max-width: 500px) {
+      .page { padding: 32px 16px; gap: 48px; }
+      .section-heading { font-size: 24px; }
+      nav a { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- NAV -->
+    <nav>
+      <a href="index.html">Work</a>
+      <a href="#" class="is-current">About</a>
+      <a href="index.html" class="nav-brand">
+        <span class="nav-brand-name">Mariel</span>
+        <img class="nav-brand-flower" src="favicon.png" alt="" />
+        <span class="nav-brand-name">Lopez</span>
+      </a>
+      <a href="#" class="nav-etc">Guides<span class="nav-etc-tip">Blooming soon</span></a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="content-container">
+
+      <!-- Heading -->
+      <p class="section-heading">Hi, hello, kamusta!</p>
+
+      <!-- Photo + botanical overlays -->
+      <div class="photo-area">
+        <div class="photo-wrap">
+          <img class="fan-photo fan-left" src="photo-fan-left-new.JPG" alt="" />
+          <img class="main-photo" src="photo-mariel.jpg" alt="Mariel Lopez" />
+          <img class="fan-photo fan-right" src="photo-fan-right.jpg" alt="" />
+          <img class="floral-tr" src="sampaguita.png" alt="" />
+          <img class="floral-bl" src="sampaguita-2.png" alt="" />
+        </div>
+      </div>
+
+      <!-- Bio columns -->
+      <div class="bio-columns">
+        <div class="bio-col">
+          <p>
+            <span class="bio-bold">My why </span>— Growing up between Manila and Toronto taught me early that context shapes everything: How people navigate space, make decisions, and what "intuitive" actually means.
+          </p>
+          <p>I bring both of those worlds into every product I work on.</p>
+          <p>
+            <span class="bio-bold">My specialty </span>— I specialize in the full arc of product design: UX, UI, research, systems, strategy, and accessibility. I care about driving the details to create the full big picture.
+          </p>
+        </div>
+        <div class="bio-col">
+          <p>
+            <span class="bio-bold">Outside of work</span> — I'm usually in motion: Hosting a design workshop, taking photos on my camera, hopping on a plane, or sitting in a café with my friends.
+          </p>
+          <p>I love bringing people together, discovering things I don't know, and finding joy in how things work.</p>
+          <p>
+            <span class="bio-bold">Lately</span> — I've been exploring First Principles Thinking and the Japanese approach to design; two ways of seeing the world that keep making my work sharper.
+          </p>
+        </div>
+      </div>
+
+      <!-- Quote -->
+      <div class="quote-block">
+        <p>Design is not just what it looks like and feels like. Design is how it works.</p>
+        <p>— Steve Jobs</p>
+      </div>
+
+    </div>
+
+    <!-- CONTACT CARD -->
+    <div class="contact-card" id="contact">
+      <img class="contact-floral" src="bird-contact form.png" alt="" />
+      <div class="contact-inner">
+        <div class="contact-text">
+          <div>
+            <p class="contact-heading">Say hi!</p>
+            <div class="email-copy-row">
+              <button class="email-copy-btn" id="email-copy-btn">
+                mariellopezdesign@gmail.com
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              </button>
+              <span class="copy-feedback" id="copy-feedback">Copied!</span>
+            </div>
+          </div>
+          <p class="contact-quote">Drop me a letter, I'd love to hear from you.</p>
+        </div>
+        <form class="contact-form" id="contact-form" action="https://formspree.io/f/xgoddvna" method="POST">
+          <div class="form-field" id="field-email">
+            <label class="form-label" for="email">Your email</label>
+            <input class="form-input" id="email" type="email" name="email" placeholder=" " autocomplete="off" required />
+            <span class="form-error" id="email-error">Please enter a valid email address.</span>
+          </div>
+          <div class="form-field" id="field-note">
+            <label class="form-label" for="note">Your note</label>
+            <input class="form-input" id="note" type="text" name="note" placeholder=" " required />
+            <span class="form-error" id="note-error">Please write a note.</span>
+          </div>
+          <button class="form-submit" type="submit">Send it up &amp; away →</button>
+        </form>
+        <div class="contact-success" id="contact-success">
+          <div class="success-text-row">
+            <p class="success-text">Sent up &amp; away… I'll be in touch soon!</p>
+            <button class="form-reset-btn" id="form-reset-btn">Send another →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <p class="footer-copy">© 2026 Mariel Lopez. Find me where the light is.</p>
+      <nav class="footer-links">
+        <a href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://luma.com/user/mariel" target="_blank" rel="noopener">Luma</a>
+        <a href="mailto:mariellopezdesign@gmail.com">Contact</a>
+      </nav>
+    </footer>
+
+  </div>
+  <script>
+    // Show bird on form interaction
+    const contactCard = document.querySelector('.contact-card');
+    document.querySelectorAll('.form-input').forEach(input => {
+      input.addEventListener('focus', () => contactCard.classList.add('form-active'));
+      input.addEventListener('blur', () => {
+        if (!document.querySelector('.form-input:focus')) contactCard.classList.remove('form-active');
+      });
+    });
+
+    // Floating label behaviour
+    document.getElementById('email-copy-btn').addEventListener('click', function() {
+      navigator.clipboard.writeText('mariellopezdesign@gmail.com').then(() => {
+        const feedback = document.getElementById('copy-feedback');
+        feedback.classList.add('visible');
+        setTimeout(() => feedback.classList.remove('visible'), 2000);
+      });
+    });
+
+    document.querySelectorAll('.form-field').forEach(field => {
+      const input = field.querySelector('.form-input');
+      if (!input) return;
+      input.addEventListener('focus',  () => field.classList.add('focused'));
+      input.addEventListener('blur',   () => field.classList.remove('focused'));
+      input.addEventListener('input',  () => field.classList.toggle('has-value', input.value.length > 0));
+    });
+
+    // Form submission
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const emailInput = document.getElementById('email');
+      const noteInput  = document.getElementById('note');
+      const emailErr   = document.getElementById('email-error');
+      const noteErr    = document.getElementById('note-error');
+      const emailRe    = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      let valid = true;
+
+      emailErr.style.display = 'none';
+      noteErr.style.display  = 'none';
+
+      if (!emailRe.test(emailInput.value.trim())) {
+        emailErr.style.display = 'block';
+        valid = false;
+      }
+      if (!noteInput.value.trim()) {
+        noteErr.style.display = 'block';
+        valid = false;
+      }
+      if (!valid) return;
+
+      // Send via Formspree
+      const form = this;
+      fetch('https://formspree.io/f/xgoddvna', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(response => {
+        if (response.ok) {
+          form.style.opacity = '0';
+          form.style.transition = 'opacity 0.3s ease';
+          setTimeout(() => {
+            form.style.display = 'none';
+            document.getElementById('contact-success').classList.add('visible');
+          }, 300);
+        }
+      });
+    });
+
+    // Reset form from success state
+    document.getElementById('form-reset-btn').addEventListener('click', function() {
+      const form    = document.getElementById('contact-form');
+      const success = document.getElementById('contact-success');
+      success.classList.remove('visible');
+      form.reset();
+      form.style.opacity = '0';
+      form.style.display = 'flex';
+      form.style.transition = 'opacity 0.3s ease';
+      document.querySelectorAll('.form-field').forEach(f => f.classList.remove('has-value', 'focused'));
+      requestAnimationFrame(() => { form.style.opacity = '1'; });
+    });
+  </script>
+</body>
+</html>
