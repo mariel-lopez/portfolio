@@ -494,11 +494,6 @@
       outline: none;
     }
 
-    #field-email .form-input {
-      width: 85%;
-      max-width: 100%;
-    }
-
     .form-input::placeholder { color: transparent; }
 
     .form-submit {
@@ -539,10 +534,6 @@
       .contact-form-fields #field-email,
       .contact-form-fields #field-note {
         flex: none;
-        width: 100%;
-      }
-
-      #field-email .form-input {
         width: 100%;
       }
     }
@@ -961,7 +952,10 @@
       form.style.opacity = '0';
       form.style.display = 'flex';
       form.style.transition = 'opacity 0.3s ease';
-      document.querySelectorAll('.form-field').forEach(f => f.classList.remove('has-value', 'focused'));
+      document.querySelectorAll('.form-field').forEach((f) => {
+        f.classList.remove('has-value');
+        f.classList.remove('focused');
+      });
       requestAnimationFrame(() => { form.style.opacity = '1'; });
     });
   </script>
