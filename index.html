@@ -4,28 +4,441 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mariel Lopez</title>
-  <link rel="icon" type="image/png" href="favicon.png" />
-  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700,300i,400i,500i,700i&display=swap" rel="stylesheet">
-  <link href="https://api.fontshare.com/v2/css?f[]=recoleta@400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
+    :root {
+      --mono-serif: 'Cormorant Garamond', 'Playfair Display', Georgia, 'Times New Roman', serif;
+    }
+
     body {
       font-size: 16px;
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-family: var(--mono-serif);
       font-weight: 300;
-      background: #f7eee5;
+      background: linear-gradient(180deg, #b0cfe6 0%, #cfe6f4 14%, #e4f0f8 28%, #efe8df 45%, #f7eee5 58%, #f7eee5 100%);
       color: #2a2420;
       min-height: 100vh;
     }
 
+    /* ── Editorial hero strip (index): white field, serif, split header ── */
+    .home-hero-mono {
+      background: #fff;
+      color: #111;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      padding: 28px clamp(20px, 4.5vw, 64px) 48px;
+    }
+
+    .mono-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 24px 40px;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto 56px;
+    }
+
+    .mono-logo {
+      font-family: var(--mono-serif);
+      font-size: clamp(22px, 2.15vw, 28px);
+      font-weight: 500;
+      color: #111;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .mono-logo:hover,
+    .mono-logo:focus-visible {
+      opacity: 0.72;
+    }
+
+    .mono-nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: clamp(18px, 2.8vw, 36px);
+    }
+
+    .mono-nav > a {
+      position: relative;
+      font-family: var(--mono-serif);
+      font-size: clamp(18px, 1.65vw, 22px);
+      font-weight: 400;
+      color: #111;
+      text-decoration: none;
+      text-transform: lowercase;
+      letter-spacing: 0.02em;
+      transition: opacity 0.2s ease;
+    }
+
+    .mono-nav > a:hover,
+    .mono-nav > a:focus-visible {
+      opacity: 0.55;
+    }
+
+    .mono-nav > a.is-current {
+      font-weight: 600;
+    }
+
+    .mono-nav .nav-etc {
+      position: relative;
+    }
+
+    .mono-nav .nav-etc-tip {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-family: var(--mono-serif);
+      font-size: 12px;
+      font-weight: 300;
+      font-style: italic;
+      color: #555;
+      text-transform: lowercase;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+      z-index: 20;
+    }
+
+    .mono-nav .nav-etc:hover .nav-etc-tip,
+    .mono-nav .nav-etc:focus-visible .nav-etc-tip {
+      opacity: 1;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .hero-mono {
+      font-family: var(--mono-serif);
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 0 24px;
+    }
+
+    .hero-mono-inner {
+      position: relative;
+      min-height: min(72vh, 720px);
+      margin-bottom: clamp(32px, 6vh, 64px);
+      overflow: visible;
+    }
+
+    .hero-mono-star {
+      position: absolute;
+      font-size: clamp(16px, 1.55vw, 21px);
+      font-weight: 400;
+      line-height: 1.38;
+      color: #111;
+      max-width: min(320px, 40vw);
+      margin: 0;
+      z-index: 1;
+    }
+
+    .hero-mono-star-line {
+      display: block;
+      white-space: nowrap;
+    }
+
+    .hero-mono-star-line + .hero-mono-star-line {
+      margin-top: 0.14em;
+    }
+
+    /* First line may wrap under the axis; second line must stay one line (“product, business, and tech”). */
+    .hero-mono-star--ml .hero-mono-star-line:first-of-type {
+      white-space: normal;
+    }
+
+    .hero-mono-star--ml .hero-mono-star-line:last-of-type {
+      white-space: nowrap;
+      padding-left: 1.2em;
+    }
+
+    .hero-mono-star--br .hero-mono-star-line:last-of-type {
+      padding-left: 1.2em;
+    }
+
+    /* Wrapper is the positioning + hover context; tooltip is out-of-flow so it never pushes lines apart. */
+    .hero-mono-star-tt {
+      position: relative;
+      display: inline-block;
+      vertical-align: baseline;
+    }
+
+    .hero-mono-star-keyword,
+    .hero-mono-role a,
+    .footer-links a {
+      color: #17436b;
+      font-weight: 500;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(23, 67, 107, 0.55);
+      cursor: pointer;
+      transition: color 0.15s ease, text-decoration-color 0.15s ease, text-decoration-thickness 0.15s ease;
+    }
+
+    .hero-mono-star-keyword:hover,
+    .hero-mono-star-keyword:focus-visible,
+    .hero-mono-role a:hover,
+    .hero-mono-role a:focus-visible,
+    .footer-links a:hover,
+    .footer-links a:focus-visible {
+      color: #0f2d48;
+      text-decoration-color: currentColor;
+      text-decoration-thickness: 1.5px;
+    }
+
+    .hero-mono-star-cardtip {
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      left: auto;
+      width: max-content;
+      max-width: min(260px, 62vw);
+      padding: 6px 10px;
+      font-family: var(--mono-serif);
+      font-size: clamp(11px, 1.05vw, 13px);
+      font-weight: 400;
+      line-height: 1.25;
+      color: #111;
+      text-align: left;
+      text-decoration: none;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      opacity: 0;
+      visibility: hidden;
+      z-index: 25;
+      pointer-events: none;
+      transition: opacity 0.18s ease, visibility 0.18s ease;
+    }
+
+    .hero-mono-star-tt:hover .hero-mono-star-cardtip,
+    .hero-mono-star-tt:focus-within .hero-mono-star-cardtip {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .hero-mono-star-cardtip-title {
+      display: block;
+      font-weight: 600;
+    }
+
+    .hero-mono-star-cardtip-domain {
+      display: block;
+      margin-top: 0.15em;
+      font-weight: 300;
+      font-style: italic;
+      opacity: 0.72;
+    }
+
+    @media (hover: none) {
+      .hero-mono-star-tt:hover .hero-mono-star-cardtip {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .hero-mono-star-tt:focus-within .hero-mono-star-cardtip {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    .hero-mono-star-glyph {
+      display: inline-block;
+      margin-right: 0.35em;
+      font-size: 0.85em;
+      vertical-align: 0.05em;
+    }
+
+    .hero-mono-star--tr {
+      top: calc(2% + min(18vh, 180px));
+      right: 0;
+      text-align: right;
+      max-width: min(440px, 54vw);
+      z-index: 5;
+    }
+
+    .hero-mono-star--ml {
+      /* Sit slightly below the name column (axis ~46%) so wrapped lines clear “Mariel Lopez”. */
+      top: calc(48% + min(10vh, 100px));
+      left: 0;
+      text-align: left;
+      transform: translateY(-50%);
+      max-width: min(380px, calc(50% - 1.5rem));
+    }
+
+    .hero-mono-star--br {
+      bottom: 10%;
+      /* Past inner’s right edge so the block sits further into the banner padding (still inside white strip). */
+      right: calc(-1 * clamp(12px, 3vw, 52px));
+      text-align: right;
+    }
+
+    .hero-mono-axis {
+      position: absolute;
+      left: 50%;
+      top: 46%;
+      /* ~15% viewport nudge up-left in the hero white space */
+      transform: translate(calc(-50% - min(8vw, 7rem)), calc(-50% - min(5vh, 4.5rem)));
+      width: min(420px, 86vw);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      z-index: 2;
+    }
+
+    .hero-mono-axis-top {
+      font-size: clamp(22px, 2.4vw, 32px);
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      line-height: 1.12;
+    }
+
+    /* SVG + role: role starts just after the bottom terminal dot, vertically centered on it */
+    .hero-mono-axis-lower {
+      position: relative;
+      width: min(320px, 100%);
+      margin: 0 0 0 18px;
+      padding-bottom: 1.25rem;
+      /* Slight down-right from name; reduced so cluster sits up-left with .hero-mono-axis */
+      transform: translate(3%, 3%);
+    }
+
+    .hero-mono-diagonal {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 0;
+    }
+
+    .hero-mono-role {
+      position: absolute;
+      /* Bottom circle in viewBox: cx 314 / 320, cy 128 / 138; align copy to that point */
+      left: calc(314 / 320 * 100% + 0.45em);
+      top: calc(128 / 138 * 100%);
+      transform: translateY(-50%);
+      margin: 0;
+      font-size: clamp(18px, 1.85vw, 24px);
+      font-weight: 400;
+      line-height: 1.35;
+      text-align: left;
+      white-space: nowrap;
+      max-width: none;
+    }
+
+    .hero-mono-scroll {
+      display: block;
+      width: fit-content;
+      margin: 0 auto;
+      font-family: var(--mono-serif);
+      font-size: clamp(15px, 1.35vw, 18px);
+      color: #111;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      opacity: 0.85;
+      transition: opacity 0.2s ease;
+    }
+
+    .hero-mono-scroll:hover,
+    .hero-mono-scroll:focus-visible {
+      opacity: 0.45;
+    }
+
+    @media (max-width: 720px) {
+      .mono-header {
+        margin-bottom: 36px;
+      }
+
+      .hero-mono-inner {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        min-height: 0;
+        margin-bottom: 28px;
+      }
+
+      .hero-mono-axis {
+        position: static;
+        order: -1;
+        transform: none;
+        width: 100%;
+        margin: 0 0 8px;
+      }
+
+      .hero-mono-star {
+        position: static;
+        transform: none !important;
+        text-align: left;
+        max-width: none;
+        white-space: normal;
+      }
+
+      .hero-mono-star--tr {
+        max-width: none;
+      }
+
+      .hero-mono-star--ml {
+        max-width: none;
+      }
+
+      .hero-mono-star-line {
+        white-space: normal;
+      }
+
+      /* Keep the SVG at a book-like width so the diagonal + dots scale with the
+         name; anchor the role copy to the bottom dot (not below a full-bleed SVG). */
+      .hero-mono-axis-lower {
+        width: min(300px, 100%);
+        max-width: 100%;
+        aspect-ratio: 320 / 132;
+        position: relative;
+        margin-left: 0;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0;
+        transform: none;
+      }
+
+      .hero-mono-role {
+        position: absolute;
+        right: calc(6 / 320 * 100%);
+        top: calc((128 - 6) / 132 * 100%);
+        left: auto;
+        transform: translateY(-50%);
+        margin: 0;
+        text-align: right;
+        max-width: min(92%, 280px);
+        white-space: normal;
+        line-height: 1.32;
+      }
+    }
+
     .page {
-      padding: 80px;
+      padding: 48px 80px 80px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -34,278 +447,31 @@
       margin: 0 auto;
     }
 
-    /* ── NAV ── */
-    nav {
-      display: flex;
-      gap: 56px;
-      align-items: center;
-      justify-content: center;
-    }
-
-    nav a {
-      font-size: 20px;
-      color: #000;
-      text-decoration: none;
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
-    }
-
-    /* Active page indicator — soft warm pill rendered via pseudo-element so layout
-       stays identical across pages regardless of which item is current. */
-    nav a.is-current {
-      position: relative;
-      isolation: isolate;
-    }
-
-    nav a.is-current::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: calc(100% + 32px);
-      height: calc(100% + 12px);
-      background: rgba(42, 36, 32, 0.08);
-      border-radius: 100px;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    .nav-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-      text-decoration: none;
-    }
-
-    .nav-brand-flower {
-      width: 52px;
-      height: 52px;
-      object-fit: contain;
-      display: block;
-    }
-
-    .nav-brand-name {
-      font-family: 'Recoleta', 'Playfair Display', serif;
-      font-size: 22px;
-      font-weight: 400;
-      color: #2a2420;
-      letter-spacing: 0.03em;
-    }
-
-    /* ── KAMUSTA TOOLTIP ── */
-    .kamusta {
-      position: relative;
-      cursor: default;
-    }
-
-    .kamusta-tip {
-      position: absolute;
-      bottom: calc(100% + 8px);
-      left: 50%;
-      transform: translateX(-50%);
-      background: #fdf9f7;
-      border: 1px solid rgba(42,36,32,0.1);
-      border-radius: 100px;
-      padding: 5px 14px;
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 300;
-      font-style: italic;
-      color: #6d6d6d;
-      white-space: nowrap;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-    }
-
-    .kamusta:hover .kamusta-tip { opacity: 1; }
-
-    /* ── NAV ETC TOOLTIP ── */
-    .nav-etc {
-      position: relative;
-    }
-
-    .nav-etc-tip {
-      position: absolute;
-      top: calc(100% + 8px);
-      left: 50%;
-      transform: translateX(-50%);
-      background: #fdf9f7;
-      border: 1px solid rgba(42,36,32,0.1);
-      border-radius: 100px;
-      padding: 5px 14px;
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 300;
-      font-style: italic;
-      color: #6d6d6d;
-      white-space: nowrap;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-      z-index: 10;
-    }
-
-    .nav-etc:hover .nav-etc-tip { opacity: 1; }
-
-    /* ── HERO ── */
-    .hero {
-      display: flex;
-      align-items: center;
-      width: 100%;
-      gap: 40px;
-    }
-
-    .hero-text {
-      flex: 1 0 0;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .hero-greeting {
-      font-size: 28px;
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
-      font-weight: 300;
-    }
-
-    .hero-headline {
-      font-size: 48px;
-      font-family: 'Recoleta', 'Playfair Display', serif;
-      font-weight: 400;
-      line-height: 1.15;
-    }
-
-    .hero-sub {
-      font-size: 28px;
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
-      font-weight: 300;
-    }
-
-    .hero-floral-wrap {
-      position: relative;
-      width: min(500px, 46vw);
-      aspect-ratio: 1 / 1;
-      flex-shrink: 0;
-      overflow: visible;
-    }
-
-    .hero-floral {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-      position: relative;
-      z-index: 0;
-    }
-
-    .hero-floral-caption {
-      position: absolute;
-      bottom: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 300;
-      font-style: italic;
-      color: #2a2420;
-      background: rgba(247, 238, 229, 0.85);
-      padding: 6px 14px;
-      border-radius: 100px;
-      white-space: nowrap;
-      opacity: 0;
-      transition: opacity 0.25s ease;
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    .hero-floral-wrap:hover .hero-floral-caption {
-      opacity: 1;
-    }
-
     /* ── FEATURED WORK ── */
-    /* isolation keeps card stack predictable; flora uses screen so black PNG matte disappears on #f7eee5 */
     .work-section {
       width: 100%;
       display: flex;
       flex-direction: column;
       gap: 24px;
       position: relative;
-      isolation: isolate;
       overflow: visible;
-      padding-inline: clamp(4px, 1.2vw, 16px);
       box-sizing: border-box;
-    }
-
-    /* Side birds: fade in on card hover/focus */
-    .work-section::before,
-    .work-flora-flight {
-      content: '';
-      position: absolute;
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-color: transparent;
-      background-blend-mode: normal;
-      mix-blend-mode: screen;
-      opacity: 0;
-      transform: scale(1);
-      transition: opacity 0.65s ease, transform 0.65s ease;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* Hummingbird floats top-right, near the design system card. Flipped to face outward (right). */
-    .work-section::before {
-      top: clamp(72px, 11%, 128px);
-      bottom: 50%;
-      width: clamp(96px, 18vw, 160px);
-      right: clamp(-118px, -10vw, -32px);
-      background-image: url('bird-hummingbird.png');
-      background-position: left center;
-      background-size: contain;
-      background-origin: border-box;
-      transform: scaleX(-1);
-      transform-origin: center;
-    }
-
-    /* Sunbird in flight, floating over the bottom-left near the "designed and launched" card. Flipped to face outward (left). */
-    .work-flora-flight {
-      bottom: clamp(-28px, -2vw, 0px);
-      top: auto;
-      width: clamp(96px, 14vw, 160px);
-      aspect-ratio: 766 / 612;
-      left: clamp(-56px, -5vw, -20px);
-      background-image: url('hero-sunbird-flight.png');
-      background-position: center;
-      background-size: contain;
-      transform: scaleX(-1);
-      transform-origin: center;
-    }
-
-    .work-section:has(.project-card:hover)::before,
-    .work-section:has(.project-card:focus-within)::before,
-    .work-section:has(.project-card:hover) .work-flora-flight,
-    .work-section:has(.project-card:focus-within) .work-flora-flight {
-      opacity: 1;
+      scroll-margin-top: 28px;
     }
 
     .work-title {
-      font-family: 'Recoleta', 'Playfair Display', serif;
+      font-family: var(--mono-serif);
       font-size: 32px;
-      font-weight: 400;
+      font-weight: 500;
+      color: #2a2420;
+      letter-spacing: 0.01em;
       position: relative;
-      z-index: 2;
     }
 
-    /* Solid stacking above flora in the gutters */
     .work-section .projects-row {
       display: flex;
       gap: 24px;
       position: relative;
-      z-index: 2;
     }
 
     .project-card {
@@ -319,12 +485,13 @@
       background-clip: padding-box;
       border: 1px solid rgba(42, 36, 32, 0.06);
       padding: 24px;
-      border-radius: 16px;
+      border-radius: 12px;
       display: flex;
       flex-direction: column;
       gap: 24px;
       text-decoration: none;
       color: #000;
+      box-shadow: 0 10px 28px rgba(42, 36, 32, 0.07);
       transition: transform 0.35s ease, box-shadow 0.35s ease;
     }
 
@@ -339,7 +506,7 @@
 
     .project-card.no-hover:hover {
       transform: none;
-      box-shadow: none;
+      box-shadow: 0 10px 28px rgba(42, 36, 32, 0.07);
     }
 
     .project-card.card-green:hover  { box-shadow: 0 12px 40px rgba(45,130,80,0.27); }
@@ -353,6 +520,26 @@
       border-radius: 12px;
       overflow: hidden;
       flex-shrink: 0;
+      background: #e8e0d8;
+    }
+
+    .project-thumb-wrap--logo {
+      background: linear-gradient(
+        168deg,
+        #fdfbf7 0%,
+        #f6efe6 42%,
+        #ebe3d8 100%
+      );
+      border: 1px solid rgba(42, 36, 32, 0.1);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    }
+
+    .project-thumb-wrap--logo .project-thumb {
+      object-fit: contain;
+      object-position: center;
+      padding: clamp(20px, 5vw, 56px);
+      box-sizing: border-box;
+      background: transparent;
     }
 
     .project-thumb {
@@ -373,7 +560,7 @@
         filter: brightness(1.13) contrast(1.10) saturate(1.32);
       }
 
-      /* Non-interactive cards stay static — no scale, no warm filter shift. */
+      /* Non-interactive cards stay static — no scale, no filter shift. */
       .project-card.no-hover:hover .project-thumb,
       .project-card.no-hover:focus-within .project-thumb {
         transform: none;
@@ -382,16 +569,17 @@
     }
 
     .project-card-title {
-      font-family: 'Recoleta', 'Playfair Display', serif;
+      font-family: var(--mono-serif);
       font-size: 24px;
       font-weight: 400;
       line-height: 1.3;
+      color: #000;
     }
 
     /* ── CONTACT CARD ── */
     .contact-card {
       background: #fff7ef;
-      padding: 40px;
+      padding: 28px 32px;
       border-radius: 16px;
       border: 1px solid rgba(42, 36, 32, 0.1);
       width: 100%;
@@ -401,79 +589,68 @@
 
     .contact-inner {
       display: flex;
-      gap: 24px;
-      align-items: flex-start;
-    }
-
-    .contact-floral {
-      position: absolute;
-      top: -145px;
-      right: 80px;
-      width: 160px;
-      height: auto;
-      object-fit: contain;
-      pointer-events: none;
-      z-index: 2;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-
-    .contact-card:hover .contact-floral,
-    .contact-card.form-active .contact-floral {
-      opacity: 1;
-    }
-
-    .contact-text {
-      flex: 1 0 0;
-      display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 14px;
+      align-items: stretch;
     }
 
-    .contact-heading {
-      font-family: 'Recoleta', 'Playfair Display', serif;
-      font-size: 40px;
-      font-weight: 400;
+    .contact-email-lead {
+      width: 100%;
     }
 
     .email-copy-row {
       display: flex;
       align-items: center;
-      gap: 10px;
+      flex-wrap: wrap;
+      gap: 8px 14px;
     }
 
     .email-copy-btn {
       display: inline-flex;
-      align-items: center;
-      gap: 8px;
+      align-items: baseline;
+      gap: 0.45em;
+      flex-wrap: nowrap;
       background: none;
       border: none;
       padding: 0;
-      font-family: 'Recoleta', 'Playfair Display', serif;
-      font-size: 24px;
+      font-family: var(--mono-serif);
+      font-size: clamp(20px, 2.15vw, 28px);
       font-weight: 400;
+      letter-spacing: 0.01em;
       color: #2a2420;
       cursor: pointer;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      text-decoration-color: rgba(42,36,32,0.3);
+      text-decoration: none;
+      text-align: left;
       transition: opacity 0.2s;
     }
 
-    .email-copy-btn:hover { opacity: 0.6; }
+    .email-copy-greeting {
+      font-weight: 700;
+      color: #2a2420;
+    }
+
+    .email-copy-address {
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(42, 36, 32, 0.35);
+    }
+
+    .email-copy-btn:hover { opacity: 0.72; }
 
     .email-copy-btn svg {
-      width: 15px;
-      height: 15px;
-      opacity: 0.45;
+      width: clamp(14px, 1.35vw, 18px);
+      height: clamp(14px, 1.35vw, 18px);
+      opacity: 0.42;
       flex-shrink: 0;
+      align-self: center;
       transition: opacity 0.2s;
     }
 
-    .email-copy-btn:hover svg { opacity: 0.7; }
+    .email-copy-btn:hover svg { opacity: 0.65; }
 
     .copy-feedback {
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-family: var(--mono-serif);
       font-size: 14px;
       font-weight: 400;
       font-style: italic;
@@ -485,18 +662,32 @@
 
     .copy-feedback.visible { opacity: 1; }
 
-    .contact-quote {
-      font-family: 'Recoleta', 'Playfair Display', serif;
-      font-size: 24px;
-      font-weight: 400;
-      line-height: 1.4;
-    }
-
     .contact-form {
-      flex: 1 0 0;
+      width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 40px;
+      gap: 14px;
+    }
+
+    .contact-form-fields {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    .contact-form-fields .form-field {
+      min-width: 0;
+    }
+
+    /* Email column ~15% narrower than an even split with “Your note”. */
+    .contact-form-fields #field-email {
+      flex: 0.85 1 0;
+    }
+
+    .contact-form-fields #field-note {
+      flex: 1.15 1 0;
     }
 
     .form-field {
@@ -509,7 +700,7 @@
       position: absolute;
       bottom: 8px;
       left: 0;
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-family: var(--mono-serif);
       font-size: 20px;
       color: #6d6d6d;
       font-style: italic;
@@ -529,7 +720,7 @@
       background: none;
       border: none;
       border-bottom: 1px solid rgba(0,0,0,0.25);
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-family: var(--mono-serif);
       font-size: 20px;
       font-style: italic;
       font-weight: 300;
@@ -538,10 +729,15 @@
       outline: none;
     }
 
+    #field-email .form-input {
+      width: 85%;
+      max-width: 100%;
+    }
+
     .form-input::placeholder { color: transparent; }
 
     .form-submit {
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-family: var(--mono-serif);
       font-size: 20px;
       font-weight: 400;
       font-style: italic;
@@ -550,7 +746,8 @@
       background: none;
       border: none;
       padding: 0;
-      text-align: left;
+      text-align: right;
+      align-self: flex-end;
       transition: opacity 0.2s;
     }
 
@@ -559,8 +756,30 @@
     .form-error {
       font-size: 16px;
       color: #c0392b;
+      font-weight: 600;
       margin-top: 4px;
       display: none;
+    }
+
+    @media (max-width: 560px) {
+      .email-copy-btn {
+        flex-wrap: wrap;
+      }
+
+      .contact-form-fields {
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .contact-form-fields #field-email,
+      .contact-form-fields #field-note {
+        flex: none;
+        width: 100%;
+      }
+
+      #field-email .form-input {
+        width: 100%;
+      }
     }
 
     @keyframes float-up-in {
@@ -576,7 +795,7 @@
 
     .contact-success {
       display: none;
-      flex: 1 0 0;
+      width: 100%;
       flex-direction: column;
       gap: 12px;
     }
@@ -586,14 +805,7 @@
       animation: float-up-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
       position: relative;
       z-index: 3;
-      padding-top: 80px;
-    }
-
-    .success-floral {
-      width: 100px;
-      height: 120px;
-      object-fit: contain;
-      animation: float-up-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+      padding-top: 0;
     }
 
     .success-text-row {
@@ -604,7 +816,7 @@
     }
 
     .success-text {
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-family: var(--mono-serif);
       font-size: 20px;
       font-style: italic;
       font-weight: 400;
@@ -616,7 +828,7 @@
       background: none;
       border: none;
       padding: 0;
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-family: var(--mono-serif);
       font-size: 16px;
       font-weight: 300;
       color: #6d6d6d;
@@ -632,20 +844,26 @@
     /* ── FOOTER ── */
     footer {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       width: 100%;
+      gap: 16px 24px;
     }
 
     .footer-copy {
+      flex: 1 1 220px;
+      min-width: 0;
+      max-width: 100%;
       font-size: 20px;
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-family: var(--mono-serif);
       color: #000;
-      white-space: nowrap;
+      line-height: 1.35;
     }
 
     .footer-links {
       display: flex;
+      flex-wrap: wrap;
       gap: 24px;
       margin-left: auto;
       padding-right: 40px;
@@ -653,21 +871,18 @@
 
     .footer-links a {
       font-size: 20px;
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
-      color: #000;
-      text-decoration: none;
-      transition: opacity 0.2s;
+      font-family: var(--mono-serif);
+      text-transform: lowercase;
     }
 
-    .footer-links a:hover { opacity: 0.55; }
-
     @media (prefers-reduced-motion: reduce) {
-      .work-section::before,
-      .work-flora-flight {
+      .project-thumb {
         transition-duration: 0.05s;
       }
 
-      .project-thumb {
+      .mono-nav > a,
+      .mono-logo,
+      .hero-mono-scroll {
         transition-duration: 0.05s;
       }
 
@@ -675,37 +890,21 @@
         .project-card:hover .project-thumb,
         .project-card:focus-within .project-thumb {
           transform: none;
+          filter: none;
         }
       }
     }
 
     @media (max-width: 900px) {
-      .page { padding: 40px 24px; gap: 60px; }
+      .page { padding: 32px 24px 40px; gap: 60px; }
 
-      /* Nav */
-      nav { gap: 24px; flex-wrap: wrap; justify-content: center; }
-      nav a { font-size: 17px; }
-      .nav-brand { order: -1; flex-basis: 100%; justify-content: center; }
-      .nav-brand-flower { width: 40px; height: 40px; }
-      .nav-brand-name { font-size: 18px; }
+      .home-hero-mono {
+        padding: 22px 20px 40px;
+      }
 
-      /* Hero */
-      .hero { flex-direction: column; gap: 32px; }
-      .hero-floral-wrap {
-        width: 100%;
-        max-width: 420px;
-        margin-inline: auto;
-        aspect-ratio: auto;
+      .mono-header {
+        margin-bottom: 40px;
       }
-      .hero-floral {
-        width: 100%;
-        height: auto;
-        max-height: 340px;
-        object-fit: contain;
-      }
-      .hero-floral-caption { opacity: 1; }
-      .hero-headline { font-size: 34px; }
-      .hero-greeting, .hero-sub { font-size: 20px; }
 
       /* Work — flatten the two .projects-row wrappers so all 4 cards live in a
          single sticky stack instead of two stacks of two. Selector specificity
@@ -723,87 +922,78 @@
       .work-title { font-size: 26px; text-align: left; }
       .work-section { overflow: visible; align-self: stretch; }
 
-      /* Stagger florals vertically (hummingbird upper-right / sunbird lower-left); keep visible while scrolling —
-         touch screens rarely get :hover so show at full strength here. Both flipped to face outward. */
-      .work-section::before,
-      .work-flora-flight {
-        opacity: 0.93;
-        background-size: contain;
-      }
-
-      .work-section::before {
-        width: clamp(222px, 84vw, 420px);
-        top: clamp(44px, 7%, 80px);
-        bottom: 52%;
-        left: auto;
-        right: clamp(-200px, -32vw, -52px);
-        background-position: left center;
-        transform: scaleX(-1);
-      }
-
-      .work-flora-flight {
-        top: 52%;
-        bottom: clamp(-64px, -12vw, -16px);
-        width: clamp(240px, 86vw, 450px);
-        right: auto;
-        left: clamp(-185px, -27.5vw, -45px);
-        background-position: 55% 88%;
-        transform: scaleX(-1);
-      }
-
       /* Contact */
-      .contact-card { padding: 28px 20px; }
-      .contact-inner { flex-direction: column; align-items: stretch; width: 100%; }
-      .contact-floral { width: 150px; top: -85px; right: 10px; }
-      .contact-heading { font-size: 32px; }
-      .email-copy-btn { font-size: 18px; }
-      .contact-quote { font-size: 18px; }
+      .contact-card { padding: 24px 20px; }
+      .email-copy-btn {
+        font-size: clamp(17px, 4vw, 22px);
+      }
 
       /* Footer */
       footer { flex-direction: column; gap: 16px; align-items: flex-start; }
       .footer-links { flex-wrap: wrap; gap: 16px; margin-left: 0; padding-right: 0; }
+      .footer-copy { flex: none; width: 100%; }
     }
 
     @media (max-width: 500px) {
-      .page { padding: 32px 16px; gap: 48px; }
-      .hero-headline { font-size: 28px; }
-      nav a { font-size: 15px; }
-      .contact-heading { font-size: 28px; }
+      .page { padding: 28px 16px 36px; gap: 48px; }
+
+      .mono-nav {
+        gap: 14px 18px;
+      }
+
+      .mono-nav > a {
+        font-size: 17px;
+      }
+
     }
   </style>
 </head>
 <body>
+  <div class="home-hero-mono">
+    <header class="mono-header">
+      <a href="index.html" class="mono-logo">Mariel Lopez</a>
+      <nav class="mono-nav" aria-label="Main">
+        <a href="index.html" class="is-current">work</a>
+        <a href="about.html">about</a>
+        <a href="#" class="nav-etc">etc<span class="nav-etc-tip">Coming soon</span></a>
+        <a href="#contact">contact</a>
+      </nav>
+    </header>
+    <section class="hero-mono" aria-labelledby="hero-heading">
+      <h1 id="hero-heading" class="visually-hidden">Mariel Lopez, Product Designer at IBM iX</h1>
+      <div class="hero-mono-inner">
+        <p class="hero-mono-star hero-mono-star--tr">
+          <span class="hero-mono-star-line"><span class="hero-mono-star-glyph" aria-hidden="true">★</span> curious about how the <span class="hero-mono-star-tt"><a class="hero-mono-star-keyword" href="https://ysknd.medium.com/ui-ux-design-in-japan-e3e5fb7613f" target="_blank" rel="noopener noreferrer" aria-label="UI/UX design in Japan on Medium (opens in new tab)">Japanese</a><span class="hero-mono-star-cardtip" aria-hidden="true"><span class="hero-mono-star-cardtip-title">UI/UX design in Japan</span><span class="hero-mono-star-cardtip-domain">ysknd.medium.com</span></span></span></span>
+          <span class="hero-mono-star-line">and <span class="hero-mono-star-tt"><a class="hero-mono-star-keyword" href="https://admindagency.com/exploring-the-depths-of-swiss-design/" target="_blank" rel="noopener noreferrer" aria-label="Exploring the depths of Swiss design on Admind (opens in new tab)">Swiss</a><span class="hero-mono-star-cardtip" aria-hidden="true"><span class="hero-mono-star-cardtip-title">Exploring the depths of Swiss design</span><span class="hero-mono-star-cardtip-domain">admindagency.com</span></span></span> approach design</span>
+        </p>
+        <p class="hero-mono-star hero-mono-star--ml">
+          <span class="hero-mono-star-line"><span class="hero-mono-star-glyph" aria-hidden="true">★</span> fascinated by the intersection of design,</span>
+          <span class="hero-mono-star-line">product, business, and tech</span>
+        </p>
+        <p class="hero-mono-star hero-mono-star--br">
+          <span class="hero-mono-star-line"><span class="hero-mono-star-glyph" aria-hidden="true">★</span> learning more about</span>
+          <span class="hero-mono-star-line"><span class="hero-mono-star-tt"><a class="hero-mono-star-keyword" href="https://fs.blog/first-principles/" target="_blank" rel="noopener noreferrer" aria-label="What is First Principles Thinking? on Farnam Street (opens in new tab)">First Principles Thinking</a><span class="hero-mono-star-cardtip" aria-hidden="true"><span class="hero-mono-star-cardtip-title">What is First Principles Thinking?</span><span class="hero-mono-star-cardtip-domain">fs.blog</span></span></span></span>
+        </p>
+        <div class="hero-mono-axis">
+          <div class="hero-mono-axis-top">Mariel Lopez</div>
+          <div class="hero-mono-axis-lower">
+            <svg class="hero-mono-diagonal" viewBox="0 6 320 132" aria-hidden="true">
+              <line x1="6" y1="10" x2="314" y2="128" stroke="#111111" stroke-width="1" />
+              <circle cx="6" cy="10" r="3.5" fill="#111111" />
+              <circle cx="314" cy="128" r="3.5" fill="#111111" />
+            </svg>
+            <p class="hero-mono-role">is a Product Designer @ <span class="hero-mono-star-tt"><a class="hero-mono-star-keyword" href="https://www.ibm.com/consulting/ibmix" target="_blank" rel="noopener noreferrer" aria-label="IBM iX on IBM Consulting (opens in new tab)">IBM iX</a><span class="hero-mono-star-cardtip" aria-hidden="true"><span class="hero-mono-star-cardtip-title">IBM iX | IBM Consulting</span><span class="hero-mono-star-cardtip-domain">ibm.com</span></span></span></p>
+          </div>
+        </div>
+      </div>
+      <a class="hero-mono-scroll" href="#work">↓ scroll more to see my work</a>
+    </section>
+  </div>
+
   <div class="page">
 
-    <!-- NAV -->
-    <nav>
-      <a href="#" class="is-current">Work</a>
-      <a href="about.html">About</a>
-      <a href="index.html" class="nav-brand">
-        <span class="nav-brand-name">Mariel</span>
-        <img class="nav-brand-flower" src="favicon.png" alt="" />
-        <span class="nav-brand-name">Lopez</span>
-      </a>
-      <a href="#" class="nav-etc">Guides<span class="nav-etc-tip">Blooming soon</span></a>
-      <a href="#contact">Contact</a>
-    </nav>
-
-    <!-- HERO -->
-    <div class="hero">
-      <div class="hero-text">
-        <p class="hero-greeting"><span class="kamusta">Kamusta<span class="kamusta-tip">Means "how are you" in Tagalog!</span></span>! I'm Mariel</p>
-        <p class="hero-headline">I'm a Product Designer who makes complex systems feel more human and intentional</p>
-        <p class="hero-sub">Currently designing @ <a href="https://www.ibm.com/consulting/ibmix" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">IBM iX</a></p>
-      </div>
-      <div class="hero-floral-wrap">
-        <img class="hero-floral" src="hero-img.png" alt="" />
-        <p class="hero-floral-caption">Sampaguita, the national flower of the Philippines</p>
-      </div>
-    </div>
-
     <!-- FEATURED WORK -->
-    <div class="work-section">
-      <div class="work-flora-flight" aria-hidden="true"></div>
+    <div class="work-section" id="work">
       <p class="work-title">Featured work</p>
 
       <div class="projects-row">
@@ -829,43 +1019,41 @@
           <p class="project-card-title">Designed and launched a website for a new real estate development</p>
         </a>
         <div class="project-card no-hover" style="--card-i:3">
-          <div class="project-thumb-wrap">
-            <img class="project-thumb" src="ac-bg.png" alt="Air Canada" />
+          <div class="project-thumb-wrap project-thumb-wrap--logo">
+            <img class="project-thumb" src="ac-logo.png" alt="Air Canada" loading="lazy" />
           </div>
-          <p class="project-card-title">Air Canada — Blooming soon</p>
+          <p class="project-card-title">Air Canada — Coming soon</p>
         </div>
       </div>
     </div>
 
     <!-- CONTACT CARD -->
     <div class="contact-card" id="contact">
-      <img class="contact-floral" src="bird-contact form.png" alt="" />
       <div class="contact-inner">
-        <div class="contact-text">
-          <div>
-            <p class="contact-heading">Say hi!</p>
-            <div class="email-copy-row">
-              <button class="email-copy-btn" id="email-copy-btn">
-                mariellopezdesign@gmail.com
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              </button>
-              <span class="copy-feedback" id="copy-feedback">Copied!</span>
-            </div>
+        <div class="contact-email-lead">
+          <div class="email-copy-row">
+            <button type="button" class="email-copy-btn" id="email-copy-btn" aria-label="Copy mariellopezdesign@gmail.com to clipboard">
+              <span class="email-copy-greeting">Say hi!</span>
+              <span class="email-copy-address">mariellopezdesign@gmail.com</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            </button>
+            <span class="copy-feedback" id="copy-feedback">Copied!</span>
           </div>
-          <p class="contact-quote">Drop me a letter, I'd love to hear from you.</p>
         </div>
         <form class="contact-form" id="contact-form" action="https://formspree.io/f/xgoddvna" method="POST">
-          <div class="form-field" id="field-email">
-            <label class="form-label" for="email">Your email</label>
-            <input class="form-input" id="email" type="email" name="email" placeholder=" " autocomplete="off" required />
-            <span class="form-error" id="email-error">Please enter a valid email address.</span>
+          <div class="contact-form-fields">
+            <div class="form-field" id="field-email">
+              <label class="form-label" for="email">Your email</label>
+              <input class="form-input" id="email" type="email" name="email" placeholder=" " autocomplete="off" required />
+              <span class="form-error" id="email-error">Please enter a valid email address.</span>
+            </div>
+            <div class="form-field" id="field-note">
+              <label class="form-label" for="note">Your note</label>
+              <input class="form-input" id="note" type="text" name="note" placeholder=" " required />
+              <span class="form-error" id="note-error">Please write a note.</span>
+            </div>
           </div>
-          <div class="form-field" id="field-note">
-            <label class="form-label" for="note">Your note</label>
-            <input class="form-input" id="note" type="text" name="note" placeholder=" " required />
-            <span class="form-error" id="note-error">Please write a note.</span>
-          </div>
-          <button class="form-submit" type="submit">Send it up &amp; away →</button>
+          <button class="form-submit" type="submit">Send message &gt;</button>
         </form>
         <div class="contact-success" id="contact-success">
           <div class="success-text-row">
@@ -880,9 +1068,14 @@
     <footer>
       <p class="footer-copy">© 2026 Mariel Lopez. Find me where the light is.</p>
       <nav class="footer-links">
-        <a href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://luma.com/user/mariel" target="_blank" rel="noopener">Luma</a>
-        <a href="mailto:mariellopezdesign@gmail.com">Contact</a>
+        <span class="hero-mono-star-tt">
+          <a class="hero-mono-star-keyword" href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener noreferrer" aria-label="Mariel Lopez on LinkedIn (opens in new tab)">LinkedIn</a>
+          <span class="hero-mono-star-cardtip" aria-hidden="true"><span class="hero-mono-star-cardtip-title">Mariel Lopez on LinkedIn</span><span class="hero-mono-star-cardtip-domain">linkedin.com</span></span>
+        </span>
+        <span class="hero-mono-star-tt">
+          <a class="hero-mono-star-keyword" href="https://luma.com/user/mariel" target="_blank" rel="noopener noreferrer" aria-label="Mariel on Luma (opens in new tab)">Luma</a>
+          <span class="hero-mono-star-cardtip" aria-hidden="true"><span class="hero-mono-star-cardtip-title">Events &amp; profile on Luma</span><span class="hero-mono-star-cardtip-domain">luma.com</span></span>
+        </span>
       </nav>
     </footer>
 
@@ -890,29 +1083,20 @@
   <!-- PASSWORD MODAL -->
   <div id="pw-modal" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(42,36,32,0.45);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
     <div style="background:#fdf9f7;border-radius:20px;padding:48px 40px;max-width:400px;width:90%;display:flex;flex-direction:column;gap:24px;box-shadow:0 24px 60px rgba(0,0,0,0.12);">
-      <p style="font-family:'Recoleta','Playfair Display',serif;font-size:28px;font-weight:400;color:#2a2420;">This project is private</p>
-      <p style="font-family:'Satoshi','DM Sans',sans-serif;font-size:16px;font-weight:300;color:#6d6d6d;margin-top:-12px;">Enter the password to continue.</p>
+      <p style="font-family:var(--mono-serif);font-size:28px;font-weight:400;color:#2a2420;">This project is private</p>
+      <p style="font-family:var(--mono-serif);font-size:16px;font-weight:300;color:#6d6d6d;margin-top:-12px;">Enter the password to continue.</p>
       <div style="position:relative;padding-bottom:2px;">
-        <input id="pw-input" type="password" placeholder="Password" style="display:block;width:100%;background:none;border:none;border-bottom:1px solid rgba(0,0,0,0.25);font-family:'Satoshi','DM Sans',sans-serif;font-size:18px;font-weight:300;font-style:italic;color:#2a2420;padding:0 0 8px;outline:none;" />
-        <p id="pw-error" style="font-family:'Satoshi','DM Sans',sans-serif;font-size:14px;color:#c0392b;margin-top:6px;display:none;">Incorrect password.</p>
+        <input id="pw-input" type="password" placeholder="Password" style="display:block;width:100%;background:none;border:none;border-bottom:1px solid rgba(0,0,0,0.25);font-family:var(--mono-serif);font-size:18px;font-weight:300;font-style:italic;color:#2a2420;padding:0 0 8px;outline:none;" />
+        <p id="pw-error" style="font-family:var(--mono-serif);font-size:14px;color:#c0392b;margin-top:6px;display:none;">Incorrect password.</p>
       </div>
       <div style="display:flex;gap:16px;align-items:center;justify-content:space-between;">
-        <button id="pw-cancel" style="font-family:'Satoshi','DM Sans',sans-serif;font-size:14px;font-weight:300;color:#6d6d6d;background:none;border:none;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px;transition:opacity 0.2s;">Cancel</button>
-        <button id="pw-submit" style="font-family:'Satoshi','DM Sans',sans-serif;font-size:18px;font-weight:400;font-style:italic;color:#000;background:none;border:none;padding:0;cursor:pointer;transition:opacity 0.2s;">Enter →</button>
+        <button id="pw-cancel" style="font-family:var(--mono-serif);font-size:14px;font-weight:300;color:#6d6d6d;background:none;border:none;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px;transition:opacity 0.2s;">Cancel</button>
+        <button id="pw-submit" style="font-family:var(--mono-serif);font-size:18px;font-weight:400;font-style:italic;color:#000;background:none;border:none;padding:0;cursor:pointer;transition:opacity 0.2s;">Enter →</button>
       </div>
     </div>
   </div>
 
   <script>
-    // Show bird on form interaction
-    const contactCard = document.querySelector('.contact-card');
-    document.querySelectorAll('.form-input').forEach(input => {
-      input.addEventListener('focus', () => contactCard.classList.add('form-active'));
-      input.addEventListener('blur', () => {
-        if (!document.querySelector('.form-input:focus')) contactCard.classList.remove('form-active');
-      });
-    });
-
     // Floating label behaviour
     document.querySelectorAll('.form-field').forEach(field => {
       const input = field.querySelector('.form-input');

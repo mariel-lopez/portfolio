@@ -4,29 +4,201 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About — Mariel Lopez</title>
-  <link rel="icon" type="image/png" href="favicon.png" />
-  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700,300i,400i,500i,700i&display=swap" rel="stylesheet">
-  <link href="https://api.fontshare.com/v2/css?f[]=recoleta@400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
+    :root {
+      --mono-serif: 'Cormorant Garamond', 'Playfair Display', Georgia, 'Times New Roman', serif;
+      /* About page: blues from the hero photo (sky / water), washed pastel; tail warms to match index cream */
+      --about-bg-sky-light: #d8ecf8;
+      --about-bg-sky-air: #e6f2fa;
+      --about-bg-sky: #c4dff2;
+      --about-bg-water: #b6d6ed;
+      --about-bg-haze: #cce4f2;
+      --about-bg-mist: #ddeaf4;
+      --about-bg-shore: #ebe6dc;
+      --about-bg-sand: #f3efe6;
+      --about-bg-warm: #faf7f0;
+    }
+
     body {
       font-size: 16px;
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-family: var(--mono-serif);
       font-weight: 300;
-      background: #f7eee5;
+      background: linear-gradient(
+        168deg,
+        var(--about-bg-sky-light) 0%,
+        var(--about-bg-sky-air) 11%,
+        var(--about-bg-sky) 24%,
+        var(--about-bg-water) 38%,
+        var(--about-bg-haze) 50%,
+        var(--about-bg-mist) 64%,
+        var(--about-bg-shore) 78%,
+        var(--about-bg-sand) 90%,
+        var(--about-bg-warm) 100%
+      );
       color: #2a2420;
       min-height: 100vh;
       overflow-x: hidden;
     }
 
+    /* ── Editorial top strip (matches index): white + split mono header ── */
+    .home-hero-mono {
+      background: #fff;
+      color: #111;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      padding: 28px clamp(20px, 4.5vw, 64px) 48px;
+    }
+
+    .mono-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 24px 40px;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto 40px;
+    }
+
+    .mono-logo {
+      font-family: var(--mono-serif);
+      font-size: clamp(22px, 2.15vw, 28px);
+      font-weight: 500;
+      color: #111;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .mono-logo:hover,
+    .mono-logo:focus-visible {
+      opacity: 0.72;
+    }
+
+    .mono-nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: clamp(18px, 2.8vw, 36px);
+    }
+
+    .mono-nav > a {
+      position: relative;
+      font-family: var(--mono-serif);
+      font-size: clamp(18px, 1.65vw, 22px);
+      font-weight: 400;
+      color: #111;
+      text-decoration: none;
+      text-transform: lowercase;
+      letter-spacing: 0.02em;
+      transition: opacity 0.2s ease;
+    }
+
+    .mono-nav > a:hover,
+    .mono-nav > a:focus-visible {
+      opacity: 0.55;
+    }
+
+    .mono-nav > a.is-current {
+      font-weight: 600;
+    }
+
+    .mono-nav .nav-etc {
+      position: relative;
+    }
+
+    .mono-nav .nav-etc-tip {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-family: var(--mono-serif);
+      font-size: 12px;
+      font-weight: 300;
+      font-style: italic;
+      color: #555;
+      text-transform: lowercase;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+      z-index: 20;
+    }
+
+    .mono-nav .nav-etc:hover .nav-etc-tip,
+    .mono-nav .nav-etc:focus-visible .nav-etc-tip {
+      opacity: 1;
+    }
+
+    .hero-mono {
+      font-family: var(--mono-serif);
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 0 8px;
+    }
+
+    .hero-mono--sub .hero-mono-sub-inner {
+      max-width: 720px;
+      margin: 0 auto 24px;
+      text-align: center;
+    }
+
+    .hero-mono-page-title {
+      font-family: var(--mono-serif);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 500;
+      color: #111;
+      line-height: 1.15;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-mono-page-lead {
+      margin-top: 18px;
+      font-family: var(--mono-serif);
+      font-size: clamp(17px, 1.65vw, 22px);
+      font-weight: 400;
+      color: #111;
+      line-height: 1.45;
+      opacity: 0.88;
+    }
+
+    .hero-mono-scroll {
+      display: block;
+      width: fit-content;
+      margin: 0 auto;
+      font-family: var(--mono-serif);
+      font-size: clamp(15px, 1.35vw, 18px);
+      color: #111;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      opacity: 0.85;
+      transition: opacity 0.2s ease;
+    }
+
+    .hero-mono-scroll:hover,
+    .hero-mono-scroll:focus-visible {
+      opacity: 0.45;
+    }
+
+    @media (max-width: 720px) {
+      .mono-header {
+        margin-bottom: 28px;
+      }
+    }
+
     .page {
-      padding: 80px;
+      padding: 48px 80px 80px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -34,123 +206,6 @@
       max-width: 1200px;
       margin: 0 auto;
     }
-
-    /* ── NAV ── */
-    nav {
-      display: flex;
-      gap: 56px;
-      align-items: center;
-      justify-content: center;
-    }
-
-    nav a {
-      font-size: 20px;
-      color: #000;
-      text-decoration: none;
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
-    }
-
-    /* Active page indicator — soft warm pill rendered via pseudo-element so layout
-       stays identical across pages regardless of which item is current. */
-    nav a.is-current {
-      position: relative;
-      isolation: isolate;
-    }
-
-    nav a.is-current::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: calc(100% + 32px);
-      height: calc(100% + 12px);
-      background: rgba(42, 36, 32, 0.08);
-      border-radius: 100px;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    /* ── NAV GUIDES TOOLTIP ── */
-    .nav-etc {
-      position: relative;
-    }
-
-    .nav-etc-tip {
-      position: absolute;
-      top: calc(100% + 8px);
-      left: 50%;
-      transform: translateX(-50%);
-      background: #fdf9f7;
-      border: 1px solid rgba(42,36,32,0.1);
-      border-radius: 100px;
-      padding: 5px 14px;
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 300;
-      font-style: italic;
-      color: #6d6d6d;
-      white-space: nowrap;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-      z-index: 10;
-    }
-
-    .nav-etc:hover .nav-etc-tip { opacity: 1; }
-
-    .nav-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-      text-decoration: none;
-    }
-
-    .nav-brand-flower {
-      width: 52px;
-      height: 52px;
-      object-fit: contain;
-      display: block;
-    }
-
-    .nav-brand-name {
-      font-family: 'Recoleta', 'Playfair Display', serif;
-      font-size: 22px;
-      font-weight: 400;
-      color: #2a2420;
-      letter-spacing: 0.03em;
-    }
-
-    /* ── KAMUSTA TOOLTIP ── */
-    .kamusta {
-      position: relative;
-      cursor: default;
-    }
-
-    .kamusta-tip {
-      position: absolute;
-      bottom: calc(100% + 8px);
-      left: 50%;
-      transform: translateX(-50%);
-      background: #fdf9f7;
-      border: 1px solid rgba(42,36,32,0.1);
-      border-radius: 100px;
-      padding: 5px 14px;
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 300;
-      font-style: italic;
-      color: #6d6d6d;
-      white-space: nowrap;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-    }
-
-    .kamusta:hover .kamusta-tip { opacity: 1; }
 
     /* ── CONTENT CONTAINER ── */
     .content-container {
@@ -161,6 +216,10 @@
       gap: 64px;
       position: relative;
       isolation: isolate;
+    }
+
+    #main {
+      scroll-margin-top: 28px;
     }
 
     /* ── PHOTO + FLORALS ── */
@@ -226,44 +285,6 @@
       display: block;
     }
 
-    /* Botanical overlay — top right */
-    .floral-tr {
-      position: absolute;
-      width: 43%;
-      top: -20%;
-      right: -25%;
-      transform-origin: bottom left;
-      pointer-events: none;
-      opacity: 0;
-      transform: rotate(20.35deg) scale(0.05);
-      transition: opacity 0.5s ease, transform 0.65s cubic-bezier(0.34, 1.5, 0.64, 1);
-      z-index: 3;
-    }
-
-    /* Botanical overlay — bottom left */
-    .floral-bl {
-      position: absolute;
-      width: 42%;
-      bottom: -18%;
-      left: -22%;
-      transform-origin: top right;
-      pointer-events: none;
-      opacity: 0;
-      transform: scale(0.05);
-      transition: opacity 0.5s ease, transform 0.7s cubic-bezier(0.34, 1.5, 0.64, 1) 0.1s;
-      z-index: 3;
-    }
-
-    .photo-wrap:hover .floral-tr {
-      opacity: 1;
-      transform: rotate(20.35deg) scale(1);
-    }
-
-    .photo-wrap:hover .floral-bl {
-      opacity: 1;
-      transform: scale(1);
-    }
-
     /* ── TEXT ── */
     .section-heading,
     .bio-columns,
@@ -273,7 +294,7 @@
     }
 
     .section-heading {
-      font-family: 'Recoleta', 'Playfair Display', serif;
+      font-family: var(--mono-serif);
       font-size: 40px;
       font-weight: 400;
       text-align: center;
@@ -299,11 +320,11 @@
     .bio-col p:last-child { margin-bottom: 0; }
 
     .bio-bold {
-      font-weight: 400;
+      font-weight: 700;
     }
 
     .quote-block {
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-family: var(--mono-serif);
       font-size: 20px;
       font-style: italic;
       text-align: center;
@@ -313,7 +334,7 @@
 
     /* ── TAGLINE ── */
     .tagline {
-      font-family: 'Recoleta', 'Playfair Display', serif;
+      font-family: var(--mono-serif);
       font-size: 40px;
       font-weight: 400;
       text-align: center;
@@ -323,7 +344,7 @@
     /* ── CONTACT CARD ── */
     .contact-card {
       background: #fff7ef;
-      padding: 40px;
+      padding: 28px 32px;
       border-radius: 16px;
       border: 1px solid rgba(42, 36, 32, 0.1);
       width: 100%;
@@ -333,79 +354,68 @@
 
     .contact-inner {
       display: flex;
-      gap: 24px;
-      align-items: flex-start;
-    }
-
-    .contact-floral {
-      position: absolute;
-      top: -145px;
-      right: 80px;
-      width: 220px;
-      height: auto;
-      object-fit: contain;
-      pointer-events: none;
-      z-index: 2;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-
-    .contact-card:hover .contact-floral,
-    .contact-card.form-active .contact-floral {
-      opacity: 1;
-    }
-
-    .contact-text {
-      flex: 1 0 0;
-      display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 14px;
+      align-items: stretch;
     }
 
-    .contact-heading {
-      font-family: 'Recoleta', 'Playfair Display', serif;
-      font-size: 40px;
-      font-weight: 400;
+    .contact-email-lead {
+      width: 100%;
     }
 
     .email-copy-row {
       display: flex;
       align-items: center;
-      gap: 10px;
+      flex-wrap: wrap;
+      gap: 8px 14px;
     }
 
     .email-copy-btn {
       display: inline-flex;
-      align-items: center;
-      gap: 8px;
+      align-items: baseline;
+      gap: 0.45em;
+      flex-wrap: nowrap;
       background: none;
       border: none;
       padding: 0;
-      font-family: 'Recoleta', 'Playfair Display', serif;
-      font-size: 24px;
+      font-family: var(--mono-serif);
+      font-size: clamp(20px, 2.15vw, 28px);
       font-weight: 400;
+      letter-spacing: 0.01em;
       color: #2a2420;
       cursor: pointer;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      text-decoration-color: rgba(42,36,32,0.3);
+      text-decoration: none;
+      text-align: left;
       transition: opacity 0.2s;
     }
 
-    .email-copy-btn:hover { opacity: 0.6; }
+    .email-copy-greeting {
+      font-weight: 700;
+      color: #2a2420;
+    }
+
+    .email-copy-address {
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(42, 36, 32, 0.35);
+    }
+
+    .email-copy-btn:hover { opacity: 0.72; }
 
     .email-copy-btn svg {
-      width: 15px;
-      height: 15px;
-      opacity: 0.45;
+      width: clamp(14px, 1.35vw, 18px);
+      height: clamp(14px, 1.35vw, 18px);
+      opacity: 0.42;
       flex-shrink: 0;
+      align-self: center;
       transition: opacity 0.2s;
     }
 
-    .email-copy-btn:hover svg { opacity: 0.7; }
+    .email-copy-btn:hover svg { opacity: 0.65; }
 
     .copy-feedback {
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-family: var(--mono-serif);
       font-size: 14px;
       font-weight: 400;
       font-style: italic;
@@ -417,18 +427,32 @@
 
     .copy-feedback.visible { opacity: 1; }
 
-    .contact-quote {
-      font-family: 'Recoleta', 'Playfair Display', serif;
-      font-size: 20px;
-      font-weight: 400;
-      line-height: 1.4;
-    }
-
     .contact-form {
-      flex: 1 0 0;
+      width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 40px;
+      gap: 14px;
+    }
+
+    .contact-form-fields {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    .contact-form-fields .form-field {
+      min-width: 0;
+    }
+
+    /* Email column ~15% narrower than an even split with “Your note”. */
+    .contact-form-fields #field-email {
+      flex: 0.85 1 0;
+    }
+
+    .contact-form-fields #field-note {
+      flex: 1.15 1 0;
     }
 
     .form-field {
@@ -441,7 +465,7 @@
       position: absolute;
       bottom: 8px;
       left: 0;
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-family: var(--mono-serif);
       font-size: 20px;
       color: #6d6d6d;
       font-style: italic;
@@ -461,7 +485,7 @@
       background: none;
       border: none;
       border-bottom: 1px solid rgba(0,0,0,0.25);
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-family: var(--mono-serif);
       font-size: 20px;
       font-style: italic;
       font-weight: 300;
@@ -470,10 +494,15 @@
       outline: none;
     }
 
+    #field-email .form-input {
+      width: 85%;
+      max-width: 100%;
+    }
+
     .form-input::placeholder { color: transparent; }
 
     .form-submit {
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-family: var(--mono-serif);
       font-size: 20px;
       font-weight: 400;
       font-style: italic;
@@ -482,7 +511,8 @@
       background: none;
       border: none;
       padding: 0;
-      text-align: left;
+      text-align: right;
+      align-self: flex-end;
       transition: opacity 0.2s;
     }
 
@@ -491,8 +521,30 @@
     .form-error {
       font-size: 16px;
       color: #c0392b;
+      font-weight: 600;
       margin-top: 4px;
       display: none;
+    }
+
+    @media (max-width: 560px) {
+      .email-copy-btn {
+        flex-wrap: wrap;
+      }
+
+      .contact-form-fields {
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .contact-form-fields #field-email,
+      .contact-form-fields #field-note {
+        flex: none;
+        width: 100%;
+      }
+
+      #field-email .form-input {
+        width: 100%;
+      }
     }
 
     @keyframes float-up-in {
@@ -508,7 +560,7 @@
 
     .contact-success {
       display: none;
-      flex: 1 0 0;
+      width: 100%;
       flex-direction: column;
       gap: 12px;
     }
@@ -518,14 +570,7 @@
       animation: float-up-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
       position: relative;
       z-index: 3;
-      padding-top: 80px;
-    }
-
-    .success-floral {
-      width: 100px;
-      height: 120px;
-      object-fit: contain;
-      animation: float-up-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+      padding-top: 0;
     }
 
     .success-text-row {
@@ -536,7 +581,7 @@
     }
 
     .success-text {
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-family: var(--mono-serif);
       font-size: 20px;
       font-style: italic;
       font-weight: 400;
@@ -548,7 +593,7 @@
       background: none;
       border: none;
       padding: 0;
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-family: var(--mono-serif);
       font-size: 16px;
       font-weight: 300;
       color: #6d6d6d;
@@ -561,51 +606,142 @@
 
     .form-reset-btn:hover { opacity: 0.55; }
 
+    /* Footer link previews (same pattern as index hero keyword tips). */
+    .hero-mono-star-tt {
+      position: relative;
+      display: inline-block;
+      vertical-align: baseline;
+    }
+
+    .hero-mono-star-cardtip {
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      left: auto;
+      width: max-content;
+      max-width: min(260px, 62vw);
+      padding: 6px 10px;
+      font-family: var(--mono-serif);
+      font-size: clamp(11px, 1.05vw, 13px);
+      font-weight: 400;
+      line-height: 1.25;
+      color: #111;
+      text-align: left;
+      text-decoration: none;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      opacity: 0;
+      visibility: hidden;
+      z-index: 25;
+      pointer-events: none;
+      transition: opacity 0.18s ease, visibility 0.18s ease;
+    }
+
+    .hero-mono-star-tt:hover .hero-mono-star-cardtip,
+    .hero-mono-star-tt:focus-within .hero-mono-star-cardtip {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .hero-mono-star-cardtip-title {
+      display: block;
+      font-weight: 600;
+    }
+
+    .hero-mono-star-cardtip-domain {
+      display: block;
+      margin-top: 0.15em;
+      font-weight: 300;
+      font-style: italic;
+      opacity: 0.72;
+    }
+
+    @media (hover: none) {
+      .hero-mono-star-tt:hover .hero-mono-star-cardtip {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .hero-mono-star-tt:focus-within .hero-mono-star-cardtip {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
     /* ── FOOTER ── */
     footer {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       width: 100%;
+      gap: 16px 24px;
     }
 
     .footer-copy {
+      flex: 1 1 220px;
+      min-width: 0;
+      max-width: 100%;
       font-size: 20px;
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
+      font-family: var(--mono-serif);
       color: #000;
-      white-space: nowrap;
+      line-height: 1.35;
     }
 
     .footer-links {
       display: flex;
+      flex-wrap: wrap;
       gap: 24px;
       margin-left: auto;
     }
 
-    .footer-links a {
+    .footer-links a,
+    .footer-links .hero-mono-star-keyword {
       font-size: 20px;
-      font-family: 'Satoshi', 'DM Sans', sans-serif;
-      color: #000;
-      text-decoration: none;
-      transition: opacity 0.2s;
+      font-family: var(--mono-serif);
+      text-transform: lowercase;
+      color: #17436b;
+      font-weight: 500;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(23, 67, 107, 0.55);
+      cursor: pointer;
+      transition: color 0.15s ease, text-decoration-color 0.15s ease, text-decoration-thickness 0.15s ease;
     }
 
-    .footer-links a:hover { opacity: 0.55; }
+    .footer-links a:hover,
+    .footer-links a:focus-visible,
+    .footer-links .hero-mono-star-keyword:hover,
+    .footer-links .hero-mono-star-keyword:focus-visible {
+      color: #0f2d48;
+      text-decoration-color: currentColor;
+      text-decoration-thickness: 1.5px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .mono-nav > a,
+      .mono-logo,
+      .hero-mono-scroll {
+        transition-duration: 0.05s;
+      }
+    }
 
     @media (max-width: 900px) {
-      .page { padding: 40px 24px; gap: 60px; }
+      .page { padding: 32px 24px 40px; gap: 60px; }
 
-      /* Nav */
-      nav { gap: 24px; flex-wrap: wrap; justify-content: center; }
-      nav a { font-size: 17px; }
-      .nav-brand { order: -1; flex-basis: 100%; justify-content: center; }
-      .nav-brand-flower { width: 40px; height: 40px; }
-      .nav-brand-name { font-size: 18px; }
+      .home-hero-mono {
+        padding: 22px 20px 40px;
+      }
+
+      .mono-header {
+        margin-bottom: 32px;
+      }
 
       /* Photo */
       .photo-wrap { max-width: 320px; }
-      .fan-left, .fan-right { display: none; }
-      .floral-tr, .floral-bl { display: none; }
       .photo-area { padding: 20px 0; }
 
       /* Content */
@@ -616,55 +752,62 @@
       .quote-block { font-size: 18px; }
 
       /* Contact */
-      .contact-card { padding: 28px 20px; }
-      .contact-inner { flex-direction: column; align-items: stretch; width: 100%; }
-      .contact-floral { width: 150px; top: -85px; right: 10px; }
-      .contact-heading { font-size: 32px; }
-      .email-copy-btn { font-size: 18px; }
-      .contact-quote { font-size: 18px; }
+      .contact-card { padding: 24px 20px; }
+      .email-copy-btn {
+        font-size: clamp(17px, 4vw, 22px);
+      }
 
       /* Footer */
       footer { flex-direction: column; gap: 16px; align-items: flex-start; }
       .footer-links { flex-wrap: wrap; gap: 16px; margin-left: 0; padding-right: 0; }
+      .footer-copy { flex: none; width: 100%; }
     }
 
     @media (max-width: 500px) {
-      .page { padding: 32px 16px; gap: 48px; }
+      .page { padding: 28px 16px 36px; gap: 48px; }
       .section-heading { font-size: 24px; }
-      nav a { font-size: 15px; }
+
+      .mono-nav {
+        gap: 14px 18px;
+      }
+
+      .mono-nav > a {
+        font-size: 17px;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="home-hero-mono">
+    <header class="mono-header">
+      <a href="index.html" class="mono-logo">Mariel Lopez</a>
+      <nav class="mono-nav" aria-label="Main">
+        <a href="index.html">work</a>
+        <a href="about.html" class="is-current">about</a>
+        <a href="#" class="nav-etc">etc<span class="nav-etc-tip">Coming soon</span></a>
+        <a href="#contact">contact</a>
+      </nav>
+    </header>
+    <section class="hero-mono hero-mono--sub" aria-labelledby="page-hero-heading">
+      <div class="hero-mono-sub-inner">
+        <h1 id="page-hero-heading" class="hero-mono-page-title">Hi, hello!</h1>
+        <p class="hero-mono-page-lead">Growing up between Manila and Toronto taught me that context shapes everything—how people navigate space, decide, and what &ldquo;intuitive&rdquo; really means.</p>
+      </div>
+      <a class="hero-mono-scroll" href="#main">↓ read more</a>
+    </section>
+  </div>
+
   <div class="page">
 
-    <!-- NAV -->
-    <nav>
-      <a href="index.html">Work</a>
-      <a href="#" class="is-current">About</a>
-      <a href="index.html" class="nav-brand">
-        <span class="nav-brand-name">Mariel</span>
-        <img class="nav-brand-flower" src="favicon.png" alt="" />
-        <span class="nav-brand-name">Lopez</span>
-      </a>
-      <a href="#" class="nav-etc">Guides<span class="nav-etc-tip">Blooming soon</span></a>
-      <a href="#contact">Contact</a>
-    </nav>
-
     <!-- MAIN CONTENT -->
-    <div class="content-container">
+    <div class="content-container" id="main">
 
-      <!-- Heading -->
-      <p class="section-heading">Hi, hello, kamusta!</p>
-
-      <!-- Photo + botanical overlays -->
+      <!-- Photo -->
       <div class="photo-area">
         <div class="photo-wrap">
           <img class="fan-photo fan-left" src="photo-fan-left-new.JPG" alt="" />
           <img class="main-photo" src="photo-mariel.jpg" alt="Mariel Lopez" />
           <img class="fan-photo fan-right" src="photo-fan-right.jpg" alt="" />
-          <img class="floral-tr" src="sampaguita.png" alt="" />
-          <img class="floral-bl" src="sampaguita-2.png" alt="" />
         </div>
       </div>
 
@@ -672,11 +815,10 @@
       <div class="bio-columns">
         <div class="bio-col">
           <p>
-            <span class="bio-bold">My why </span>— Growing up between Manila and Toronto taught me early that context shapes everything: How people navigate space, make decisions, and what "intuitive" actually means.
+            <span class="bio-bold">My why</span> — Growing up between Manila and Toronto taught me early that context shapes everything: How people navigate space, make decisions, and what "intuitive" actually means.
           </p>
-          <p>I bring both of those worlds into every product I work on.</p>
           <p>
-            <span class="bio-bold">My specialty </span>— I specialize in the full arc of product design: UX, UI, research, systems, strategy, and accessibility. I care about driving the details to create the full big picture.
+            <span class="bio-bold">My specialty</span> — I specialize in the full arc of product design: UX, UI, research, systems, strategy, and accessibility. I care about driving the details to create the full big picture.
           </p>
         </div>
         <div class="bio-col">
@@ -700,33 +842,31 @@
 
     <!-- CONTACT CARD -->
     <div class="contact-card" id="contact">
-      <img class="contact-floral" src="bird-contact form.png" alt="" />
       <div class="contact-inner">
-        <div class="contact-text">
-          <div>
-            <p class="contact-heading">Say hi!</p>
-            <div class="email-copy-row">
-              <button class="email-copy-btn" id="email-copy-btn">
-                mariellopezdesign@gmail.com
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              </button>
-              <span class="copy-feedback" id="copy-feedback">Copied!</span>
-            </div>
+        <div class="contact-email-lead">
+          <div class="email-copy-row">
+            <button type="button" class="email-copy-btn" id="email-copy-btn" aria-label="Copy mariellopezdesign@gmail.com to clipboard">
+              <span class="email-copy-greeting">Say hi!</span>
+              <span class="email-copy-address">mariellopezdesign@gmail.com</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            </button>
+            <span class="copy-feedback" id="copy-feedback">Copied!</span>
           </div>
-          <p class="contact-quote">Drop me a letter, I'd love to hear from you.</p>
         </div>
         <form class="contact-form" id="contact-form" action="https://formspree.io/f/xgoddvna" method="POST">
-          <div class="form-field" id="field-email">
-            <label class="form-label" for="email">Your email</label>
-            <input class="form-input" id="email" type="email" name="email" placeholder=" " autocomplete="off" required />
-            <span class="form-error" id="email-error">Please enter a valid email address.</span>
+          <div class="contact-form-fields">
+            <div class="form-field" id="field-email">
+              <label class="form-label" for="email">Your email</label>
+              <input class="form-input" id="email" type="email" name="email" placeholder=" " autocomplete="off" required />
+              <span class="form-error" id="email-error">Please enter a valid email address.</span>
+            </div>
+            <div class="form-field" id="field-note">
+              <label class="form-label" for="note">Your note</label>
+              <input class="form-input" id="note" type="text" name="note" placeholder=" " required />
+              <span class="form-error" id="note-error">Please write a note.</span>
+            </div>
           </div>
-          <div class="form-field" id="field-note">
-            <label class="form-label" for="note">Your note</label>
-            <input class="form-input" id="note" type="text" name="note" placeholder=" " required />
-            <span class="form-error" id="note-error">Please write a note.</span>
-          </div>
-          <button class="form-submit" type="submit">Send it up &amp; away →</button>
+          <button class="form-submit" type="submit">Send message &gt;</button>
         </form>
         <div class="contact-success" id="contact-success">
           <div class="success-text-row">
@@ -741,23 +881,19 @@
     <footer>
       <p class="footer-copy">© 2026 Mariel Lopez. Find me where the light is.</p>
       <nav class="footer-links">
-        <a href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://luma.com/user/mariel" target="_blank" rel="noopener">Luma</a>
-        <a href="mailto:mariellopezdesign@gmail.com">Contact</a>
+        <span class="hero-mono-star-tt">
+          <a class="hero-mono-star-keyword" href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener noreferrer" aria-label="Mariel Lopez on LinkedIn (opens in new tab)">LinkedIn</a>
+          <span class="hero-mono-star-cardtip" aria-hidden="true"><span class="hero-mono-star-cardtip-title">Mariel Lopez on LinkedIn</span><span class="hero-mono-star-cardtip-domain">linkedin.com</span></span>
+        </span>
+        <span class="hero-mono-star-tt">
+          <a class="hero-mono-star-keyword" href="https://luma.com/user/mariel" target="_blank" rel="noopener noreferrer" aria-label="Mariel on Luma (opens in new tab)">Luma</a>
+          <span class="hero-mono-star-cardtip" aria-hidden="true"><span class="hero-mono-star-cardtip-title">Events &amp; profile on Luma</span><span class="hero-mono-star-cardtip-domain">luma.com</span></span>
+        </span>
       </nav>
     </footer>
 
   </div>
   <script>
-    // Show bird on form interaction
-    const contactCard = document.querySelector('.contact-card');
-    document.querySelectorAll('.form-input').forEach(input => {
-      input.addEventListener('focus', () => contactCard.classList.add('form-active'));
-      input.addEventListener('blur', () => {
-        if (!document.querySelector('.form-input:focus')) contactCard.classList.remove('form-active');
-      });
-    });
-
     // Floating label behaviour
     document.getElementById('email-copy-btn').addEventListener('click', function() {
       navigator.clipboard.writeText('mariellopezdesign@gmail.com').then(() => {
