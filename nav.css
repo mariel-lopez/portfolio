@@ -1,0 +1,436 @@
+/* Shared site nav — homepage is source of truth */
+
+:root {
+  --mono-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --nav-pad-y: 24px;
+  --nav-pad-x: 48px;
+  --nav-header-gap: 24px 40px;
+  --nav-row-gap: 16px 28px;
+  --nav-headline-size: clamp(17px, 1.55vw, 20px);
+  --nav-meta-size: clamp(13px, 1.05vw, 15px);
+  --nav-headline-weight: 500;
+  --nav-meta-weight: 400;
+  --nav-headline-tracking: 0.01em;
+  --nav-meta-tracking: 0.02em;
+  --nav-headline-lh: 1.35;
+  --nav-meta-lh: 1.35;
+  --nav-ink: #111;
+  --nav-muted: #777777;
+  --nav-rotating: rgba(0, 0, 0, 0.45);
+}
+
+/* ── Fixed nav shell ── */
+.home-hero-mono.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 100;
+  padding: var(--nav-pad-y) var(--nav-pad-x);
+  min-height: 0;
+  box-sizing: border-box;
+  overflow: visible;
+  color: var(--nav-ink);
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+  transition: transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.home-hero-mono.navbar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(100% + 140px);
+  z-index: 0;
+  pointer-events: none;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  background: linear-gradient(
+    to bottom,
+    rgba(245, 245, 242, 0.5) 0%,
+    rgba(245, 245, 242, 0.34) 38%,
+    rgba(245, 245, 242, 0.18) 58%,
+    rgba(245, 245, 242, 0.08) 74%,
+    rgba(245, 245, 242, 0.03) 88%,
+    rgba(245, 245, 242, 0) 100%
+  );
+  backdrop-filter: blur(18px) saturate(1.02);
+  -webkit-backdrop-filter: blur(18px) saturate(1.02);
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 32%,
+    rgba(0, 0, 0, 0.9) 52%,
+    rgba(0, 0, 0, 0.62) 68%,
+    rgba(0, 0, 0, 0.34) 82%,
+    rgba(0, 0, 0, 0.14) 92%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 32%,
+    rgba(0, 0, 0, 0.9) 52%,
+    rgba(0, 0, 0, 0.62) 68%,
+    rgba(0, 0, 0, 0.34) 82%,
+    rgba(0, 0, 0, 0.14) 92%,
+    transparent 100%
+  );
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+  -webkit-mask-size: 100% 100%;
+  opacity: 0;
+  transition:
+    opacity 800ms cubic-bezier(0.22, 1, 0.36, 1),
+    -webkit-backdrop-filter 800ms cubic-bezier(0.22, 1, 0.36, 1),
+    backdrop-filter 800ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.home-hero-mono.navbar.scrolled::before {
+  opacity: 1;
+}
+
+.home-hero-mono.navbar .mono-header {
+  position: relative;
+  z-index: 1;
+}
+
+.mono-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--nav-header-gap);
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0;
+  min-height: 0;
+}
+
+.mono-nav {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: var(--nav-row-gap);
+}
+
+/* ── Homepage headline ── */
+.hero-line {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-family: var(--mono-serif);
+  font-size: var(--nav-headline-size);
+  font-weight: var(--nav-headline-weight);
+  letter-spacing: var(--nav-headline-tracking);
+  line-height: var(--nav-headline-lh);
+}
+
+.hero-name {
+  display: inline;
+  color: var(--nav-ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.hero-name:focus-visible {
+  opacity: 0.72;
+}
+
+.hero-name .mono-logo-slot {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.mono-logo-slot {
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.mono-logo-original,
+.mono-logo-clone {
+  display: block;
+  transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: 0ms;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.mono-logo-clone {
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+.hero-name:hover .mono-logo-original,
+.hero-name:hover .mono-logo-clone,
+.hero-name:focus-visible .mono-logo-original,
+.hero-name:focus-visible .mono-logo-clone {
+  transform: none;
+}
+
+.hero-rotating {
+  display: inline-flex;
+  align-items: baseline;
+  margin-left: 0.26em;
+  color: var(--nav-rotating);
+  transition: opacity 560ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-rotating-track {
+  display: inline-grid;
+  align-items: baseline;
+}
+
+.hero-rotating-measure,
+#typewriter {
+  grid-area: 1 / 1;
+}
+
+.hero-rotating-measure {
+  visibility: hidden;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+#typewriter {
+  display: inline;
+}
+
+.hero-rotating-link {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.hero-rotating-link:focus-visible {
+  outline: none;
+}
+
+.hero-cursor {
+  display: inline-block;
+  width: 1px;
+  height: 0.92em;
+  margin-left: 1px;
+  background: currentColor;
+  opacity: 0.28;
+  vertical-align: -0.04em;
+  animation: hero-cursor-blink 1.35s ease-in-out infinite;
+}
+
+@keyframes hero-cursor-blink {
+  0%, 42% { opacity: 0.28; }
+  50%, 100% { opacity: 0; }
+}
+
+.hero-line--static .hero-cursor {
+  display: none;
+}
+
+/* ── Subpage nav (Sobeys, About) — same typography as homepage headline ── */
+.nav-page-line {
+  display: flex;
+  align-items: baseline;
+  gap: 40px;
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-family: var(--mono-serif);
+  font-size: var(--nav-headline-size);
+  font-weight: var(--nav-headline-weight);
+  letter-spacing: var(--nav-headline-tracking);
+  line-height: var(--nav-headline-lh);
+}
+
+.nav-back,
+.nav-page-name {
+  display: inline;
+  color: var(--nav-ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nav-back:focus-visible,
+.nav-page-name:focus-visible {
+  opacity: 0.72;
+}
+
+/* ── Location + time ── */
+.nav-local-time {
+  font-family: var(--mono-serif);
+  font-size: var(--nav-meta-size);
+  font-weight: var(--nav-meta-weight);
+  color: var(--nav-muted);
+  letter-spacing: var(--nav-meta-tracking);
+  line-height: var(--nav-meta-lh);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
+  flex-shrink: 0;
+  cursor: default;
+}
+
+.nav-local-place-link {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 280ms ease, opacity 280ms ease;
+}
+
+.nav-local-place-link:hover,
+.nav-local-place-link:focus-visible {
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.nav-local-place-link:focus-visible {
+  outline: none;
+}
+
+.nav-local-place {
+  display: inline-grid;
+  align-items: baseline;
+}
+
+.nav-local-place-measure,
+.nav-local-place-text {
+  grid-area: 1 / 1;
+}
+
+.nav-local-place-measure {
+  visibility: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.nav-local-place-text {
+  font-variant-numeric: tabular-nums;
+}
+
+.nav-local-sep {
+  padding: 0 8px;
+  letter-spacing: 0;
+}
+
+.nav-local-clock {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .home-hero-mono.navbar {
+    padding: var(--nav-pad-y) 32px;
+  }
+
+  .mono-nav {
+    flex-wrap: nowrap;
+    gap: 12px 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .home-hero-mono.navbar {
+    padding: 20px 20px;
+  }
+
+  .mono-nav {
+    flex-wrap: wrap;
+    row-gap: 6px;
+    column-gap: 12px;
+    align-items: baseline;
+    justify-content: space-between;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  .hero-line {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 16px;
+    font-weight: var(--nav-headline-weight);
+    line-height: 1.25;
+    letter-spacing: var(--nav-headline-tracking);
+  }
+
+  .hero-rotating {
+    margin-left: 0.24em;
+    white-space: normal;
+  }
+
+  .hero-rotating-measure {
+    display: none;
+  }
+
+  .nav-page-line {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 16px;
+    font-weight: var(--nav-headline-weight);
+    line-height: 1.25;
+    letter-spacing: var(--nav-headline-tracking);
+  }
+
+
+  .nav-local-time {
+    flex: 0 0 auto;
+    max-width: 100%;
+    text-align: right;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    row-gap: 2px;
+    font-size: clamp(12px, 3.4vw, 16px);
+    font-weight: var(--nav-meta-weight);
+    line-height: 1.25;
+    letter-spacing: var(--nav-meta-tracking);
+    color: var(--nav-ink);
+    opacity: 0.6;
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-cursor {
+    animation: none;
+    opacity: 0.25;
+  }
+
+  .hero-rotating {
+    transition-duration: 0.05s;
+  }
+
+
+  .mono-logo-original,
+  .mono-logo-clone {
+    transition-duration: 0.05s !important;
+  }
+
+  .home-hero-mono.navbar::before {
+    transition-duration: 0.15s !important;
+  }
+
+  .home-hero-mono.navbar.scrolled::before {
+    backdrop-filter: blur(14px) saturate(1) !important;
+    -webkit-backdrop-filter: blur(14px) saturate(1) !important;
+  }
+}

@@ -9,6 +9,9 @@
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="shortcut icon" href="favicon.ico" />
+  <link rel="stylesheet" href="nav.css" />
+  <link rel="stylesheet" href="hover.css" />
+  <link rel="stylesheet" href="copy-email.css" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html {
@@ -33,145 +36,6 @@
       background: #f5f5f2;
       color: #111;
       min-height: 100vh;
-    }
-
-    /* ── Editorial text link hover: subtle Y-axis perspective ── */
-    .link-hover {
-      display: inline-block;
-      transform-style: preserve-3d;
-      transform-origin: left center;
-      transition:
-        transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
-        letter-spacing 180ms ease,
-        opacity 180ms ease;
-      will-change: transform;
-    }
-
-    .rolling-link.link-hover,
-    .footer-email.link-hover {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4em;
-    }
-
-    .footer-social a.rolling-link.link-hover {
-      gap: 5px;
-    }
-
-    .sobeys-nav-home.rolling-link.link-hover {
-      align-items: baseline;
-      gap: 6px;
-    }
-
-    .link-hover:hover,
-    .link-hover:focus-visible {
-      transform:
-        perspective(900px)
-        rotateY(-15deg)
-        translateY(-1px)
-        translateX(1px);
-      letter-spacing: -0.01em;
-    }
-
-    .link-hover:active {
-      transform:
-        perspective(900px)
-        rotateY(-6deg)
-        scale(0.985);
-    }
-
-    .sobeys-nav-home.link-hover:hover,
-    .sobeys-nav-home.link-hover:focus-visible {
-      transform:
-        perspective(900px)
-        rotateY(-15deg)
-        translateY(-1px)
-        translateX(1px);
-      letter-spacing: -0.01em;
-    }
-
-    .sobeys-nav-home.link-hover:active {
-      transform:
-        perspective(900px)
-        rotateY(-6deg)
-        scale(0.965);
-    }
-
-    /* ── Fixed nav strip ── */
-    .home-hero-mono {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      background: rgba(245, 245, 242, 0.72);
-      backdrop-filter: blur(10px) saturate(1.05);
-      -webkit-backdrop-filter: blur(10px) saturate(1.05);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-      color: #111;
-      padding: 28px 48px;
-      min-height: 0;
-      box-sizing: border-box;
-      overflow: hidden;
-      transition:
-        transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 220ms ease;
-      will-change: transform, opacity;
-    }
-
-    .home-hero-mono.is-hidden {
-      transform: translateY(-110%);
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .mono-header {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 16px 28px;
-      flex-wrap: nowrap;
-      width: 100%;
-      max-width: 1440px;
-      margin: 0 auto;
-      padding: 0;
-      min-height: 0;
-    }
-
-    .sobeys-nav-home {
-      font-family: var(--mono-serif);
-      font-size: clamp(13px, 1.05vw, 15px);
-      font-weight: 400;
-      color: #111;
-      text-decoration: none;
-      letter-spacing: 0.02em;
-      display: inline-flex;
-      align-items: baseline;
-      gap: 6px;
-      transition:
-        opacity 180ms ease,
-        transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
-        letter-spacing 180ms ease;
-    }
-
-    .sobeys-nav-home:hover { opacity: 0.7; }
-
-    .nav-role {
-      font-family: var(--mono-serif);
-      font-size: clamp(13px, 1.05vw, 15px);
-      font-weight: 400;
-      color: #111;
-      letter-spacing: 0.02em;
-    }
-
-    .nav-local-time {
-      font-family: var(--mono-serif);
-      font-size: clamp(13px, 1.05vw, 15px);
-      font-weight: 400;
-      color: #777777;
-      letter-spacing: 0.02em;
-      font-variant-numeric: tabular-nums;
-      white-space: nowrap;
     }
 
     /* ── Project page shell (matches index / about grid) ── */
@@ -263,17 +127,14 @@
       background: rgba(252, 250, 246, 0.94);
       border-color: rgba(0, 0, 0, 0.1);
       box-shadow: 0 8px 26px rgba(0, 0, 0, 0.07);
-      transform: translateY(-2px);
     }
 
     .back-to-top.is-visible:hover svg,
     .back-to-top.is-visible:focus-visible svg {
       opacity: 0.85;
-      transform: translateY(-1px);
     }
 
     .back-to-top.is-visible:active {
-      transform: translateY(0);
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
     }
 
@@ -307,6 +168,7 @@
       gap: 12px;
       flex-wrap: wrap;
       justify-content: flex-start;
+      margin-top: 80px;
     }
 
     .live-pill {
@@ -683,7 +545,7 @@
       transition: color 180ms ease;
     }
 
-    .footer-email:hover { color: #111; }
+    .footer-email:hover { color: rgba(0, 0, 0, 0.55); }
 
     .footer-social {
       display: flex;
@@ -710,69 +572,6 @@
     }
 
     .footer-social a:hover svg { opacity: 1; }
-
-    /* ── ROLLING LINK ── */
-    .rolling-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4em;
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .rolling-link-inner {
-      position: relative;
-      display: inline-block;
-      overflow: hidden;
-      height: 1em;
-      vertical-align: bottom;
-    }
-
-    .rolling-link-text {
-      display: block;
-      transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .rolling-link-text.duplicate {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      white-space: nowrap;
-    }
-
-    .rolling-link:hover .rolling-link-text,
-    .rolling-link:focus-visible .rolling-link-text {
-      transform: translateY(-100%);
-    }
-
-    .rolling-link svg {
-      flex-shrink: 0;
-      transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease;
-    }
-
-    .rolling-link:hover .arrow-up-right { transform: translate(2px, -2px); }
-
-    @media (prefers-reduced-motion: reduce) {
-      .rolling-link-text { transition: opacity 150ms ease !important; transform: none !important; }
-      .rolling-link svg { transition: opacity 150ms ease !important; transform: none !important; }
-      .link-hover,
-      .link-hover:hover,
-      .link-hover:focus-visible,
-      .link-hover:active,
-      .sobeys-nav-home.link-hover:hover,
-      .sobeys-nav-home.link-hover:focus-visible,
-      .sobeys-nav-home.link-hover:active,
-      .back-to-top.is-visible:hover,
-      .back-to-top.is-visible:focus-visible,
-      .back-to-top.is-visible:active {
-        transform: none !important;
-        transition: opacity 0.15s ease, color 0.15s ease, box-shadow 0.15s ease !important;
-      }
-
-      .back-to-top {
-        transition-duration: 0.2s !important;
-      }
-    }
 
     /* ── FOOTER LINK TOOLTIPS (kept for hover preview utility) ── */
     .hero-mono-star-tt {
@@ -855,14 +654,6 @@
         padding-right: 40px;
       }
 
-      .home-hero-mono {
-        padding: 24px 32px;
-      }
-
-      .mono-header {
-        gap: 12px 20px;
-        flex-wrap: nowrap;
-      }
     }
 
     @media (max-width: 900px) {
@@ -908,50 +699,6 @@
 
       .page { gap: 48px; }
 
-      .home-hero-mono {
-        padding: 20px 20px;
-      }
-
-      .mono-header {
-        flex-wrap: wrap;
-        row-gap: 6px;
-        column-gap: 12px;
-        align-items: baseline;
-        -webkit-text-size-adjust: 100%;
-        text-size-adjust: 100%;
-      }
-
-      .mono-header > .sobeys-nav-home {
-        flex: 1 1 100%;
-        min-width: 0;
-        font-size: 16px;
-        font-weight: 400;
-        line-height: 1.25;
-        letter-spacing: 0.02em;
-        color: #111;
-      }
-
-      .mono-header > .nav-role {
-        flex: 1 1 auto;
-        min-width: 0;
-        font-size: 16px;
-        font-weight: 500;
-        line-height: 1.25;
-        letter-spacing: 0.02em;
-        color: #111;
-      }
-
-      .mono-header > .nav-local-time {
-        flex: 0 0 auto;
-        text-align: right;
-        font-size: 16px;
-        font-weight: 400;
-        line-height: 1.25;
-        letter-spacing: 0.02em;
-        color: #111;
-        opacity: 0.6;
-      }
-
       .back-to-top {
         bottom: max(16px, env(safe-area-inset-bottom, 0px) + 10px);
         right: max(16px, env(safe-area-inset-right, 0px) + 10px);
@@ -968,17 +715,20 @@
 </head>
 <body>
   <!-- FIXED NAV -->
-  <div id="top" class="home-hero-mono">
+  <div id="top" class="home-hero-mono navbar">
     <header class="mono-header">
-      <a href="index.html" class="sobeys-nav-home rolling-link link-hover" aria-label="Back to home">
-        <svg class="arrow-left" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 5-7 7 7 7"/></svg>
-        <span class="rolling-link-inner">
-          <span class="rolling-link-text">Home</span>
-          <span class="rolling-link-text duplicate" aria-hidden="true">Home</span>
-        </span>
-      </a>
-      <span class="nav-role">Product Designer</span>
-      <time class="nav-local-time" id="nav-local-time" datetime="" aria-label="Local time"></time>
+      <nav class="mono-nav" aria-label="Main">
+        <p class="nav-page-line">
+          <a href="index.html" class="nav-back link-hover">← Back</a>
+          <a href="index.html" class="nav-page-name link-hover" aria-label="Mariel Lopez, home">Mariel Lopez</a>
+        </p>
+        <time class="nav-local-time" id="nav-local-time" datetime="" aria-label="Toronto local time">
+          <a class="nav-local-place-link" href="https://maps.app.goo.gl/6hsyKCkpBHdvvt2j8" target="_blank" rel="noopener noreferrer" aria-label="Toronto on Google Maps"><span class="nav-local-place">
+            <span class="nav-local-place-measure" aria-hidden="true">Toronto, Ontario, Canada</span>
+            <span class="nav-local-place-text" data-text-coords="43.6532° N, 79.3832° W" data-text-label="Toronto, Ontario, Canada">43.6532° N, 79.3832° W</span>
+          </span></a><span class="nav-local-sep" aria-hidden="true">•</span><span class="nav-local-clock"></span>
+        </time>
+      </nav>
     </header>
   </div>
 
@@ -1173,12 +923,22 @@
 
     <!-- FOOTER -->
     <footer>
-      <a class="footer-email rolling-link link-hover" href="mailto:mariellopezdesign@gmail.com">
-        <span class="rolling-link-inner">
-          <span class="rolling-link-text">mariellopezdesign@gmail.com</span>
-          <span class="rolling-link-text duplicate" aria-hidden="true">mariellopezdesign@gmail.com</span>
-        </span>
-      </a>
+      <div class="footer-email-row">
+        <a class="footer-email rolling-link link-hover" href="mailto:mariellopezdesign@gmail.com">
+          <span class="rolling-link-inner">
+            <span class="rolling-link-text">mariellopezdesign@gmail.com</span>
+            <span class="rolling-link-text duplicate" aria-hidden="true">mariellopezdesign@gmail.com</span>
+          </span>
+        </a>
+        <button type="button" class="footer-email-copy" data-email="mariellopezdesign@gmail.com" aria-label="Copy email address">
+          <span class="footer-email-copy-icons" aria-hidden="true">
+            <svg class="footer-email-copy-icon footer-email-copy-icon--clipboard" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <svg class="footer-email-copy-icon footer-email-copy-icon--check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          <span class="footer-email-copy-feedback" aria-hidden="true">Email copied!</span>
+        </button>
+        <span class="footer-email-copy-status" role="status" aria-live="polite"></span>
+      </div>
       <nav class="footer-social" aria-label="Social links">
         <a class="rolling-link link-hover" href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener noreferrer">
           <span class="rolling-link-inner"><span class="rolling-link-text">LinkedIn</span><span class="rolling-link-text duplicate" aria-hidden="true">LinkedIn</span></span>
@@ -1197,29 +957,15 @@
 
     </div>
   </main>
+  <script src="nav-clock.js" defer></script>
+  <script src="nav-location-scramble.js" defer></script>
+  <script src="copy-email.js" defer></script>
+  <script src="nav-scroll.js" defer></script>
   <a href="#top" class="back-to-top" id="back-to-top" aria-label="Back to top">
-    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
     <span>Back to top</span>
   </a>
   <script>
-    (function () {
-      var el = document.getElementById('nav-local-time');
-      if (!el) return;
-      var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      var city = tz.split('/').pop().replace(/_/g, ' ');
-      var fmt = new Intl.DateTimeFormat('en-CA', {
-        hour: '2-digit', minute: '2-digit', second: '2-digit',
-        hour12: false, timeZone: tz
-      });
-      function refresh() {
-        var d = new Date();
-        el.textContent = city + ' • ' + fmt.format(d);
-        el.setAttribute('datetime', d.toISOString());
-      }
-      refresh();
-      window.setInterval(refresh, 1000);
-    })();
-
     function switchTab(button, panelId) {
       const block = button.closest('.visual-block');
       block.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));

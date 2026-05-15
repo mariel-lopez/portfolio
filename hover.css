@@ -1,0 +1,249 @@
+/* Shared editorial hover — color only, no motion */
+
+:root {
+  --hover-color: rgba(0, 0, 0, 0.55);
+  --hover-duration: 0.3s;
+  --hover-ease: ease;
+}
+
+/* ── Text links ── */
+.link-hover {
+  display: inline-block;
+  transition:
+    color var(--hover-duration) var(--hover-ease),
+    opacity var(--hover-duration) var(--hover-ease);
+}
+
+.link-hover:hover,
+.link-hover:focus-visible {
+  color: var(--hover-color);
+}
+
+.rolling-link.link-hover,
+.footer-email.link-hover {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.footer-social a.rolling-link.link-hover {
+  gap: 5px;
+}
+
+.card-footer.link-hover {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-start;
+}
+
+.hero-name:hover .mono-logo-original,
+.hero-name:hover .mono-logo-clone,
+.hero-name:focus-visible .mono-logo-original,
+.hero-name:focus-visible .mono-logo-clone,
+.hero-name.link-hover:hover .mono-logo-original,
+.hero-name.link-hover:hover .mono-logo-clone,
+.hero-name.link-hover:focus-visible .mono-logo-original,
+.hero-name.link-hover:focus-visible .mono-logo-clone {
+  transform: none;
+  transition-delay: 0ms;
+}
+
+/* Nav links */
+.hero-name.link-hover:hover,
+.hero-name.link-hover:focus-visible,
+.nav-back.link-hover:hover,
+.nav-back.link-hover:focus-visible,
+.nav-page-name.link-hover:hover,
+.nav-page-name.link-hover:focus-visible {
+  color: var(--hover-color);
+}
+
+/* Rotating headline links */
+.hero-rotating-link {
+  transition:
+    color var(--hover-duration) var(--hover-ease),
+    opacity var(--hover-duration) var(--hover-ease);
+}
+
+.hero-rotating-link:hover,
+.hero-rotating-link:focus-visible {
+  color: var(--hover-color);
+}
+
+/* Location link */
+.nav-local-place-link {
+  transition:
+    color var(--hover-duration) var(--hover-ease),
+    opacity var(--hover-duration) var(--hover-ease);
+}
+
+.nav-local-place-link:hover,
+.nav-local-place-link:focus-visible {
+  color: var(--hover-color);
+}
+
+/* Footer email */
+.footer-email.link-hover {
+  transition:
+    color var(--hover-duration) var(--hover-ease),
+    opacity var(--hover-duration) var(--hover-ease);
+}
+
+.footer-email.link-hover:hover,
+.footer-email.link-hover:focus-visible {
+  color: var(--hover-color);
+  opacity: 1;
+}
+
+.footer-email-copy:hover,
+.footer-email-copy:focus-visible {
+  color: var(--copy-icon-hover, #949494);
+}
+
+/* ── Rolling links ── */
+.rolling-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  color: inherit;
+  text-decoration: none;
+  transition:
+    color var(--hover-duration) var(--hover-ease),
+    opacity var(--hover-duration) var(--hover-ease);
+}
+
+.rolling-link.link-hover:hover,
+.rolling-link.link-hover:focus-visible {
+  color: var(--hover-color);
+}
+
+.rolling-link-inner {
+  position: relative;
+  display: inline-block;
+  overflow: visible;
+  height: auto;
+  vertical-align: baseline;
+}
+
+.rolling-link-text {
+  display: block;
+  transition:
+    color var(--hover-duration) var(--hover-ease),
+    opacity var(--hover-duration) var(--hover-ease);
+}
+
+.rolling-link-text.duplicate {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.rolling-link:hover .rolling-link-text,
+.rolling-link:focus-visible .rolling-link-text {
+  transform: none;
+}
+
+.rolling-link svg {
+  flex-shrink: 0;
+  transition:
+    color var(--hover-duration) var(--hover-ease),
+    opacity var(--hover-duration) var(--hover-ease);
+}
+
+.rolling-link.link-hover:hover svg,
+.rolling-link.link-hover:focus-visible svg {
+  opacity: 0.75;
+}
+
+/* ── Project cards — text color only ── */
+.project-card {
+  transition:
+    box-shadow var(--hover-duration) var(--hover-ease),
+    background var(--hover-duration) var(--hover-ease);
+}
+
+.project-card:hover,
+.project-card:focus-visible {
+  transform: none;
+}
+
+.project-card:hover .card-image img,
+.project-card:focus-visible .card-image img {
+  transform: none;
+}
+
+.project-card:hover .card-title-original,
+.project-card:focus-visible .card-title-original {
+  color: var(--hover-color);
+  transition: color var(--hover-duration) var(--hover-ease);
+}
+
+.project-card:hover .card-tag,
+.project-card:focus-visible .card-tag {
+  color: var(--hover-color);
+  transition: color var(--hover-duration) var(--hover-ease);
+}
+
+.project-card:hover .card-icon,
+.project-card:focus-visible .card-icon {
+  opacity: 0.85;
+  transform: none;
+  transition:
+    color var(--hover-duration) var(--hover-ease),
+    opacity var(--hover-duration) var(--hover-ease);
+}
+
+.project-card:not(.no-hover):active {
+  transform: none !important;
+}
+
+/* Quest / inline links */
+.quest-org a.link-hover:hover,
+.quest-org a.link-hover:focus-visible {
+  color: var(--hover-color);
+}
+
+/* Footer social */
+.footer-social a.rolling-link.link-hover:hover,
+.footer-social a.rolling-link.link-hover:focus-visible {
+  color: var(--hover-color);
+}
+
+/* Misc */
+.hero-mono-scroll.link-hover:hover,
+.hero-mono-scroll.link-hover:focus-visible {
+  color: var(--hover-color);
+  opacity: 0.55;
+}
+
+/* Back to top — color/opacity only (position unchanged) */
+.back-to-top.is-visible:hover,
+.back-to-top.is-visible:focus-visible {
+  color: var(--hover-color);
+}
+
+.back-to-top.is-visible:hover svg,
+.back-to-top.is-visible:focus-visible svg {
+  opacity: 0.75;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link-hover,
+  .link-hover:hover,
+  .link-hover:focus-visible,
+  .rolling-link,
+  .rolling-link:hover,
+  .rolling-link:focus-visible,
+  .hero-rotating-link,
+  .hero-rotating-link:hover,
+  .hero-rotating-link:focus-visible {
+    transition-duration: 0.15s !important;
+  }
+}
