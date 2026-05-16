@@ -3,7 +3,7 @@
 footer,
 .about-footer {
   width: 100%;
-  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-top: var(--divider);
   padding-top: clamp(36px, 3.2vw, 52px);
   display: flex;
   align-items: flex-start;
@@ -13,12 +13,15 @@ footer,
 }
 
 .about-footer {
-  max-width: 1440px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: var(--page-pad, 80px);
-  padding-right: var(--page-pad, 80px);
   padding-bottom: 48px;
+}
+
+.content-shell > .about-footer,
+.content-shell > footer {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: 0;
 }
 
 .footer-email {
@@ -105,11 +108,6 @@ footer,
     gap: 48px;
     padding-top: 48px;
     padding-bottom: max(48px, env(safe-area-inset-bottom, 0px) + 20px);
-  }
-
-  .about-footer {
-    padding-left: 20px;
-    padding-right: 20px;
   }
 
   .project-page-container > footer {

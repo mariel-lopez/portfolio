@@ -18,10 +18,47 @@
   --nav-muted: #777777;
   --nav-rotating: rgba(0, 0, 0, 0.45);
   --nav-title-extra: 0px;
+  --divider-color: rgba(0, 0, 0, 0.12);
+  --divider: 1px solid var(--divider-color);
+  --content-max: 1440px;
+  --content-pad: 80px;
   /* Hover tokens — match hover.css; defined here so nav works standalone */
   --hover-color: rgba(0, 0, 0, 0.55);
   --hover-duration: 0.3s;
   --hover-ease: ease;
+}
+
+/* ── Content column (aligns dividers + body copy) ── */
+.content-shell {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: var(--content-pad);
+  box-sizing: border-box;
+  overflow-x: visible;
+}
+
+/* ── Horizontal dividers (sitewide) ── */
+.divider {
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--divider-color);
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --content-pad: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --content-pad: 20px;
+  }
 }
 
 /* ── Fixed nav shell ── */
