@@ -69,7 +69,8 @@
   right: 0;
   width: 100%;
   z-index: 100;
-  padding: var(--nav-pad-y) var(--nav-pad-x);
+  padding-block: var(--nav-pad-y);
+  padding-inline: max(var(--nav-pad-x), calc(50vw - var(--content-max) / 2));
   min-height: 0;
   box-sizing: border-box;
   overflow: visible;
@@ -157,10 +158,11 @@
   gap: var(--nav-header-gap);
   flex-wrap: wrap;
   width: 100%;
-  max-width: 1440px;
+  max-width: var(--content-max);
   margin: 0 auto;
-  padding: 0;
+  padding: 0 var(--content-pad);
   min-height: 0;
+  box-sizing: border-box;
 }
 
 .mono-nav {

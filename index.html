@@ -10,6 +10,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="shortcut icon" href="favicon.ico" />
   <link rel="stylesheet" href="nav.css" />
+  <link rel="stylesheet" href="layout.css" />
   <link rel="stylesheet" href="hover.css" />
   <link rel="stylesheet" href="copy-email.css" />
   <style>
@@ -326,8 +327,8 @@
       padding: var(--content-pad) var(--content-pad) var(--content-pad);
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 120px;
+      align-items: stretch;
+      gap: clamp(40px, 5vw, 64px);
       max-width: var(--content-max);
       margin: 0 auto;
       box-sizing: border-box;

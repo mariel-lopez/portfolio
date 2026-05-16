@@ -87,10 +87,6 @@ footer,
     padding-bottom: max(clamp(48px, 12vw, 64px), env(safe-area-inset-bottom, 0px) + 24px);
   }
 
-  .project-page-container > footer {
-    margin-top: clamp(48px, 12vw, 64px);
-  }
-
   .footer-social {
     align-items: flex-start;
     gap: 12px;
@@ -108,10 +104,6 @@ footer,
     gap: 48px;
     padding-top: 48px;
     padding-bottom: max(48px, env(safe-area-inset-bottom, 0px) + 20px);
-  }
-
-  .project-page-container > footer {
-    margin-top: 48px;
   }
 
   .footer-email {
