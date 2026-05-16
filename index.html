@@ -305,6 +305,152 @@
       opacity: 0.4;
     }
 
+    /* ── BACKGROUND BLOBS ── */
+    .bg-blobs {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .bg-blob {
+      position: absolute;
+      border-radius: 50%;
+      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Accent blobs — hidden by default, revealed on card hover */
+    .bg-accent {
+      opacity: 0;
+      animation: none !important;
+    }
+
+    /* Sobeys — muted sage green */
+    .bg-accent-sobeys-1 {
+      width: 62vw; height: 62vw;
+      top: -14%; left: -8%;
+      background: radial-gradient(circle, rgba(155, 205, 175, 0.58) 0%, rgba(155, 205, 175, 0.18) 40%, transparent 62%);
+      filter: blur(58px);
+    }
+    .bg-accent-sobeys-2 {
+      width: 50vw; height: 50vw;
+      bottom: -8%; right: 8%;
+      background: radial-gradient(circle, rgba(135, 190, 158, 0.44) 0%, rgba(135, 190, 158, 0.12) 40%, transparent 62%);
+      filter: blur(64px);
+    }
+
+    /* Design Systems — pale lavender */
+    .bg-accent-design-1 {
+      width: 60vw; height: 60vw;
+      top: -10%; right: -8%;
+      background: radial-gradient(circle, rgba(195, 178, 232, 0.58) 0%, rgba(195, 178, 232, 0.18) 40%, transparent 62%);
+      filter: blur(58px);
+    }
+    .bg-accent-design-2 {
+      width: 48vw; height: 48vw;
+      bottom: -10%; left: 8%;
+      background: radial-gradient(circle, rgba(172, 155, 218, 0.44) 0%, rgba(172, 155, 218, 0.12) 40%, transparent 62%);
+      filter: blur(62px);
+    }
+
+    /* One Pacific — warm amber gold */
+    .bg-accent-pacific-1 {
+      width: 58vw; height: 58vw;
+      top: -12%; right: -4%;
+      background: radial-gradient(circle, rgba(235, 205, 140, 0.58) 0%, rgba(235, 205, 140, 0.18) 40%, transparent 62%);
+      filter: blur(56px);
+    }
+    .bg-accent-pacific-2 {
+      width: 48vw; height: 48vw;
+      bottom: -12%; left: 14%;
+      background: radial-gradient(circle, rgba(218, 185, 112, 0.44) 0%, rgba(218, 185, 112, 0.12) 40%, transparent 62%);
+      filter: blur(60px);
+    }
+
+    /* Fade out base blobs on any featured card hover */
+    body:has(.project-card--accent-sobeys:hover) .bg-blob-1,
+    body:has(.project-card--accent-sobeys:hover) .bg-blob-2,
+    body:has(.project-card--accent-sobeys:hover) .bg-blob-3,
+    body:has(.project-card--accent-design-systems:hover) .bg-blob-1,
+    body:has(.project-card--accent-design-systems:hover) .bg-blob-2,
+    body:has(.project-card--accent-design-systems:hover) .bg-blob-3,
+    body:has(.project-card--accent-one-pacific:hover) .bg-blob-1,
+    body:has(.project-card--accent-one-pacific:hover) .bg-blob-2,
+    body:has(.project-card--accent-one-pacific:hover) .bg-blob-3 { opacity: 0; }
+
+    /* Fade in Sobeys blobs */
+    body:has(.project-card--accent-sobeys:hover) .bg-accent-sobeys-1,
+    body:has(.project-card--accent-sobeys:hover) .bg-accent-sobeys-2 { opacity: 1; }
+
+    /* Fade in Design Systems blobs */
+    body:has(.project-card--accent-design-systems:hover) .bg-accent-design-1,
+    body:has(.project-card--accent-design-systems:hover) .bg-accent-design-2 { opacity: 1; }
+
+    /* Fade in One Pacific blobs */
+    body:has(.project-card--accent-one-pacific:hover) .bg-accent-pacific-1,
+    body:has(.project-card--accent-one-pacific:hover) .bg-accent-pacific-2 { opacity: 1; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .bg-blob { transition: none !important; }
+    }
+
+    .bg-blob-1 {
+      width: 55vw; height: 55vw;
+      top: -12%; left: -10%;
+      background: radial-gradient(circle, rgba(255, 185, 140, 0.58) 0%, rgba(255, 185, 140, 0.18) 38%, transparent 62%);
+      filter: blur(48px);
+      animation: bg-drift-1 24s ease-in-out infinite;
+    }
+
+    .bg-blob-2 {
+      width: 48vw; height: 48vw;
+      top: -8%; right: -8%;
+      background: radial-gradient(circle, rgba(255, 220, 140, 0.52) 0%, rgba(255, 220, 140, 0.16) 36%, transparent 60%);
+      filter: blur(44px);
+      animation: bg-drift-2 30s ease-in-out infinite;
+    }
+
+    .bg-blob-3 {
+      width: 50vw; height: 50vw;
+      bottom: -15%; left: 22%;
+      background: radial-gradient(circle, rgba(255, 175, 185, 0.48) 0%, rgba(255, 175, 185, 0.14) 36%, transparent 60%);
+      filter: blur(52px);
+      animation: bg-drift-3 27s ease-in-out infinite;
+    }
+
+    .bg-noise {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: url("textures/noise.png") repeat / 220px;
+      opacity: 0.045;
+      mix-blend-mode: multiply;
+    }
+
+    @keyframes bg-drift-1 {
+      0%, 100% { transform: translate(0%,   0%);  }
+      33%       { transform: translate(9%,  14%);  }
+      66%       { transform: translate(-4%, 20%);  }
+    }
+
+    @keyframes bg-drift-2 {
+      0%, 100% { transform: translate(0%,   0%);  }
+      33%       { transform: translate(-11%, 9%);  }
+      66%       { transform: translate(7%,  16%);  }
+    }
+
+    @keyframes bg-drift-3 {
+      0%, 100% { transform: translate(0%,    0%); }
+      33%       { transform: translate(13%,  -9%); }
+      66%       { transform: translate(-7%, -13%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .bg-blob { animation: none !important; }
+    }
+
     @media (max-width: 720px) {
       .hero-sans-grid {
         grid-template-columns: 1fr;
@@ -443,12 +589,7 @@
       border-radius: inherit;
       z-index: 0;
       pointer-events: none;
-      background:
-        radial-gradient(circle at 78% 35%, rgba(180, 210, 220, 0.44), transparent 38%),
-        radial-gradient(circle at 28% 55%, rgba(240, 220, 190, 0.48), transparent 42%),
-        radial-gradient(circle at 50% 90%, rgba(195, 215, 180, 0.28), transparent 45%),
-        radial-gradient(circle at 18% 18%, rgba(235, 225, 210, 0.32), transparent 38%),
-        #f7f5f0;
+      background: #f5f5f2;
       filter: blur(24px);
       opacity: 0.88;
       transform: scale(1.08) translateX(-4%);
@@ -843,6 +984,18 @@
   <link rel="stylesheet" href="footer.css" />
 </head>
 <body>
+  <div class="bg-blobs" aria-hidden="true">
+    <div class="bg-blob bg-blob-1"></div>
+    <div class="bg-blob bg-blob-2"></div>
+    <div class="bg-blob bg-blob-3"></div>
+    <div class="bg-blob bg-accent bg-accent-sobeys-1"></div>
+    <div class="bg-blob bg-accent bg-accent-sobeys-2"></div>
+    <div class="bg-blob bg-accent bg-accent-design-1"></div>
+    <div class="bg-blob bg-accent bg-accent-design-2"></div>
+    <div class="bg-blob bg-accent bg-accent-pacific-1"></div>
+    <div class="bg-blob bg-accent bg-accent-pacific-2"></div>
+  </div>
+  <div class="bg-noise" aria-hidden="true"></div>
   <script>!function(){var e=document.createElement('div');e.id='pt-overlay';e.setAttribute('aria-hidden','true');e.style.cssText='position:fixed;inset:0;z-index:9990;background:#f5f5f2;pointer-events:none;opacity:1;will-change:opacity;';document.body.appendChild(e)}();</script>
   <div id="big-hover-title" class="big-hover-title" aria-hidden="true">Hey world</div>
   <div id="custom-cursor" class="custom-cursor" aria-hidden="true"></div>
@@ -856,7 +1009,7 @@
                 <span class="mono-logo-original">Mariel Lopez</span>
                 <span class="mono-logo-clone" aria-hidden="true">Mariel Lopez</span>
               </span>
-            </a><span class="hero-rotating" aria-live="polite"><span class="hero-rotating-track"><span class="hero-rotating-measure" aria-hidden="true">City and travel photographer</span><span id="typewriter"></span></span></span>
+            </a><span class="hero-rotating">Product Designer @&nbsp;<a class="hero-rotating-link" href="https://www.ibm.com/consulting/ibmix" target="_blank" rel="noopener noreferrer">IBM iX</a></span>
           </h1>
         </div>
         <div class="nav-right">
@@ -994,7 +1147,6 @@
   <script src="nav-location-scramble.js" defer></script>
   <script src="copy-email.js" defer></script>
   <script src="nav-scroll.js" defer></script>
-  <script src="nav-typewriter.js" defer></script>
 
   <script>
     // Single giant hero title: default “Hey world”; cards swap via data-hover-title
