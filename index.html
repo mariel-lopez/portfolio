@@ -344,12 +344,15 @@
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: clamp(14px, 1.5vw, 24px);
+      align-items: stretch;
     }
 
     .project-card {
       position: relative;
       z-index: 1;
       isolation: isolate;
+      height: 100%;
+      align-self: stretch;
       background: rgba(255, 255, 255, 0.78);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
@@ -514,7 +517,8 @@
       margin: 10px 10px 0;
       border-radius: 20px;
       overflow: hidden;
-      flex-shrink: 0;
+      flex: 1 1 auto;
+      min-height: 0;
       aspect-ratio: 4 / 3;
       background: #e8e0d8;
     }
@@ -550,6 +554,8 @@
       display: flex;
       flex-direction: column;
       gap: 5px;
+      margin-top: auto;
+      flex-shrink: 0;
     }
 
     /* Slot-machine title */
@@ -600,7 +606,6 @@
     .about-card {
       grid-column: span 2;
       min-height: 300px;
-      height: 300px;
       position: relative;
       overflow: hidden;
     }
@@ -612,7 +617,6 @@
     .utility-card,
     .air-canada-card {
       min-height: 300px;
-      height: 300px;
     }
 
     .about-card.project-card--nav {
@@ -646,11 +650,6 @@
       box-sizing: border-box;
     }
 
-    .air-canada-card .card-footer {
-      margin-top: auto;
-      flex-shrink: 0;
-    }
-
     /* Icon in cards and links */
     .card-icon {
       display: inline-block;
@@ -671,65 +670,6 @@
       .air-canada-card {
         grid-column: span 1;
       }
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      width: 100%;
-      border-top: 1px solid rgba(0, 0, 0, 0.12);
-      padding-top: clamp(36px, 3.2vw, 52px);
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: clamp(28px, 2.5vw, 40px);
-    }
-
-    .footer-email {
-      font-family: var(--mono-serif);
-      font-size: clamp(34px, 2.6vw, 42px);
-      font-weight: 500;
-      letter-spacing: -0.045em;
-      line-height: 1;
-      color: #000;
-      text-decoration: none;
-      transition: opacity 180ms ease;
-      max-width: 100%;
-      min-width: 0;
-    }
-
-    .footer-email .rolling-link-text {
-      font-weight: inherit;
-      letter-spacing: inherit;
-      line-height: inherit;
-    }
-
-
-    .footer-social {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 8px;
-    }
-
-    .footer-social a {
-      font-family: var(--mono-serif);
-      font-size: clamp(13px, 1.05vw, 15px);
-      font-weight: 400;
-      color: var(--nav-muted, #777777);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .footer-social a svg {
-      flex-shrink: 0;
-      opacity: 0.58;
-      transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease;
-    }
-
-    .footer-social a:hover svg {
-      opacity: 1;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -784,20 +724,20 @@
     @media (max-width: 1024px) {
       .page { padding-left: 40px; padding-right: 40px; }
 
-      .footer-email {
-        font-size: clamp(30px, 3.2vw, 34px);
-      }
     }
 
     @media (max-width: 900px) {
       .page { gap: 60px; }
       .work-section { margin-top: clamp(64px, 14vw, 100px); }
-      footer { flex-direction: column; gap: 20px; }
-      .footer-social { align-items: flex-start; }
     }
 
     @media (max-width: 640px) {
-      .page { padding-left: 20px; padding-right: 20px; gap: 48px; }
+      .page {
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: calc(80px + var(--nav-title-extra));
+        gap: 48px;
+      }
 
       .cards-grid {
         grid-template-columns: minmax(0, 1fr);
@@ -817,20 +757,6 @@
 
       .project-card--nav { min-height: 100px; }
       .work-section { margin-top: 80px; }
-
-      .footer-email {
-        font-size: clamp(24px, 4.5vw, 28px);
-      }
-
-      /* Long address: allow wrap without single-line rolling clip */
-      .footer-email .rolling-link-inner {
-        height: auto;
-        overflow: visible;
-      }
-
-      .footer-email .rolling-link-text.duplicate {
-        display: none;
-      }
 
       .about-card,
       .utility-card,
@@ -915,6 +841,7 @@
     }
 
   </style>
+  <link rel="stylesheet" href="footer.css" />
 </head>
 <body>
   <script>!function(){var e=document.createElement('div');e.id='pt-overlay';e.setAttribute('aria-hidden','true');e.style.cssText='position:fixed;inset:0;z-index:9990;background:#f5f5f2;pointer-events:none;opacity:1;will-change:opacity;';document.body.appendChild(e)}();</script>

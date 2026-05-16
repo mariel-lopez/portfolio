@@ -386,79 +386,6 @@
       }
     }
 
-    /* ── FOOTER ── */
-    .about-footer {
-      padding: clamp(36px, 3.2vw, 52px) var(--page-pad) 48px;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: clamp(28px, 2.5vw, 40px);
-      border-top: 1px solid rgba(0, 0, 0, 0.12);
-      max-width: var(--max-w);
-      margin: 0 auto;
-    }
-
-    .footer-email {
-      font-family: var(--mono-serif);
-      font-size: clamp(34px, 2.6vw, 42px);
-      font-weight: 500;
-      letter-spacing: -0.045em;
-      line-height: 1;
-      color: #000;
-      text-decoration: none;
-      transition: opacity 180ms ease;
-      max-width: 100%;
-      min-width: 0;
-    }
-
-    .footer-email .rolling-link-text {
-      font-weight: inherit;
-      letter-spacing: inherit;
-      line-height: inherit;
-    }
-
-    @media (max-width: 1024px) {
-      .footer-email {
-        font-size: clamp(30px, 3.2vw, 34px);
-      }
-
-    }
-
-    @media (max-width: 640px) {
-      .footer-email {
-        font-size: clamp(24px, 4.5vw, 28px);
-      }
-
-    }
-
-    .footer-social {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 8px;
-    }
-
-    .footer-social a {
-      font-family: var(--mono-serif);
-      font-size: clamp(13px, 1.05vw, 15px);
-      font-weight: 400;
-      color: var(--nav-muted, #777777);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .footer-social a svg {
-      flex-shrink: 0;
-      opacity: 0.58;
-      transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease;
-    }
-
-    .footer-social a:hover svg {
-      opacity: 1;
-    }
-
     /* ── RESPONSIVE ── */
     @media (max-width: 860px) {
       .about-photos {
@@ -468,7 +395,19 @@
       }
 
       .about-photo {
-        aspect-ratio: 4 / 3;
+        aspect-ratio: 4 / 5;
+      }
+
+      .about-photo:nth-child(1) img {
+        object-position: center 58%;
+      }
+
+      .about-photo:nth-child(2) img {
+        object-position: center 52%;
+      }
+
+      .about-photo:nth-child(3) img {
+        object-position: center 30%;
       }
 
       .about-photo-caption {
@@ -518,16 +457,17 @@
         color: rgba(0, 0, 0, 0.58);
       }
 
-      .about-footer {
-        flex-direction: column;
-        gap: 20px;
-      }
+    }
 
-      .footer-social { align-items: flex-start; }
+    @media (max-width: 640px) {
+      .about-headline {
+        margin-top: calc(48px + var(--nav-title-extra));
+        margin-bottom: 44px;
+      }
     }
 
     @media (max-width: 500px) {
-      .about-headline { margin-top: 80px; margin-bottom: 48px; }
+      .about-headline { margin-top: calc(44px + var(--nav-title-extra)); margin-bottom: 40px; }
       .about-main { padding: 0 20px; }
     }
 
@@ -618,6 +558,7 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="footer.css" />
 </head>
 <body>
   <script>!function(){var e=document.createElement('div');e.id='pt-overlay';e.setAttribute('aria-hidden','true');e.style.cssText='position:fixed;inset:0;z-index:9990;background:#f5f5f2;pointer-events:none;opacity:1;will-change:opacity;';document.body.appendChild(e)}();</script>
@@ -690,7 +631,7 @@
               <div class="quest-date">Mar 2022 – Present</div>
               <div class="quest-desc">
                 <span style="font-weight:500;">Clients served:</span> Air Canada Sobeys Government of Canada<br><br>
-                Led 0→1 initiatives growth optimizations and design system development for clients in retail aviation and financial services impacting millions of users<br><br>
+                Led 0→1 initiatives growth optimizations and design system development for clients in travel/transportation grocery retail and government impacting millions of users<br><br>
                 Passionate about reducing friction at critical decision points and aligning cross functional teams around clear product vision
               </div>
             </div>

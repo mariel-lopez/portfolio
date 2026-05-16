@@ -17,6 +17,7 @@
   --nav-ink: #111;
   --nav-muted: #777777;
   --nav-rotating: rgba(0, 0, 0, 0.45);
+  --nav-title-extra: 0px;
   /* Hover tokens — match hover.css; defined here so nav works standalone */
   --hover-color: rgba(0, 0, 0, 0.55);
   --hover-duration: 0.3s;
@@ -441,14 +442,18 @@
 }
 
 @media (max-width: 640px) {
+  :root {
+    --nav-title-extra: 16px;
+  }
+
   .home-hero-mono.navbar {
-    padding: 20px 20px;
+    padding: 14px 20px;
   }
 
   .mono-nav {
     flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
+    gap: 10px;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
   }
@@ -474,6 +479,7 @@
   .nav-page-line {
     flex: 1 1 auto;
     min-width: 0;
+    gap: 24px;
     font-size: 16px;
     font-weight: var(--nav-headline-weight);
     line-height: 1.25;

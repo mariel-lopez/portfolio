@@ -41,12 +41,6 @@
   transition: color 0.3s ease;
 }
 
-/* Sobeys — smaller footer email */
-.project-page-container .footer-email-copy {
-  font-size: clamp(13px, 1.05vw, 15px);
-  --copy-icon-scale: 0.72;
-}
-
 .footer-email-copy:hover,
 .footer-email-copy:focus-visible {
   color: var(--copy-icon-hover);
