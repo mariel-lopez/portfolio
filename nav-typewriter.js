@@ -1,7 +1,6 @@
 (function () {
   var textEl = document.getElementById('typewriter');
   var rotatingEl = document.querySelector('.hero-rotating');
-  var heroLine = document.querySelector('.hero-line');
   if (!textEl || !rotatingEl) return;
 
   var phrases = [
@@ -85,7 +84,6 @@
   function setStaticPhrase() {
     renderPhrase(phrases[0], phrases[0].text.length);
     rotatingEl.style.opacity = '1';
-    if (heroLine) heroLine.classList.add('hero-line--static');
   }
 
   if (motionQuery.matches) {
@@ -152,7 +150,6 @@
       setStaticPhrase();
       return;
     }
-    if (heroLine) heroLine.classList.remove('hero-line--static');
     phraseIndex = 0;
     charIndex = 0;
     deleting = false;

@@ -50,4 +50,25 @@
       });
     });
   });
+
+  document.querySelectorAll('.nav-email-copy').forEach(function (link) {
+    var email = link.getAttribute('data-email') || DEFAULT_EMAIL;
+    var wrap = link.closest('.nav-email-wrap');
+    var feedback = wrap ? wrap.querySelector('.nav-copy-feedback') : null;
+    var fadeTimer;
+
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      copyText(email).then(function () {
+        if (!feedback) return;
+        clearTimeout(fadeTimer);
+        feedback.classList.add('is-visible');
+
+        fadeTimer = setTimeout(function () {
+          feedback.classList.remove('is-visible');
+        }, 2000);
+      });
+    });
+  });
 })();

@@ -360,6 +360,10 @@
       flex-direction: column;
       text-decoration: none;
       color: #111;
+      box-shadow:
+        0 6px 22px rgba(0, 0, 0, 0.055),
+        0 18px 44px rgba(0, 0, 0, 0.048),
+        0 1px 3px rgba(0, 0, 0, 0.04);
       transition:
         box-shadow 0.35s ease,
         background 0.35s ease;
@@ -367,11 +371,43 @@
 
     .project-card:hover,
     .project-card:focus-visible {
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.09);
+      box-shadow:
+        0 14px 42px rgba(0, 0, 0, 0.092),
+        0 36px 76px rgba(0, 0, 0, 0.068),
+        0 4px 14px rgba(0, 0, 0, 0.045);
       background: rgba(255, 255, 255, 0.96);
     }
 
+    /* Featured project cards — subtle brand-tinted ambient shadow on hover */
+    .project-card--accent-sobeys:hover,
+    .project-card--accent-sobeys:focus-visible {
+      box-shadow:
+        0 14px 42px rgba(0, 0, 0, 0.078),
+        0 36px 78px rgba(28, 118, 102, 0.22),
+        0 10px 34px rgba(18, 92, 82, 0.12),
+        0 4px 14px rgba(12, 72, 64, 0.06);
+    }
+
+    .project-card--accent-design-systems:hover,
+    .project-card--accent-design-systems:focus-visible {
+      box-shadow:
+        0 14px 42px rgba(0, 0, 0, 0.078),
+        0 36px 78px rgba(92, 68, 168, 0.21),
+        0 10px 36px rgba(72, 52, 148, 0.11),
+        0 4px 14px rgba(56, 42, 128, 0.055);
+    }
+
+    .project-card--accent-one-pacific:hover,
+    .project-card--accent-one-pacific:focus-visible {
+      box-shadow:
+        0 14px 42px rgba(0, 0, 0, 0.078),
+        0 36px 78px rgba(176, 138, 72, 0.24),
+        0 10px 34px rgba(148, 112, 48, 0.13),
+        0 4px 14px rgba(128, 96, 40, 0.065);
+    }
+
     /* About card: whisper-soft wash (ivory / beige / blush, barely-there cool) */
+    /* About card: 4-layer system — gradient / photo / overlay / text */
     .project-card.about-card {
       border-radius: 40px;
       border: 1px solid rgba(0, 0, 0, 0.045);
@@ -380,83 +416,87 @@
       box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.42),
         0 6px 26px rgba(0, 0, 0, 0.028);
-      background:
-        linear-gradient(
-          122deg,
-          rgba(255, 250, 243, 0.4) 0%,
-          rgba(255, 252, 248, 0.06) 40%,
-          rgba(237, 230, 222, 0.22) 100%
-        ),
-        radial-gradient(
-          125% 85% at 12% 10%,
-          rgba(247, 236, 229, 0.22),
-          transparent 62%
-        ),
-        radial-gradient(
-          95% 75% at 90% 92%,
-          rgba(235, 233, 237, 0.11),
-          transparent 58%
-        ),
-        radial-gradient(
-          110% 55% at 48% 6%,
-          rgba(252, 247, 240, 0.16),
-          transparent 54%
-        ),
-        linear-gradient(
-          168deg,
-          #fdfbf7 0%,
-          #faf6ef 48%,
-          #f3efe6 100%
-        );
-    }
-
-    .about-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      border-radius: inherit;
-      background-image: url("textures/noise.png");
-      background-repeat: repeat;
-      background-size: 220px;
-      opacity: 0.028;
-      mix-blend-mode: multiply;
-      pointer-events: none;
+      background: #f7f5f0;
     }
 
     .project-card.about-card:hover,
     .project-card.about-card:focus-visible {
       box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.48),
-        0 16px 48px rgba(0, 0, 0, 0.085);
+        0 16px 48px rgba(0, 0, 0, 0.075);
+    }
+
+    /* Layer 1: Soft blurred gradient — wave shifts on hover */
+    .about-card::before {
+      content: "";
+      position: absolute;
+      inset: -12%;
+      border-radius: inherit;
+      z-index: 0;
+      pointer-events: none;
       background:
-        linear-gradient(
-          122deg,
-          rgba(255, 249, 241, 0.34) 0%,
-          rgba(255, 253, 248, 0.05) 42%,
-          rgba(239, 232, 224, 0.2) 100%
-        ),
-        radial-gradient(
-          125% 85% at 12% 10%,
-          rgba(246, 234, 227, 0.2),
-          transparent 64%
-        ),
-        radial-gradient(
-          95% 75% at 90% 92%,
-          rgba(233, 231, 235, 0.09),
-          transparent 60%
-        ),
-        radial-gradient(
-          110% 55% at 48% 6%,
-          rgba(252, 247, 240, 0.13),
-          transparent 56%
-        ),
-        linear-gradient(
-          168deg,
-          #fefcf8 0%,
-          #faf7f1 48%,
-          #f4efe7 100%
-        );
+        radial-gradient(circle at 78% 35%, rgba(180, 210, 220, 0.44), transparent 38%),
+        radial-gradient(circle at 28% 55%, rgba(240, 220, 190, 0.48), transparent 42%),
+        radial-gradient(circle at 50% 90%, rgba(195, 215, 180, 0.28), transparent 45%),
+        radial-gradient(circle at 18% 18%, rgba(235, 225, 210, 0.32), transparent 38%),
+        #f7f5f0;
+      filter: blur(24px);
+      opacity: 0.88;
+      transform: scale(1.08) translateX(-4%);
+      transition:
+        transform 0.88s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity   0.88s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .about-card:hover::before,
+    .about-card:focus-visible::before {
+      transform: scale(1.14) translateX(4%);
+      opacity: 1;
+    }
+
+    /* Layer 2: Photo — emerges through the gradient on hover */
+    .about-card-photo {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      z-index: 1;
+      pointer-events: none;
+      background: url("photo-mariel2.jpeg") center 42% / cover no-repeat;
+      filter: saturate(0.88) contrast(0.93) brightness(1.06);
+      opacity: 0;
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      transition-delay: 0.12s;
+    }
+
+    .about-card:hover .about-card-photo,
+    .about-card:focus-visible .about-card-photo {
+      opacity: 0.24;
+    }
+
+    /* Layer 3: Cream readability overlay */
+    .about-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      border-radius: inherit;
+      pointer-events: none;
+      background: linear-gradient(to bottom,
+        rgba(247, 245, 240, 0.04) 0%,
+        rgba(247, 245, 240, 0.62) 100%);
+      opacity: 1;
+    }
+
+    /* Layer 4: Noise — same treatment as site-wide noise */
+    .about-card-noise {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      z-index: 3;
+      pointer-events: none;
+      background: url("textures/noise.png") repeat / 220px;
+      opacity: 0.028;
+      mix-blend-mode: multiply;
     }
 
     .project-card.no-hover {
@@ -556,7 +596,7 @@
       min-height: 160px;
     }
 
-    /* Bottom row: wide About + compact Air Canada (desktop 3-col grid) */
+    /* Bottom row: compact Air Canada left + wide About right (desktop 3-col grid) */
     .about-card {
       grid-column: span 2;
       min-height: 300px;
@@ -581,7 +621,7 @@
 
     .about-card-content {
       position: relative;
-      z-index: 2;
+      z-index: 4;
       flex: 1;
       display: flex;
       flex-direction: column;
@@ -623,13 +663,13 @@
     @media (max-width: 1024px) {
       .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .project-card--nav { min-height: 130px; }
-      /* 2-col grid: full-width bottom row, no orphaned column */
+      /* 2-col grid: One Pacific + Air Canada share row 2, About full-width in row 3 */
       .about-card {
         grid-column: 1 / -1;
       }
 
       .air-canada-card {
-        grid-column: 1 / -1;
+        grid-column: span 1;
       }
     }
 
@@ -675,7 +715,7 @@
       font-family: var(--mono-serif);
       font-size: clamp(13px, 1.05vw, 15px);
       font-weight: 400;
-      color: #111;
+      color: var(--nav-muted, #777777);
       text-decoration: none;
       display: inline-flex;
       align-items: center;
@@ -684,12 +724,12 @@
 
     .footer-social a svg {
       flex-shrink: 0;
-      opacity: 0.55;
+      opacity: 0.58;
       transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease;
     }
 
     .footer-social a:hover svg {
-      opacity: 0.75;
+      opacity: 1;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -710,6 +750,22 @@
       }
 
       .orb-blob { animation: none !important; }
+
+      .about-card::before {
+        animation: none !important;
+        transition: opacity 0.12s ease !important;
+        transform: scale(1.08) translateX(-4%) !important;
+      }
+
+      .about-card:hover::before,
+      .about-card:focus-visible::before {
+        transform: scale(1.08) translateX(-4%) !important;
+      }
+
+      .about-card-photo {
+        transition: opacity 0.12s ease !important;
+        transition-delay: 0s !important;
+      }
 
       .big-hover-title {
         filter: none !important;
@@ -743,7 +799,22 @@
     @media (max-width: 640px) {
       .page { padding-left: 20px; padding-right: 20px; gap: 48px; }
 
-      .cards-grid { grid-template-columns: minmax(0, 1fr); }
+      .cards-grid {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: 16px;
+      }
+
+      .cards-grid .project-card {
+        position: sticky;
+        top: 96px;
+      }
+
+      .cards-grid .project-card:nth-child(1) { z-index: 1; }
+      .cards-grid .project-card:nth-child(2) { z-index: 2; }
+      .cards-grid .project-card:nth-child(3) { z-index: 3; }
+      .cards-grid .project-card:nth-child(4) { z-index: 4; }
+      .cards-grid .project-card:nth-child(5) { z-index: 5; }
+
       .project-card--nav { min-height: 100px; }
       .work-section { margin-top: 80px; }
 
@@ -795,18 +866,19 @@
       left: 50%;
       transform: translateX(-50%);
       width: min(94vw, 1280px);
-      max-width: 94vw;
+      max-width: 90vw;
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       font-family: var(--mono-serif);
-      font-size: clamp(78px, 12.4vw, 186px);
+      font-size: clamp(5rem, 12vw, 16rem);
       font-weight: 500;
       letter-spacing: -0.075em;
-      line-height: 0.85;
+      line-height: 0.9;
       color: #111;
-      white-space: nowrap;
+      white-space: normal;
       text-align: center;
+      text-wrap: balance;
       overflow: visible;
       pointer-events: none;
       z-index: 1;
@@ -845,25 +917,35 @@
   </style>
 </head>
 <body>
+  <script>!function(){var e=document.createElement('div');e.id='pt-overlay';e.setAttribute('aria-hidden','true');e.style.cssText='position:fixed;inset:0;z-index:9990;background:#f5f5f2;pointer-events:none;opacity:1;will-change:opacity;';document.body.appendChild(e)}();</script>
   <div id="big-hover-title" class="big-hover-title" aria-hidden="true">Hey world</div>
   <div id="custom-cursor" class="custom-cursor" aria-hidden="true"></div>
   <div class="home-hero-mono navbar">
     <header class="mono-header">
       <nav class="mono-nav" aria-label="Main">
-        <h1 class="hero-line">
-          <a href="index.html" class="hero-name link-hover" aria-label="Mariel Lopez, home">
-            <span class="mono-logo-slot">
-              <span class="mono-logo-original">Mariel Lopez</span>
-              <span class="mono-logo-clone" aria-hidden="true">Mariel Lopez</span>
-            </span>
-          </a><span class="hero-rotating" aria-live="polite"><span class="hero-rotating-track"><span class="hero-rotating-measure" aria-hidden="true">City and travel photographer</span><span id="typewriter"></span></span><span class="hero-cursor" aria-hidden="true"></span></span>
-        </h1>
-        <time class="nav-local-time" id="nav-local-time" datetime="" aria-label="Toronto local time">
-          <a class="nav-local-place-link" href="https://maps.app.goo.gl/6hsyKCkpBHdvvt2j8" target="_blank" rel="noopener noreferrer" aria-label="Toronto on Google Maps"><span class="nav-local-place">
-            <span class="nav-local-place-measure" aria-hidden="true">Toronto, Ontario, Canada</span>
-            <span class="nav-local-place-text" data-text-coords="43.6532° N, 79.3832° W" data-text-label="Toronto, Ontario, Canada">43.6532° N, 79.3832° W</span>
-          </span></a><span class="nav-local-sep" aria-hidden="true">•</span><span class="nav-local-clock"></span>
+        <div class="nav-left">
+          <h1 class="hero-line">
+            <a href="index.html" class="hero-name link-hover" aria-label="Mariel Lopez, home">
+              <span class="mono-logo-slot">
+                <span class="mono-logo-original">Mariel Lopez</span>
+                <span class="mono-logo-clone" aria-hidden="true">Mariel Lopez</span>
+              </span>
+            </a><span class="hero-rotating" aria-live="polite"><span class="hero-rotating-track"><span class="hero-rotating-measure" aria-hidden="true">City and travel photographer</span><span id="typewriter"></span></span></span>
+          </h1>
+        </div>
+        <div class="nav-right">
+          <time class="nav-local-time" id="nav-local-time" datetime="" aria-label="Toronto local time">
+          <a class="nav-local-place-link location-link" href="https://maps.app.goo.gl/6hsyKCkpBHdvvt2j8" target="_blank" rel="noopener noreferrer" aria-label="Toronto on Google Maps"><span class="nav-local-place-text" data-text-coords="43.6532° N, 79.3832° W" data-text-label="Toronto, Ontario, Canada">43.6532° N, 79.3832° W</span></a><span class="nav-local-sep" aria-hidden="true">•</span><span class="nav-local-clock"></span>
         </time>
+          <div class="nav-links">
+            <a class="nav-contact-link" href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener noreferrer">LinkedIn<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+            <a class="nav-contact-link" href="https://drive.google.com/file/d/1HT2FcuIwYNYXt00IsOKhti0plwNZEdIb/view?usp=sharing" target="_blank" rel="noopener noreferrer">Resume<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+            <span class="nav-email-wrap">
+              <a class="nav-contact-link nav-email-copy" href="#" data-email="mariellopezdesign@gmail.com">Email<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+              <span class="nav-copy-feedback" aria-hidden="true">Copied email</span>
+            </span>
+          </div>
+        </div>
       </nav>
     </header>
   </div>
@@ -875,59 +957,46 @@
       <div class="cards-grid">
 
         <!-- Row 1: Projects -->
-        <a class="project-card protected-card" href="sobeys.html" data-dest="sobeys.html" data-hover-title="Sobeys">
+        <a class="project-card project-card--accent-sobeys" href="sobeys.html" data-hover-title="Sobeys">
           <div class="card-image">
             <img src="sobeys-cover.png" alt="Sobeys" />
           </div>
           <div class="card-footer link-hover">
             <div class="card-title-wrap">
-              <span class="card-title-original">Shaping the Sobeys ecosystem for 1M+ monthly users</span>
-              <span class="card-title-clone" aria-hidden="true">Shaping the Sobeys ecosystem for 1M+ monthly users</span>
+              <span class="card-title-original">Improving how 1M+ users shop across the Sobeys ecosystem</span>
+              <span class="card-title-clone" aria-hidden="true">Improving how 1M+ users shop across the Sobeys ecosystem</span>
             </div>
             <span class="card-tag">Product Design · Grocery</span>
           </div>
         </a>
 
-        <a class="project-card protected-card" href="#" data-dest="https://www.figma.com/deck/Sec5BHYFpoc6wfvJEchXHn/Sobeys-%7C-Design-system--Public-?node-id=21-3087&viewport=401%2C246%2C0.24&t=h57Xp4S5bA1gz9wt-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1" data-external="true" data-hover-title="Design Systems">
+        <a class="project-card project-card--accent-design-systems" href="https://www.figma.com/deck/Sec5BHYFpoc6wfvJEchXHn/Sobeys-%7C-Design-system--Public-?node-id=21-3087&viewport=401%2C246%2C0.24&t=h57Xp4S5bA1gz9wt-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1" target="_blank" rel="noopener noreferrer" data-hover-title="Design Systems">
           <div class="card-image">
             <img src="ds-cover.png" alt="Design System" />
           </div>
           <div class="card-footer link-hover">
             <div class="card-title-wrap">
-              <span class="card-title-original">Building a design system to unify 6 grocery brands</span>
-              <span class="card-title-clone" aria-hidden="true">Building a design system to unify 6 grocery brands</span>
+              <span class="card-title-original">Scaling a shared design system across 6 grocery brands</span>
+              <span class="card-title-clone" aria-hidden="true">Scaling a shared design system across 6 grocery brands</span>
             </div>
             <span class="card-tag">Design Systems · Tokens</span>
           </div>
         </a>
 
-        <a class="project-card" href="https://onepacificbythebay.com/" target="_blank" rel="noopener" data-hover-title="One Pacific">
+        <a class="project-card project-card--accent-one-pacific" href="https://onepacificbythebay.com/" target="_blank" rel="noopener" data-hover-title="One Pacific">
           <div class="card-image">
             <img src="onepacific-cover.png" alt="One Pacific" />
           </div>
           <div class="card-footer link-hover">
             <div class="card-title-wrap">
-              <span class="card-title-original">Designed and launched a website for a new real estate development</span>
-              <span class="card-title-clone" aria-hidden="true">Designed and launched a website for a new real estate development</span>
+              <span class="card-title-original">Elevating the digital experience for a luxury real estate development</span>
+              <span class="card-title-clone" aria-hidden="true">Elevating the digital experience for a luxury real estate development</span>
             </div>
-            <span class="card-tag">Web Design · Real Estate</span>
+            <span class="card-tag">UI Design · Real Estate</span>
           </div>
         </a>
 
-        <!-- Row 2: Nav + Coming soon -->
-        <a class="project-card project-card--nav about-card" href="about.html" data-hover-title="About">
-          <div class="about-card-content">
-            <div class="card-footer link-hover">
-              <div class="card-title-wrap">
-                <span class="card-title-original">About <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
-                <span class="card-title-clone" aria-hidden="true">About <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
-              </div>
-              <span class="card-tag">Get to know me</span>
-            </div>
-          </div>
-        </a>
-
-
+        <!-- Row 2: Coming soon + About -->
         <div class="project-card no-hover air-canada-card utility-card">
           <div class="card-image card-image--logo">
             <img src="ac-logo.png" alt="Air Canada" loading="lazy" />
@@ -940,6 +1009,20 @@
             <span class="card-tag">Coming soon</span>
           </div>
         </div>
+
+        <a class="project-card project-card--nav about-card" href="about.html" data-hover-title="About">
+          <div class="about-card-photo" aria-hidden="true"></div>
+          <div class="about-card-noise" aria-hidden="true"></div>
+          <div class="about-card-content">
+            <div class="card-footer link-hover">
+              <div class="card-title-wrap">
+                <span class="card-title-original">About <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+                <span class="card-title-clone" aria-hidden="true">About <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+              </div>
+              <span class="card-tag">Get to know me</span>
+            </div>
+          </div>
+        </a>
 
       </div>
     </div>
@@ -980,20 +1063,7 @@
 
   </div>
   <!-- PASSWORD MODAL -->
-  <div id="pw-modal" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.45);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
-    <div style="background:#fff;border-radius:20px;padding:48px 40px;max-width:400px;width:90%;display:flex;flex-direction:column;gap:24px;box-shadow:0 24px 60px rgba(0,0,0,0.12);border:1px solid rgba(0,0,0,0.08);">
-      <p style="font-family:var(--mono-serif);font-size:28px;font-weight:400;color:#111;">This project is private</p>
-      <p style="font-family:var(--mono-serif);font-size:16px;font-weight:300;color:#6d6d6d;margin-top:-12px;">Enter the password to continue.</p>
-      <div style="position:relative;padding-bottom:2px;">
-        <input id="pw-input" type="password" placeholder="Password" style="display:block;width:100%;background:none;border:none;border-bottom:1px solid rgba(0,0,0,0.25);font-family:var(--mono-serif);font-size:18px;font-weight:300;font-style:italic;color:#111;padding:0 0 8px;outline:none;" />
-        <p id="pw-error" style="font-family:var(--mono-serif);font-size:14px;color:#c0392b;margin-top:6px;display:none;">Incorrect password.</p>
-      </div>
-      <div style="display:flex;gap:16px;align-items:center;justify-content:space-between;">
-        <button id="pw-cancel" style="font-family:var(--mono-serif);font-size:14px;font-weight:300;color:#6d6d6d;background:none;border:none;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px;transition:opacity 0.2s;">Cancel</button>
-        <button id="pw-submit" style="font-family:var(--mono-serif);font-size:18px;font-weight:400;font-style:italic;color:#000;background:none;border:none;padding:0;cursor:pointer;transition:opacity 0.2s;">Enter →</button>
-      </div>
-    </div>
-  </div>
+  <script src="transitions.js" defer></script>
   <script src="nav-clock.js" defer></script>
   <script src="nav-location-scramble.js" defer></script>
   <script src="copy-email.js" defer></script>
@@ -1001,79 +1071,6 @@
   <script src="nav-typewriter.js" defer></script>
 
   <script>
-    // Password protection for project cards
-    const PW_HASH = '143705b2daf4782f008a1fc7aedddf3ee66e8b42d295cf07cdc015ab93b90be9';
-    let pendingDest = null;
-    let pendingCard = null;
-
-    async function sha256(str) {
-      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
-    }
-
-    function openModal(dest, card) {
-      pendingDest = dest;
-      pendingCard = card;
-      document.getElementById('pw-input').value = '';
-      document.getElementById('pw-error').style.display = 'none';
-      const modal = document.getElementById('pw-modal');
-      modal.style.display = 'flex';
-      setTimeout(() => document.getElementById('pw-input').focus(), 50);
-    }
-
-    function closeModal() {
-      document.getElementById('pw-modal').style.display = 'none';
-      pendingDest = null;
-    }
-
-    const PW_EXPIRY_MS = 7 * 24 * 60 * 60 * 1000;
-
-    function isUnlocked() {
-      const ts = localStorage.getItem('pw_unlocked_at');
-      return ts && (Date.now() - parseInt(ts)) < PW_EXPIRY_MS;
-    }
-
-    document.querySelectorAll('.protected-card').forEach(card => {
-      card.addEventListener('click', function(e) {
-        e.preventDefault();
-        if (isUnlocked()) {
-          const dest = this.dataset.dest;
-          if (dest && dest !== '#') {
-            if (this.dataset.external) window.open(dest, '_blank', 'noopener');
-            else window.location.href = dest;
-          }
-        } else {
-          openModal(this.dataset.dest, this);
-        }
-      });
-    });
-
-    document.getElementById('pw-submit').addEventListener('click', async function() {
-      const val = document.getElementById('pw-input').value;
-      const hash = await sha256(val);
-      if (hash === PW_HASH) {
-        localStorage.setItem('pw_unlocked_at', Date.now().toString());
-        const isExternal = pendingCard && pendingCard.dataset.external;
-        closeModal();
-        if (pendingDest && pendingDest !== '#') {
-          if (isExternal) window.open(pendingDest, '_blank', 'noopener');
-          else window.location.href = pendingDest;
-        }
-      } else {
-        document.getElementById('pw-error').style.display = 'block';
-        document.getElementById('pw-input').value = '';
-      }
-    });
-
-    document.getElementById('pw-input').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') document.getElementById('pw-submit').click();
-    });
-
-    document.getElementById('pw-cancel').addEventListener('click', closeModal);
-    document.getElementById('pw-modal').addEventListener('click', function(e) {
-      if (e.target === this) closeModal();
-    });
-
     // Single giant hero title: default “Hey world”; cards swap via data-hover-title
     (function () {
       var el = document.getElementById('big-hover-title');

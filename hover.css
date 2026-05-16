@@ -49,6 +49,12 @@
   transition-delay: 0ms;
 }
 
+.nav-back.link-hover {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+}
+
 /* Nav links */
 .hero-name.link-hover:hover,
 .hero-name.link-hover:focus-visible,
@@ -210,10 +216,23 @@
   color: var(--hover-color);
 }
 
-/* Footer social */
+/* Footer social — muted default, off-black hover */
+.footer-social a.rolling-link.link-hover {
+  color: var(--nav-muted, #777777);
+}
+
 .footer-social a.rolling-link.link-hover:hover,
 .footer-social a.rolling-link.link-hover:focus-visible {
-  color: var(--hover-color);
+  color: #1a1a1a;
+}
+
+.footer-social a.rolling-link.link-hover svg {
+  opacity: 0.58;
+}
+
+.footer-social a.rolling-link.link-hover:hover svg,
+.footer-social a.rolling-link.link-hover:focus-visible svg {
+  opacity: 1;
 }
 
 /* Misc */
