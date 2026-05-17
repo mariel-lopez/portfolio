@@ -485,7 +485,7 @@
       width: 100%;
       position: relative;
       scroll-margin-top: clamp(72px, 14vw, 100px);
-      margin-top: calc(clamp(56px, 8vw, 96px) + 30px);
+      margin-top: var(--nav-content-offset);
     }
 
     .cards-grid {
@@ -870,12 +870,12 @@
 
     @media (max-width: 900px) {
       .page { gap: 60px; }
-      .work-section { margin-top: clamp(64px, 14vw, 100px); }
+      .work-section { margin-top: var(--nav-content-offset); }
     }
 
     @media (max-width: 640px) {
       .page {
-        padding-top: calc(var(--content-pad) + var(--nav-title-extra));
+        padding-top: 0;
         gap: 48px;
       }
 
@@ -896,7 +896,7 @@
       .cards-grid .project-card:nth-child(5) { z-index: 5; }
 
       .project-card--nav { min-height: 100px; }
-      .work-section { margin-top: 80px; }
+      .work-section { margin-top: var(--nav-content-offset); }
 
       .about-card,
       .utility-card,

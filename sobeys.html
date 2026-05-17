@@ -50,7 +50,8 @@
     }
 
     .project-hero-region {
-      padding-top: 64px;
+      /* Tighter than sitewide offset — case hero sits closer to nav */
+      padding-top: calc(var(--nav-content-offset) - var(--nav-below-gap));
       width: 100%;
     }
 
@@ -169,7 +170,7 @@
       gap: 12px;
       flex-wrap: wrap;
       justify-content: flex-start;
-      margin-top: 80px;
+      margin-top: 0;
     }
 
     .live-pill {
@@ -626,14 +627,6 @@
     }
 
     @media (max-width: 640px) {
-      .project-hero-region {
-        padding-top: calc(40px + var(--nav-title-extra));
-      }
-
-      .case-tags {
-        margin-top: 28px;
-      }
-
       .live-pill {
         margin-bottom: 20px;
       }
