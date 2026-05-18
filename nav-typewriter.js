@@ -32,13 +32,33 @@
 
   var motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
+  function createExternalLinkIcon() {
+    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('class', 'hero-rotating-link-icon');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('fill', 'none');
+    svg.setAttribute('stroke', 'currentColor');
+    svg.setAttribute('stroke-width', '1.75');
+    svg.setAttribute('stroke-linecap', 'round');
+    svg.setAttribute('stroke-linejoin', 'round');
+    svg.setAttribute('aria-hidden', 'true');
+    var path1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path1.setAttribute('d', 'M7 7h10v10');
+    var path2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path2.setAttribute('d', 'M7 17 17 7');
+    svg.appendChild(path1);
+    svg.appendChild(path2);
+    return svg;
+  }
+
   function createRotatingLink(href, label) {
     var anchor = document.createElement('a');
     anchor.className = 'hero-rotating-link';
     anchor.href = href;
     anchor.target = '_blank';
     anchor.rel = 'noopener noreferrer';
-    anchor.textContent = label;
+    anchor.appendChild(document.createTextNode(label));
+    anchor.appendChild(createExternalLinkIcon());
     return anchor;
   }
 

@@ -77,6 +77,11 @@
   color: var(--hover-color);
 }
 
+.hero-rotating-link:hover .hero-rotating-link-icon,
+.hero-rotating-link:focus-visible .hero-rotating-link-icon {
+  opacity: 1;
+}
+
 /* Location link */
 .nav-local-place-link {
   transition:
@@ -262,7 +267,8 @@
   .rolling-link:focus-visible,
   .hero-rotating-link,
   .hero-rotating-link:hover,
-  .hero-rotating-link:focus-visible {
+  .hero-rotating-link:focus-visible,
+  .hero-rotating-link-icon {
     transition-duration: 0.15s !important;
   }
 }

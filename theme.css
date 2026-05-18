@@ -1,0 +1,391 @@
+/* Galaxy night mode — sitewide tokens + overrides */
+
+:root {
+  --page-bg: #f5f5f2;
+  --page-ink: #111111;
+  --page-ink-soft: rgba(17, 17, 17, 0.9);
+  --overlay-bg: #f5f5f2;
+  --surface-glass: rgba(255, 255, 255, 0.78);
+  --surface-glass-hover: rgba(255, 255, 255, 0.96);
+  --surface-border: rgba(0, 0, 0, 0.07);
+  --card-tag: rgba(0, 0, 0, 0.42);
+  --card-title-ink: #111111;
+  --card-meta-ink: rgba(0, 0, 0, 0.52);
+  --noise-opacity: 0.045;
+  --noise-blend: multiply;
+  --theme-toggle-glow: transparent;
+  --theme-toggle-bg: rgba(255, 255, 255, 0.55);
+  --theme-toggle-border: rgba(0, 0, 0, 0.08);
+  --theme-toggle-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+}
+
+html.dark-theme {
+  color-scheme: dark;
+  --page-bg: #0b0914;
+  --page-ink: #ebe6f5;
+  --page-ink-soft: rgba(235, 230, 245, 0.92);
+  --overlay-bg: #0b0914;
+  --nav-ink: #ebe6f5;
+  --nav-muted: rgba(198, 188, 224, 0.62);
+  --nav-rotating: rgba(198, 188, 224, 0.48);
+  --divider-color: rgba(255, 255, 255, 0.1);
+  --hover-color: rgba(196, 172, 255, 0.9);
+  --surface-glass: rgba(22, 18, 36, 0.78);
+  --surface-glass-hover: rgba(30, 24, 48, 0.94);
+  --surface-border: rgba(255, 255, 255, 0.09);
+  --card-tag: rgba(235, 226, 255, 0.78);
+  --card-title-ink: #ffffff;
+  --card-meta-ink: rgba(235, 226, 255, 0.78);
+  --noise-opacity: 0.06;
+  --noise-blend: soft-light;
+  --theme-toggle-glow: rgba(140, 110, 220, 0.35);
+  --theme-toggle-bg: rgba(28, 22, 44, 0.72);
+  --theme-toggle-border: rgba(255, 255, 255, 0.12);
+  --theme-toggle-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+  --sobeys-ui-tab-active: #ebe6f5;
+  --sobeys-label: rgba(214, 204, 235, 0.55);
+  --sobeys-bg-mist: rgba(18, 14, 32, 0.92);
+  --sobeys-ui-chrome: rgba(22, 18, 38, 0.96);
+}
+
+/* ── Base page ── */
+body {
+  background-color: var(--page-bg) !important;
+  color: var(--page-ink) !important;
+  transition:
+    background-color 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.45s ease;
+}
+
+html.dark-theme body {
+  background-image:
+    radial-gradient(ellipse 90% 55% at 12% -8%, rgba(108, 62, 198, 0.38) 0%, transparent 58%),
+    radial-gradient(ellipse 70% 50% at 92% 8%, rgba(62, 88, 198, 0.28) 0%, transparent 52%),
+    radial-gradient(ellipse 80% 65% at 48% 108%, rgba(128, 52, 168, 0.24) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 30% at 72% 42%, rgba(88, 48, 148, 0.14) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+
+#pt-overlay {
+  background: var(--overlay-bg) !important;
+  transition:
+    opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.45s ease !important;
+}
+
+/* ── Nav ── */
+.nav-contact-link:hover,
+.nav-contact-link:focus-visible {
+  color: var(--nav-ink);
+}
+
+html.dark-theme .home-hero-mono.navbar::before {
+  background: linear-gradient(
+    to bottom,
+    rgba(11, 9, 20, 0.62) 0%,
+    rgba(11, 9, 20, 0.42) 38%,
+    rgba(11, 9, 20, 0.22) 58%,
+    rgba(11, 9, 20, 0.1) 74%,
+    rgba(11, 9, 20, 0.04) 88%,
+    rgba(11, 9, 20, 0) 100%
+  );
+}
+
+/* ── Theme toggle — fixed top-right, glass pill ── */
+.home-hero-mono.navbar:has(.theme-toggle) .mono-header {
+  padding-right: 52px;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: max(var(--nav-pad-y), env(safe-area-inset-top, 0px));
+  right: var(--content-pad);
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--theme-toggle-border);
+  border-radius: 999px;
+  background: var(--theme-toggle-bg);
+  backdrop-filter: blur(14px) saturate(1.15);
+  -webkit-backdrop-filter: blur(14px) saturate(1.15);
+  box-shadow: var(--theme-toggle-shadow);
+  color: var(--nav-muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  transition:
+    color 0.3s ease,
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.25s ease;
+}
+
+.theme-toggle:hover {
+  color: var(--nav-ink);
+  border-color: rgba(128, 100, 200, 0.22);
+  box-shadow:
+    var(--theme-toggle-shadow),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+}
+
+html.dark-theme .theme-toggle:hover {
+  color: var(--nav-ink);
+  box-shadow:
+    var(--theme-toggle-shadow),
+    0 0 20px var(--theme-toggle-glow);
+}
+
+.theme-toggle:focus-visible {
+  outline: 1px solid rgba(128, 100, 200, 0.45);
+  outline-offset: 3px;
+}
+
+.theme-toggle:active {
+  transform: scale(0.96);
+}
+
+.theme-icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.82) rotate(-12deg);
+  transition:
+    opacity 0.28s ease,
+    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.theme-icon svg {
+  display: block;
+}
+
+html:not(.dark-theme) .theme-toggle .moon-icon {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+html.dark-theme .theme-toggle .sun-icon {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+@media (max-width: 640px) {
+  .home-hero-mono.navbar:has(.theme-toggle) .mono-header {
+    padding-right: 0;
+  }
+
+  .theme-toggle {
+    top: max(calc(var(--nav-pad-y) - 2px), env(safe-area-inset-top, 0px));
+    right: max(16px, env(safe-area-inset-right, 0px));
+  }
+}
+
+/* ── Homepage: hero title — full width, soft bottom fade via mask in index.html */
+.hero-title-wrapper,
+.big-hover-title,
+.hero-title,
+.large-title {
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+  max-width: none !important;
+  clip-path: none !important;
+}
+
+/* ── Homepage: hero title ── */
+html.dark-theme .big-hover-title,
+html.dark-theme .hero-title {
+  color: rgba(235, 228, 255, 0.9);
+}
+
+/* ── Homepage: cards (readable contrast in dark mode) ── */
+html.dark-theme .project-card {
+  background: var(--surface-glass) !important;
+  border-color: var(--surface-border) !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.35),
+    0 24px 56px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset !important;
+}
+
+html.dark-theme .project-card:hover,
+html.dark-theme .project-card:focus-visible {
+  background: var(--surface-glass-hover) !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+html.dark-theme .project-card h3,
+html.dark-theme .project-card .card-title,
+html.dark-theme .project-card .card-title-original,
+html.dark-theme .project-card .card-title-clone {
+  color: #ffffff !important;
+}
+
+html.dark-theme .project-card p,
+html.dark-theme .project-card .card-meta,
+html.dark-theme .project-card .card-subtitle,
+html.dark-theme .project-card .card-tag {
+  color: rgba(235, 226, 255, 0.78) !important;
+}
+
+html.dark-theme .project-card:hover .card-title-original,
+html.dark-theme .project-card:focus-visible .card-title-original,
+html.dark-theme .project-card:hover .card-tag,
+html.dark-theme .project-card:focus-visible .card-tag {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
+html.dark-theme .about-card,
+html.dark-theme .air-canada-card {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(210, 190, 255, 0.18) !important;
+}
+
+html.dark-theme .about-card h3,
+html.dark-theme .about-card p,
+html.dark-theme .about-card .card-title,
+html.dark-theme .about-card .card-title-original,
+html.dark-theme .about-card .card-tag,
+html.dark-theme .air-canada-card h3,
+html.dark-theme .air-canada-card p,
+html.dark-theme .air-canada-card .card-title,
+html.dark-theme .air-canada-card .card-title-original,
+html.dark-theme .air-canada-card .card-tag {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
+html.dark-theme .project-card.no-hover:hover,
+html.dark-theme .project-card.no-hover:focus-visible {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+@media (min-width: 901px) {
+  html.dark-theme .cards-grid .project-card {
+    background: rgba(24, 20, 38, 0.92) !important;
+    backdrop-filter: blur(22px) saturate(1.08) !important;
+    -webkit-backdrop-filter: blur(22px) saturate(1.08) !important;
+    box-shadow:
+      0 10px 32px rgba(0, 0, 0, 0.38),
+      0 28px 64px rgba(0, 0, 0, 0.32),
+      0 0 0 1px rgba(255, 255, 255, 0.06) inset !important;
+  }
+}
+
+html.dark-theme .tab-button:hover {
+  color: var(--page-ink);
+}
+
+/* ── Homepage: ambient blobs → galaxy nebula ── */
+html.dark-theme .bg-blob-1 {
+  background: radial-gradient(circle, rgba(140, 90, 220, 0.42) 0%, rgba(100, 60, 180, 0.14) 38%, transparent 62%);
+}
+
+html.dark-theme .bg-blob-2 {
+  background: radial-gradient(circle, rgba(90, 120, 220, 0.38) 0%, rgba(70, 90, 180, 0.12) 36%, transparent 60%);
+}
+
+html.dark-theme .bg-blob-3 {
+  background: radial-gradient(circle, rgba(180, 80, 200, 0.34) 0%, rgba(140, 60, 160, 0.1) 36%, transparent 60%);
+}
+
+html.dark-theme .bg-noise {
+  opacity: var(--noise-opacity);
+  mix-blend-mode: var(--noise-blend);
+}
+
+/* ── Footer ── */
+html.dark-theme .footer-email {
+  color: var(--page-ink);
+}
+
+html.dark-theme .footer-social a {
+  color: var(--nav-muted);
+}
+
+/* ── About page ── */
+html.dark-theme .about-headline {
+  color: var(--page-ink);
+}
+
+html.dark-theme .about-headline-accent {
+  color: inherit;
+}
+
+html.dark-theme .quest-title,
+html.dark-theme .quest-org,
+html.dark-theme .about-card-label {
+  color: var(--page-ink);
+}
+
+html.dark-theme .quest-desc,
+html.dark-theme .about-card-desc {
+  color: rgba(214, 204, 235, 0.62);
+}
+
+html.dark-theme .about-photo-caption {
+  color: rgba(214, 204, 235, 0.55);
+  background: rgba(18, 14, 32, 0.88);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+html.dark-theme .about-photo {
+  background: #2a2438;
+}
+
+/* ── Sobeys / case study ── */
+html.dark-theme .project-hero,
+html.dark-theme .hero-mono--case,
+html.dark-theme .case-section,
+html.dark-theme .visual-block,
+html.dark-theme .tab-panel {
+  color: var(--page-ink);
+}
+
+html.dark-theme .case-tags,
+html.dark-theme .case-meta,
+html.dark-theme .visual-caption,
+html.dark-theme .tab-button {
+  color: rgba(214, 204, 235, 0.62);
+}
+
+html.dark-theme .tab-button.is-active,
+html.dark-theme .tab-button[aria-selected="true"] {
+  color: var(--page-ink);
+}
+
+html.dark-theme .case-divider {
+  background: var(--divider-color);
+}
+
+html.dark-theme .ui-frame,
+html.dark-theme .mist-panel {
+  background: var(--sobeys-bg-mist);
+  border-color: var(--surface-border);
+}
+
+/* ── Misc ink overrides ── */
+html.dark-theme .hero-sans-lead,
+html.dark-theme .hero-sans-sub,
+html.dark-theme .nav-page-name,
+html.dark-theme .nav-back {
+  color: var(--page-ink);
+}
+
+html.dark-theme .hero-sans-lead-muted {
+  color: var(--nav-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body,
+  #pt-overlay {
+    transition-duration: 0.12s !important;
+  }
+}

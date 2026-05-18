@@ -9,7 +9,9 @@
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="shortcut icon" href="favicon.ico" />
+  <script>!function(){try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('dark-theme');}catch(e){}}();</script>
   <link rel="stylesheet" href="nav.css" />
+  <link rel="stylesheet" href="theme.css" />
   <link rel="stylesheet" href="layout.css" />
   <link rel="stylesheet" href="hover.css" />
   <link rel="stylesheet" href="copy-email.css" />
@@ -34,8 +36,8 @@
       font-size: 16px;
       font-family: var(--mono-serif);
       font-weight: 400;
-      background: #f5f5f2;
-      color: #111;
+      background: var(--page-bg);
+      color: var(--page-ink);
       min-height: 100vh;
     }
 
@@ -650,7 +652,7 @@
   <link rel="stylesheet" href="footer.css" />
 </head>
 <body>
-  <script>!function(){var e=document.createElement('div');e.id='pt-overlay';e.setAttribute('aria-hidden','true');e.style.cssText='position:fixed;inset:0;z-index:9990;background:#f5f5f2;pointer-events:none;opacity:1;will-change:opacity;';document.body.appendChild(e)}();</script>
+  <script>!function(){var e=document.createElement('div');e.id='pt-overlay';e.setAttribute('aria-hidden','true');e.style.cssText='position:fixed;inset:0;z-index:9990;pointer-events:none;opacity:1;will-change:opacity;';document.body.appendChild(e)}();</script>
   <!-- FIXED NAV -->
   <div id="top" class="home-hero-mono navbar">
     <header class="mono-header">
@@ -679,6 +681,26 @@
         </div>
       </nav>
     </header>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle theme" aria-pressed="false">
+      <span class="theme-icon sun-icon" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.7"/>
+          <path d="M12 2V5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          <path d="M12 19V22" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          <path d="M2 12H5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          <path d="M19 12H22" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          <path d="M4.9 4.9L7 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          <path d="M17 17L19.1 19.1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          <path d="M17 7L19.1 4.9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          <path d="M4.9 19.1L7 17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="theme-icon moon-icon" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M20 14.5C19.2 14.8 18.4 15 17.5 15C13.4 15 10 11.6 10 7.5C10 6.6 10.2 5.8 10.5 5C7.1 5.7 4.5 8.7 4.5 12.3C4.5 16.5 7.9 20 12.2 20C15.8 20 18.8 17.4 20 14.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </button>
   </div>
 
   <main class="project-page-container">
@@ -911,6 +933,7 @@
   <script src="nav-location-scramble.js" defer></script>
   <script src="copy-email.js" defer></script>
   <script src="nav-scroll.js" defer></script>
+  <script src="theme.js" defer></script>
   <a href="#top" class="back-to-top" id="back-to-top" aria-label="Back to top">
     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
     <span>Back to top</span>

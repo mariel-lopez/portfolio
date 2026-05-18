@@ -11,7 +11,7 @@
     ov.id = 'pt-overlay';
     ov.setAttribute('aria-hidden', 'true');
     ov.style.cssText =
-      'position:fixed;inset:0;z-index:9990;background:#f5f5f2;' +
+      'position:fixed;inset:0;z-index:9990;' +
       'pointer-events:none;opacity:1;will-change:opacity;';
     document.body.appendChild(ov);
   }
