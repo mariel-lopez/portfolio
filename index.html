@@ -42,10 +42,12 @@
       --hero-title-fade: linear-gradient(
         to bottom,
         #000 0%,
-        #000 78%,
-        rgba(0, 0, 0, 0.92) 86%,
-        rgba(0, 0, 0, 0.6) 92%,
-        rgba(0, 0, 0, 0.22) 97%,
+        #000 72%,
+        rgba(0, 0, 0, 0.97) 80%,
+        rgba(0, 0, 0, 0.88) 86%,
+        rgba(0, 0, 0, 0.68) 91%,
+        rgba(0, 0, 0, 0.42) 95.5%,
+        rgba(0, 0, 0, 0.12) 98.5%,
         transparent 100%
       );
     }
@@ -786,11 +788,13 @@
       padding: 14px 16px 18px;
       display: flex;
       flex-direction: column;
+      align-items: flex-start;
       gap: 5px;
       margin-top: auto;
       flex: 0 0 auto;
       flex-shrink: 0;
       min-width: 0;
+      text-align: left;
     }
 
     /* Slot-machine title */
@@ -799,6 +803,7 @@
       position: relative;
       min-width: 0;
       width: 100%;
+      text-align: left;
     }
 
     .card-title-original,
@@ -811,6 +816,7 @@
       letter-spacing: -0.02em;
       color: var(--card-title-ink);
       white-space: nowrap;
+      text-align: left;
       transition: color 0.3s ease;
     }
 
@@ -827,11 +833,14 @@
     }
 
     .card-tag {
+      display: block;
+      width: 100%;
       font-family: var(--mono-serif);
       font-size: clamp(11px, 0.95vw, 13px);
       font-weight: 400;
       color: var(--card-meta-ink);
       letter-spacing: 0.01em;
+      text-align: left;
       transition: color 0.3s ease;
     }
 
@@ -868,6 +877,7 @@
       flex: 1;
       display: flex;
       flex-direction: column;
+      align-items: stretch;
       justify-content: flex-end;
       min-height: 0;
     }
@@ -1046,6 +1056,7 @@
     /* ── BIG HOVER TITLE (background anchor; cards layer on top) ── */
     .home-hero-mono.navbar,
     .hero-title-wrapper,
+    .hero-title-inner,
     .hero-text-wrapper,
     .bg-noise {
       overflow-x: visible;
@@ -1057,17 +1068,35 @@
       top: clamp(56px, 3.5vw + 44px, 80px);
       left: 0;
       right: 0;
-      width: auto;
+      width: 100%;
       max-width: none;
-      overflow-x: visible;
-      overflow-y: visible;
+      overflow: visible;
       pointer-events: none;
       z-index: 1;
       display: flex;
       justify-content: center;
+      align-items: flex-start;
       box-sizing: border-box;
-      padding-right: 4vw;
-      padding-left: 0;
+      padding-inline: clamp(20px, 4vw, 64px);
+    }
+
+    /* Mask on wrapper so glyphs aren’t clipped by tight line-height box */
+    .hero-title-inner {
+      display: block;
+      margin-inline: auto;
+      max-width: 100%;
+      text-align: center;
+      overflow: visible;
+      padding: 0.06em 0.18em 0.42em;
+      box-sizing: content-box;
+      -webkit-mask-image: var(--hero-title-fade);
+      mask-image: var(--hero-title-fade);
+      -webkit-mask-size: 100% 100%;
+      mask-size: 100% 100%;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-clip: border-box;
+      mask-clip: border-box;
     }
 
     .big-hover-title,
@@ -1075,16 +1104,17 @@
     .large-title {
       position: relative;
       z-index: 1;
+      display: block;
       width: max-content;
-      max-width: none;
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+      max-width: 100%;
+      margin-inline: auto;
+      padding: 0.02em 0.12em 0;
+      box-sizing: content-box;
       font-family: var(--mono-serif);
-      font-size: clamp(5rem, 12vw, 11rem);
+      font-size: clamp(3.25rem, calc((100vw - clamp(3.5rem, 11vw, 9rem)) / 9.25), 11rem);
       font-weight: 500;
-      letter-spacing: -0.075em;
-      line-height: 0.9;
+      letter-spacing: -0.065em;
+      line-height: 1.06;
       color: rgba(17, 17, 17, 0.9);
       white-space: nowrap;
       text-align: center;
@@ -1095,27 +1125,21 @@
       filter: blur(0px);
       user-select: none;
       will-change: transform, opacity, filter;
-      -webkit-mask-image: var(--hero-title-fade);
-      mask-image: var(--hero-title-fade);
-      -webkit-mask-size: 100% 100%;
-      mask-size: 100% 100%;
-      -webkit-mask-repeat: no-repeat;
-      mask-repeat: no-repeat;
     }
 
     @media (max-width: 1200px) {
       .big-hover-title,
       .hero-title {
-        font-size: clamp(4.5rem, 10vw, 8rem);
+        font-size: clamp(3rem, calc((100vw - clamp(3rem, 10vw, 7rem)) / 9.25), 8rem);
       }
     }
 
     @media (max-width: 768px) {
       .big-hover-title,
       .hero-title {
-        font-size: clamp(3.5rem, 14vw, 5.5rem);
+        font-size: clamp(2.75rem, calc((100vw - 3rem) / 8.5), 5.5rem);
         white-space: normal;
-        line-height: 0.95;
+        line-height: 1.05;
         text-wrap: balance;
       }
     }
@@ -1164,7 +1188,9 @@
   <div class="bg-noise" aria-hidden="true"></div>
   <script>!function(){var e=document.createElement('div');e.id='pt-overlay';e.setAttribute('aria-hidden','true');e.style.cssText='position:fixed;inset:0;z-index:9990;pointer-events:none;opacity:1;will-change:opacity;';document.body.appendChild(e)}();</script>
   <div class="hero-title-wrapper" aria-hidden="true">
-    <div id="big-hover-title" class="big-hover-title hero-title">Hey world</div>
+    <div class="hero-title-inner">
+      <div id="big-hover-title" class="big-hover-title hero-title">Hey world</div>
+    </div>
   </div>
   <div id="custom-cursor" class="custom-cursor" aria-hidden="true"></div>
   <div class="home-hero-mono navbar">

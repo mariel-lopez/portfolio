@@ -190,13 +190,21 @@ html.dark-theme .theme-toggle .sun-icon {
 
 /* ── Homepage: hero title — full width, soft bottom fade via mask in index.html */
 .hero-title-wrapper,
+.hero-title-inner,
 .big-hover-title,
 .hero-title,
 .large-title {
-  overflow-x: visible !important;
-  overflow-y: visible !important;
-  max-width: none !important;
+  overflow: visible !important;
   clip-path: none !important;
+}
+
+.hero-title-inner {
+  max-width: 100% !important;
+}
+
+.big-hover-title,
+.hero-title {
+  max-width: 100% !important;
 }
 
 /* ── Homepage: hero title ── */
