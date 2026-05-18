@@ -12,7 +12,8 @@
     ov.setAttribute('aria-hidden', 'true');
     ov.style.cssText =
       'position:fixed;inset:0;z-index:9990;' +
-      'pointer-events:none;opacity:1;will-change:opacity;';
+      'pointer-events:none;opacity:1;will-change:opacity;' +
+      'background:var(--overlay-bg,#f5f5f2);';
     document.body.appendChild(ov);
   }
 

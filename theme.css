@@ -296,6 +296,18 @@ html.dark-theme .project-card:not(.about-card) .card-tag {
   text-align: left !important;
 }
 
+html.dark-theme .about-card .card-footer,
+html.dark-theme .about-card .card-footer.link-hover {
+  align-items: flex-start !important;
+  text-align: left !important;
+}
+
+html.dark-theme .about-card .card-title-wrap,
+html.dark-theme .about-card .card-title-original,
+html.dark-theme .about-card .card-tag {
+  text-align: left !important;
+}
+
 html.dark-theme .project-card:not(.about-card) h3,
 html.dark-theme .project-card:not(.about-card) .card-title,
 html.dark-theme .project-card:not(.about-card) .card-title-original,
