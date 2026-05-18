@@ -386,18 +386,9 @@
 }
 
 .nav-local-move {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.32em;
   color: inherit;
   white-space: nowrap;
   flex-shrink: 0;
-}
-
-.nav-local-move-icon {
-  flex-shrink: 0;
-  display: block;
-  opacity: 0.55;
 }
 
 .nav-local-sep {

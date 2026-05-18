@@ -297,19 +297,44 @@
 
     .quest-org a.link-hover {
       display: inline-flex;
-      align-items: center;
-      gap: 7px;
+      align-items: baseline;
+      gap: 0;
     }
 
-    .quest-org a svg {
+    .quest-org a .quest-org-link-icon {
       flex-shrink: 0;
-      opacity: 0.5;
-      transition: opacity 0.3s ease;
+      display: inline-block;
+      width: 0;
+      height: 0;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      vertical-align: baseline;
+      color: currentColor;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+        opacity var(--hover-duration, 280ms) var(--hover-ease, ease),
+        width var(--hover-duration, 280ms) var(--hover-ease, ease),
+        height var(--hover-duration, 280ms) var(--hover-ease, ease),
+        margin-inline-start var(--hover-duration, 280ms) var(--hover-ease, ease),
+        visibility 0s linear var(--hover-duration, 280ms);
     }
 
-    .quest-org a:hover svg,
-    .quest-org a:focus-visible svg {
-      opacity: 0.7;
+    .quest-org a:hover .quest-org-link-icon,
+    .quest-org a:focus-visible .quest-org-link-icon {
+      width: 1em;
+      height: 1em;
+      margin-inline-start: 0.22em;
+      opacity: 1;
+      visibility: visible;
+      transition:
+        opacity var(--hover-duration, 280ms) var(--hover-ease, ease),
+        width var(--hover-duration, 280ms) var(--hover-ease, ease),
+        height var(--hover-duration, 280ms) var(--hover-ease, ease),
+        margin-inline-start var(--hover-duration, 280ms) var(--hover-ease, ease),
+        visibility 0s;
     }
 
     .quest-desc {
@@ -385,7 +410,8 @@
 
       .about-photo,
       .about-photo::after,
-      .about-photo-caption {
+      .about-photo-caption,
+      .quest-org a .quest-org-link-icon {
         transition-duration: 0.08s !important;
       }
     }
@@ -592,7 +618,7 @@
         </div>
         <div class="nav-right">
           <time class="nav-local-time" id="nav-local-time" datetime="" aria-label="New York local time">
-            <span class="nav-local-move" aria-label="Relocated from Toronto to New York">Toronto<svg class="nav-local-move-icon" xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>New York</span><span class="nav-local-sep" aria-hidden="true">•</span><span class="nav-local-clock"></span>
+            <span class="nav-local-move" aria-label="Relocated from Toronto to New York">Toronto x New York</span><span class="nav-local-sep" aria-hidden="true">•</span><span class="nav-local-clock"></span>
           </time>
           <div class="nav-links">
             <a class="nav-contact-link" href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener noreferrer">LinkedIn<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
@@ -659,7 +685,7 @@
           <div class="quest-row">
             <div class="quest-role">
               <div class="quest-title">Product Designer</div>
-              <div class="quest-org"><a class="link-hover" href="https://www.ibm.com/consulting/ibmix" target="_blank" rel="noopener noreferrer">IBM iX<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></div>
+              <div class="quest-org"><a class="link-hover" href="https://www.ibm.com/consulting/ibmix" target="_blank" rel="noopener noreferrer">IBM iX<svg class="quest-org-link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></div>
             </div>
             <div class="quest-right">
               <div class="quest-date">Mar 2022 – Present</div>
@@ -681,7 +707,7 @@
           <div class="quest-row">
             <div class="quest-role">
               <div class="quest-title">Organizer</div>
-              <div class="quest-org"><a class="link-hover" href="https://lu.ma/mariel" target="_blank" rel="noopener noreferrer">Luma<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></div>
+              <div class="quest-org"><a class="link-hover" href="https://lu.ma/mariel" target="_blank" rel="noopener noreferrer">Luma<svg class="quest-org-link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></div>
             </div>
             <div class="quest-right">
               <div class="quest-date">Jan 2026 – Present</div>
@@ -695,7 +721,7 @@
           <div class="quest-row">
             <div class="quest-role">
               <div class="quest-title">Mentor</div>
-              <div class="quest-org"><a class="link-hover" href="https://adplist.org/mentors/mariel-lopez" target="_blank" rel="noopener noreferrer">ADPList<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></div>
+              <div class="quest-org"><a class="link-hover" href="https://adplist.org/mentors/mariel-lopez" target="_blank" rel="noopener noreferrer">ADPList<svg class="quest-org-link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></div>
             </div>
             <div class="quest-right">
               <div class="quest-date">Feb 2023 – Present</div>
