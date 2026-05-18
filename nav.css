@@ -409,25 +409,34 @@
   align-items: center;
 }
 
-.nav-copy-feedback {
-  position: absolute;
-  top: calc(100% + 5px);
-  left: 0;
-  font-family: var(--mono-serif);
-  font-size: 0.72rem;
-  font-weight: var(--nav-meta-weight);
-  color: var(--nav-muted);
-  letter-spacing: var(--nav-meta-tracking);
-  white-space: nowrap;
-  pointer-events: none;
-  opacity: 0;
-  transform: translateY(3px);
-  transition: opacity 0.28s ease, transform 0.28s ease;
+.nav-email-label {
+  display: inline-grid;
+  align-items: center;
 }
 
-.nav-copy-feedback.is-visible {
-  opacity: 0.65;
-  transform: translateY(0);
+.nav-email-label-default,
+.nav-email-label-hover {
+  grid-area: 1 / 1;
+  transition: opacity 0.22s ease;
+}
+
+.nav-email-label-hover {
+  opacity: 0;
+}
+
+.nav-email-copy:hover .nav-email-label-default,
+.nav-email-copy:focus-visible .nav-email-label-default {
+  opacity: 0;
+}
+
+.nav-email-copy:hover .nav-email-label-hover,
+.nav-email-copy:focus-visible .nav-email-label-hover,
+.nav-email-copy.is-copied .nav-email-label-hover {
+  opacity: 1;
+}
+
+.nav-email-copy.is-copied .nav-email-label-default {
+  opacity: 0;
 }
 
 /* ── Left column (name) ── */

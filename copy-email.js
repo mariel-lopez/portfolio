@@ -53,21 +53,20 @@
 
   document.querySelectorAll('.nav-email-copy').forEach(function (link) {
     var email = link.getAttribute('data-email') || DEFAULT_EMAIL;
-    var wrap = link.closest('.nav-email-wrap');
-    var feedback = wrap ? wrap.querySelector('.nav-copy-feedback') : null;
-    var fadeTimer;
+    var resetTimer;
 
     link.addEventListener('click', function (e) {
       e.preventDefault();
 
       copyText(email).then(function () {
-        if (!feedback) return;
-        clearTimeout(fadeTimer);
-        feedback.classList.add('is-visible');
+        window.clearTimeout(resetTimer);
+        link.classList.add('is-copied');
+        link.setAttribute('aria-label', 'Email copied');
 
-        fadeTimer = setTimeout(function () {
-          feedback.classList.remove('is-visible');
-        }, 2000);
+        resetTimer = window.setTimeout(function () {
+          link.classList.remove('is-copied');
+          link.setAttribute('aria-label', 'Copy email address');
+        }, RESET_MS);
       });
     });
   });
