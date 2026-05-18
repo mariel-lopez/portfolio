@@ -80,7 +80,11 @@
 
 .hero-rotating-link:hover .hero-rotating-link-icon,
 .hero-rotating-link:focus-visible .hero-rotating-link-icon {
+  width: 1em;
+  height: 1em;
+  margin-inline-start: 0.22em;
   opacity: 1;
+  visibility: visible;
 }
 
 /* Location link */

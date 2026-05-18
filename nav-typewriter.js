@@ -57,7 +57,10 @@
     anchor.href = href;
     anchor.target = '_blank';
     anchor.rel = 'noopener noreferrer';
-    anchor.appendChild(document.createTextNode(label));
+    var labelSpan = document.createElement('span');
+    labelSpan.className = 'hero-rotating-link-label';
+    labelSpan.textContent = label;
+    anchor.appendChild(labelSpan);
     anchor.appendChild(createExternalLinkIcon());
     return anchor;
   }
