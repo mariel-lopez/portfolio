@@ -372,7 +372,7 @@
   font-family: var(--mono-serif);
   font-size: var(--nav-meta-size);
   font-weight: var(--nav-meta-weight);
-  color: var(--nav-muted);
+  color: var(--nav-ink);
   letter-spacing: var(--nav-meta-tracking);
   line-height: var(--nav-meta-lh);
   white-space: nowrap;

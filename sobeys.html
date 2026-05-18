@@ -294,9 +294,22 @@
     .overview-value {
       font-family: var(--mono-serif);
       font-size: 18px;
-      font-weight: 300;
+      font-weight: 400;
       line-height: 1.65;
+      letter-spacing: -0.015em;
       color: var(--page-ink);
+    }
+
+    .overview-team {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4em;
+    }
+
+    .overview-team-role {
+      color: var(--sobeys-ink-soft);
+      font-weight: 400;
     }
 
     /* ── THREE-COL STAT CARDS ── */
@@ -329,7 +342,7 @@
     .stat-card-body {
       font-family: var(--mono-serif);
       font-size: 18px;
-      font-weight: 300;
+      font-weight: 400;
       line-height: 1.65;
       color: var(--page-ink);
     }
@@ -376,8 +389,9 @@
     .section-body {
       font-family: var(--mono-serif);
       font-size: 20px;
-      font-weight: 300;
+      font-weight: 400;
       line-height: 1.7;
+      letter-spacing: -0.015em;
       color: var(--sobeys-ink-soft);
     }
 
@@ -455,7 +469,7 @@
       padding: 14px 20px;
       font-family: var(--mono-serif);
       font-size: 14px;
-      font-weight: 300;
+      font-weight: 400;
       color: var(--sobeys-label);
       border-top: 1px solid var(--sobeys-ui-border);
       background: var(--sobeys-ui-chrome);
@@ -503,7 +517,7 @@
     .learning-card p {
       font-family: var(--mono-serif);
       font-size: 18px;
-      font-weight: 300;
+      font-weight: 400;
       color: var(--sobeys-ink-soft);
       line-height: 1.65;
     }
@@ -530,7 +544,7 @@
     .result-desc {
       font-family: var(--mono-serif);
       font-size: 18px;
-      font-weight: 300;
+      font-weight: 400;
       color: var(--sobeys-ink-soft);
       line-height: 1.4;
     }
@@ -582,7 +596,7 @@
     .hero-mono-star-cardtip-domain {
       display: block;
       margin-top: 0.15em;
-      font-weight: 300;
+      font-weight: 400;
       font-style: italic;
       opacity: 0.72;
     }
@@ -743,7 +757,12 @@
       </div>
       <div class="overview-item">
         <p class="overview-label">Team</p>
-        <p class="overview-value">Shannon M. · Valerie C.<br>Avinash R. · Justin C.</p>
+        <ul class="overview-value overview-team">
+          <li class="overview-team-member">Shannon M. <span class="overview-team-role">(Product Design Manager)</span></li>
+          <li class="overview-team-member">Valerie C. <span class="overview-team-role">(Product Manager)</span></li>
+          <li class="overview-team-member">Avinash R. <span class="overview-team-role">(Technical Architect/Engineer)</span></li>
+          <li class="overview-team-member">Justin C. <span class="overview-team-role">(Design Intern)</span></li>
+        </ul>
       </div>
       <div class="overview-item">
         <p class="overview-label">Tools</p>

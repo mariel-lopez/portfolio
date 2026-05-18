@@ -533,7 +533,7 @@
         transform: translateY(0);
         grid-template-columns: repeat(3, 1fr);
         column-gap: 15px;
-        row-gap: 19px;
+        row-gap: 16px;
         align-items: stretch;
       }
 
@@ -551,8 +551,34 @@
 
       .cards-grid .project-card:nth-child(-n+3) .card-image {
         flex: 0 0 auto;
-        aspect-ratio: 4 / 3;
+        aspect-ratio: 3 / 2;
         max-height: none;
+        margin: 8px 8px 0;
+        width: calc(100% - 16px);
+      }
+
+      .cards-grid .project-card:nth-child(-n+3) .card-footer {
+        --card-footer-reserve: 86px;
+        padding: 11px 14px 13px;
+      }
+
+      .cards-grid .project-card:nth-child(n+4) .card-footer {
+        --card-footer-reserve: auto;
+        min-height: 0;
+        padding: 10px 14px 12px;
+      }
+
+      .cards-grid .project-card:nth-child(n+4) {
+        min-height: 252px;
+      }
+
+      .cards-grid .air-canada-card .card-image {
+        flex: 1 1 auto;
+        aspect-ratio: unset;
+        max-height: none;
+        min-height: 0;
+        margin: 8px 8px 0;
+        width: calc(100% - 16px);
       }
     }
 
@@ -746,14 +772,14 @@
 
     /* Card image — intrinsic 4:3; flex-grow only where grid gives card height (tablet+) */
     .card-image {
-      margin: 10px 10px 0;
+      margin: 8px 8px 0;
       border-radius: 20px;
       overflow: hidden;
       flex: 0 0 auto;
       width: calc(100% - 20px);
       min-height: auto;
       max-height: none;
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 3 / 2;
       background: #e8e0d8;
     }
 
@@ -762,7 +788,7 @@
         flex: 1 1 0;
         min-height: 0;
         width: auto;
-        max-height: calc(100% - var(--card-footer-reserve, 76px));
+        max-height: calc(100% - var(--card-footer-reserve, 86px));
       }
 
       .cards-grid .project-card:nth-child(-n+3) .card-image {
@@ -788,22 +814,27 @@
     }
 
     .card-image--logo {
-      background: linear-gradient(168deg, #fdfbf7 0%, #f6efe6 42%, #ebe3d8 100%);
+      background: linear-gradient(180deg, #ffffff 0%, #f8f4ee 55%, #efe8dc 100%);
+    }
+
+    .air-canada-card .card-image--logo {
+      background: linear-gradient(180deg, #ffffff 0%, #f8f4ee 55%, #efe8dc 100%);
     }
 
     .card-image--logo img {
       object-fit: contain;
-      padding: 20%;
+      padding: 12%;
     }
 
     /* Card footer */
     .card-footer {
-      --card-footer-reserve: 76px;
-      padding: 14px 16px 18px;
+      --card-footer-reserve: 86px;
+      min-height: var(--card-footer-reserve);
+      padding: 11px 14px 13px;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 5px;
+      gap: 4px;
       margin-top: auto;
       flex: 0 0 auto;
       flex-shrink: 0;
@@ -822,16 +853,25 @@
 
     .card-title-original,
     .card-title-clone {
-      display: block;
+      max-width: 100%;
       font-family: var(--mono-serif);
       font-size: var(--card-title-font-size);
       font-weight: 500;
       line-height: 1.35;
       letter-spacing: -0.02em;
       color: var(--card-title-ink);
-      white-space: nowrap;
       text-align: left;
       transition: color 0.3s ease;
+    }
+
+    .card-title-original {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      white-space: normal;
+      text-wrap: balance;
+      overflow-wrap: break-word;
+      overflow: hidden;
     }
 
     .card-title-clone {
@@ -867,7 +907,7 @@
     /* Bottom row: compact Air Canada left + wide About right (desktop 3-col grid) */
     .about-card {
       grid-column: span 2;
-      min-height: 300px;
+      min-height: 252px;
       position: relative;
       overflow: hidden;
     }
@@ -878,11 +918,11 @@
 
     .utility-card,
     .air-canada-card {
-      min-height: 300px;
+      min-height: 252px;
     }
 
     .about-card.project-card--nav {
-      min-height: 300px;
+      min-height: 252px;
     }
 
     .about-card-content {
@@ -896,19 +936,21 @@
       min-height: 0;
     }
 
-    /* Air Canada: image band fills card — logo scaled, minimal dead space */
+    /* Air Canada: image fills space above footer */
     .air-canada-card .card-image {
-      aspect-ratio: unset;
       flex: 1 1 auto;
+      aspect-ratio: unset;
       min-height: 0;
-      margin: 10px 10px 0;
+      max-height: none;
+      margin: 8px 8px 0;
+      width: calc(100% - 16px);
     }
 
     .air-canada-card .card-image--logo img {
       width: 100%;
       height: 100%;
-      padding: 0;
-      object-fit: cover;
+      padding: 8% 10%;
+      object-fit: contain;
       object-position: center;
       box-sizing: border-box;
     }
@@ -1003,7 +1045,6 @@
 
       .card-title-original,
       .card-title-clone {
-        white-space: normal;
         letter-spacing: -0.01em;
       }
     }
@@ -1031,7 +1072,7 @@
         width: calc(100% - 20px);
         min-height: auto;
         max-height: none;
-        aspect-ratio: 4 / 3;
+        aspect-ratio: 3 / 2;
       }
 
       .cards-grid .project-card:nth-child(1) { z-index: 1; }
@@ -1047,22 +1088,24 @@
       .utility-card,
       .air-canada-card {
         grid-column: span 1;
-        min-height: 240px;
+        min-height: 220px;
         height: auto;
-        max-height: 340px;
+        max-height: 300px;
       }
 
       .about-card.project-card--nav {
-        min-height: 240px;
+        min-height: 220px;
       }
 
       .air-canada-card {
-        min-height: 292px;
+        min-height: 220px;
       }
 
       .air-canada-card .card-image {
-        min-height: 176px;
+        min-height: 0;
+        max-height: none;
         flex: 1 1 auto;
+        aspect-ratio: unset;
       }
     }
 

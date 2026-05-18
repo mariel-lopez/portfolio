@@ -247,15 +247,53 @@ html.dark-theme .project-card:not(.about-card) {
   border-color: var(--surface-border) !important;
   color: rgba(255, 255, 255, 0.92) !important;
   box-shadow:
-    0 8px 28px rgba(0, 0, 0, 0.35),
-    0 24px 56px rgba(0, 0, 0, 0.28),
-    0 0 0 1px rgba(255, 255, 255, 0.04) inset !important;
+    0 10px 32px rgba(0, 0, 0, 0.38),
+    0 28px 64px rgba(0, 0, 0, 0.32),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset !important;
+  backdrop-filter: blur(22px) saturate(1.08) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(1.08) !important;
+}
+
+html.dark-theme .project-card:not(.about-card) .card-image {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+html.dark-theme .air-canada-card .card-image.card-image--logo {
+  background: linear-gradient(180deg, #ffffff 0%, #faf6f0 48%, #f0e9de 100%) !important;
+  min-height: 168px;
+}
+
+html.dark-theme .air-canada-card .card-image--logo img {
+  object-fit: contain !important;
+  object-position: center !important;
+  padding: 6% 8% !important;
+  filter: none !important;
+  transform: scale(1.08);
+  transform-origin: center center;
 }
 
 html.dark-theme .project-card:not(.about-card):hover,
 html.dark-theme .project-card:not(.about-card):focus-visible {
   background: var(--surface-glass-hover) !important;
   color: rgba(255, 255, 255, 0.92) !important;
+}
+
+html.dark-theme .project-card:not(.about-card) .card-footer,
+html.dark-theme .project-card:not(.about-card) .card-footer.link-hover {
+  background: transparent !important;
+  align-items: flex-start !important;
+  text-align: left !important;
+}
+
+html.dark-theme .project-card:not(.about-card) .card-title-wrap,
+html.dark-theme .project-card:not(.about-card) .card-title-original,
+html.dark-theme .project-card:not(.about-card) .card-title-clone,
+html.dark-theme .project-card:not(.about-card) .card-tag {
+  text-align: left !important;
 }
 
 html.dark-theme .project-card:not(.about-card) h3,
@@ -281,7 +319,7 @@ html.dark-theme .project-card:not(.about-card):focus-visible .card-tag {
 
 html.dark-theme .project-card.no-hover:not(.about-card):hover,
 html.dark-theme .project-card.no-hover:not(.about-card):focus-visible {
-  background: rgba(255, 255, 255, 0.08) !important;
+  background: var(--surface-glass) !important;
 }
 
 /* About card — dark glass surface; photo hover preserved */
@@ -362,7 +400,12 @@ html.dark-theme .about-card .card-title-clone {
 }
 
 html.dark-theme .about-card .card-tag {
-  color: rgba(235, 226, 255, 0.78) !important;
+  color: rgba(235, 226, 255, 0.88) !important;
+}
+
+html.dark-theme .about-card .card-footer,
+html.dark-theme .about-card .card-footer.link-hover {
+  background: transparent !important;
 }
 
 html.dark-theme .about-card:hover .card-title-original,
@@ -588,7 +631,8 @@ html.dark-theme .result-number {
 
 html.dark-theme .section-body,
 html.dark-theme .learning-card p,
-html.dark-theme .result-desc {
+html.dark-theme .result-desc,
+html.dark-theme .overview-team-role {
   color: var(--sobeys-ink-soft) !important;
 }
 
