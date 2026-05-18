@@ -87,18 +87,6 @@
   visibility: visible;
 }
 
-/* Location link */
-.nav-local-place-link {
-  transition:
-    color var(--hover-duration) var(--hover-ease),
-    opacity var(--hover-duration) var(--hover-ease);
-}
-
-.nav-local-place-link:hover,
-.nav-local-place-link:focus-visible {
-  color: var(--hover-color);
-}
-
 /* Footer email */
 .footer-email.link-hover {
   transition:
@@ -114,7 +102,8 @@
 
 .footer-email-copy:hover,
 .footer-email-copy:focus-visible {
-  color: var(--copy-icon-hover, #949494);
+  color: var(--hover-color, inherit);
+  opacity: 0.75;
 }
 
 /* ── Rolling links ── */

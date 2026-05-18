@@ -1,9 +1,7 @@
 /* Footer copy-email — scales with email typography */
 
 :root {
-  --copy-icon: #777777;
-  --copy-icon-hover: #949494;
-  --copy-icon-focus-ring: rgba(119, 119, 119, 0.35);
+  --copy-icon-focus-ring: rgba(17, 17, 17, 0.2);
 }
 
 .footer-email-row {
@@ -13,6 +11,7 @@
   min-width: 0;
   max-width: 100%;
   line-height: 1;
+  color: var(--page-ink, #111111);
 }
 
 .footer-email-row .footer-email {
@@ -34,16 +33,17 @@
   padding: 0;
   border: none;
   background: none;
-  color: var(--copy-icon);
+  color: inherit;
   cursor: pointer;
   align-self: baseline;
   vertical-align: baseline;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, opacity 0.3s ease;
 }
 
 .footer-email-copy:hover,
 .footer-email-copy:focus-visible {
-  color: var(--copy-icon-hover);
+  color: var(--hover-color, inherit);
+  opacity: 0.75;
   outline: none;
 }
 
@@ -95,7 +95,8 @@
   font-weight: 400;
   letter-spacing: 0.02em;
   line-height: 1;
-  color: var(--copy-icon);
+  color: inherit;
+  opacity: 0.72;
   white-space: nowrap;
   min-width: 6.8em;
   opacity: 0;

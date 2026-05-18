@@ -73,8 +73,8 @@
     var textEl = link.querySelector('.nav-local-place-text');
     if (!textEl) return;
 
-    var coords = textEl.getAttribute('data-text-coords') || '43.6532° N, 79.3832° W';
-    var label = textEl.getAttribute('data-text-label') || 'Toronto, Ontario, Canada';
+    var coords = textEl.getAttribute('data-text-coords') || '40.7128° N, 74.0060° W';
+    var label = textEl.getAttribute('data-text-label') || 'New York, New York, USA';
 
     function showCoords() {
       animateTo(textEl, coords, motionQuery.matches);

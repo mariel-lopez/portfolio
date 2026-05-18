@@ -26,10 +26,20 @@
     :root {
       --mono-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
       --sobeys-ui-border: var(--divider-color);
-      --sobeys-ui-tab-active: #111;
+      --sobeys-ui-tab-active: #111111;
       --sobeys-label: rgba(0, 0, 0, 0.52);
+      --sobeys-ink: #111111;
+      --sobeys-ink-strong: #000000;
+      --sobeys-ink-soft: rgba(0, 0, 0, 0.58);
+      --sobeys-link-underline: rgba(0, 0, 0, 0.35);
       --sobeys-bg-mist: #ffffff;
       --sobeys-ui-chrome: #ffffff;
+      --sobeys-stat-bg: #ffffff;
+      --sobeys-surface-border: rgba(0, 0, 0, 0.08);
+      --sobeys-visual-border: rgba(0, 0, 0, 0.1);
+      --sobeys-live-ink: #111111;
+      --sobeys-live-bg: rgba(0, 0, 0, 0.07);
+      --sobeys-tag-border: rgba(0, 0, 0, 0.3);
     }
 
     body {
@@ -71,8 +81,8 @@
     }
 
     .home-hero-mono .live-badge {
-      color: #111;
-      background: rgba(0, 0, 0, 0.06);
+      color: var(--sobeys-live-ink);
+      background: var(--sobeys-live-bg);
     }
 
     .back-to-top {
@@ -90,10 +100,10 @@
       font-style: normal;
       letter-spacing: 0.04em;
       text-transform: none;
-      color: rgba(0, 0, 0, 0.48);
+      color: var(--about-ink-muted, rgba(0, 0, 0, 0.48));
       text-decoration: none;
-      background: rgba(253, 251, 247, 0.86);
-      border: 1px solid rgba(0, 0, 0, 0.07);
+      background: var(--about-chip-bg, rgba(253, 251, 247, 0.86));
+      border: 1px solid var(--about-chip-border, rgba(0, 0, 0, 0.07));
       border-radius: 10px;
       box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
       backdrop-filter: blur(10px) saturate(1.02);
@@ -127,9 +137,9 @@
 
     .back-to-top.is-visible:hover,
     .back-to-top.is-visible:focus-visible {
-      color: rgba(0, 0, 0, 0.78);
-      background: rgba(252, 250, 246, 0.94);
-      border-color: rgba(0, 0, 0, 0.1);
+      color: var(--page-ink);
+      background: var(--about-chip-bg, rgba(252, 250, 246, 0.94));
+      border-color: var(--about-chip-border, rgba(0, 0, 0, 0.1));
       box-shadow: 0 8px 26px rgba(0, 0, 0, 0.07);
     }
 
@@ -184,8 +194,8 @@
       font-family: var(--mono-serif);
       font-size: 14px;
       font-weight: 400;
-      color: #111;
-      border: 1px solid rgba(0,0,0,0.3);
+      color: var(--sobeys-ink);
+      border: 1px solid var(--sobeys-tag-border);
       border-radius: 100px;
       padding: 6px 16px;
     }
@@ -197,8 +207,8 @@
       font-family: var(--mono-serif);
       font-size: 14px;
       font-weight: 400;
-      color: #111;
-      background: rgba(0,0,0,0.07);
+      color: var(--sobeys-live-ink);
+      background: var(--sobeys-live-bg);
       border-radius: 100px;
       padding: 6px 16px;
     }
@@ -236,7 +246,7 @@
       text-align: left;
       max-width: 1200px;
       margin: 0;
-      color: #111;
+      color: var(--page-ink);
     }
 
     .hero-image {
@@ -286,7 +296,7 @@
       font-size: 18px;
       font-weight: 300;
       line-height: 1.65;
-      color: #111;
+      color: var(--page-ink);
     }
 
     /* ── THREE-COL STAT CARDS ── */
@@ -298,13 +308,13 @@
 
     .stat-card {
       flex: 1 0 0;
-      background: #fff;
+      background: var(--sobeys-stat-bg);
       border-radius: 26px;
       padding: 32px;
       display: flex;
       flex-direction: column;
       gap: 12px;
-      border: 1px solid rgba(0, 0, 0, 0.06);
+      border: 1px solid var(--sobeys-surface-border);
     }
 
     .stat-card-label {
@@ -321,7 +331,7 @@
       font-size: 18px;
       font-weight: 300;
       line-height: 1.65;
-      color: #111;
+      color: var(--page-ink);
     }
 
     .stat-card-body strong { font-weight: 500; }
@@ -356,6 +366,7 @@
       line-height: 1.2;
       margin-bottom: 20px;
       letter-spacing: 0.01em;
+      color: var(--page-ink);
     }
 
     .section-heading em {
@@ -367,7 +378,7 @@
       font-size: 20px;
       font-weight: 300;
       line-height: 1.7;
-      color: #111;
+      color: var(--sobeys-ink-soft);
     }
 
     .section-body p { margin-bottom: 1em; }
@@ -375,12 +386,12 @@
 
     .section-body a,
     .callout a {
-      color: #111;
+      color: var(--page-ink);
       font-weight: 500;
       text-decoration: underline;
       text-decoration-thickness: 1px;
       text-underline-offset: 3px;
-      text-decoration-color: rgba(0, 0, 0, 0.35);
+      text-decoration-color: var(--sobeys-link-underline);
       cursor: pointer;
       transition: color 0.15s ease, text-decoration-color 0.15s ease, text-decoration-thickness 0.15s ease;
     }
@@ -389,7 +400,7 @@
     .section-body a:focus-visible,
     .callout a:hover,
     .callout a:focus-visible {
-      color: #000;
+      color: var(--sobeys-ink-strong);
       text-decoration-color: currentColor;
       text-decoration-thickness: 1.5px;
     }
@@ -398,7 +409,7 @@
     .visual-block {
       border-radius: 26px;
       overflow: hidden;
-      border: 1px solid rgba(0,0,0,0.1);
+      border: 1px solid var(--sobeys-visual-border);
       margin-top: 24px;
     }
 
@@ -423,10 +434,10 @@
       letter-spacing: 0.01em;
     }
 
-    .tab-button:hover { color: #111; }
+    .tab-button:hover { color: var(--page-ink); }
 
     .tab-button.active {
-      color: #111;
+      color: var(--page-ink);
       border-bottom-color: var(--sobeys-ui-tab-active);
       font-weight: 500;
     }
@@ -455,7 +466,7 @@
       background: var(--sobeys-bg-mist);
       border-radius: 26px;
       padding: 40px;
-      border: 1px solid rgba(0, 0, 0, 0.08);
+      border: 1px solid var(--sobeys-surface-border);
     }
 
     .callout-quote {
@@ -463,6 +474,7 @@
       font-size: 28px;
       font-weight: 400;
       line-height: 1.4;
+      color: var(--page-ink);
     }
 
     /* ── LEARNING CARDS ── */
@@ -477,14 +489,14 @@
       background: var(--sobeys-bg-mist);
       border-radius: 26px;
       padding: 32px;
-      border: 1px solid rgba(0, 0, 0, 0.08);
+      border: 1px solid var(--sobeys-surface-border);
     }
 
     .learning-card h4 {
       font-family: var(--mono-serif);
       font-size: 22px;
       font-weight: 500;
-      color: #111;
+      color: var(--page-ink);
       margin-bottom: 12px;
     }
 
@@ -492,7 +504,7 @@
       font-family: var(--mono-serif);
       font-size: 18px;
       font-weight: 300;
-      color: #111;
+      color: var(--sobeys-ink-soft);
       line-height: 1.65;
     }
 
@@ -512,13 +524,14 @@
       font-weight: 500;
       line-height: 1;
       margin-bottom: 8px;
+      color: var(--page-ink);
     }
 
     .result-desc {
       font-family: var(--mono-serif);
       font-size: 18px;
       font-weight: 300;
-      color: #111;
+      color: var(--sobeys-ink-soft);
       line-height: 1.4;
     }
 
@@ -541,10 +554,10 @@
       font-size: clamp(11px, 1.05vw, 13px);
       font-weight: 400;
       line-height: 1.25;
-      color: #111;
+      color: var(--page-ink);
       text-align: left;
       text-decoration: none;
-      border: 1px solid rgba(0, 0, 0, 0.12);
+      border: 1px solid var(--sobeys-surface-border);
       border-radius: 8px;
       background: rgba(255, 255, 255, 0.96);
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
@@ -667,14 +680,14 @@
           </p>
         </div>
         <div class="nav-right">
-          <time class="nav-local-time" id="nav-local-time" datetime="" aria-label="Toronto local time">
-          <a class="nav-local-place-link location-link" href="https://maps.app.goo.gl/6hsyKCkpBHdvvt2j8" target="_blank" rel="noopener noreferrer" aria-label="Toronto on Google Maps"><span class="nav-local-place-text" data-text-coords="43.6532° N, 79.3832° W" data-text-label="Toronto, Ontario, Canada">43.6532° N, 79.3832° W</span></a><span class="nav-local-sep" aria-hidden="true">•</span><span class="nav-local-clock"></span>
-        </time>
+          <time class="nav-local-time" id="nav-local-time" datetime="" aria-label="New York local time">
+            <span class="nav-local-move" aria-label="Relocated from Toronto to New York">Toronto<svg class="nav-local-move-icon" xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>New York</span><span class="nav-local-sep" aria-hidden="true">•</span><span class="nav-local-clock"></span>
+          </time>
           <div class="nav-links">
             <a class="nav-contact-link" href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener noreferrer">LinkedIn<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
             <a class="nav-contact-link" href="https://drive.google.com/file/d/1HT2FcuIwYNYXt00IsOKhti0plwNZEdIb/view?usp=sharing" target="_blank" rel="noopener noreferrer">Resume<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
             <span class="nav-email-wrap">
-              <a class="nav-contact-link nav-email-copy" href="#" data-email="mariellopezdesign@gmail.com">Email<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+              <a class="nav-contact-link nav-email-copy" href="#" data-email="mariellopezdesign@gmail.com">Contact<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
               <span class="nav-copy-feedback" aria-hidden="true">Copied email</span>
             </span>
           </div>
@@ -929,11 +942,10 @@
     </div>
   </main>
   <script src="transitions.js" defer></script>
-  <script src="nav-clock.js" defer></script>
-  <script src="nav-location-scramble.js" defer></script>
   <script src="copy-email.js" defer></script>
   <script src="nav-scroll.js" defer></script>
   <script src="theme.js" defer></script>
+  <script src="nav-clock.js" defer></script>
   <a href="#top" class="back-to-top" id="back-to-top" aria-label="Back to top">
     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
     <span>Back to top</span>

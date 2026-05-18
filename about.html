@@ -46,7 +46,7 @@
       font-weight: 600;
       letter-spacing: -0.07em;
       line-height: 0.95;
-      color: #000;
+      color: var(--page-ink);
       margin-top: var(--nav-content-offset);
       margin-bottom: 72px;
       max-width: 1200px;
@@ -72,7 +72,7 @@
       border-radius: 28px;
       overflow: hidden;
       aspect-ratio: 3 / 4;
-      background: #ddd;
+      background: var(--about-photo-bg, #ddd);
       isolation: isolate;
       transition: box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
     }
@@ -104,9 +104,9 @@
       .about-photo:hover .about-photo-caption {
         opacity: 1;
         visibility: visible;
-        color: rgba(0, 0, 0, 0.48);
-        background: rgba(252, 250, 246, 0.94);
-        border-color: rgba(0, 0, 0, 0.1);
+        color: var(--about-ink-muted);
+        background: var(--about-chip-bg);
+        border-color: var(--about-chip-border);
         box-shadow: 0 8px 26px rgba(0, 0, 0, 0.07);
         transition:
           opacity 0.28s cubic-bezier(0.22, 1, 0.36, 1),
@@ -134,12 +134,12 @@
       text-transform: none;
       text-decoration: none;
       line-height: normal;
-      color: rgba(0, 0, 0, 0.48);
+      color: var(--about-ink-muted);
       white-space: nowrap;
       pointer-events: none;
       border-radius: 10px;
-      background: rgba(253, 251, 247, 0.86);
-      border: 1px solid rgba(0, 0, 0, 0.07);
+      background: var(--about-chip-bg);
+      border: 1px solid var(--about-chip-border);
       box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
       backdrop-filter: blur(10px) saturate(1.02);
       -webkit-backdrop-filter: blur(10px) saturate(1.02);
@@ -173,9 +173,9 @@
       .about-photo:active .about-photo-caption {
         opacity: 1;
         visibility: visible;
-        color: rgba(0, 0, 0, 0.48);
-        background: rgba(252, 250, 246, 0.94);
-        border-color: rgba(0, 0, 0, 0.1);
+        color: var(--about-ink-muted);
+        background: var(--about-chip-bg);
+        border-color: var(--about-chip-border);
         box-shadow: 0 8px 26px rgba(0, 0, 0, 0.07);
         transform: translateX(-50%);
       }
@@ -184,20 +184,21 @@
     .quests-section {
       position: relative;
       margin-bottom: 80px;
-      isolation: isolate;
+      background: transparent;
+      border: none;
+      box-shadow: none;
     }
 
     .quests-section::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-      background-image: url("textures/noise.png");
-      background-repeat: repeat;
-      background-size: 200px;
-      opacity: 0.032;
-      mix-blend-mode: multiply;
+      content: none;
+      display: none;
+    }
+
+    .quest-block,
+    .quests-rows {
+      background: transparent;
+      border: none;
+      box-shadow: none;
     }
 
     .quest-block {
@@ -215,7 +216,7 @@
       font-weight: 700;
       letter-spacing: -0.065em;
       line-height: 0.95;
-      color: #111;
+      color: var(--page-ink);
       margin: 0 0 clamp(52px, 6vw, 88px);
     }
 
@@ -250,7 +251,7 @@
       font-family: var(--mono-serif);
       font-size: 0.95rem;
       font-weight: 500;
-      color: rgba(0, 0, 0, 0.45);
+      color: var(--about-ink-muted);
       line-height: 1.4;
       letter-spacing: -0.01em;
     }
@@ -274,7 +275,7 @@
       font-family: var(--mono-serif);
       font-size: clamp(2rem, 3.15vw, 3.35rem);
       font-weight: 700;
-      color: #111;
+      color: var(--page-ink);
       line-height: 0.98;
       letter-spacing: -0.045em;
     }
@@ -284,7 +285,7 @@
       font-family: var(--mono-serif);
       font-size: clamp(1.125rem, 1.4vw, 1.5rem);
       font-weight: 600;
-      color: #111;
+      color: var(--page-ink);
       line-height: 1.25;
       letter-spacing: -0.035em;
     }
@@ -315,7 +316,7 @@
       font-family: var(--mono-serif);
       font-size: clamp(0.9375rem, 1.08vw, 1.125rem);
       font-weight: 400;
-      color: rgba(0, 0, 0, 0.58);
+      color: var(--about-ink-soft);
       line-height: 1.52;
       letter-spacing: -0.015em;
       max-width: none;
@@ -324,19 +325,19 @@
 
     .quest-desc strong {
       font-weight: 500;
-      color: rgba(0, 0, 0, 0.66);
+      color: var(--about-ink-strong);
     }
 
     .quest-desc-lead {
       font-weight: 400;
-      color: rgba(0, 0, 0, 0.58);
+      color: var(--about-ink-soft);
       line-height: 1.45;
     }
 
     .quest-desc-body {
       margin-top: 14px;
       font-weight: 400;
-      color: rgba(0, 0, 0, 0.52);
+      color: var(--about-ink-soft);
       line-height: 1.55;
     }
 
@@ -369,7 +370,7 @@
       font-weight: 700;
       letter-spacing: -0.05em;
       line-height: 1;
-      color: #111;
+      color: var(--page-ink);
       padding-right: 0.3em;
       flex-shrink: 0;
     }
@@ -457,7 +458,7 @@
         max-width: none;
         font-size: clamp(0.9rem, 2.7vw, 1.05rem);
         line-height: 1.52;
-        color: rgba(0, 0, 0, 0.58);
+        color: var(--about-ink-soft);
       }
 
     }
@@ -475,7 +476,7 @@
       .about-photo {
         position: sticky;
         top: 96px;
-        background: #f5f5f2;
+        background: var(--about-surface, #f5f5f2);
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
       }
 
@@ -503,10 +504,10 @@
       font-style: normal;
       letter-spacing: 0.04em;
       text-transform: none;
-      color: rgba(0, 0, 0, 0.48);
+      color: var(--about-ink-muted);
       text-decoration: none;
-      background: rgba(253, 251, 247, 0.86);
-      border: 1px solid rgba(0, 0, 0, 0.07);
+      background: var(--about-chip-bg);
+      border: 1px solid var(--about-chip-border);
       border-radius: 10px;
       box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
       backdrop-filter: blur(10px) saturate(1.02);
@@ -540,9 +541,9 @@
 
     .back-to-top.is-visible:hover,
     .back-to-top.is-visible:focus-visible {
-      color: rgba(0, 0, 0, 0.78);
-      background: rgba(252, 250, 246, 0.94);
-      border-color: rgba(0, 0, 0, 0.1);
+      color: var(--page-ink);
+      background: var(--about-chip-bg);
+      border-color: var(--about-chip-border);
       box-shadow: 0 8px 26px rgba(0, 0, 0, 0.07);
     }
 
@@ -569,11 +570,6 @@
       }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      .quests-section::before {
-        opacity: 0.02;
-      }
-    }
   </style>
   <link rel="stylesheet" href="layout.css" />
   <link rel="stylesheet" href="footer.css" />
@@ -595,14 +591,14 @@
           </p>
         </div>
         <div class="nav-right">
-          <time class="nav-local-time" id="nav-local-time" datetime="" aria-label="Toronto local time">
-          <a class="nav-local-place-link location-link" href="https://maps.app.goo.gl/6hsyKCkpBHdvvt2j8" target="_blank" rel="noopener noreferrer" aria-label="Toronto on Google Maps"><span class="nav-local-place-text" data-text-coords="43.6532° N, 79.3832° W" data-text-label="Toronto, Ontario, Canada">43.6532° N, 79.3832° W</span></a><span class="nav-local-sep" aria-hidden="true">•</span><span class="nav-local-clock"></span>
-        </time>
+          <time class="nav-local-time" id="nav-local-time" datetime="" aria-label="New York local time">
+            <span class="nav-local-move" aria-label="Relocated from Toronto to New York">Toronto<svg class="nav-local-move-icon" xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>New York</span><span class="nav-local-sep" aria-hidden="true">•</span><span class="nav-local-clock"></span>
+          </time>
           <div class="nav-links">
             <a class="nav-contact-link" href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener noreferrer">LinkedIn<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
             <a class="nav-contact-link" href="https://drive.google.com/file/d/1HT2FcuIwYNYXt00IsOKhti0plwNZEdIb/view?usp=sharing" target="_blank" rel="noopener noreferrer">Resume<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
             <span class="nav-email-wrap">
-              <a class="nav-contact-link nav-email-copy" href="#" data-email="mariellopezdesign@gmail.com">Email<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+              <a class="nav-contact-link nav-email-copy" href="#" data-email="mariellopezdesign@gmail.com">Contact<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
               <span class="nav-copy-feedback" aria-hidden="true">Copied email</span>
             </span>
           </div>
@@ -762,11 +758,10 @@
 
   <script src="about-photo-cursor-caption.js" defer></script>
   <script src="transitions.js" defer></script>
-  <script src="nav-clock.js" defer></script>
-  <script src="nav-location-scramble.js" defer></script>
   <script src="copy-email.js" defer></script>
   <script src="nav-scroll.js" defer></script>
   <script src="theme.js" defer></script>
+  <script src="nav-clock.js" defer></script>
   <a href="#top" class="back-to-top" id="back-to-top" aria-label="Back to top">
     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
     <span>Back to top</span>

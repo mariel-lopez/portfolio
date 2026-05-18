@@ -17,6 +17,13 @@
   --theme-toggle-bg: rgba(255, 255, 255, 0.55);
   --theme-toggle-border: rgba(0, 0, 0, 0.08);
   --theme-toggle-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  --about-ink-muted: rgba(0, 0, 0, 0.45);
+  --about-ink-soft: rgba(0, 0, 0, 0.58);
+  --about-ink-strong: rgba(0, 0, 0, 0.66);
+  --about-surface: #f5f5f2;
+  --about-chip-bg: rgba(253, 251, 247, 0.86);
+  --about-chip-border: rgba(0, 0, 0, 0.07);
+  --about-photo-bg: #dddddd;
 }
 
 html.dark-theme {
@@ -44,8 +51,26 @@ html.dark-theme {
   --theme-toggle-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
   --sobeys-ui-tab-active: #ebe6f5;
   --sobeys-label: rgba(214, 204, 235, 0.55);
+  --sobeys-ink: #ebe6f5;
+  --sobeys-ink-strong: #ffffff;
+  --sobeys-ink-soft: rgba(214, 204, 235, 0.78);
+  --sobeys-link-underline: rgba(235, 228, 255, 0.45);
   --sobeys-bg-mist: rgba(18, 14, 32, 0.92);
   --sobeys-ui-chrome: rgba(22, 18, 38, 0.96);
+  --sobeys-stat-bg: rgba(22, 18, 38, 0.96);
+  --sobeys-surface-border: rgba(255, 255, 255, 0.09);
+  --sobeys-visual-border: rgba(255, 255, 255, 0.12);
+  --sobeys-live-ink: #ebe6f5;
+  --sobeys-live-bg: rgba(255, 255, 255, 0.08);
+  --sobeys-tag-border: rgba(255, 255, 255, 0.22);
+  --about-ink-muted: rgba(198, 188, 224, 0.55);
+  --about-ink-soft: rgba(214, 204, 235, 0.62);
+  --about-ink-strong: rgba(235, 228, 255, 0.82);
+  --about-surface: transparent;
+  --about-chip-bg: rgba(22, 18, 36, 0.9);
+  --about-chip-border: rgba(255, 255, 255, 0.1);
+  --about-photo-bg: #2a2438;
+  --copy-icon-focus-ring: rgba(235, 228, 255, 0.28);
 }
 
 /* ── Base page ── */
@@ -211,10 +236,13 @@ html.dark-theme .theme-toggle .sun-icon {
 html.dark-theme .big-hover-title,
 html.dark-theme .hero-title {
   color: rgba(235, 228, 255, 0.9);
+  text-shadow:
+    0 0.14em 0.35em color-mix(in srgb, var(--page-bg) 55%, transparent),
+    0 0.28em 0.7em color-mix(in srgb, var(--page-bg) 80%, transparent);
 }
 
 /* ── Homepage: cards (readable contrast in dark mode) ── */
-html.dark-theme .project-card {
+html.dark-theme .project-card:not(.about-card) {
   background: var(--surface-glass) !important;
   border-color: var(--surface-border) !important;
   color: rgba(255, 255, 255, 0.92) !important;
@@ -224,59 +252,135 @@ html.dark-theme .project-card {
     0 0 0 1px rgba(255, 255, 255, 0.04) inset !important;
 }
 
-html.dark-theme .project-card:hover,
-html.dark-theme .project-card:focus-visible {
+html.dark-theme .project-card:not(.about-card):hover,
+html.dark-theme .project-card:not(.about-card):focus-visible {
   background: var(--surface-glass-hover) !important;
   color: rgba(255, 255, 255, 0.92) !important;
 }
 
-html.dark-theme .project-card h3,
-html.dark-theme .project-card .card-title,
-html.dark-theme .project-card .card-title-original,
-html.dark-theme .project-card .card-title-clone {
+html.dark-theme .project-card:not(.about-card) h3,
+html.dark-theme .project-card:not(.about-card) .card-title,
+html.dark-theme .project-card:not(.about-card) .card-title-original,
+html.dark-theme .project-card:not(.about-card) .card-title-clone {
   color: #ffffff !important;
 }
 
-html.dark-theme .project-card p,
-html.dark-theme .project-card .card-meta,
-html.dark-theme .project-card .card-subtitle,
-html.dark-theme .project-card .card-tag {
+html.dark-theme .project-card:not(.about-card) p,
+html.dark-theme .project-card:not(.about-card) .card-meta,
+html.dark-theme .project-card:not(.about-card) .card-subtitle,
+html.dark-theme .project-card:not(.about-card) .card-tag {
   color: rgba(235, 226, 255, 0.78) !important;
 }
 
-html.dark-theme .project-card:hover .card-title-original,
-html.dark-theme .project-card:focus-visible .card-title-original,
-html.dark-theme .project-card:hover .card-tag,
-html.dark-theme .project-card:focus-visible .card-tag {
+html.dark-theme .project-card:not(.about-card):hover .card-title-original,
+html.dark-theme .project-card:not(.about-card):focus-visible .card-title-original,
+html.dark-theme .project-card:not(.about-card):hover .card-tag,
+html.dark-theme .project-card:not(.about-card):focus-visible .card-tag {
   color: rgba(255, 255, 255, 0.88) !important;
 }
 
-html.dark-theme .about-card,
-html.dark-theme .air-canada-card {
+html.dark-theme .project-card.no-hover:not(.about-card):hover,
+html.dark-theme .project-card.no-hover:not(.about-card):focus-visible {
   background: rgba(255, 255, 255, 0.08) !important;
-  border: 1px solid rgba(210, 190, 255, 0.18) !important;
 }
 
-html.dark-theme .about-card h3,
-html.dark-theme .about-card p,
+/* About card — dark glass surface; photo hover preserved */
+html.dark-theme .about-card {
+  background: rgba(24, 20, 38, 0.92) !important;
+  border: 1px solid rgba(255, 255, 255, 0.09) !important;
+  color: var(--page-ink) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 10px 32px rgba(0, 0, 0, 0.38),
+    0 24px 56px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset !important;
+}
+
+html.dark-theme .about-card:hover,
+html.dark-theme .about-card:focus-visible {
+  background: rgba(30, 24, 48, 0.94) !important;
+  color: var(--page-ink) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 14px 42px rgba(0, 0, 0, 0.42),
+    0 32px 72px rgba(88, 52, 148, 0.22),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset !important;
+}
+
+html.dark-theme .about-card::before {
+  background: radial-gradient(
+    ellipse 130% 90% at 28% 18%,
+    rgba(108, 62, 198, 0.38) 0%,
+    rgba(42, 32, 68, 0.72) 42%,
+    rgba(18, 14, 32, 0.96) 100%
+  );
+  opacity: 0.9;
+}
+
+html.dark-theme .about-card:hover::before,
+html.dark-theme .about-card:focus-visible::before {
+  opacity: 1;
+}
+
+html.dark-theme .about-card-photo {
+  filter: saturate(0.9) contrast(1.04) brightness(0.92);
+}
+
+html.dark-theme .about-card:hover .about-card-photo,
+html.dark-theme .about-card:focus-visible .about-card-photo {
+  opacity: 0.48;
+  filter: saturate(0.96) contrast(1.06) brightness(0.96);
+}
+
+html.dark-theme .about-card::after {
+  background: linear-gradient(
+    to bottom,
+    rgba(18, 14, 32, 0.06) 0%,
+    rgba(18, 14, 32, 0.78) 100%
+  );
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html.dark-theme .about-card:hover::after,
+html.dark-theme .about-card:focus-visible::after {
+  background: linear-gradient(
+    to bottom,
+    rgba(18, 14, 32, 0.04) 0%,
+    rgba(18, 14, 32, 0.58) 100%
+  );
+}
+
+html.dark-theme .about-card-noise {
+  opacity: 0.055;
+  mix-blend-mode: soft-light;
+}
+
 html.dark-theme .about-card .card-title,
 html.dark-theme .about-card .card-title-original,
-html.dark-theme .about-card .card-tag,
-html.dark-theme .air-canada-card h3,
-html.dark-theme .air-canada-card p,
-html.dark-theme .air-canada-card .card-title,
-html.dark-theme .air-canada-card .card-title-original,
-html.dark-theme .air-canada-card .card-tag {
+html.dark-theme .about-card .card-title-clone {
+  color: #ffffff !important;
+}
+
+html.dark-theme .about-card .card-tag {
+  color: rgba(235, 226, 255, 0.78) !important;
+}
+
+html.dark-theme .about-card:hover .card-title-original,
+html.dark-theme .about-card:focus-visible .card-title-original,
+html.dark-theme .about-card.link-hover:hover .card-title-original,
+html.dark-theme .about-card.link-hover:focus-visible .card-title-original {
   color: rgba(255, 255, 255, 0.88) !important;
 }
 
-html.dark-theme .project-card.no-hover:hover,
-html.dark-theme .project-card.no-hover:focus-visible {
-  background: rgba(255, 255, 255, 0.08) !important;
+html.dark-theme .about-card:hover .card-tag,
+html.dark-theme .about-card:focus-visible .card-tag,
+html.dark-theme .about-card.link-hover:hover .card-tag,
+html.dark-theme .about-card.link-hover:focus-visible .card-tag {
+  color: var(--hover-color) !important;
 }
 
 @media (min-width: 901px) {
-  html.dark-theme .cards-grid .project-card {
+  html.dark-theme .cards-grid .project-card:not(.about-card) {
     background: rgba(24, 20, 38, 0.92) !important;
     backdrop-filter: blur(22px) saturate(1.08) !important;
     -webkit-backdrop-filter: blur(22px) saturate(1.08) !important;
@@ -284,6 +388,21 @@ html.dark-theme .project-card.no-hover:focus-visible {
       0 10px 32px rgba(0, 0, 0, 0.38),
       0 28px 64px rgba(0, 0, 0, 0.32),
       0 0 0 1px rgba(255, 255, 255, 0.06) inset !important;
+  }
+
+  html.dark-theme .cards-grid .about-card {
+    background: rgba(24, 20, 38, 0.92) !important;
+    backdrop-filter: blur(22px) saturate(1.08) !important;
+    -webkit-backdrop-filter: blur(22px) saturate(1.08) !important;
+    box-shadow:
+      0 10px 32px rgba(0, 0, 0, 0.38),
+      0 28px 64px rgba(0, 0, 0, 0.32),
+      0 0 0 1px rgba(255, 255, 255, 0.06) inset !important;
+  }
+
+  html.dark-theme .cards-grid .about-card:hover,
+  html.dark-theme .cards-grid .about-card:focus-visible {
+    background: rgba(30, 24, 48, 0.94) !important;
   }
 }
 
@@ -310,8 +429,13 @@ html.dark-theme .bg-noise {
 }
 
 /* ── Footer ── */
-html.dark-theme .footer-email {
+html.dark-theme .footer-email,
+html.dark-theme .footer-email-row {
   color: var(--page-ink);
+}
+
+html.dark-theme .footer-email-copy {
+  color: inherit;
 }
 
 html.dark-theme .footer-social a {
@@ -319,62 +443,213 @@ html.dark-theme .footer-social a {
 }
 
 /* ── About page ── */
-html.dark-theme .about-headline {
+.about-main.content-shell,
+.quests-section,
+.quest-block,
+.quests-rows {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+html.dark-theme .about-main.content-shell,
+html.dark-theme .quests-section,
+html.dark-theme .quest-block,
+html.dark-theme .quests-rows {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+html.dark-theme .quests-section::before {
+  content: none !important;
+  display: none !important;
+}
+
+html.dark-theme .about-headline,
+html.dark-theme .about-headline-accent {
   color: var(--page-ink);
 }
 
-html.dark-theme .about-headline-accent {
-  color: inherit;
-}
-
+html.dark-theme .quest-heading,
+html.dark-theme .quest-heading-inner,
 html.dark-theme .quest-title,
 html.dark-theme .quest-org,
+html.dark-theme .quest-org a,
 html.dark-theme .about-card-label {
   color: var(--page-ink);
 }
 
+html.dark-theme .quest-date {
+  color: var(--about-ink-muted);
+}
+
 html.dark-theme .quest-desc,
+html.dark-theme .quest-desc-lead,
+html.dark-theme .quest-desc-body,
 html.dark-theme .about-card-desc {
-  color: rgba(214, 204, 235, 0.62);
+  color: var(--about-ink-soft);
+}
+
+html.dark-theme .quest-desc strong {
+  color: var(--about-ink-strong);
+}
+
+html.dark-theme .marquee-text {
+  color: var(--page-ink);
 }
 
 html.dark-theme .about-photo-caption {
-  color: rgba(214, 204, 235, 0.55);
-  background: rgba(18, 14, 32, 0.88);
-  border-color: rgba(255, 255, 255, 0.1);
+  color: var(--about-ink-muted);
+  background: var(--about-chip-bg);
+  border-color: var(--about-chip-border);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
 }
 
 html.dark-theme .about-photo {
-  background: #2a2438;
+  background: var(--about-photo-bg);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.32);
+}
+
+@media (max-width: 640px) {
+  html.dark-theme .about-photo {
+    background: var(--about-photo-bg);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+  }
+}
+
+html.dark-theme .about-photo::after {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+@media (hover: hover) {
+  html.dark-theme .about-photo:hover::after {
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  }
+
+  html.dark-theme .about-photo:hover .about-photo-caption {
+    color: var(--about-ink-muted);
+    background: var(--about-chip-bg);
+    border-color: var(--about-chip-border);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.32);
+  }
+}
+
+@media (hover: none) {
+  html.dark-theme .about-photo:active::after {
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  }
+
+  html.dark-theme .about-photo:active .about-photo-caption {
+    color: var(--about-ink-muted);
+    background: var(--about-chip-bg);
+    border-color: var(--about-chip-border);
+  }
+}
+
+html.dark-theme .back-to-top {
+  color: var(--about-ink-muted);
+  background: var(--about-chip-bg);
+  border-color: var(--about-chip-border);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+}
+
+html.dark-theme .back-to-top.is-visible:hover,
+html.dark-theme .back-to-top.is-visible:focus-visible {
+  color: var(--page-ink);
+  background: rgba(30, 24, 48, 0.96);
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.38);
+}
+
+html.dark-theme .back-to-top:focus-visible {
+  outline-color: rgba(255, 255, 255, 0.22);
 }
 
 /* ── Sobeys / case study ── */
 html.dark-theme .project-hero,
 html.dark-theme .hero-mono--case,
 html.dark-theme .case-section,
+html.dark-theme .case-content,
 html.dark-theme .visual-block,
 html.dark-theme .tab-panel {
   color: var(--page-ink);
+}
+
+html.dark-theme .project-hero-title,
+html.dark-theme .section-heading,
+html.dark-theme .overview-value,
+html.dark-theme .stat-card-body,
+html.dark-theme .callout-quote,
+html.dark-theme .learning-card h4,
+html.dark-theme .result-number {
+  color: var(--page-ink) !important;
+}
+
+html.dark-theme .section-body,
+html.dark-theme .learning-card p,
+html.dark-theme .result-desc {
+  color: var(--sobeys-ink-soft) !important;
+}
+
+html.dark-theme .live-badge,
+html.dark-theme .home-hero-mono .live-badge {
+  color: var(--sobeys-live-ink) !important;
+  background: var(--sobeys-live-bg) !important;
 }
 
 html.dark-theme .case-tags,
 html.dark-theme .case-meta,
 html.dark-theme .visual-caption,
 html.dark-theme .tab-button {
-  color: rgba(214, 204, 235, 0.62);
+  color: var(--sobeys-label);
 }
 
+html.dark-theme .tab-button:hover,
+html.dark-theme .tab-button.active,
 html.dark-theme .tab-button.is-active,
 html.dark-theme .tab-button[aria-selected="true"] {
-  color: var(--page-ink);
+  color: var(--page-ink) !important;
 }
 
-html.dark-theme .case-divider {
+html.dark-theme .section-body a,
+html.dark-theme .callout a {
+  color: var(--page-ink) !important;
+  text-decoration-color: var(--sobeys-link-underline) !important;
+}
+
+html.dark-theme .section-body a:hover,
+html.dark-theme .section-body a:focus-visible,
+html.dark-theme .callout a:hover,
+html.dark-theme .callout a:focus-visible {
+  color: var(--sobeys-ink-strong) !important;
+}
+
+html.dark-theme .stat-card {
+  background: var(--sobeys-stat-bg) !important;
+  border-color: var(--sobeys-surface-border) !important;
+}
+
+html.dark-theme .callout,
+html.dark-theme .learning-card {
+  border-color: var(--sobeys-surface-border) !important;
+}
+
+html.dark-theme .visual-block {
+  border-color: var(--sobeys-visual-border) !important;
+}
+
+html.dark-theme .case-divider,
+html.dark-theme .divider {
   background: var(--divider-color);
 }
 
 html.dark-theme .ui-frame,
-html.dark-theme .mist-panel {
+html.dark-theme .mist-panel,
+html.dark-theme .callout,
+html.dark-theme .learning-card,
+html.dark-theme .visual-tabs,
+html.dark-theme .visual-caption {
   background: var(--sobeys-bg-mist);
   border-color: var(--surface-border);
 }
