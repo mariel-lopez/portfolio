@@ -37,18 +37,24 @@ body {
 
 .page > footer,
 .project-page-container > footer {
-  margin-top: auto;
   flex-shrink: 0;
   width: 100%;
 }
 
-/* ── Homepage: work grid fills space between nav and footer ── */
+/* ── Homepage: work grid — natural height, no stretch void above footer ── */
 .page > .work-section {
-  flex: 1 1 auto;
+  flex: 0 1 auto;
   display: flex;
   flex-direction: column;
   width: 100%;
   min-height: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.page > .work-section .cards-grid {
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .page > .work-section .cards-grid {
@@ -109,4 +115,36 @@ body:has(.about-main) {
   display: flex;
   flex-direction: column;
   min-height: 0;
+}
+
+/* ── Status pills — hug content, never stretch full-width ── */
+.status-badge,
+.live-pill,
+.case-status-pill,
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  max-width: max-content;
+  flex: 0 0 auto;
+  white-space: nowrap;
+  align-self: flex-start;
+}
+
+.case-header,
+.hero-topbar,
+.hero-header-row,
+.hero-content {
+  align-items: flex-start;
+}
+
+@media (max-width: 640px) {
+  .status-badge,
+  .live-pill,
+  .case-status-pill,
+  .live-badge {
+    width: fit-content;
+    max-width: max-content;
+  }
 }

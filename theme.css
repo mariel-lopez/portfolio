@@ -251,21 +251,41 @@ html.dark-theme .project-card:not(.about-card) {
   color: rgba(255, 255, 255, 0.92) !important;
   box-shadow:
     0 10px 32px rgba(0, 0, 0, 0.38),
-    0 28px 64px rgba(0, 0, 0, 0.32),
-    0 0 0 1px rgba(255, 255, 255, 0.06) inset !important;
+    0 28px 64px rgba(0, 0, 0, 0.32) !important;
   backdrop-filter: blur(22px) saturate(1.08) !important;
   -webkit-backdrop-filter: blur(22px) saturate(1.08) !important;
+}
+
+@media (min-width: 901px) {
+  html.dark-theme .cards-grid .project-card:nth-child(-n+3):not(.about-card) {
+    border-top: none !important;
+  }
+
+  html.dark-theme .cards-grid .project-card:nth-child(-n+3):not(.about-card):hover,
+  html.dark-theme .cards-grid .project-card:nth-child(-n+3):not(.about-card):focus-visible {
+    border-top: none !important;
+  }
 }
 
 html.dark-theme .project-card:not(.about-card) .card-image {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
+  border-radius: 0 !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
 
-html.dark-theme .air-canada-card .card-image.card-image--logo {
+html.dark-theme .project-card:not(.about-card):not(.no-hover):hover .card-image,
+html.dark-theme .project-card:not(.about-card):not(.no-hover):focus-visible .card-image {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+html.dark-theme .air-canada-card .card-image.card-image--logo,
+html.dark-theme .air-canada-card.no-hover:hover .card-image.card-image--logo,
+html.dark-theme .air-canada-card.no-hover:focus-visible .card-image.card-image--logo {
   background: linear-gradient(180deg, #ffffff 0%, #faf6f0 48%, #f0e9de 100%) !important;
   min-height: 168px;
 }
@@ -279,8 +299,8 @@ html.dark-theme .air-canada-card .card-image--logo img {
   transform-origin: center center;
 }
 
-html.dark-theme .project-card:not(.about-card):hover,
-html.dark-theme .project-card:not(.about-card):focus-visible {
+html.dark-theme .project-card:not(.about-card):not(.no-hover):hover,
+html.dark-theme .project-card:not(.about-card):not(.no-hover):focus-visible {
   background: var(--surface-glass-hover) !important;
   color: rgba(255, 255, 255, 0.92) !important;
 }
@@ -288,26 +308,48 @@ html.dark-theme .project-card:not(.about-card):focus-visible {
 html.dark-theme .project-card:not(.about-card) .card-footer,
 html.dark-theme .project-card:not(.about-card) .card-footer.link-hover {
   background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
   align-items: flex-start !important;
   text-align: left !important;
 }
 
 html.dark-theme .project-card:not(.about-card) .card-title-wrap,
 html.dark-theme .project-card:not(.about-card) .card-title-original,
-html.dark-theme .project-card:not(.about-card) .card-title-clone,
-html.dark-theme .project-card:not(.about-card) .card-tag {
+html.dark-theme .project-card:not(.about-card) .card-title-clone {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  text-align: left !important;
+}
+
+html.dark-theme .project-card:not(.about-card) .card-tag,
+html.dark-theme .project-card:not(.about-card) .card-tags {
   text-align: left !important;
 }
 
 html.dark-theme .about-card .card-footer,
 html.dark-theme .about-card .card-footer.link-hover {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
   align-items: flex-start !important;
   text-align: left !important;
 }
 
 html.dark-theme .about-card .card-title-wrap,
 html.dark-theme .about-card .card-title-original,
-html.dark-theme .about-card .card-tag {
+html.dark-theme .about-card .card-title-clone {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  text-align: left !important;
+}
+
+html.dark-theme .about-card .card-tag,
+html.dark-theme .about-card .card-tags {
   text-align: left !important;
 }
 
@@ -325,16 +367,37 @@ html.dark-theme .project-card:not(.about-card) .card-tag {
   color: rgba(235, 226, 255, 0.78) !important;
 }
 
-html.dark-theme .project-card:not(.about-card):hover .card-title-original,
-html.dark-theme .project-card:not(.about-card):focus-visible .card-title-original,
-html.dark-theme .project-card:not(.about-card):hover .card-tag,
-html.dark-theme .project-card:not(.about-card):focus-visible .card-tag {
+html.dark-theme .project-card:not(.about-card):not(.no-hover):hover .card-title-original,
+html.dark-theme .project-card:not(.about-card):not(.no-hover):focus-visible .card-title-original,
+html.dark-theme .project-card:not(.about-card):not(.no-hover):hover .card-tag,
+html.dark-theme .project-card:not(.about-card):not(.no-hover):focus-visible .card-tag,
+html.dark-theme .project-card:not(.about-card):not(.no-hover):hover .card-pill,
+html.dark-theme .project-card:not(.about-card):not(.no-hover):focus-visible .card-pill {
   color: rgba(255, 255, 255, 0.88) !important;
+}
+
+html.dark-theme .air-canada-card.no-hover:hover .card-title-original,
+html.dark-theme .air-canada-card.no-hover:focus-visible .card-title-original {
+  color: #ffffff !important;
+}
+
+html.dark-theme .air-canada-card.no-hover:hover .card-pill,
+html.dark-theme .air-canada-card.no-hover:focus-visible .card-pill {
+  color: rgba(235, 226, 255, 0.78) !important;
+  border-color: var(--surface-border) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
 }
 
 html.dark-theme .project-card.no-hover:not(.about-card):hover,
 html.dark-theme .project-card.no-hover:not(.about-card):focus-visible {
   background: var(--surface-glass) !important;
+}
+
+@media (min-width: 901px) {
+  html.dark-theme .cards-grid .air-canada-card.no-hover:hover,
+  html.dark-theme .cards-grid .air-canada-card.no-hover:focus-visible {
+    background: rgba(24, 20, 38, 0.92) !important;
+  }
 }
 
 /* About card — dark glass surface; photo hover preserved */
@@ -414,8 +477,13 @@ html.dark-theme .about-card .card-title-clone {
   color: #ffffff !important;
 }
 
-html.dark-theme .about-card .card-tag {
-  color: rgba(235, 226, 255, 0.88) !important;
+html.dark-theme .about-card .card-tag,
+html.dark-theme .about-card .card-pill,
+html.dark-theme .air-canada-card .card-pill,
+html.dark-theme .second-row-card .card-pill {
+  color: rgba(235, 226, 255, 0.78) !important;
+  border-color: var(--surface-border) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
 }
 
 html.dark-theme .about-card .card-footer,
@@ -432,9 +500,11 @@ html.dark-theme .about-card.link-hover:focus-visible .card-title-original {
 
 html.dark-theme .about-card:hover .card-tag,
 html.dark-theme .about-card:focus-visible .card-tag,
-html.dark-theme .about-card.link-hover:hover .card-tag,
-html.dark-theme .about-card.link-hover:focus-visible .card-tag {
-  color: var(--hover-color) !important;
+html.dark-theme .about-card:hover .card-pill,
+html.dark-theme .about-card:focus-visible .card-pill {
+  color: rgba(235, 226, 255, 0.78) !important;
+  border-color: var(--surface-border) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
 }
 
 @media (min-width: 901px) {
@@ -444,8 +514,7 @@ html.dark-theme .about-card.link-hover:focus-visible .card-tag {
     -webkit-backdrop-filter: blur(22px) saturate(1.08) !important;
     box-shadow:
       0 10px 32px rgba(0, 0, 0, 0.38),
-      0 28px 64px rgba(0, 0, 0, 0.32),
-      0 0 0 1px rgba(255, 255, 255, 0.06) inset !important;
+      0 28px 64px rgba(0, 0, 0, 0.32) !important;
   }
 
   html.dark-theme .cards-grid .about-card {
@@ -454,8 +523,7 @@ html.dark-theme .about-card.link-hover:focus-visible .card-tag {
     -webkit-backdrop-filter: blur(22px) saturate(1.08) !important;
     box-shadow:
       0 10px 32px rgba(0, 0, 0, 0.38),
-      0 28px 64px rgba(0, 0, 0, 0.32),
-      0 0 0 1px rgba(255, 255, 255, 0.06) inset !important;
+      0 28px 64px rgba(0, 0, 0, 0.32) !important;
   }
 
   html.dark-theme .cards-grid .about-card:hover,
@@ -489,7 +557,12 @@ html.dark-theme .bg-noise {
 /* ── Footer ── */
 html.dark-theme .footer-email,
 html.dark-theme .footer-email-row {
-  color: var(--page-ink);
+  color: #ffffff;
+}
+
+html.dark-theme .footer-email:hover,
+html.dark-theme .footer-email:focus {
+  color: #ffffff;
 }
 
 html.dark-theme .footer-email-copy {
@@ -498,6 +571,11 @@ html.dark-theme .footer-email-copy {
 
 html.dark-theme .footer-social a {
   color: var(--nav-muted);
+}
+
+html.dark-theme .footer-social a.rolling-link.link-hover:hover,
+html.dark-theme .footer-social a.rolling-link.link-hover:focus-visible {
+  color: var(--nav-ink) !important;
 }
 
 /* ── About page ── */
@@ -624,7 +702,19 @@ html.dark-theme .back-to-top:focus-visible {
   outline-color: rgba(255, 255, 255, 0.22);
 }
 
+/* ── Case study hero (Sobeys — in-flow layout) ── */
+.case-sobeys .hero .theme-toggle {
+  position: relative !important;
+  top: auto !important;
+  right: auto !important;
+}
+
+.case-sobeys .hero-topbar .mono-header {
+  padding-right: 0 !important;
+}
+
 /* ── Sobeys / case study ── */
+html.dark-theme .hero,
 html.dark-theme .project-hero,
 html.dark-theme .hero-mono--case,
 html.dark-theme .case-section,
@@ -634,6 +724,7 @@ html.dark-theme .tab-panel {
   color: var(--page-ink);
 }
 
+html.dark-theme .hero-title,
 html.dark-theme .project-hero-title,
 html.dark-theme .section-heading,
 html.dark-theme .overview-value,

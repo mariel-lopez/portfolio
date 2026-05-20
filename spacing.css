@@ -10,7 +10,7 @@
 
   /* Layout */
   --content-pad: var(--space-64);
-  --page-section-gap: var(--space-64);
+  --page-section-gap: 72px;
   --section-gap-large: var(--space-96);
 
   /* Nav */
@@ -29,7 +29,6 @@
   --card-grid-gap: var(--space-24);
   --card-grid-gap-tight: var(--space-16);
   --card-image-gutter: var(--space-16);
-  --card-footer-reserve: var(--space-96);
   --card-footer-padding: var(--space-16) var(--space-24) var(--space-24);
   --card-footer-padding-compact: var(--space-16) var(--space-24) var(--space-24);
   --card-footer-gap: 4px;
@@ -37,26 +36,26 @@
   /* Second row (Air Canada + About) — compact but balanced with row 1 */
   --card-min-row-secondary: calc(var(--space-96) + var(--space-96));
   --card-air-canada-media: calc(var(--space-96) + var(--space-96));
-  --card-about-min: calc(var(--space-96) + var(--space-96));
+  --card-about-min: calc(var(--space-96) + var(--space-96)); /* same as --card-min-row-secondary */
   --card-secondary-pad: var(--space-32);
-  --card-secondary-title-gap: 4px;
+  --card-secondary-title-gap: var(--space-16);
   --card-min-nav: calc(var(--space-96) + var(--space-64));
   --card-min-nav-tablet: calc(var(--space-96) + var(--space-32));
-  --card-min-mobile: calc(var(--space-96) + var(--space-96) + var(--space-32));
-  --card-min-mobile-secondary: var(--card-min-row-secondary);
   --card-max-mobile: calc(var(--space-96) * 3);
 
   /* Footer */
-  --footer-pad-top: var(--space-48);
+  --footer-margin-top: 56px;
+  --footer-pad-top: 40px;
   --footer-pad-bottom: var(--space-48);
   --footer-gap: var(--space-48);
+  --footer-divider-margin: 40px;
   --footer-social-gap: var(--space-16);
   --footer-email-gap: var(--space-16);
 
   /* Homepage hero */
   --home-hero-title-gap: var(--space-64);
-  --home-cards-overlap: calc(var(--space-32) * -1);
-  --home-cards-overlap-md: calc(var(--space-48) * -1);
+  --home-cards-overlap: var(--space-32);
+  --home-cards-overlap-md: var(--space-32);
 
   /* Popovers / tooltips */
   --popover-offset: var(--space-16);
@@ -76,6 +75,9 @@
     --nav-below-gap: var(--space-32);
     --card-image-gap-below: var(--space-16);
     --card-footer-padding-mobile: var(--space-16) var(--space-16) var(--space-24);
+    --page-section-gap: 56px;
+    --footer-margin-top: 40px;
+    --footer-pad-top: 32px;
   }
 }
 
@@ -85,18 +87,23 @@
     --nav-pad-top-extra: var(--space-16);
     --nav-title-extra: calc(var(--space-16) + var(--nav-pad-top-extra));
     --nav-below-gap: var(--space-32);
-    --nav-content-offset: calc(var(--space-96) + var(--nav-title-extra) + var(--nav-below-gap));
-    --page-section-gap: var(--space-48);
+    /* Stacked nav: name + subtitle + link row + padding + clearance below links */
+    --nav-mobile-clearance: var(--space-48);
+    --nav-content-offset: calc(
+      var(--space-96) + var(--nav-title-extra) + var(--space-96) + var(--nav-below-gap) + var(--nav-mobile-clearance)
+    );
     --footer-gap: var(--space-48);
-    --footer-pad-top: var(--space-48);
     --footer-pad-bottom: var(--space-48);
     --home-hero-title-gap: 0;
+    --nav-card-top-gap: 120px;
     --card-grid-gap-tight: var(--space-16);
   }
 }
 
 @media (max-width: 500px) {
   :root {
-    --nav-content-offset: calc(var(--space-96) + var(--nav-title-extra) + var(--nav-below-gap));
+    --nav-content-offset: calc(
+      var(--space-96) + var(--nav-title-extra) + var(--space-96) + var(--nav-below-gap) + var(--nav-mobile-clearance)
+    );
   }
 }

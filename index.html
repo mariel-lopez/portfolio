@@ -492,8 +492,7 @@
 
     .page {
       position: relative;
-      z-index: 2;
-      padding: var(--content-pad) var(--content-pad) var(--content-pad);
+      padding: 0 var(--content-pad) var(--content-pad);
       display: flex;
       flex-direction: column;
       align-items: stretch;
@@ -509,28 +508,41 @@
     .work-section {
       width: 100%;
       position: relative;
-      z-index: 2;
+      z-index: 1;
       overflow: visible;
       scroll-margin-top: var(--space-96);
-      margin-top: calc(var(--nav-content-offset) + var(--home-hero-title-gap));
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-bottom: 0;
     }
 
     .cards-grid {
       position: relative;
-      z-index: 2;
+      z-index: 1;
+      margin-top: 24px;
+      margin-bottom: 0;
+      padding-bottom: 0;
+      transform: none;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: var(--card-grid-gap-tight);
       align-items: stretch;
     }
 
-    /* Cards layer on top of hero title — ~10% overlap, ~5% of letterforms behind glass */
     @media (min-width: 901px) {
+      .work-section {
+        margin-top: 0;
+      }
+
       .cards-grid {
         max-width: 1180px;
         width: 100%;
-        margin: var(--home-cards-overlap-md) auto 0;
-        transform: translateY(0);
+        margin-top: -16px;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        z-index: 2;
+        transform: none;
         grid-template-columns: repeat(3, 1fr);
         column-gap: var(--space-16);
         row-gap: var(--card-grid-gap-tight);
@@ -538,6 +550,7 @@
       }
 
       .cards-grid .project-card {
+        position: relative;
         z-index: 2;
         background: rgba(255, 255, 255, 0.9);
         backdrop-filter: blur(22px) saturate(1.04);
@@ -547,6 +560,7 @@
       .cards-grid .project-card:nth-child(-n+3) {
         margin-top: 0;
         align-self: stretch;
+        border-top: none;
       }
 
       .cards-grid .project-card:nth-child(-n+3) .card-image {
@@ -561,51 +575,37 @@
         padding: var(--card-footer-padding);
       }
 
-      .cards-grid .project-card:nth-child(-n+3) .card-title-wrap {
-        min-height: calc(var(--card-title-font-size) * 2 * 1.12);
-      }
-
       .cards-grid .project-card:nth-child(n+4),
       .cards-grid .second-row-card {
         min-height: var(--card-min-row-secondary);
-        height: auto;
-        align-self: start;
+        height: 100%;
+        align-self: stretch;
       }
 
-      .cards-grid .project-card:nth-child(n+4) .card-footer,
       .cards-grid .second-row-card .card-footer {
-        --card-footer-reserve: auto;
         min-height: 0;
         margin-top: 0;
         padding: var(--space-16) var(--space-24) var(--space-24);
         gap: var(--card-secondary-title-gap);
       }
 
-      .cards-grid .second-row-card .card-title-wrap {
+      .cards-grid .second-row-card .card-title-wrap,
+      .cards-grid .second-row-card .card-tags {
+        margin-top: 0;
         margin-bottom: 0;
       }
 
-      .cards-grid .second-row-card .card-tags {
-        margin-top: 0;
-      }
-
       .cards-grid .air-canada-card .card-image {
-        flex: 0 0 auto;
+        flex: 1 1 auto;
         aspect-ratio: unset;
-        height: var(--card-air-canada-media);
-        max-height: var(--card-air-canada-media);
-        min-height: 0;
+        height: auto;
+        min-height: var(--card-air-canada-media);
+        max-height: none;
         margin: 0;
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
-      }
-    }
-
-    @media (min-width: 901px) and (max-width: 1200px) {
-      .cards-grid {
-        margin-top: var(--home-cards-overlap);
       }
     }
 
@@ -632,6 +632,7 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      gap: 0;
       text-decoration: none;
       color: var(--page-ink);
       box-shadow:
@@ -640,11 +641,12 @@
         0 1px 3px rgba(0, 0, 0, 0.04);
       transition:
         box-shadow 0.35s ease,
-        background 0.35s ease;
+        background 0.35s ease,
+        border-color 0.35s ease;
     }
 
-    .project-card:hover,
-    .project-card:focus-visible {
+    .project-card:not(.no-hover):hover,
+    .project-card:not(.no-hover):focus-visible {
       box-shadow:
         0 14px 42px rgba(0, 0, 0, 0.092),
         0 36px 76px rgba(0, 0, 0, 0.068),
@@ -678,6 +680,13 @@
         0 36px 78px rgba(176, 138, 72, 0.24),
         0 10px 34px rgba(148, 112, 48, 0.13),
         0 4px 14px rgba(128, 96, 40, 0.065);
+    }
+
+    @media (min-width: 901px) {
+      .cards-grid .project-card:nth-child(-n+3):hover,
+      .cards-grid .project-card:nth-child(-n+3):focus-visible {
+        border-top: none;
+      }
     }
 
     /* About card: whisper-soft wash (ivory / beige / blush, barely-there cool) */
@@ -785,36 +794,41 @@
       cursor: default;
     }
 
-    .project-card.no-hover:hover {
+    .project-card.no-hover:hover,
+    .project-card.no-hover:focus-visible {
       transform: none;
       box-shadow: none;
       background: var(--surface-glass);
     }
 
+    @media (min-width: 901px) {
+      .cards-grid .air-canada-card.no-hover:hover,
+      .cards-grid .air-canada-card.no-hover:focus-visible {
+        background: rgba(255, 255, 255, 0.9);
+      }
+    }
+
     /* Card image — fills top of card edge-to-edge; card overflow:hidden clips top corners */
     .card-image {
       margin: 0;
-      border-radius: 20px 20px 0 0;
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
       overflow: hidden;
       flex: 0 0 auto;
       width: 100%;
       min-height: auto;
       max-height: none;
       aspect-ratio: 4 / 3;
-      background: #e8e0d8;
+      line-height: 0;
+      background: transparent;
     }
 
     @media (min-width: 641px) {
-      .cards-grid .project-card .card-image {
-        flex: 1 1 0;
-        min-height: 0;
-        width: 100%;
-        max-height: calc(100% - var(--card-footer-reserve));
-      }
-
       .cards-grid .project-card:nth-child(-n+3) .card-image {
         flex: 0 0 auto;
         max-height: none;
+        width: 100%;
       }
     }
 
@@ -823,22 +837,31 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      margin-bottom: -1px;
     }
 
     .air-canada-card.no-hover:hover .card-image img,
     .air-canada-card.no-hover:focus-within .card-image img {
-      opacity: 0.94;
+      opacity: 1;
     }
 
-    .air-canada-card .card-image img {
-      transition: opacity 0.35s ease;
+    .air-canada-card.no-hover:hover .card-title-original,
+    .air-canada-card.no-hover:focus-visible .card-title-original {
+      color: var(--card-title-ink);
+    }
+
+    .air-canada-card.no-hover:hover .card-pill,
+    .air-canada-card.no-hover:focus-visible .card-pill {
+      color: var(--card-meta-ink);
     }
 
     .card-image--logo {
       background: linear-gradient(180deg, #ffffff 0%, #f8f4ee 55%, #efe8dc 100%);
     }
 
-    .air-canada-card .card-image--logo {
+    .air-canada-card .card-image--logo,
+    .air-canada-card.no-hover:hover .card-image--logo,
+    .air-canada-card.no-hover:focus-visible .card-image--logo {
       background: linear-gradient(180deg, #ffffff 0%, #f8f4ee 55%, #efe8dc 100%);
     }
 
@@ -847,9 +870,9 @@
       padding: 12%;
     }
 
-    /* Card footer */
+    /* Card footer — no reserved box; title area is text only */
     .card-footer {
-      min-height: var(--card-footer-reserve);
+      min-height: 0;
       padding: var(--card-footer-padding);
       display: flex;
       flex-direction: column;
@@ -860,6 +883,9 @@
       flex-shrink: 0;
       min-width: 0;
       text-align: left;
+      background: transparent;
+      border: none;
+      box-shadow: none;
     }
 
     /* Slot-machine title */
@@ -869,6 +895,14 @@
       min-width: 0;
       width: 100%;
       text-align: left;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      outline: none;
+    }
+
+    .cards-grid .project-card:nth-child(-n+3) .card-title-wrap {
+      min-height: calc(var(--card-title-font-size) * 2 * 1.12);
     }
 
     .card-title-original,
@@ -882,6 +916,9 @@
       color: var(--card-title-ink);
       text-align: left;
       margin: 0;
+      background: transparent;
+      border: none;
+      box-shadow: none;
       transition: color 0.3s ease;
     }
 
@@ -934,15 +971,29 @@
     /* Nav-style cards (no image) — About only in second row */
     .project-card--nav.about-card {
       justify-content: flex-start;
-      min-height: var(--card-about-min);
-      height: auto;
+      min-height: var(--card-min-row-secondary);
+      height: 100%;
+    }
+
+    /* Second row — shared title/tag spacing (Air Canada + About) */
+    .cards-grid .second-row-card .card-footer {
+      gap: var(--card-secondary-title-gap);
+      padding: var(--space-16) var(--space-24) var(--space-24);
+      min-height: 0;
+      margin-top: 0;
+    }
+
+    .cards-grid .second-row-card .card-title-wrap,
+    .cards-grid .second-row-card .card-tags {
+      margin-top: 0;
+      margin-bottom: 0;
     }
 
     /* Bottom row: Air Canada + About */
     .about-card {
       grid-column: span 2;
-      min-height: var(--card-about-min);
-      height: auto;
+      min-height: var(--card-min-row-secondary);
+      height: 100%;
       position: relative;
       overflow: hidden;
     }
@@ -955,12 +1006,13 @@
     .air-canada-card,
     .second-row-card {
       min-height: var(--card-min-row-secondary);
-      height: auto;
+      height: 100%;
     }
 
     .about-card.second-row-card,
     .about-card.project-card--nav {
-      min-height: var(--card-about-min);
+      min-height: var(--card-min-row-secondary);
+      height: 100%;
       padding: 0;
     }
 
@@ -984,21 +1036,6 @@
       box-sizing: border-box;
     }
 
-    .about-card .card-footer {
-      margin-top: 0;
-      padding: var(--card-footer-padding);
-      min-height: 0;
-      gap: var(--card-footer-gap);
-    }
-
-    .about-card .card-title-wrap {
-      margin-bottom: 0;
-    }
-
-    .about-card .card-tags {
-      margin-top: 0;
-    }
-
     /* Air Canada: teaser tile — fixed logo band; override second-row-card padding so image fills to top */
     .air-canada-card.second-row-card {
       display: flex;
@@ -1007,11 +1044,11 @@
     }
 
     .air-canada-card .card-image {
-      flex: 0 0 auto;
+      flex: 1 1 auto;
       aspect-ratio: unset;
-      height: var(--card-air-canada-media);
-      max-height: var(--card-air-canada-media);
-      min-height: 0;
+      height: auto;
+      min-height: var(--card-air-canada-media);
+      max-height: none;
       margin: 0;
       width: 100%;
       display: flex;
@@ -1030,18 +1067,6 @@
 
     .air-canada-card.second-row-card .card-footer {
       flex: 0 0 auto;
-      padding: var(--card-footer-padding);
-      min-height: var(--card-footer-reserve);
-      margin-top: 0;
-      gap: var(--card-footer-gap);
-    }
-
-    .air-canada-card .card-title-wrap {
-      margin-bottom: 0;
-    }
-
-    .air-canada-card .card-tags {
-      margin-top: 0;
     }
 
     /* Icon in cards and links */
@@ -1128,7 +1153,8 @@
 
       @media (min-width: 901px) {
         .cards-grid {
-          margin-top: var(--home-cards-overlap) !important;
+          margin-top: -16px !important;
+          transform: none !important;
         }
       }
 
@@ -1142,9 +1168,24 @@
     }
 
     @media (max-width: 900px) {
-      .page { gap: var(--space-64); padding-top: 0; }
+      .page { gap: var(--page-section-gap); padding-top: 0; }
       body { --home-hero-title-gap: 0; }
-      .work-section { margin-top: var(--nav-content-offset); }
+      .work-section {
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      .cards-grid {
+        margin-top: 24px;
+        transform: none;
+      }
+    }
+
+    .cards-grid .project-card:last-child,
+    .cards-grid .about-card,
+    .cards-grid .air-canada-card {
+      margin-bottom: 0;
     }
 
     @media (max-width: 900px) {
@@ -1158,52 +1199,6 @@
       }
     }
 
-    /* Mobile-only: featured project cards hug image + text */
-    @media (max-width: 768px) {
-      .cards-grid {
-        align-items: start;
-      }
-
-      .cards-grid .project-card:not(.about-card):not(.air-canada-card) {
-        height: auto;
-        align-self: start;
-        min-height: 0;
-      }
-
-      .cards-grid .project-card:not(.about-card):not(.air-canada-card) .card-image {
-        flex: 0 0 auto;
-        aspect-ratio: 4 / 3;
-        height: auto;
-        min-height: 0;
-        max-height: none;
-        margin: 0;
-        width: 100%;
-      }
-
-      .cards-grid .project-card:not(.about-card):not(.air-canada-card) .card-image img {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-      }
-
-      .cards-grid .project-card:not(.about-card):not(.air-canada-card) .card-footer {
-        --card-footer-reserve: auto;
-        min-height: 0;
-        margin-top: 0;
-        padding: var(--card-footer-padding-mobile);
-        gap: var(--card-footer-gap);
-      }
-
-      .cards-grid .project-card:not(.about-card):not(.air-canada-card) .card-title-wrap {
-        margin-top: 0;
-        margin-bottom: 0;
-      }
-
-      .cards-grid .project-card:not(.about-card):not(.air-canada-card) .card-tags {
-        margin-top: 0;
-      }
-    }
-
     @media (max-width: 640px) {
       .page {
         padding-top: 0;
@@ -1212,22 +1207,75 @@
 
       .cards-grid {
         grid-template-columns: minmax(0, 1fr);
-        row-gap: var(--card-grid-gap-tight);
+        align-items: stretch;
+        gap: 20px;
       }
 
       .cards-grid .project-card {
-        position: sticky;
-        top: var(--space-96);
+        display: flex;
+        flex-direction: column;
+        min-height: auto;
         height: auto;
-        align-self: start;
+        max-height: none;
+        padding-bottom: 0;
+        aspect-ratio: auto;
+        position: sticky;
+        top: var(--site-nav-height);
       }
 
-      .cards-grid .project-card .card-image {
+      .cards-grid .project-card:not(.air-canada-card) .card-image {
         flex: 0 0 auto;
+        height: 280px;
+        min-height: 280px;
+        max-height: 280px;
+        overflow: hidden;
+      }
+
+      .cards-grid .project-card:not(.air-canada-card) .card-image img {
         width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .cards-grid .project-card .card-footer,
+      .cards-grid .second-row-card .card-footer,
+      .cards-grid .project-card:nth-child(-n+3) .card-footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex: 0 0 auto;
+        min-height: 0;
+        height: auto;
+        padding: 20px 20px 18px;
+        gap: 10px;
+        margin-top: 0;
+      }
+
+      .cards-grid .project-card .card-title-wrap,
+      .cards-grid .project-card:nth-child(-n+3) .card-title-wrap {
+        min-height: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
+      .cards-grid .project-card .card-title-original {
+        line-height: 1.08;
+      }
+
+      .cards-grid .project-card .card-tags {
+        margin-top: 0;
+        gap: 6px;
+      }
+
+      .cards-grid .project-card::after {
+        display: none;
+      }
+
+      .cards-grid .about-card,
+      .cards-grid .second-row-card {
         min-height: auto;
-        max-height: none;
-        aspect-ratio: 4 / 3;
+        height: auto;
       }
 
       .cards-grid .project-card:nth-child(1) { z-index: 1; }
@@ -1236,36 +1284,34 @@
       .cards-grid .project-card:nth-child(4) { z-index: 4; }
       .cards-grid .project-card:nth-child(5) { z-index: 5; }
 
-      .project-card--nav { min-height: calc(var(--space-96) + var(--space-16)); }
-      .work-section { margin-top: var(--nav-content-offset); }
-
       .about-card,
       .utility-card,
       .air-canada-card {
         grid-column: span 1;
-        height: auto;
-        max-height: none;
       }
 
-      .about-card,
-      .about-card.project-card--nav {
-        min-height: var(--card-about-min);
-      }
-
-      .utility-card,
-      .air-canada-card {
-        min-height: var(--card-min-mobile-secondary);
-      }
-
-      .air-canada-card .card-image {
+      .cards-grid .air-canada-card .card-image,
+      .cards-grid .air-canada-card .card-image--logo {
         flex: 0 0 auto;
-        height: var(--card-air-canada-media);
-        max-height: var(--card-air-canada-media);
-        min-height: 0;
-        aspect-ratio: unset;
+        height: 220px;
+        min-height: 220px;
+        max-height: 220px;
         display: flex;
         align-items: center;
         justify-content: center;
+        overflow: visible;
+        padding: 32px 24px;
+      }
+
+      .cards-grid .air-canada-card .card-image--logo img {
+        width: auto;
+        max-width: 78%;
+        height: auto;
+        max-height: 90px;
+        object-fit: contain;
+        object-position: center;
+        padding: 0;
+        display: block;
       }
     }
 
@@ -1284,12 +1330,14 @@
     }
 
     .hero-title-wrapper {
-      position: fixed;
-      top: var(--space-64);
-      left: 0;
-      right: 0;
+      position: relative;
+      top: auto;
+      left: auto;
+      right: auto;
       width: 100%;
       max-width: none;
+      margin-top: 0;
+      margin-bottom: 24px;
       overflow: visible;
       pointer-events: none;
       z-index: 1;
@@ -1323,7 +1371,7 @@
     .hero-title,
     .large-title {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       display: block;
       width: max-content;
       max-width: 100%;
@@ -1334,7 +1382,7 @@
       font-size: clamp(3.25rem, calc((100vw - clamp(3.5rem, 11vw, 9rem)) / 9.25), 11rem);
       font-weight: 500;
       letter-spacing: -0.065em;
-      line-height: 1.06;
+      line-height: 0.95;
       color: rgba(17, 17, 17, 0.9);
       text-shadow:
         0 0.14em 0.35em color-mix(in srgb, var(--page-bg) 55%, transparent),
@@ -1364,6 +1412,53 @@
         white-space: normal;
         line-height: 1.05;
         text-wrap: balance;
+      }
+    }
+
+    @media (min-width: 901px) {
+      .hero-title-wrapper {
+        position: relative;
+        z-index: 1;
+        margin-bottom: -24px;
+        pointer-events: none;
+      }
+
+      .hero-title-inner {
+        padding-bottom: 0.35em;
+        overflow: visible;
+        -webkit-mask-image: none;
+        mask-image: none;
+      }
+
+      .big-hover-title,
+      .hero-title {
+        opacity: 1;
+        filter: blur(0px);
+        -webkit-mask-image: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 1) 0%,
+          rgba(0, 0, 0, 1) 62%,
+          rgba(0, 0, 0, 0.82) 74%,
+          rgba(0, 0, 0, 0.45) 86%,
+          transparent 100%
+        );
+        mask-image: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 1) 0%,
+          rgba(0, 0, 0, 1) 62%,
+          rgba(0, 0, 0, 0.82) 74%,
+          rgba(0, 0, 0, 0.45) 86%,
+          transparent 100%
+        );
+        -webkit-mask-size: 100% 100%;
+        mask-size: 100% 100%;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+      }
+
+      .cards-grid .project-card {
+        position: relative;
+        z-index: 2;
       }
     }
 
@@ -1436,10 +1531,7 @@
           <div class="nav-links">
             <a class="nav-contact-link" href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener noreferrer">LinkedIn<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
             <a class="nav-contact-link" href="https://drive.google.com/file/d/1HT2FcuIwYNYXt00IsOKhti0plwNZEdIb/view?usp=sharing" target="_blank" rel="noopener noreferrer">Resume<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
-            <span class="nav-email-wrap">
-              <a class="nav-contact-link nav-email-copy" href="#" data-email="mariellopezdesign@gmail.com" aria-label="Copy email address">Contact<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
-              <span class="nav-copy-feedback" role="status" aria-live="polite" aria-hidden="true">Email copied</span>
-            </span>
+            <a class="nav-contact-link" href="mailto:mariellopezdesign@gmail.com">Contact<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
           </div>
         </div>
       </nav>
@@ -1544,7 +1636,7 @@
           <div class="about-card-photo" aria-hidden="true"></div>
           <div class="about-card-noise" aria-hidden="true"></div>
           <div class="about-card-content">
-            <div class="card-footer link-hover">
+            <div class="card-footer">
               <div class="card-title-wrap">
                 <span class="card-title-original">About</span>
                 <span class="card-title-clone" aria-hidden="true">About</span>
@@ -1562,12 +1654,7 @@
     <!-- FOOTER -->
     <footer>
       <div class="footer-email-row">
-        <a class="footer-email rolling-link link-hover" href="mailto:mariellopezdesign@gmail.com">
-          <span class="rolling-link-inner">
-            <span class="rolling-link-text">mariellopezdesign@gmail.com</span>
-            <span class="rolling-link-text duplicate" aria-hidden="true">mariellopezdesign@gmail.com</span>
-          </span>
-        </a>
+        <span class="footer-email">mariellopezdesign@gmail.com</span>
         <button type="button" class="footer-email-copy" data-email="mariellopezdesign@gmail.com" aria-label="Copy email address">
           <span class="footer-email-copy-icons" aria-hidden="true">
             <svg class="footer-email-copy-icon footer-email-copy-icon--clipboard" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
@@ -1582,7 +1669,7 @@
           <span class="rolling-link-inner"><span class="rolling-link-text">LinkedIn</span><span class="rolling-link-text duplicate" aria-hidden="true">LinkedIn</span></span>
           <svg class="arrow-up-right" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
         </a>
-        <a class="rolling-link link-hover" href="https://lu.ma/mariel" target="_blank" rel="noopener noreferrer">
+        <a class="rolling-link link-hover" href="https://luma.com/user/mariel" target="_blank" rel="noopener noreferrer">
           <span class="rolling-link-inner"><span class="rolling-link-text">Luma</span><span class="rolling-link-text duplicate" aria-hidden="true">Luma</span></span>
           <svg class="arrow-up-right" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
         </a>

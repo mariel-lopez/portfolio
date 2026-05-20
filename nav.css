@@ -24,6 +24,9 @@
   --nav-copy-popup-bg: #ffffff;
   --nav-copy-popup-border: rgba(0, 0, 0, 0.1);
   --nav-copy-popup-shadow: 0 6px 20px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+  /* Global nav-height system — single source of truth for all page offsets */
+  --site-nav-height: 112px;
+  --site-nav-safe-gap: 40px;
 }
 
 /* ── Content column (aligns dividers + body copy) ── */
@@ -55,7 +58,7 @@
   left: 0;
   right: 0;
   width: 100%;
-  z-index: 100;
+  z-index: 9999;
   padding-top: max(var(--nav-pad-y), env(safe-area-inset-top, 0px));
   padding-bottom: var(--nav-pad-y);
   padding-inline: 0;
@@ -580,6 +583,113 @@
 
   .nav-links {
     gap: var(--space-16);
+  }
+}
+
+/* ── Global page offset — pushes all content below the fixed nav ── */
+:root {
+  --site-nav-height: 112px;
+  --site-nav-safe-gap: 8px;
+}
+
+body {
+  padding-top: calc(var(--site-nav-height) + var(--site-nav-safe-gap));
+}
+
+/* Prevent double-spacing: zero top padding on every page wrapper */
+.page,
+.about-main,
+.project-page-container,
+main {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+/* Hero wrappers: no extra spacing */
+.hero,
+.case-hero,
+.about-hero,
+.hero-content,
+.hero-title-wrapper,
+.hero-title-inner {
+  margin-top: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+/* Content sections: breathing room below nav */
+.work-section,
+.cards-grid,
+.case-study-grid {
+  margin-top: 32px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* Cards and images stay in normal stacking — z-index kept low */
+.cards-grid,
+.project-card,
+.hero-image,
+.about-card {
+  position: relative;
+  z-index: 1;
+}
+
+/* Nav and toggle always above everything */
+.home-hero-mono.navbar,
+.theme-toggle {
+  z-index: 9999;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --site-nav-height: 92px;
+    --site-nav-safe-gap: 4px;
+  }
+
+  body {
+    padding-top: calc(var(--site-nav-height) - 16px);
+  }
+
+  .page,
+  .project-page-container {
+    padding-top: 0;
+    margin-top: 0;
+  }
+
+  /* Homepage + shared content (not Sobeys/About heroes) */
+  .work-section,
+  .cards-grid,
+  .homepage-main {
+    margin-top: 24px;
+  }
+
+  .cards-grid .project-card:first-child {
+    margin-top: 24px;
+  }
+
+  /* SOBEYS PAGE */
+  .case-page .case-hero {
+    margin-top: 32px;
+  }
+
+  .case-page main {
+    margin-top: 0;
+  }
+
+  .case-page .page {
+    padding-top: 8px;
+  }
+
+  /* ABOUT PAGE */
+  .about-page main,
+  .about-page .about-hero {
+    margin-top: 32px;
+  }
+
+  .about-page .page {
+    padding-top: 8px;
   }
 }
 

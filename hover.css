@@ -19,8 +19,7 @@
   color: var(--hover-color);
 }
 
-.rolling-link.link-hover,
-.footer-email.link-hover {
+.rolling-link.link-hover {
   display: inline-flex;
   align-items: center;
   gap: 0.4em;
@@ -36,6 +35,10 @@
   gap: var(--space-16);
   align-items: flex-start;
   text-align: left;
+}
+
+.cards-grid .second-row-card .card-footer.link-hover {
+  gap: var(--card-secondary-title-gap);
 }
 
 .hero-name:hover .mono-logo-original,
@@ -85,19 +88,6 @@
   margin-inline-start: 0.22em;
   opacity: 1;
   visibility: visible;
-}
-
-/* Footer email */
-.footer-email.link-hover {
-  transition:
-    color var(--hover-duration) var(--hover-ease),
-    opacity var(--hover-duration) var(--hover-ease);
-}
-
-.footer-email.link-hover:hover,
-.footer-email.link-hover:focus-visible {
-  color: var(--hover-color);
-  opacity: 1;
 }
 
 .footer-email-copy:hover,
@@ -179,25 +169,27 @@
   transform: none;
 }
 
-.project-card:hover .card-image img,
-.project-card:focus-visible .card-image img {
+.project-card:not(.no-hover):hover .card-image img,
+.project-card:not(.no-hover):focus-visible .card-image img {
   transform: none;
 }
 
-.project-card:hover .card-title-original,
-.project-card:focus-visible .card-title-original {
+.project-card:not(.no-hover):hover .card-title-original,
+.project-card:not(.no-hover):focus-visible .card-title-original {
   color: var(--hover-color);
   transition: color var(--hover-duration) var(--hover-ease);
 }
 
-.project-card:hover .card-tag,
-.project-card:focus-visible .card-tag {
+.project-card:not(.no-hover):hover .card-tag,
+.project-card:not(.no-hover):focus-visible .card-tag,
+.project-card:not(.no-hover):hover .card-pill,
+.project-card:not(.no-hover):focus-visible .card-pill {
   color: var(--hover-color);
   transition: color var(--hover-duration) var(--hover-ease);
 }
 
-.project-card:hover .card-icon,
-.project-card:focus-visible .card-icon {
+.project-card:not(.no-hover):hover .card-icon,
+.project-card:not(.no-hover):focus-visible .card-icon {
   opacity: 0.85;
   transform: none;
   transition:
@@ -220,14 +212,14 @@
   color: currentColor;
 }
 
-/* Footer social — muted default, off-black hover */
+/* Footer social — muted default; hover matches nav (nav-ink) */
 .footer-social a.rolling-link.link-hover {
   color: var(--nav-muted, #777777);
 }
 
 .footer-social a.rolling-link.link-hover:hover,
 .footer-social a.rolling-link.link-hover:focus-visible {
-  color: #1a1a1a;
+  color: var(--nav-ink, #111111);
 }
 
 .footer-social a.rolling-link.link-hover svg {

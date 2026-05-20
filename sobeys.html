@@ -62,26 +62,59 @@
       box-sizing: border-box;
     }
 
-    .project-hero-region {
-      /* Tighter than sitewide offset — case hero sits closer to nav */
-      padding-top: calc(var(--nav-content-offset) - var(--nav-below-gap));
+    /* ── Case study hero — offset below fixed nav ── */
+    .hero {
+      position: relative;
       width: 100%;
+      padding: 0 0 var(--space-48);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-32);
+      overflow: visible;
     }
 
-    /* Hero section (static, scrolls normally) */
-    .hero-mono {
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+      z-index: 5;
+      max-width: 900px;
+      width: 100%;
+      position: relative;
+    }
+
+    .hero-title {
       font-family: var(--mono-serif);
-      width: 100%;
-      max-width: none;
+      font-size: clamp(48px, 7vw, 96px);
+      line-height: 0.92;
+      letter-spacing: -0.05em;
+      font-weight: 700;
+      max-width: 11ch;
       margin: 0;
-      padding: 0;
+      color: var(--page-ink);
+      text-wrap: balance;
     }
 
-    .hero-mono--case {
+    .hero-image {
+      position: relative;
       width: 100%;
+      border-radius: 32px;
+      overflow: hidden;
+      margin-top: 12px;
+      z-index: 1;
     }
 
-    .home-hero-mono .live-badge {
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      border-radius: 32px;
+      aspect-ratio: 16 / 10;
+    }
+
+    .live-badge {
       color: var(--sobeys-live-ink);
       background: var(--sobeys-live-bg);
     }
@@ -169,28 +202,6 @@
       margin: 0;
     }
 
-    /* ── HERO ── */
-    .project-hero {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      text-align: left;
-    }
-
-    .case-tags {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      margin-top: 0;
-    }
-
-    .live-pill {
-      align-self: flex-start;
-      margin-bottom: 32px;
-    }
-
     .tag {
       font-family: var(--mono-serif);
       font-size: 14px;
@@ -202,8 +213,6 @@
     }
 
     .live-badge {
-      display: inline-flex;
-      align-items: center;
       gap: 8px;
       font-family: var(--mono-serif);
       font-size: 14px;
@@ -236,28 +245,6 @@
       0%   { transform: scale(1); opacity: 0.6; }
       70%  { transform: scale(2.4); opacity: 0; }
       100% { transform: scale(2.4); opacity: 0; }
-    }
-
-    .project-hero-title {
-      font-family: var(--mono-serif);
-      font-size: clamp(64px, 7vw, 120px);
-      line-height: 0.95;
-      letter-spacing: -0.075em;
-      font-weight: 600;
-      text-align: left;
-      max-width: 1200px;
-      margin: 0;
-      color: var(--page-ink);
-    }
-
-    .hero-image {
-      width: 100%;
-      max-width: none;
-      margin-top: 64px;
-      border-radius: 26px;
-      display: block;
-      object-fit: cover;
-      aspect-ratio: 16 / 12;
     }
 
     /* ── OVERVIEW ROW ── */
@@ -628,9 +615,7 @@
     @media (max-width: 900px) {
       .page { gap: 60px; }
 
-      /* Hero */
-      .project-hero-title { font-size: clamp(40px, 8vw, 64px); line-height: 1; letter-spacing: -0.06em; }
-      .hero-image { aspect-ratio: 4 / 3; margin-top: 48px; }
+      .hero-image img { aspect-ratio: 4 / 3; }
 
       /* Overview */
       .overview-row { flex-direction: column; gap: 32px; border: none; padding: 0; }
@@ -656,11 +641,34 @@
       }
     }
 
-    @media (max-width: 640px) {
-      .live-pill {
-        margin-bottom: 20px;
+    @media (max-width: 768px) {
+      .hero {
+        padding-top: 0;
+        padding-bottom: var(--space-48);
+        gap: var(--space-24);
       }
 
+      .hero-title {
+        font-size: clamp(42px, 11vw, 72px);
+        max-width: 100%;
+        line-height: 0.95;
+      }
+
+      .hero-content {
+        gap: var(--space-16);
+      }
+
+      .hero-image {
+        border-radius: 24px;
+        margin-top: var(--space-16);
+      }
+
+      .hero-image img {
+        border-radius: 24px;
+      }
+    }
+
+    @media (max-width: 640px) {
       .page { gap: 48px; }
 
       .back-to-top {
@@ -672,17 +680,18 @@
     }
 
     @media (max-width: 500px) {
-      .project-hero-title { font-size: clamp(32px, 9vw, 44px); }
+      .hero-title { font-size: clamp(36px, 10vw, 52px); }
       .section-heading { font-size: 24px; }
     }
   </style>
   <link rel="stylesheet" href="layout.css" />
   <link rel="stylesheet" href="footer.css" />
 </head>
-<body>
+<body class="case-sobeys case-page">
   <script>!function(){var e=document.createElement('div');e.id='pt-overlay';e.setAttribute('aria-hidden','true');e.style.cssText='position:fixed;inset:0;z-index:9990;pointer-events:none;opacity:1;will-change:opacity;background:var(--overlay-bg,#f5f5f2);';document.body.appendChild(e)}();</script>
-  <!-- FIXED NAV -->
-  <div id="top" class="home-hero-mono navbar">
+
+  <!-- NAV -->
+  <div class="home-hero-mono navbar">
     <header class="mono-header">
       <nav class="mono-nav" aria-label="Main">
         <div class="nav-left">
@@ -701,10 +710,7 @@
           <div class="nav-links">
             <a class="nav-contact-link" href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener noreferrer">LinkedIn<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
             <a class="nav-contact-link" href="https://drive.google.com/file/d/1HT2FcuIwYNYXt00IsOKhti0plwNZEdIb/view?usp=sharing" target="_blank" rel="noopener noreferrer">Resume<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
-            <span class="nav-email-wrap">
-              <a class="nav-contact-link nav-email-copy" href="#" data-email="mariellopezdesign@gmail.com" aria-label="Copy email address">Contact<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
-              <span class="nav-copy-feedback" role="status" aria-live="polite" aria-hidden="true">Email copied</span>
-            </span>
+            <a class="nav-contact-link" href="mailto:mariellopezdesign@gmail.com">Contact<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
           </div>
         </div>
       </nav>
@@ -732,17 +738,16 @@
   </div>
 
   <main class="project-page-container">
-    <div class="project-hero-region">
-      <section class="hero-mono hero-mono--case" aria-labelledby="case-hero-title">
-        <div class="project-hero">
-          <div class="case-tags">
-            <span class="live-badge live-pill"><span class="live-dot"></span>Live as of Sep 2025</span>
-          </div>
-          <h1 class="project-hero-title" id="case-hero-title">Scaling Sobeys' digital shopping experience for 1M+ monthly users</h1>
-          <img class="hero-image" src="sobeys-cover.png" alt="Sobeys homepage redesign" />
-        </div>
-      </section>
-    </div>
+    <section class="hero case-hero" id="top" aria-labelledby="case-hero-title">
+      <div class="hero-content">
+        <span class="live-badge"><span class="live-dot"></span>Live as of Sep 2025</span>
+        <h1 class="hero-title" id="case-hero-title">Scaling Sobeys' digital shopping experience for 1M+ monthly users</h1>
+      </div>
+
+      <div class="hero-image">
+        <img src="sobeys-cover.png" alt="Sobeys homepage redesign" width="1440" height="900" loading="eager" decoding="async" />
+      </div>
+    </section>
 
     <div class="page">
 
@@ -928,12 +933,7 @@
     <!-- FOOTER -->
     <footer>
       <div class="footer-email-row">
-        <a class="footer-email rolling-link link-hover" href="mailto:mariellopezdesign@gmail.com">
-          <span class="rolling-link-inner">
-            <span class="rolling-link-text">mariellopezdesign@gmail.com</span>
-            <span class="rolling-link-text duplicate" aria-hidden="true">mariellopezdesign@gmail.com</span>
-          </span>
-        </a>
+        <span class="footer-email">mariellopezdesign@gmail.com</span>
         <button type="button" class="footer-email-copy" data-email="mariellopezdesign@gmail.com" aria-label="Copy email address">
           <span class="footer-email-copy-icons" aria-hidden="true">
             <svg class="footer-email-copy-icon footer-email-copy-icon--clipboard" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
@@ -948,7 +948,7 @@
           <span class="rolling-link-inner"><span class="rolling-link-text">LinkedIn</span><span class="rolling-link-text duplicate" aria-hidden="true">LinkedIn</span></span>
           <svg class="arrow-up-right" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
         </a>
-        <a class="rolling-link link-hover" href="https://lu.ma/mariel" target="_blank" rel="noopener noreferrer">
+        <a class="rolling-link link-hover" href="https://luma.com/user/mariel" target="_blank" rel="noopener noreferrer">
           <span class="rolling-link-inner"><span class="rolling-link-text">Luma</span><span class="rolling-link-text duplicate" aria-hidden="true">Luma</span></span>
           <svg class="arrow-up-right" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
         </a>
