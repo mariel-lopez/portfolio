@@ -410,17 +410,21 @@
 }
 
 .nav-email-label {
-  display: inline-grid;
-  align-items: center;
+  position: relative;
+  display: inline-block;
 }
 
 .nav-email-label-default,
 .nav-email-label-hover {
-  grid-area: 1 / 1;
   transition: opacity 0.22s ease;
 }
 
 .nav-email-label-hover {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
   opacity: 0;
 }
 

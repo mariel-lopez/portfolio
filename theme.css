@@ -118,7 +118,7 @@ html.dark-theme .home-hero-mono.navbar::before {
 
 /* ── Theme toggle — fixed top-right, glass pill ── */
 .home-hero-mono.navbar:has(.theme-toggle) .mono-header {
-  padding-right: 52px;
+  padding-right: calc(var(--content-pad) + 44px);
 }
 
 .theme-toggle {
@@ -204,7 +204,7 @@ html.dark-theme .theme-toggle .sun-icon {
 
 @media (max-width: 640px) {
   .home-hero-mono.navbar:has(.theme-toggle) .mono-header {
-    padding-right: 0;
+    padding-right: 56px;
   }
 
   .theme-toggle {
