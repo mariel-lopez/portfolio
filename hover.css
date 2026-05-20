@@ -27,13 +27,13 @@
 }
 
 .footer-social a.rolling-link.link-hover {
-  gap: 5px;
+  gap: 4px;
 }
 
 .card-footer.link-hover {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: var(--space-16);
   align-items: flex-start;
   text-align: left;
 }

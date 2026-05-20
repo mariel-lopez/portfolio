@@ -66,8 +66,15 @@ body {
 
 @media (min-width: 641px) and (max-width: 1024px) {
   .page > .work-section .cards-grid {
-    grid-template-rows: repeat(3, minmax(0, 1fr));
-    min-height: min(62vh, 780px);
+    grid-template-rows: auto auto auto;
+    min-height: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .page > .work-section .cards-grid {
+    grid-template-rows: auto;
+    min-height: 0;
   }
 }
 

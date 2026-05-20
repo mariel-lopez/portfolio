@@ -35,6 +35,9 @@ html.dark-theme {
   --nav-ink: #ebe6f5;
   --nav-muted: rgba(198, 188, 224, 0.62);
   --nav-rotating: rgba(198, 188, 224, 0.48);
+  --nav-copy-popup-bg: rgba(28, 24, 42, 0.96);
+  --nav-copy-popup-border: rgba(255, 255, 255, 0.1);
+  --nav-copy-popup-shadow: 0 8px 28px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.06) inset;
   --divider-color: rgba(255, 255, 255, 0.1);
   --hover-color: rgba(196, 172, 255, 0.9);
   --surface-glass: rgba(22, 18, 36, 0.78);
@@ -118,7 +121,7 @@ html.dark-theme .home-hero-mono.navbar::before {
 
 /* ── Theme toggle — fixed top-right, glass pill ── */
 .home-hero-mono.navbar:has(.theme-toggle) .mono-header {
-  padding-right: calc(var(--content-pad) + 44px);
+  padding-right: calc(var(--content-pad) + var(--space-48));
 }
 
 .theme-toggle {
@@ -204,12 +207,12 @@ html.dark-theme .theme-toggle .sun-icon {
 
 @media (max-width: 640px) {
   .home-hero-mono.navbar:has(.theme-toggle) .mono-header {
-    padding-right: 56px;
+    padding-right: var(--space-64);
   }
 
   .theme-toggle {
-    top: max(calc(var(--nav-pad-y) - 2px), env(safe-area-inset-top, 0px));
-    right: max(16px, env(safe-area-inset-right, 0px));
+    top: max(var(--nav-pad-y), env(safe-area-inset-top, 0px));
+    right: max(var(--space-16), env(safe-area-inset-right, 0px));
   }
 }
 

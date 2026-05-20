@@ -10,6 +10,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="shortcut icon" href="favicon.ico" />
   <script>!function(){try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('dark-theme');}catch(e){}}();</script>
+  <link rel="stylesheet" href="spacing.css" />
   <link rel="stylesheet" href="nav.css" />
   <link rel="stylesheet" href="theme.css" />
   <link rel="stylesheet" href="layout.css" />
@@ -38,7 +39,6 @@
       min-height: 100vh;
       overflow-x: visible;
       overflow-y: auto;
-      --home-hero-title-gap: clamp(34px, 4.66vh, 71px);
       --card-tag-font-size: clamp(11px, 0.95vw, 13px);
       --card-title-font-size: calc(var(--card-tag-font-size) * 1.08);
       --hero-title-fade: linear-gradient(
@@ -63,13 +63,13 @@
 
     .mono-nav .nav-etc-tip {
       position: absolute;
-      top: calc(100% + 8px);
+      top: calc(100% + var(--popover-offset));
       left: 50%;
       transform: translateX(-50%);
       background: #fff;
       border: 1px solid rgba(0, 0, 0, 0.12);
       border-radius: 100px;
-      padding: 5px 14px;
+      padding: var(--popover-pad-y) var(--space-16);
       font-family: var(--mono-serif);
       font-size: 12px;
       font-weight: 300;
@@ -105,15 +105,15 @@
       font-family: var(--mono-serif);
       max-width: 1440px;
       margin: 0 auto;
-      padding: 0 0 clamp(32px, 5vh, 56px);
+      padding: 0 0 var(--space-48);
     }
 
     .hero-sans-grid {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(260px, 0.95fr);
-      gap: clamp(32px, 5vw, 72px);
+      gap: var(--space-64);
       align-items: center;
-      margin-bottom: clamp(28px, 4vh, 48px);
+      margin-bottom: var(--space-48);
     }
 
     .hero-sans-copy {
@@ -135,7 +135,7 @@
     }
 
     .hero-sans-sub {
-      margin-top: 1.25rem;
+      margin-top: var(--space-24);
       font-size: clamp(15px, 1.35vw, 18px);
       font-weight: 400;
       line-height: 1.45;
@@ -255,12 +255,12 @@
 
     .hero-mono-star-cardtip {
       position: absolute;
-      top: calc(100% + 6px);
+      top: calc(100% + var(--popover-offset));
       right: 0;
       left: auto;
       width: max-content;
       max-width: min(260px, 62vw);
-      padding: 6px 10px;
+      padding: var(--popover-pad-y) var(--popover-pad-x);
       font-family: var(--mono-serif);
       font-size: clamp(11px, 1.05vw, 13px);
       font-weight: 400;
@@ -474,10 +474,10 @@
       .bg-blob { animation: none !important; }
     }
 
-    @media (max-width: 720px) {
+    @media (max-width: 768px) {
       .hero-sans-grid {
         grid-template-columns: 1fr;
-        gap: 28px;
+        gap: var(--space-32);
       }
 
       .hero-sans-visual {
@@ -497,7 +497,7 @@
       display: flex;
       flex-direction: column;
       align-items: stretch;
-      gap: clamp(32px, 4.04vw, 51px);
+      gap: var(--page-section-gap);
       max-width: var(--content-max);
       margin: 0 auto;
       box-sizing: border-box;
@@ -511,7 +511,7 @@
       position: relative;
       z-index: 2;
       overflow: visible;
-      scroll-margin-top: clamp(68px, 13.3vw, 95px);
+      scroll-margin-top: var(--space-96);
       margin-top: calc(var(--nav-content-offset) + var(--home-hero-title-gap));
     }
 
@@ -520,7 +520,7 @@
       z-index: 2;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: clamp(13px, 1.43vw, 23px);
+      gap: var(--card-grid-gap-tight);
       align-items: stretch;
     }
 
@@ -529,11 +529,11 @@
       .cards-grid {
         max-width: 1180px;
         width: 100%;
-        margin: clamp(-39px, -6.6vh, -67px) auto 0;
+        margin: var(--home-cards-overlap-md) auto 0;
         transform: translateY(0);
         grid-template-columns: repeat(3, 1fr);
-        column-gap: 15px;
-        row-gap: 16px;
+        column-gap: var(--space-16);
+        row-gap: var(--card-grid-gap-tight);
         align-items: stretch;
       }
 
@@ -551,44 +551,61 @@
 
       .cards-grid .project-card:nth-child(-n+3) .card-image {
         flex: 0 0 auto;
-        aspect-ratio: 3 / 2;
+        aspect-ratio: 4 / 3;
         max-height: none;
-        margin: 8px 8px 0;
-        width: calc(100% - 16px);
+        margin: 0;
+        width: 100%;
       }
 
       .cards-grid .project-card:nth-child(-n+3) .card-footer {
-        --card-footer-reserve: 86px;
-        padding: 11px 14px 13px;
+        padding: var(--card-footer-padding);
       }
 
-      .cards-grid .project-card:nth-child(-n+3) .card-tag {
-        white-space: nowrap;
+      .cards-grid .project-card:nth-child(-n+3) .card-title-wrap {
+        min-height: calc(var(--card-title-font-size) * 2 * 1.12);
       }
 
-      .cards-grid .project-card:nth-child(n+4) .card-footer {
+      .cards-grid .project-card:nth-child(n+4),
+      .cards-grid .second-row-card {
+        min-height: var(--card-min-row-secondary);
+        height: auto;
+        align-self: start;
+      }
+
+      .cards-grid .project-card:nth-child(n+4) .card-footer,
+      .cards-grid .second-row-card .card-footer {
         --card-footer-reserve: auto;
         min-height: 0;
-        padding: 10px 14px 12px;
+        margin-top: 0;
+        padding: var(--space-16) var(--space-24) var(--space-24);
+        gap: var(--card-secondary-title-gap);
       }
 
-      .cards-grid .project-card:nth-child(n+4) {
-        min-height: 252px;
+      .cards-grid .second-row-card .card-title-wrap {
+        margin-bottom: 0;
+      }
+
+      .cards-grid .second-row-card .card-tags {
+        margin-top: 0;
       }
 
       .cards-grid .air-canada-card .card-image {
-        flex: 1 1 auto;
+        flex: 0 0 auto;
         aspect-ratio: unset;
-        max-height: none;
+        height: var(--card-air-canada-media);
+        max-height: var(--card-air-canada-media);
         min-height: 0;
-        margin: 8px 8px 0;
-        width: calc(100% - 16px);
+        margin: 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
 
     @media (min-width: 901px) and (max-width: 1200px) {
       .cards-grid {
-        margin-top: clamp(-32px, -5.46vh, -56px);
+        margin-top: var(--home-cards-overlap);
       }
     }
 
@@ -774,16 +791,16 @@
       background: var(--surface-glass);
     }
 
-    /* Card image — intrinsic 4:3; flex-grow only where grid gives card height (tablet+) */
+    /* Card image — fills top of card edge-to-edge; card overflow:hidden clips top corners */
     .card-image {
-      margin: 8px 8px 0;
-      border-radius: 20px;
+      margin: 0;
+      border-radius: 20px 20px 0 0;
       overflow: hidden;
       flex: 0 0 auto;
-      width: calc(100% - 20px);
+      width: 100%;
       min-height: auto;
       max-height: none;
-      aspect-ratio: 3 / 2;
+      aspect-ratio: 4 / 3;
       background: #e8e0d8;
     }
 
@@ -791,8 +808,8 @@
       .cards-grid .project-card .card-image {
         flex: 1 1 0;
         min-height: 0;
-        width: auto;
-        max-height: calc(100% - var(--card-footer-reserve, 86px));
+        width: 100%;
+        max-height: calc(100% - var(--card-footer-reserve));
       }
 
       .cards-grid .project-card:nth-child(-n+3) .card-image {
@@ -832,14 +849,13 @@
 
     /* Card footer */
     .card-footer {
-      --card-footer-reserve: 86px;
       min-height: var(--card-footer-reserve);
-      padding: 11px 14px 13px;
+      padding: var(--card-footer-padding);
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 4px;
-      margin-top: auto;
+      gap: var(--card-footer-gap);
+      margin-top: 0;
       flex: 0 0 auto;
       flex-shrink: 0;
       min-width: 0;
@@ -861,10 +877,11 @@
       font-family: var(--mono-serif);
       font-size: var(--card-title-font-size);
       font-weight: 500;
-      line-height: 1.35;
+      line-height: 1.12;
       letter-spacing: -0.02em;
       color: var(--card-title-ink);
       text-align: left;
+      margin: 0;
       transition: color 0.3s ease;
     }
 
@@ -890,29 +907,42 @@
       border: 0;
     }
 
-    .card-tag {
-      display: block;
-      width: 100%;
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .card-pill {
+      display: inline-flex;
+      align-items: center;
       font-family: var(--mono-serif);
       font-size: var(--card-tag-font-size);
       font-weight: 400;
-      line-height: 1.25;
+      line-height: 1;
       color: var(--card-meta-ink);
       letter-spacing: 0.01em;
-      text-align: left;
+      padding: 3px 8px;
+      border-radius: 100px;
+      border: 1px solid var(--surface-border);
+      background: rgba(0, 0, 0, 0.04);
+      white-space: nowrap;
       transition: color 0.3s ease;
     }
 
-    /* Nav-style cards (no image) */
-    .project-card--nav {
-      justify-content: flex-end;
-      min-height: 160px;
+    /* Nav-style cards (no image) — About only in second row */
+    .project-card--nav.about-card {
+      justify-content: flex-start;
+      min-height: var(--card-about-min);
+      height: auto;
     }
 
-    /* Bottom row: compact Air Canada left + wide About right (desktop 3-col grid) */
+    /* Bottom row: Air Canada + About */
     .about-card {
       grid-column: span 2;
-      min-height: 252px;
+      min-height: var(--card-about-min);
+      height: auto;
       position: relative;
       overflow: hidden;
     }
@@ -922,42 +952,96 @@
     }
 
     .utility-card,
-    .air-canada-card {
-      min-height: 252px;
+    .air-canada-card,
+    .second-row-card {
+      min-height: var(--card-min-row-secondary);
+      height: auto;
     }
 
+    .about-card.second-row-card,
     .about-card.project-card--nav {
-      min-height: 252px;
+      min-height: var(--card-about-min);
+      padding: 0;
+    }
+
+    .second-row-card {
+      padding: var(--card-secondary-pad);
+      box-sizing: border-box;
     }
 
     .about-card-content {
-      position: relative;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
       z-index: 4;
-      flex: 1;
       display: flex;
       flex-direction: column;
       align-items: stretch;
-      justify-content: flex-end;
+      justify-content: flex-start;
       min-height: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    /* Air Canada: image fills space above footer */
-    .air-canada-card .card-image {
-      flex: 1 1 auto;
-      aspect-ratio: unset;
+    .about-card .card-footer {
+      margin-top: 0;
+      padding: var(--card-footer-padding);
       min-height: 0;
-      max-height: none;
-      margin: 8px 8px 0;
-      width: calc(100% - 16px);
+      gap: var(--card-footer-gap);
+    }
+
+    .about-card .card-title-wrap {
+      margin-bottom: 0;
+    }
+
+    .about-card .card-tags {
+      margin-top: 0;
+    }
+
+    /* Air Canada: teaser tile — fixed logo band; override second-row-card padding so image fills to top */
+    .air-canada-card.second-row-card {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+    }
+
+    .air-canada-card .card-image {
+      flex: 0 0 auto;
+      aspect-ratio: unset;
+      height: var(--card-air-canada-media);
+      max-height: var(--card-air-canada-media);
+      min-height: 0;
+      margin: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .air-canada-card .card-image--logo img {
-      width: 100%;
-      height: 100%;
-      padding: 8% 10%;
+      width: 260px;
+      max-width: 75%;
+      height: auto;
       object-fit: contain;
       object-position: center;
-      box-sizing: border-box;
+      display: block;
+    }
+
+    .air-canada-card.second-row-card .card-footer {
+      flex: 0 0 auto;
+      padding: var(--card-footer-padding);
+      min-height: var(--card-footer-reserve);
+      margin-top: 0;
+      gap: var(--card-footer-gap);
+    }
+
+    .air-canada-card .card-title-wrap {
+      margin-bottom: 0;
+    }
+
+    .air-canada-card .card-tags {
+      margin-top: 0;
     }
 
     /* Icon in cards and links */
@@ -972,14 +1056,21 @@
     @media (max-width: 1024px) {
       .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
-      .cards-grid .project-card:nth-child(-n+3) .card-tag {
+      .cards-grid .project-card:nth-child(-n+3) .card-pill {
         font-size: calc(var(--card-tag-font-size) * 0.94);
         letter-spacing: -0.01em;
-        white-space: normal;
-        text-wrap: balance;
       }
 
-      .project-card--nav { min-height: 130px; }
+      .project-card--nav,
+      .about-card.project-card--nav {
+        min-height: var(--card-about-min);
+      }
+
+      .utility-card,
+      .air-canada-card {
+        min-height: var(--card-min-row-secondary);
+      }
+
       /* 2-col grid: One Pacific + Air Canada share row 2, About full-width in row 3 */
       .about-card {
         grid-column: 1 / -1;
@@ -987,6 +1078,11 @@
 
       .air-canada-card {
         grid-column: span 1;
+      }
+
+      .cards-grid .project-card:nth-child(n+4) {
+        align-self: start;
+        min-height: var(--card-min-row-secondary);
       }
     }
 
@@ -1032,7 +1128,7 @@
 
       @media (min-width: 901px) {
         .cards-grid {
-          margin-top: clamp(-32px, -5.46vh, -56px) !important;
+          margin-top: var(--home-cards-overlap) !important;
         }
       }
 
@@ -1046,8 +1142,8 @@
     }
 
     @media (max-width: 900px) {
-      .page { gap: 57px; }
-      body { --home-hero-title-gap: 0px; }
+      .page { gap: var(--space-64); padding-top: 0; }
+      body { --home-hero-title-gap: 0; }
       .work-section { margin-top: var(--nav-content-offset); }
     }
 
@@ -1062,30 +1158,76 @@
       }
     }
 
+    /* Mobile-only: featured project cards hug image + text */
+    @media (max-width: 768px) {
+      .cards-grid {
+        align-items: start;
+      }
+
+      .cards-grid .project-card:not(.about-card):not(.air-canada-card) {
+        height: auto;
+        align-self: start;
+        min-height: 0;
+      }
+
+      .cards-grid .project-card:not(.about-card):not(.air-canada-card) .card-image {
+        flex: 0 0 auto;
+        aspect-ratio: 4 / 3;
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        margin: 0;
+        width: 100%;
+      }
+
+      .cards-grid .project-card:not(.about-card):not(.air-canada-card) .card-image img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+
+      .cards-grid .project-card:not(.about-card):not(.air-canada-card) .card-footer {
+        --card-footer-reserve: auto;
+        min-height: 0;
+        margin-top: 0;
+        padding: var(--card-footer-padding-mobile);
+        gap: var(--card-footer-gap);
+      }
+
+      .cards-grid .project-card:not(.about-card):not(.air-canada-card) .card-title-wrap {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
+      .cards-grid .project-card:not(.about-card):not(.air-canada-card) .card-tags {
+        margin-top: 0;
+      }
+    }
+
     @media (max-width: 640px) {
       .page {
         padding-top: 0;
-        gap: 46px;
+        gap: var(--page-section-gap);
       }
 
       .cards-grid {
         grid-template-columns: minmax(0, 1fr);
-        row-gap: 15px;
+        row-gap: var(--card-grid-gap-tight);
       }
 
       .cards-grid .project-card {
         position: sticky;
-        top: 96px;
+        top: var(--space-96);
         height: auto;
         align-self: start;
       }
 
       .cards-grid .project-card .card-image {
         flex: 0 0 auto;
-        width: calc(100% - 20px);
+        width: 100%;
         min-height: auto;
         max-height: none;
-        aspect-ratio: 3 / 2;
+        aspect-ratio: 4 / 3;
       }
 
       .cards-grid .project-card:nth-child(1) { z-index: 1; }
@@ -1094,36 +1236,41 @@
       .cards-grid .project-card:nth-child(4) { z-index: 4; }
       .cards-grid .project-card:nth-child(5) { z-index: 5; }
 
-      .project-card--nav { min-height: 100px; }
+      .project-card--nav { min-height: calc(var(--space-96) + var(--space-16)); }
       .work-section { margin-top: var(--nav-content-offset); }
 
       .about-card,
       .utility-card,
       .air-canada-card {
         grid-column: span 1;
-        min-height: 220px;
         height: auto;
-        max-height: 300px;
+        max-height: none;
       }
 
+      .about-card,
       .about-card.project-card--nav {
-        min-height: 220px;
+        min-height: var(--card-about-min);
       }
 
+      .utility-card,
       .air-canada-card {
-        min-height: 220px;
+        min-height: var(--card-min-mobile-secondary);
       }
 
       .air-canada-card .card-image {
+        flex: 0 0 auto;
+        height: var(--card-air-canada-media);
+        max-height: var(--card-air-canada-media);
         min-height: 0;
-        max-height: none;
-        flex: 1 1 auto;
         aspect-ratio: unset;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
 
     @media (max-width: 500px) {
-      .mono-nav { gap: 14px 18px; }
+      .mono-nav { gap: var(--space-16) var(--space-16); }
     }
 
     /* ── BIG HOVER TITLE (background anchor; cards layer on top) ── */
@@ -1138,7 +1285,7 @@
 
     .hero-title-wrapper {
       position: fixed;
-      top: clamp(56px, 3.5vw + 44px, 80px);
+      top: var(--space-64);
       left: 0;
       right: 0;
       width: 100%;
@@ -1150,7 +1297,7 @@
       justify-content: center;
       align-items: flex-start;
       box-sizing: border-box;
-      padding-inline: clamp(20px, 4vw, 64px);
+      padding-inline: var(--content-pad);
     }
 
     /* Mask on wrapper so glyphs aren’t clipped by tight line-height box */
@@ -1290,7 +1437,8 @@
             <a class="nav-contact-link" href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener noreferrer">LinkedIn<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
             <a class="nav-contact-link" href="https://drive.google.com/file/d/1HT2FcuIwYNYXt00IsOKhti0plwNZEdIb/view?usp=sharing" target="_blank" rel="noopener noreferrer">Resume<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
             <span class="nav-email-wrap">
-              <a class="nav-contact-link nav-email-copy" href="#" data-email="mariellopezdesign@gmail.com" aria-label="Copy email address"><span class="nav-email-label"><span class="nav-email-label-default">Contact</span><span class="nav-email-label-hover" aria-hidden="true">Email copied</span></span><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+              <a class="nav-contact-link nav-email-copy" href="#" data-email="mariellopezdesign@gmail.com" aria-label="Copy email address">Contact<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+              <span class="nav-copy-feedback" role="status" aria-live="polite" aria-hidden="true">Email copied</span>
             </span>
           </div>
         </div>
@@ -1334,7 +1482,11 @@
               <span class="card-title-original">Designing the future of grocery for 1M+ shoppers</span>
               <span class="card-title-clone" aria-hidden="true">Designing the future of grocery for 1M+ shoppers</span>
             </div>
-            <span class="card-tag">Product Strategy · Customer Experience · Scalable UX</span>
+            <div class="card-tags">
+              <span class="card-pill">Product Strategy</span>
+              <span class="card-pill">Customer Experience</span>
+              <span class="card-pill">Scalable UX</span>
+            </div>
           </div>
         </a>
 
@@ -1344,10 +1496,14 @@
           </div>
           <div class="card-footer link-hover">
             <div class="card-title-wrap">
-              <span class="card-title-original">Building a scalable design system across 6 grocery brands</span>
-              <span class="card-title-clone" aria-hidden="true">Building a scalable design system across 6 grocery brands</span>
+              <span class="card-title-original">Scaling a shared design system across 6 grocery brands</span>
+              <span class="card-title-clone" aria-hidden="true">Scaling a shared design system across 6 grocery brands</span>
             </div>
-            <span class="card-tag">Design Systems · Component Libraries · UX Consistency</span>
+            <div class="card-tags">
+              <span class="card-pill">Design Systems</span>
+              <span class="card-pill">Component Libraries</span>
+              <span class="card-pill">UX Consistency</span>
+            </div>
           </div>
         </a>
 
@@ -1357,15 +1513,19 @@
           </div>
           <div class="card-footer link-hover">
             <div class="card-title-wrap">
-              <span class="card-title-original">Elevating the digital experience for a luxury real estate development</span>
-              <span class="card-title-clone" aria-hidden="true">Elevating the digital experience for a luxury real estate development</span>
+              <span class="card-title-original">Redesigning the digital experience for a luxury real estate launch</span>
+              <span class="card-title-clone" aria-hidden="true">Redesigning the digital experience for a luxury real estate launch</span>
             </div>
-            <span class="card-tag">UI Design · Premium Interfaces · Brand Experience</span>
+            <div class="card-tags">
+              <span class="card-pill">UI Design</span>
+              <span class="card-pill">Premium Interfaces</span>
+              <span class="card-pill">Brand Experience</span>
+            </div>
           </div>
         </a>
 
-        <!-- Row 2: Coming soon + About -->
-        <div class="project-card no-hover air-canada-card utility-card" data-hover-title="Coming soon">
+        <!-- Row 2: Air Canada + About -->
+        <div class="project-card no-hover air-canada-card utility-card second-row-card" data-hover-title="Air Canada">
           <div class="card-image card-image--logo">
             <img src="ac-logo.png" alt="Air Canada" loading="lazy" />
           </div>
@@ -1374,11 +1534,13 @@
               <span class="card-title-original">Air Canada</span>
               <span class="card-title-clone" aria-hidden="true">Air Canada</span>
             </div>
-            <span class="card-tag">Coming soon</span>
+            <div class="card-tags">
+              <span class="card-pill">Case study available upon request</span>
+            </div>
           </div>
         </div>
 
-        <a class="project-card project-card--nav about-card" href="about.html" data-hover-title="About">
+        <a class="project-card project-card--nav about-card second-row-card" href="about.html" data-hover-title="About">
           <div class="about-card-photo" aria-hidden="true"></div>
           <div class="about-card-noise" aria-hidden="true"></div>
           <div class="about-card-content">
@@ -1387,7 +1549,9 @@
                 <span class="card-title-original">About</span>
                 <span class="card-title-clone" aria-hidden="true">About</span>
               </div>
-              <span class="card-tag">Get to know me</span>
+              <div class="card-tags">
+                <span class="card-pill">Get to know me</span>
+              </div>
             </div>
           </div>
         </a>

@@ -2,10 +2,6 @@
 
 :root {
   --mono-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --nav-pad-y: 32px;
-  --nav-pad-x: 48px;
-  --nav-header-gap: 24px 40px;
-  --nav-row-gap: 16px 28px;
   --nav-headline-size: clamp(17px, 1.55vw, 20px);
   --nav-meta-size: clamp(13px, 1.05vw, 15px);
   --nav-headline-weight: 500;
@@ -17,18 +13,17 @@
   --nav-ink: #111;
   --nav-muted: #777777;
   --nav-rotating: rgba(0, 0, 0, 0.45);
-  --nav-title-extra: 0px;
-  /* Space from viewport top to first content below fixed nav */
-  --nav-below-gap: 32px;
-  --nav-content-offset: calc(104px + var(--nav-below-gap));
+  --nav-title-extra: 0;
   --divider-color: rgba(0, 0, 0, 0.12);
   --divider: 1px solid var(--divider-color);
   --content-max: 1440px;
-  --content-pad: 80px;
   /* Hover tokens — match hover.css; defined here so nav works standalone */
   --hover-color: rgba(0, 0, 0, 0.55);
   --hover-duration: 0.3s;
   --hover-ease: ease;
+  --nav-copy-popup-bg: #ffffff;
+  --nav-copy-popup-border: rgba(0, 0, 0, 0.1);
+  --nav-copy-popup-shadow: 0 6px 20px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
 /* ── Content column (aligns dividers + body copy) ── */
@@ -52,17 +47,6 @@
   background: var(--divider-color);
 }
 
-@media (max-width: 1024px) {
-  :root {
-    --content-pad: 40px;
-  }
-}
-
-@media (max-width: 640px) {
-  :root {
-    --content-pad: 20px;
-  }
-}
 
 /* ── Fixed nav shell ── */
 .home-hero-mono.navbar {
@@ -327,7 +311,7 @@
 .nav-page-line {
   display: flex;
   align-items: baseline;
-  gap: 40px;
+  gap: var(--space-48);
   flex: 1;
   min-width: 0;
   margin: 0;
@@ -379,7 +363,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 8px;
+  gap: 6px;
   width: auto;
   flex-shrink: 0;
   cursor: default;
@@ -402,45 +386,59 @@
   flex: 0 0 auto;
 }
 
-/* ── Email copy feedback ── */
+/* ── Email copy feedback (popup card below Contact) ── */
 .nav-email-wrap {
   position: relative;
   display: inline-flex;
   align-items: center;
+  overflow: visible;
 }
 
-.nav-email-label {
-  position: relative;
-  display: inline-block;
-}
-
-.nav-email-label-default,
-.nav-email-label-hover {
-  transition: opacity 0.22s ease;
-}
-
-.nav-email-label-hover {
+.nav-copy-feedback {
   position: absolute;
+  top: calc(100% + var(--popover-offset));
   left: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  z-index: 120;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--space-24);
+  padding: var(--popover-pad-y) var(--popover-pad-x);
+  font-family: var(--mono-serif);
+  font-size: 12px;
+  font-weight: var(--nav-meta-weight);
+  color: var(--nav-ink);
+  letter-spacing: var(--nav-meta-tracking);
+  line-height: 1.25;
   white-space: nowrap;
+  pointer-events: none;
+  background: var(--nav-copy-popup-bg);
+  border: 1px solid var(--nav-copy-popup-border);
+  border-radius: 10px;
+  box-shadow: var(--nav-copy-popup-shadow);
   opacity: 0;
+  visibility: hidden;
+  transform: translateY(var(--space-16)) scale(0.97);
+  transition:
+    opacity 0.24s ease,
+    transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0.24s ease;
 }
 
-.nav-email-copy:hover .nav-email-label-default,
-.nav-email-copy:focus-visible .nav-email-label-default {
-  opacity: 0;
+.nav-copy-feedback::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: var(--space-16);
+  border: 5px solid transparent;
+  border-bottom-color: var(--nav-copy-popup-bg);
+  filter: drop-shadow(0 -1px 0 var(--nav-copy-popup-border));
 }
 
-.nav-email-copy:hover .nav-email-label-hover,
-.nav-email-copy:focus-visible .nav-email-label-hover,
-.nav-email-copy.is-copied .nav-email-label-hover {
+.nav-copy-feedback.is-visible {
   opacity: 1;
-}
-
-.nav-email-copy.is-copied .nav-email-label-default {
-  opacity: 0;
+  visibility: visible;
+  transform: translateY(0) scale(1);
 }
 
 /* ── Left column (name) ── */
@@ -453,16 +451,18 @@
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: var(--nav-right-gap);
   flex-shrink: 0;
+  overflow: visible;
 }
 
 /* ── Quiet contact links ── */
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: var(--nav-links-gap);
   flex-shrink: 0;
+  overflow: visible;
 }
 
 .nav-contact-link {
@@ -514,27 +514,20 @@
 @media (max-width: 1024px) {
   .mono-nav {
     flex-wrap: nowrap;
-    gap: 12px 20px;
+    gap: var(--space-16) var(--space-24);
   }
 }
 
 @media (max-width: 640px) {
-  :root {
-    --nav-pad-top-extra: 8px;
-    --nav-title-extra: calc(16px + var(--nav-pad-top-extra));
-    --nav-below-gap: 36px;
-    --nav-content-offset: calc(80px + var(--nav-title-extra) + var(--nav-below-gap));
-  }
-
   .home-hero-mono.navbar {
-    padding-block: calc(14px + var(--nav-pad-top-extra)) 14px;
+    padding-block: calc(var(--space-16) + var(--nav-pad-top-extra)) var(--space-16);
     padding-inline: 0;
   }
 
   .mono-nav {
     flex-direction: column;
     align-items: stretch;
-    gap: 18px;
+    gap: var(--space-16);
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
   }
@@ -570,7 +563,7 @@
   .nav-page-line {
     flex: 1 1 auto;
     min-width: 0;
-    gap: 24px;
+    gap: var(--space-24);
     font-size: 16px;
     font-weight: var(--nav-headline-weight);
     line-height: 1.25;
@@ -580,20 +573,13 @@
 
   .nav-right {
     flex-wrap: wrap;
-    gap: 8px 16px;
+    gap: var(--space-16) var(--space-16);
     align-items: flex-start;
     justify-content: flex-start;
   }
 
   .nav-links {
-    gap: 12px;
-  }
-}
-
-@media (max-width: 500px) {
-  :root {
-    --nav-below-gap: 32px;
-    --nav-content-offset: calc(76px + var(--nav-title-extra) + var(--nav-below-gap));
+    gap: var(--space-16);
   }
 }
 
