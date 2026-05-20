@@ -530,11 +530,11 @@
     }
 
     @media (min-width: 901px) {
-      .work-section {
-        margin-top: 0;
+      .home-page .work-section {
+        margin-top: 40px;
       }
 
-      .cards-grid {
+      .home-page .cards-grid {
         max-width: 1180px;
         width: 100%;
         margin-top: -16px;
@@ -1416,11 +1416,16 @@
     }
 
     @media (min-width: 901px) {
-      .hero-title-wrapper {
+      .home-page .hero-title-wrapper {
         position: relative;
         z-index: 1;
+        margin-top: 28px;
         margin-bottom: -24px;
         pointer-events: none;
+      }
+
+      .home-page .home-hero-mono.navbar {
+        z-index: 9999;
       }
 
       .hero-title-inner {
@@ -1491,7 +1496,7 @@
   </style>
   <link rel="stylesheet" href="footer.css" />
 </head>
-<body>
+<body class="home-page">
   <div class="bg-blobs" aria-hidden="true">
     <div class="bg-blob bg-blob-1"></div>
     <div class="bg-blob bg-blob-2"></div>
