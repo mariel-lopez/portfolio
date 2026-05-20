@@ -8,6 +8,7 @@ footer,
   margin-top: var(--footer-margin-top, 56px);
   border-top: var(--divider);
   padding-top: var(--footer-pad-top);
+  padding-bottom: var(--footer-pad-bottom);
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -18,10 +19,6 @@ footer,
 .footer-divider,
 .site-footer hr {
   margin-bottom: var(--footer-divider-margin, 40px);
-}
-
-.about-footer {
-  padding-bottom: var(--footer-pad-bottom);
 }
 
 .content-shell > .about-footer,

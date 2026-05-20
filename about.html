@@ -391,15 +391,25 @@
       will-change: transform;
     }
 
+    .contact-marquee,
     .marquee-text {
       font-family: var(--mono-serif);
       font-size: clamp(64px, 9vw, 140px);
       font-weight: 700;
-      letter-spacing: -0.05em;
-      line-height: 1;
+      letter-spacing: -0.04em;
+      line-height: 0.9;
+      white-space: nowrap;
+      text-transform: uppercase;
       color: var(--page-ink);
       padding-right: 0.3em;
       flex-shrink: 0;
+    }
+
+    @media (min-width: 1600px) {
+      .contact-marquee,
+      .marquee-text {
+        font-size: clamp(5rem, 8vw, 10rem);
+      }
     }
 
     @keyframes marquee-scroll {
@@ -735,12 +745,12 @@
 
   <div class="site-bottom">
   <!-- MARQUEE -->
-  <div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-strip contact-marquee" aria-hidden="true">
     <div class="marquee-track">
-      <span class="marquee-text">SAY HI, DROP A LINE, LET'S CONNECT &nbsp;·&nbsp; </span>
-      <span class="marquee-text">SAY HI, DROP A LINE, LET'S CONNECT &nbsp;·&nbsp; </span>
-      <span class="marquee-text">SAY HI, DROP A LINE, LET'S CONNECT &nbsp;·&nbsp; </span>
-      <span class="marquee-text">SAY HI, DROP A LINE, LET'S CONNECT &nbsp;·&nbsp; </span>
+      <span class="marquee-text">LET’S MAKE COOL THINGS TOGETHER ·&nbsp;</span>
+      <span class="marquee-text">LET’S MAKE COOL THINGS TOGETHER ·&nbsp;</span>
+      <span class="marquee-text">LET’S MAKE COOL THINGS TOGETHER ·&nbsp;</span>
+      <span class="marquee-text">LET’S MAKE COOL THINGS TOGETHER ·&nbsp;</span>
     </div>
   </div>
 

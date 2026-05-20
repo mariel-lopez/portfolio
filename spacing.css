@@ -46,7 +46,7 @@
   /* Footer */
   --footer-margin-top: 56px;
   --footer-pad-top: 40px;
-  --footer-pad-bottom: var(--space-48);
+  --footer-pad-bottom: 80px;
   --footer-gap: var(--space-48);
   --footer-divider-margin: 40px;
   --footer-social-gap: var(--space-16);

@@ -148,3 +148,20 @@ body:has(.about-main) {
     max-width: max-content;
   }
 }
+
+/* Desktop: no flex stretch void below footer — bottom inset lives on footer */
+@media (min-width: 861px) {
+  body:not(:has(.about-main)) {
+    min-height: 0;
+  }
+
+  .page,
+  .project-page-container {
+    flex: 0 1 auto;
+    min-height: 0;
+  }
+
+  .project-page-container > .page {
+    flex: 0 1 auto;
+  }
+}
