@@ -165,3 +165,48 @@ body:has(.about-main) {
     flex: 0 1 auto;
   }
 }
+
+/* ── Page hero h1 (About, case studies) ── */
+.about-main.about-hero,
+.hero-content {
+  container-type: inline-size;
+  container-name: hero-content;
+}
+
+h1.hero-title {
+  font-family: var(--mono-serif);
+  font-size: clamp(1.875rem, 5.25cqi + 0.35rem, 3.75rem);
+  line-height: 0.95;
+  letter-spacing: -0.038em;
+  font-weight: 700;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin-block: 0;
+  margin-inline: 0;
+  color: var(--page-ink);
+  text-wrap: balance;
+  text-wrap: pretty;
+  widows: 2;
+  orphans: 2;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+
+.about-main.about-hero > h1.hero-title {
+  margin-block-end: 32px;
+}
+
+@media (max-width: 768px) {
+  h1.hero-title {
+    line-height: 0.96;
+    letter-spacing: -0.035em;
+  }
+}
+
+@media (max-width: 500px) {
+  h1.hero-title {
+    line-height: 0.97;
+  }
+}

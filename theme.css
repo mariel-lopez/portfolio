@@ -607,8 +607,8 @@ html.dark-theme .quests-section::before {
   display: none !important;
 }
 
-html.dark-theme .about-headline,
-html.dark-theme .about-headline-accent {
+html.dark-theme h1.hero-title,
+html.dark-theme .hero-title-accent {
   color: var(--page-ink);
 }
 
