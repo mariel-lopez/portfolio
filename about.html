@@ -51,7 +51,15 @@
       margin-top: 0;
       margin-bottom: 0;
       max-width: 1200px;
-      text-wrap: balance;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+    }
+
+    .about-headline-line {
+      display: block;
+      white-space: nowrap;
     }
 
     /* ── Intro (below hero, above photos) ── */
@@ -478,6 +486,10 @@
     }
 
     @media (max-width: 640px) {
+      .about-headline {
+        font-size: clamp(24px, 8.25vw, 52px);
+      }
+
       .about-intro {
         margin-top: 24px;
         margin-bottom: 40px;
@@ -648,10 +660,13 @@
   <main class="about-main about-hero content-shell">
 
     <!-- Hero headline -->
-    <h1 class="about-headline"><span class="about-headline-accent">Designer</span> by day. <span class="about-headline-accent">Community builder</span> by night.</h1>
+    <h1 class="about-headline">
+      <span class="about-headline-line"><span class="about-headline-accent">Designer</span> by day.</span>
+      <span class="about-headline-line"><span class="about-headline-accent">Community builder</span> by night.</span>
+    </h1>
 
     <div class="about-intro">
-      <p>I'm a product designer shaped by two very different worlds: the busy streets of Manila, Philippines and the quiet suburbs of Ontario, Canada.</p>
+      <p>I'm a product designer that's been shaped by two very different worlds: the busy streets of Manila, Philippines and the quiet suburbs of Ontario, Canada.</p>
       <p>That contrast taught me early on that perspective shapes how people move through the world, and continues to influence how I approach my designs and problem spaces today.</p>
     </div>
 
@@ -686,6 +701,9 @@
                 <p><span style="font-weight:500;">Clients served:</span> Air Canada, Sobeys, Government of Canada</p>
                 <p>I've spent the past few years working across large-scale platforms, design systems, and complex customer experiences, learning how to navigate ambiguity, align cross-functional teams, and design within systems that impact millions of people.</p>
                 <p>I care deeply about doing meaningful work alongside ambitious, thoughtful people who are motivated by impact over ego.</p>
+                <p class="quest-resume-link">
+                  <a class="nav-contact-link" href="https://drive.google.com/file/d/1HT2FcuIwYNYXt00IsOKhti0plwNZEdIb/view?usp=sharing" target="_blank" rel="noopener noreferrer">View my resume<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+                </p>
               </div>
             </div>
           </div>
