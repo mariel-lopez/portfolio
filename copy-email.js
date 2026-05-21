@@ -33,7 +33,8 @@
     var status = row ? row.querySelector('.footer-email-copy-status') : null;
     var resetTimer;
 
-    btn.addEventListener('click', function () {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
       if (btn.classList.contains('is-copied')) return;
 
       copyText(email).then(function () {

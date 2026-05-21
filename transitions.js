@@ -34,14 +34,18 @@
     var a = e.target.closest('a[href]');
     if (!a) return;
 
-    var href = a.getAttribute('href');
+    var href = (a.getAttribute('href') || '').trim();
     if (!href || a.target === '_blank') return;
-    if (/^(#|mailto:|tel:|javascript:)/i.test(href)) return;
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
 
     try {
-      if (new URL(href, location.href).origin !== location.origin) return;
-    } catch (_) { return; }
+      var url = new URL(href, location.href);
+      if (url.protocol === 'mailto:' || url.protocol === 'tel:') return;
+      if (url.origin !== location.origin) return;
+    } catch (_) {
+      if (/^(#|mailto:|tel:|javascript:)/i.test(href)) return;
+      return;
+    }
 
     e.preventDefault();
 
