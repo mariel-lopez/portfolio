@@ -276,16 +276,16 @@ html.dark-theme .project-card:not(.about-card) .card-image {
   -webkit-backdrop-filter: none !important;
 }
 
-html.dark-theme .project-card:not(.about-card):not(.no-hover):hover .card-image,
-html.dark-theme .project-card:not(.about-card):not(.no-hover):focus-visible .card-image {
+html.dark-theme .project-card:not(.about-card):not(.no-hover):not(.air-canada-card):hover .card-image,
+html.dark-theme .project-card:not(.about-card):not(.no-hover):not(.air-canada-card):focus-visible .card-image {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
 }
 
 html.dark-theme .air-canada-card .card-image.card-image--logo,
-html.dark-theme .air-canada-card.no-hover:hover .card-image.card-image--logo,
-html.dark-theme .air-canada-card.no-hover:focus-visible .card-image.card-image--logo {
+html.dark-theme .air-canada-card:hover .card-image.card-image--logo,
+html.dark-theme .air-canada-card:focus-visible .card-image.card-image--logo {
   background: linear-gradient(180deg, #ffffff 0%, #faf6f0 48%, #f0e9de 100%) !important;
   min-height: 168px;
 }
@@ -299,10 +299,22 @@ html.dark-theme .air-canada-card .card-image--logo img {
   transform-origin: center center;
 }
 
-html.dark-theme .project-card:not(.about-card):not(.no-hover):hover,
-html.dark-theme .project-card:not(.about-card):not(.no-hover):focus-visible {
+html.dark-theme .project-card:not(.about-card):not(.no-hover):not(.air-canada-card):hover,
+html.dark-theme .project-card:not(.about-card):not(.no-hover):not(.air-canada-card):focus-visible {
   background: var(--surface-glass-hover) !important;
   color: rgba(255, 255, 255, 0.92) !important;
+}
+
+html.dark-theme .project-card--accent-air-canada:hover,
+html.dark-theme .project-card--accent-air-canada:focus-visible {
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #faf6f0 38%,
+    #f0e9de 52%,
+    rgba(26, 22, 38, 0.94) 100%
+  ) !important;
+  border-color: var(--surface-border) !important;
 }
 
 html.dark-theme .project-card:not(.about-card) .card-footer,
@@ -376,13 +388,13 @@ html.dark-theme .project-card:not(.about-card):not(.no-hover):focus-visible .car
   color: rgba(255, 255, 255, 0.88) !important;
 }
 
-html.dark-theme .air-canada-card.no-hover:hover .card-title-original,
-html.dark-theme .air-canada-card.no-hover:focus-visible .card-title-original {
+html.dark-theme .air-canada-card:hover .card-title-original,
+html.dark-theme .air-canada-card:focus-visible .card-title-original {
   color: #ffffff !important;
 }
 
-html.dark-theme .air-canada-card.no-hover:hover .card-pill,
-html.dark-theme .air-canada-card.no-hover:focus-visible .card-pill {
+html.dark-theme .air-canada-card:hover .card-pill,
+html.dark-theme .air-canada-card:focus-visible .card-pill {
   color: rgba(235, 226, 255, 0.78) !important;
   border-color: var(--surface-border) !important;
   background: rgba(255, 255, 255, 0.06) !important;
@@ -391,13 +403,6 @@ html.dark-theme .air-canada-card.no-hover:focus-visible .card-pill {
 html.dark-theme .project-card.no-hover:not(.about-card):hover,
 html.dark-theme .project-card.no-hover:not(.about-card):focus-visible {
   background: var(--surface-glass) !important;
-}
-
-@media (min-width: 901px) {
-  html.dark-theme .cards-grid .air-canada-card.no-hover:hover,
-  html.dark-theme .cards-grid .air-canada-card.no-hover:focus-visible {
-    background: rgba(24, 20, 38, 0.92) !important;
-  }
 }
 
 /* About card — dark glass surface; photo hover preserved */
@@ -635,13 +640,6 @@ html.dark-theme .marquee-text {
   color: var(--page-ink);
 }
 
-html.dark-theme .about-photo-caption {
-  color: var(--about-ink-muted);
-  background: var(--about-chip-bg);
-  border-color: var(--about-chip-border);
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
-}
-
 html.dark-theme .about-photo {
   background: var(--about-photo-bg);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.32);
@@ -663,23 +661,11 @@ html.dark-theme .about-photo::after {
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
   }
 
-  html.dark-theme .about-photo:hover .about-photo-caption {
-    color: var(--about-ink-muted);
-    background: var(--about-chip-bg);
-    border-color: var(--about-chip-border);
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.32);
-  }
 }
 
 @media (hover: none) {
   html.dark-theme .about-photo:active::after {
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
-  }
-
-  html.dark-theme .about-photo:active .about-photo-caption {
-    color: var(--about-ink-muted);
-    background: var(--about-chip-bg);
-    border-color: var(--about-chip-border);
   }
 }
 

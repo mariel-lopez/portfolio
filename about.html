@@ -89,20 +89,6 @@
       margin-bottom: 100px;
     }
 
-    .about-photo-link {
-      display: block;
-      min-width: 0;
-      text-decoration: none;
-      color: inherit;
-      cursor: pointer;
-      border-radius: 28px;
-    }
-
-    .about-photo-link:focus-visible {
-      outline: 2px solid rgba(0, 0, 0, 0.35);
-      outline-offset: 4px;
-    }
-
     .about-photo {
       position: relative;
       margin: 0;
@@ -112,12 +98,6 @@
       background: var(--about-photo-bg, #ddd);
       isolation: isolate;
       transition: box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    @media (hover: hover) {
-      .about-photo-link:hover .about-photo {
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-      }
     }
 
     .about-photo img {
@@ -140,89 +120,15 @@
     }
 
     @media (hover: hover) {
-      .about-photo:hover::after,
-      .about-photo-link:hover .about-photo::after {
+      .about-photo:hover::after {
         box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
       }
 
-      .about-photo:hover .about-photo-caption,
-      .about-photo-link:hover .about-photo-caption {
-        opacity: 1;
-        visibility: visible;
-        color: var(--about-ink-muted);
-        background: var(--about-chip-bg);
-        border-color: var(--about-chip-border);
-        box-shadow: 0 8px 26px rgba(0, 0, 0, 0.07);
-        transition:
-          opacity 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-          visibility 0s step-start,
-          color 0.25s ease,
-          background 0.25s ease,
-          border-color 0.25s ease,
-          box-shadow 0.32s ease;
-      }
-    }
-
-    .about-photo-caption {
-      position: absolute;
-      left: 12px;
-      top: 12px;
-      z-index: 4;
-      margin: 0;
-      max-width: calc(100% - 24px);
-      padding: 9px 14px 9px 12px;
-      font-family: var(--mono-serif);
-      font-size: 12px;
-      font-weight: 500;
-      font-style: normal;
-      letter-spacing: 0.04em;
-      text-transform: none;
-      text-decoration: none;
-      line-height: normal;
-      color: var(--about-ink-muted);
-      white-space: nowrap;
-      pointer-events: none;
-      border-radius: 10px;
-      background: var(--about-chip-bg);
-      border: 1px solid var(--about-chip-border);
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
-      backdrop-filter: blur(10px) saturate(1.02);
-      -webkit-backdrop-filter: blur(10px) saturate(1.02);
-      opacity: 0;
-      visibility: hidden;
-      transition:
-        opacity 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-        visibility 0.28s step-end,
-        color 0.25s ease,
-        background 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.32s ease;
     }
 
     @media (hover: none) {
-      .about-photo-caption {
-        left: 50% !important;
-        top: auto !important;
-        bottom: 14px;
-        transform: translateX(-50%);
-        max-width: calc(100% - 28px);
-        white-space: normal;
-        text-align: center;
-        text-wrap: balance;
-      }
-
       .about-photo:active::after {
         box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
-      }
-
-      .about-photo:active .about-photo-caption {
-        opacity: 1;
-        visibility: visible;
-        color: var(--about-ink-muted);
-        background: var(--about-chip-bg);
-        border-color: var(--about-chip-border);
-        box-shadow: 0 8px 26px rgba(0, 0, 0, 0.07);
-        transform: translateX(-50%);
       }
     }
 
@@ -494,7 +400,6 @@
 
       .about-photo,
       .about-photo::after,
-      .about-photo-caption,
       .quest-org a .quest-org-link-icon {
         transition-duration: 0.08s !important;
       }
@@ -522,12 +427,6 @@
 
       .about-photos > *:nth-child(3) img {
         object-position: center 30%;
-      }
-
-      .about-photo-caption {
-        padding: 8px 12px 8px 10px;
-        font-size: 11px;
-        letter-spacing: 0.04em;
       }
 
       .quest-heading {
@@ -595,7 +494,6 @@
         margin-bottom: 72px;
       }
 
-      .about-photos > *:nth-child(1) .about-photo,
       .about-photos > .about-photo {
         position: sticky;
         top: 96px;
@@ -603,9 +501,9 @@
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
       }
 
-      .about-photos > *:nth-child(1) { z-index: 1; }
-      .about-photos > *:nth-child(2) { z-index: 2; }
-      .about-photos > *:nth-child(3) { z-index: 3; }
+      .about-photos > .about-photo:nth-child(1) { z-index: 1; }
+      .about-photos > .about-photo:nth-child(2) { z-index: 2; }
+      .about-photos > .about-photo:nth-child(3) { z-index: 3; }
     }
 
     @media (max-width: 500px) {
@@ -759,19 +657,14 @@
 
     <!-- Photo row -->
     <div class="about-photos">
-      <a class="about-photo-link" href="https://misty-saint-10438043.figma.site/" target="_blank" rel="noopener noreferrer" aria-label="Hosted a Figma Makeathon — view project site">
-        <figure class="about-photo">
-          <img src="about-img.jpeg" alt="Two people in front of a screen showing a Figma Makeathon presentation." loading="eager" />
-          <figcaption class="about-photo-caption">Hosted a Figma Makeathon</figcaption>
-        </figure>
-      </a>
+      <figure class="about-photo">
+        <img src="about-img.jpeg" alt="Two people in front of a screen showing a Figma Makeathon presentation." loading="eager" />
+      </figure>
       <figure class="about-photo">
         <img src="photo-mariel.jpg" alt="Portrait with the Brooklyn Bridge and Manhattan skyline in the background." loading="eager" />
-        <figcaption class="about-photo-caption">Me!</figcaption>
       </figure>
       <figure class="about-photo">
         <img src="photo-fan-right.jpg" alt="Looking up at a palm tree against a blue sky." loading="eager" />
-        <figcaption class="about-photo-caption">Trying out my new camera</figcaption>
       </figure>
     </div>
 
@@ -852,7 +745,7 @@
     <div class="content-shell">
   <footer class="about-footer">
     <div class="footer-email-row">
-      <span class="footer-email">mariellopezdesign@gmail.com</span>
+      <a class="footer-email" href="mailto:mariellopezdesign@gmail.com">mariellopezdesign@gmail.com</a>
       <button type="button" class="footer-email-copy" data-email="mariellopezdesign@gmail.com" aria-label="Copy email address">
         <span class="footer-email-copy-icons" aria-hidden="true">
           <svg class="footer-email-copy-icon footer-email-copy-icon--clipboard" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
@@ -880,7 +773,6 @@
     </div>
   </div>
 
-  <script src="about-photo-cursor-caption.js" defer></script>
   <script src="transitions.js" defer></script>
   <script src="copy-email.js" defer></script>
   <script src="nav-scroll.js" defer></script>

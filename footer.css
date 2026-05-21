@@ -42,7 +42,7 @@ footer,
   line-height: 1;
   color: var(--page-ink, #000);
   text-decoration: none;
-  cursor: default;
+  cursor: pointer;
   max-width: 100%;
   min-width: 0;
 }
