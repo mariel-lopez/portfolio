@@ -625,13 +625,21 @@ main {
   margin-bottom: 0;
 }
 
-/* Cards and images stay in normal stacking — z-index kept low */
+/* Homepage cards stack above background hero title (see index.html) */
 .cards-grid,
 .project-card,
 .hero-image,
 .about-card {
   position: relative;
   z-index: 1;
+}
+
+body.home-page .hero-title-wrapper {
+  z-index: 0;
+}
+
+body.home-page .page {
+  z-index: 2;
 }
 
 .cards-grid,

@@ -1,59 +1,155 @@
 (function () {
-  var LEAVE_MS = 320;
-  var ENTER_MS = 500;
-  var reduce   = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  'use strict';
 
-  /* Use overlay already in DOM (created by inline script before first paint),
-     or create it now as a safe fallback. */
-  var ov = document.getElementById('pt-overlay');
-  if (!ov) {
-    ov = document.createElement('div');
-    ov.id = 'pt-overlay';
-    ov.setAttribute('aria-hidden', 'true');
-    ov.style.cssText =
-      'position:fixed;inset:0;z-index:9990;' +
-      'pointer-events:none;opacity:1;will-change:opacity;' +
-      'background:var(--overlay-bg,#f5f5f2);';
-    document.body.appendChild(ov);
+  var DURATION = 650;
+  var STAGGER = 45;
+  var MAX_STAGGER = 360;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var html = document.documentElement;
+
+  var overlay = document.getElementById('pt-overlay');
+  var wipe = document.getElementById('pt-gradient-wipe');
+
+  if (!overlay || !wipe) return;
+
+  var surfaceSelector =
+    '.home-hero-mono.navbar, .page, .about-main, .project-page-container, .site-bottom';
+
+  function surfaces() {
+    var list = Array.prototype.slice.call(document.querySelectorAll(surfaceSelector));
+    list.forEach(function (el) {
+      el.classList.add('pt-page-surface');
+    });
+    return list;
   }
 
-  /* Attach transition now that the overlay is confirmed in the DOM */
-  ov.style.transition =
-    'opacity ' + (reduce ? '0.1s' : (ENTER_MS / 1000) + 's') +
-    ' cubic-bezier(0.22,1,0.36,1)';
+  function setPhase(phase) {
+    if (phase) html.setAttribute('data-pt-phase', phase);
+    else html.setAttribute('data-pt-phase', 'idle');
+  }
 
-  /* Fade in: reveal the arriving page */
-  requestAnimationFrame(function () {
-    requestAnimationFrame(function () {
-      ov.style.opacity = '0';
+  function clearDelays(nodes) {
+    nodes.forEach(function (el) {
+      el.style.transitionDelay = '';
     });
-  });
+  }
 
-  /* Fade out: cover the leaving page, then navigate */
-  document.addEventListener('click', function (e) {
-    var a = e.target.closest('a[href]');
-    if (!a) return;
+  function staggerIn(nodes) {
+    if (reduce) {
+      clearDelays(nodes);
+      return;
+    }
+    nodes.forEach(function (el, i) {
+      el.style.transitionDelay = Math.min(i * STAGGER, MAX_STAGGER) + 'ms';
+    });
+  }
+
+  function wait(ms) {
+    return new Promise(function (resolve) {
+      setTimeout(resolve, ms);
+    });
+  }
+
+  function runEnter() {
+    var nodes = surfaces();
+
+    if (reduce) {
+      setPhase('enter-settle');
+      return wait(120).then(function () {
+        setPhase('idle');
+        clearDelays(nodes);
+        html.style.overflow = '';
+      });
+    }
+
+    setPhase('enter');
+    html.style.overflow = 'hidden';
+
+    return wait(40)
+      .then(function () {
+        setPhase('enter-wipe');
+        return wait(DURATION);
+      })
+      .then(function () {
+        setPhase('enter-settle');
+        staggerIn(nodes);
+        return wait(Math.max(420, DURATION - 180));
+      })
+      .then(function () {
+        setPhase('idle');
+        clearDelays(nodes);
+        html.style.overflow = '';
+
+        if (location.hash) {
+          var target = document.querySelector(location.hash);
+          if (target) target.scrollIntoView({ block: 'start' });
+        } else {
+          window.scrollTo(0, 0);
+        }
+      });
+  }
+
+  function runLeave(href) {
+    var nodes = surfaces();
+
+    if (reduce) {
+      setPhase('leave');
+      return wait(100).then(function () {
+        window.location.href = href;
+      });
+    }
+
+    setPhase('leave');
+    html.style.overflow = 'hidden';
+
+    try {
+      sessionStorage.setItem('pt-scroll:' + location.pathname, String(window.scrollY));
+    } catch (e) {}
+
+    return wait(DURATION).then(function () {
+      window.location.href = href;
+    });
+  }
+
+  function isInternalNavLink(a, e) {
+    if (!a || a.target === '_blank' || a.hasAttribute('download')) return false;
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return false;
 
     var href = (a.getAttribute('href') || '').trim();
-    if (!href || a.target === '_blank') return;
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    if (!href || href.charAt(0) === '#') return false;
 
     try {
       var url = new URL(href, location.href);
-      if (url.protocol === 'mailto:' || url.protocol === 'tel:') return;
-      if (url.origin !== location.origin) return;
+      if (url.protocol === 'mailto:' || url.protocol === 'tel:') return false;
+      if (url.origin !== location.origin) return false;
+      if (url.pathname === location.pathname && url.search === location.search) return false;
+      return true;
     } catch (_) {
-      if (/^(#|mailto:|tel:|javascript:)/i.test(href)) return;
-      return;
+      return !/^(mailto:|tel:|javascript:)/i.test(href);
     }
+  }
 
-    e.preventDefault();
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
 
-    var leaveMs = reduce ? 0 : LEAVE_MS;
-    ov.style.transition =
-      'opacity ' + (reduce ? '0.1s' : (leaveMs / 1000) + 's') + ' ease-in';
-    ov.style.opacity = '1';
-
-    setTimeout(function () { window.location.href = href; }, leaveMs);
+  window.addEventListener('pageshow', function (e) {
+    if (!e.persisted) return;
+    setPhase('idle');
+    clearDelays(surfaces());
+    html.style.overflow = '';
   });
-}());
+
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href]');
+    if (!isInternalNavLink(a, e)) return;
+    e.preventDefault();
+    runLeave(a.href);
+  });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', runEnter);
+  } else {
+    runEnter();
+  }
+})();

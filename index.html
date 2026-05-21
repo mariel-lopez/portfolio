@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="spacing.css" />
   <link rel="stylesheet" href="nav.css" />
   <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="page-transitions.css" />
   <link rel="stylesheet" href="layout.css" />
   <link rel="stylesheet" href="hover.css" />
   <link rel="stylesheet" href="copy-email.css" />
@@ -40,20 +41,6 @@
       overflow-y: auto;
       --card-tag-font-size: clamp(11px, 0.95vw, 13px);
       --card-title-font-size: calc(var(--card-tag-font-size) * 1.08);
-      --hero-title-fade: linear-gradient(
-        to bottom,
-        #000 0%,
-        #000 48%,
-        rgba(0, 0, 0, 0.98) 58%,
-        rgba(0, 0, 0, 0.93) 66%,
-        rgba(0, 0, 0, 0.84) 73%,
-        rgba(0, 0, 0, 0.7) 79%,
-        rgba(0, 0, 0, 0.52) 85%,
-        rgba(0, 0, 0, 0.32) 90%,
-        rgba(0, 0, 0, 0.16) 95%,
-        rgba(0, 0, 0, 0.05) 98.5%,
-        transparent 100%
-      );
     }
 
     .mono-nav .nav-etc {
@@ -512,6 +499,7 @@
 
     .page {
       position: relative;
+      z-index: 1;
       padding: 0 var(--content-pad) 0;
       display: flex;
       flex-direction: column;
@@ -553,7 +541,7 @@
       .home-page .cards-grid {
         max-width: 1180px;
         width: 100%;
-        margin-top: -12px;
+        margin-top: -8px;
         margin-left: auto;
         margin-right: auto;
         position: relative;
@@ -571,6 +559,24 @@
         background: rgba(255, 255, 255, 0.9);
         backdrop-filter: blur(22px) saturate(1.04);
         -webkit-backdrop-filter: blur(22px) saturate(1.04);
+      }
+
+      /* Top row: page-tinted gradient so cards melt into hero title below */
+      .home-page .cards-grid .project-card:nth-child(-n+3):not(.about-card) {
+        background: var(--hero-card-top-blend) !important;
+        box-shadow:
+          inset 0 28px 52px -20px color-mix(in srgb, var(--page-bg) 55%, transparent),
+          0 6px 22px rgba(0, 0, 0, 0.055),
+          0 18px 44px rgba(0, 0, 0, 0.048),
+          0 1px 3px rgba(0, 0, 0, 0.04);
+      }
+
+      html.dark-theme .home-page .cards-grid .project-card:nth-child(-n+3):not(.about-card) {
+        box-shadow:
+          inset 0 32px 56px -18px color-mix(in srgb, var(--page-bg) 70%, transparent),
+          0 6px 22px rgba(0, 0, 0, 0.2),
+          0 18px 44px rgba(0, 0, 0, 0.16),
+          0 1px 3px rgba(0, 0, 0, 0.12);
       }
 
       .cards-grid .project-card:nth-child(-n+3) {
@@ -1346,7 +1352,7 @@
       margin-bottom: 24px;
       overflow: visible;
       pointer-events: none;
-      z-index: 1;
+      z-index: 0;
       display: flex;
       justify-content: center;
       align-items: flex-start;
@@ -1354,14 +1360,14 @@
       padding-inline: var(--content-pad);
     }
 
-    /* Mask on wrapper so glyphs aren’t clipped by tight line-height box */
+    /* Gradient mask — sharp top, soft bottom melt into cards (no text blur) */
     .hero-title-inner {
       display: block;
       margin-inline: auto;
       max-width: 100%;
       text-align: center;
       overflow: visible;
-      padding: 0.06em 0.18em 0.72em;
+      padding: 0.06em 0.18em 0.85em;
       box-sizing: content-box;
       -webkit-mask-image: var(--hero-title-fade);
       mask-image: var(--hero-title-fade);
@@ -1369,15 +1375,17 @@
       mask-size: 100% 100%;
       -webkit-mask-repeat: no-repeat;
       mask-repeat: no-repeat;
-      -webkit-mask-clip: border-box;
-      mask-clip: border-box;
+      -webkit-mask-position: center bottom;
+      mask-position: center bottom;
+      -webkit-mask-mode: alpha;
+      mask-mode: alpha;
     }
 
     .big-hover-title,
     .hero-title,
     .large-title {
       position: relative;
-      z-index: 2;
+      z-index: 0;
       display: block;
       width: max-content;
       max-width: 100%;
@@ -1391,8 +1399,8 @@
       line-height: 0.95;
       color: rgba(17, 17, 17, 0.9);
       text-shadow:
-        0 0.14em 0.35em color-mix(in srgb, var(--page-bg) 55%, transparent),
-        0 0.28em 0.7em color-mix(in srgb, var(--page-bg) 80%, transparent);
+        0 -0.06em 0.2em color-mix(in srgb, var(--page-bg) 40%, transparent),
+        0 0.1em 0.28em color-mix(in srgb, var(--page-bg) 65%, transparent);
       white-space: nowrap;
       text-align: center;
       text-wrap: nowrap;
@@ -1421,50 +1429,47 @@
       }
     }
 
+    @media (min-width: 901px) and (max-width: 1200px) {
+      .hero-title-inner {
+        padding-bottom: 0.72em;
+      }
+    }
+
     @media (min-width: 901px) {
       .home-page .hero-title-wrapper {
         position: relative;
-        z-index: 1;
+        z-index: 0;
         margin-bottom: -24px;
         pointer-events: none;
       }
 
       .hero-title-inner {
-        padding-bottom: 0.35em;
-        overflow: visible;
-        -webkit-mask-image: none;
-        mask-image: none;
+        padding-bottom: 0.95em;
+        -webkit-mask-size: 100% 108%;
+        mask-size: 100% 108%;
       }
 
       .big-hover-title,
       .hero-title {
         opacity: 1;
-        filter: blur(0px);
-        -webkit-mask-image: linear-gradient(
-          to bottom,
-          rgba(0, 0, 0, 1) 0%,
-          rgba(0, 0, 0, 1) 62%,
-          rgba(0, 0, 0, 0.82) 74%,
-          rgba(0, 0, 0, 0.45) 86%,
-          transparent 100%
-        );
-        mask-image: linear-gradient(
-          to bottom,
-          rgba(0, 0, 0, 1) 0%,
-          rgba(0, 0, 0, 1) 62%,
-          rgba(0, 0, 0, 0.82) 74%,
-          rgba(0, 0, 0, 0.45) 86%,
-          transparent 100%
-        );
-        -webkit-mask-size: 100% 100%;
-        mask-size: 100% 100%;
-        -webkit-mask-repeat: no-repeat;
-        mask-repeat: no-repeat;
+        filter: none;
+        -webkit-mask-image: none;
+        mask-image: none;
       }
 
-      .cards-grid .project-card {
-        position: relative;
+      .home-page .page {
         z-index: 2;
+        isolation: isolate;
+      }
+    }
+
+    @media (min-width: 1440px) {
+      .home-page .hero-title-wrapper {
+        margin-bottom: -32px;
+      }
+
+      .hero-title-inner {
+        padding-bottom: 1.05em;
       }
     }
 
@@ -1498,6 +1503,7 @@
   <link rel="stylesheet" href="footer.css" />
 </head>
 <body class="home-page">
+  <script src="transitions-boot.js"></script>
   <div class="bg-blobs" aria-hidden="true">
     <div class="bg-blob bg-blob-1"></div>
     <div class="bg-blob bg-blob-2"></div>
@@ -1512,7 +1518,6 @@
     <div class="bg-blob bg-accent bg-accent-air-canada-2"></div>
   </div>
   <div class="bg-noise" aria-hidden="true"></div>
-  <script>!function(){var e=document.createElement('div');e.id='pt-overlay';e.setAttribute('aria-hidden','true');e.style.cssText='position:fixed;inset:0;z-index:9990;pointer-events:none;opacity:1;will-change:opacity;background:var(--overlay-bg,#f5f5f2);';document.body.appendChild(e)}();</script>
   <div class="hero-title-wrapper" aria-hidden="true">
     <div class="hero-title-inner">
       <div id="big-hover-title" class="big-hover-title hero-title">Hey world</div>

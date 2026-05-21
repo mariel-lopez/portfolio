@@ -13,9 +13,11 @@
   <link rel="stylesheet" href="spacing.css" />
   <link rel="stylesheet" href="nav.css" />
   <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="page-transitions.css" />
   <link rel="stylesheet" href="layout.css" />
   <link rel="stylesheet" href="hover.css" />
   <link rel="stylesheet" href="copy-email.css" />
+  <link rel="stylesheet" href="back-to-top.css" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html {
@@ -95,99 +97,141 @@
       }
     }
 
-    .hero-image {
+    .hero-image--site-link {
       position: relative;
+      display: block;
       width: 100%;
       border-radius: 32px;
       overflow: hidden;
       margin-top: 12px;
       z-index: 1;
+      text-decoration: none;
+      color: inherit;
     }
 
-    .hero-image img {
+    .hero-image--site-link img {
       width: 100%;
       height: auto;
       display: block;
       object-fit: cover;
       border-radius: 32px;
       aspect-ratio: 16 / 10;
+      transition: opacity 0.25s ease;
+    }
+
+    .hero-image-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 120;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 14px 9px 12px;
+      font-family: var(--mono-serif);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      line-height: 1;
+      white-space: nowrap;
+      color: var(--about-ink-muted, rgba(0, 0, 0, 0.48));
+      background: var(--about-chip-bg, rgba(253, 251, 247, 0.92));
+      border: 1px solid var(--about-chip-border, rgba(0, 0, 0, 0.07));
+      border-radius: 10px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+      backdrop-filter: blur(10px) saturate(1.02);
+      -webkit-backdrop-filter: blur(10px) saturate(1.02);
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+      transform: translate(-50%, -50%) scale(0.96);
+      transition:
+        opacity 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+        color 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .hero-image-cursor.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .hero-image-cursor-icon {
+      flex-shrink: 0;
+      opacity: 0.72;
+    }
+
+    .hero-image-cta {
+      display: none;
+      gap: 6px;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .hero-image--site-link {
+        cursor: none;
+      }
+
+      .hero-image--site-link:hover img {
+        opacity: 0.94;
+      }
+    }
+
+    @media (hover: none), (pointer: coarse) {
+      .hero-image-cursor {
+        display: none !important;
+      }
+
+      .hero-image--site-link {
+        cursor: pointer;
+      }
+
+      .hero-image-cta {
+        display: inline-flex;
+        align-items: center;
+        position: absolute;
+        left: 50%;
+        bottom: 20px;
+        transform: translateX(-50%);
+        gap: 6px;
+        padding: 9px 14px 9px 12px;
+        font-family: var(--mono-serif);
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        line-height: 1;
+        white-space: nowrap;
+        color: var(--page-ink);
+        background: var(--about-chip-bg, rgba(253, 251, 247, 0.92));
+        border: 1px solid var(--about-chip-border, rgba(0, 0, 0, 0.07));
+        border-radius: 10px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        backdrop-filter: blur(10px) saturate(1.02);
+        -webkit-backdrop-filter: blur(10px) saturate(1.02);
+        pointer-events: none;
+      }
+    }
+
+    .hero-image--site-link:focus-visible {
+      outline: 2px solid rgba(0, 0, 0, 0.2);
+      outline-offset: 4px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-image-cursor,
+      .hero-image--site-link img {
+        transition-duration: 0.05s;
+      }
     }
 
     .live-badge {
       color: var(--sobeys-live-ink);
       background: var(--sobeys-live-bg);
-    }
-
-    .back-to-top {
-      position: fixed;
-      z-index: 80;
-      bottom: max(20px, env(safe-area-inset-bottom, 0px) + 12px);
-      right: max(20px, env(safe-area-inset-right, 0px) + 12px);
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 9px 14px 9px 12px;
-      font-family: var(--mono-serif);
-      font-size: 12px;
-      font-weight: 500;
-      font-style: normal;
-      letter-spacing: 0.04em;
-      text-transform: none;
-      color: var(--about-ink-muted, rgba(0, 0, 0, 0.48));
-      text-decoration: none;
-      background: var(--about-chip-bg, rgba(253, 251, 247, 0.86));
-      border: 1px solid var(--about-chip-border, rgba(0, 0, 0, 0.07));
-      border-radius: 10px;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
-      backdrop-filter: blur(10px) saturate(1.02);
-      -webkit-backdrop-filter: blur(10px) saturate(1.02);
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transform: translateY(8px);
-      transition:
-        opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-        visibility 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-        transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-        color 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.32s ease,
-        background 0.25s ease;
-    }
-
-    .back-to-top svg {
-      flex-shrink: 0;
-      opacity: 0.55;
-      transition: opacity 0.25s ease, transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .back-to-top.is-visible {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-      transform: translateY(0);
-    }
-
-    .back-to-top.is-visible:hover,
-    .back-to-top.is-visible:focus-visible {
-      color: var(--page-ink);
-      background: var(--about-chip-bg, rgba(252, 250, 246, 0.94));
-      border-color: var(--about-chip-border, rgba(0, 0, 0, 0.1));
-      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.07);
-    }
-
-    .back-to-top.is-visible:hover svg,
-    .back-to-top.is-visible:focus-visible svg {
-      opacity: 0.85;
-    }
-
-    .back-to-top.is-visible:active {
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-    }
-
-    .back-to-top:focus-visible {
-      outline: 1px solid rgba(0, 0, 0, 0.2);
-      outline-offset: 3px;
     }
 
     .page {
@@ -464,6 +508,9 @@
 
     /* ── CALLOUT ── */
     .callout {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
       background: var(--sobeys-bg-mist);
       border-radius: 26px;
       padding: 40px;
@@ -614,7 +661,7 @@
     @media (max-width: 900px) {
       .page { gap: 60px; }
 
-      .hero-image img { aspect-ratio: 4 / 3; }
+      .hero-image--site-link img { aspect-ratio: 4 / 3; }
 
       /* Overview */
       .overview-row { flex-direction: column; gap: 32px; border: none; padding: 0; }
@@ -632,12 +679,6 @@
       .learning-grid { grid-template-columns: 1fr; }
       .result-number { font-size: 40px; }
 
-      .back-to-top {
-        bottom: max(16px, env(safe-area-inset-bottom, 0px) + 10px);
-        right: max(16px, env(safe-area-inset-right, 0px) + 10px);
-        padding: 8px 12px 8px 10px;
-        font-size: 11px;
-      }
     }
 
     @media (max-width: 768px) {
@@ -651,12 +692,12 @@
         gap: var(--space-16);
       }
 
-      .hero-image {
+      .hero-image--site-link {
         border-radius: 24px;
         margin-top: var(--space-16);
       }
 
-      .hero-image img {
+      .hero-image--site-link img {
         border-radius: 24px;
       }
     }
@@ -667,13 +708,6 @@
       }
 
       .page { gap: 48px; }
-
-      .back-to-top {
-        bottom: max(16px, env(safe-area-inset-bottom, 0px) + 10px);
-        right: max(16px, env(safe-area-inset-right, 0px) + 10px);
-        padding: 8px 12px 8px 10px;
-        font-size: 11px;
-      }
     }
 
     @media (max-width: 500px) {
@@ -684,7 +718,7 @@
   <link rel="stylesheet" href="footer.css" />
 </head>
 <body class="case-sobeys case-page">
-  <script>!function(){var e=document.createElement('div');e.id='pt-overlay';e.setAttribute('aria-hidden','true');e.style.cssText='position:fixed;inset:0;z-index:9990;pointer-events:none;opacity:1;will-change:opacity;background:var(--overlay-bg,#f5f5f2);';document.body.appendChild(e)}();</script>
+  <script src="transitions-boot.js"></script>
 
   <!-- NAV -->
   <div class="home-hero-mono navbar">
@@ -740,9 +774,24 @@
         <h1 class="hero-title" id="case-hero-title">Scaling Sobeys' digital shopping experience for <span class="hero-title-tail">1M+ monthly users</span></h1>
       </div>
 
-      <div class="hero-image">
+      <a
+        href="https://www.sobeys.com/"
+        class="hero-image hero-image--site-link"
+        id="hero-site-link"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Visit Sobeys.com — opens in a new tab"
+      >
         <img src="sobeys-cover.png" alt="Sobeys homepage redesign" width="1440" height="900" loading="eager" decoding="async" />
-      </div>
+        <span class="hero-image-cta" aria-hidden="true">
+          <span>Take me to the site</span>
+          <svg class="hero-image-cursor-icon" xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+        </span>
+      </a>
+      <span class="hero-image-cursor" id="hero-image-cursor" aria-hidden="true">
+        <span>Take me to the site</span>
+        <svg class="hero-image-cursor-icon" xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+      </span>
     </section>
 
     <div class="page">
@@ -905,6 +954,7 @@
 
       <!-- Outcome callout -->
       <div class="callout">
+        <p class="stat-card-label">Outcome</p>
         <p class="callout-quote">Increased engagement by <strong>11</strong> percent month-over-month. Shopping list now live on Sobeys and Safeway — rolling out across all six grocery brands.</p>
       </div>
 
@@ -1012,6 +1062,33 @@
         var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
       });
+    })();
+
+    (function () {
+      var link = document.getElementById('hero-site-link');
+      var cursor = document.getElementById('hero-image-cursor');
+      if (!link || !cursor) return;
+
+      var canFollow = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      if (!canFollow) return;
+
+      function move(e) {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+      }
+
+      function show() {
+        cursor.classList.add('is-visible');
+      }
+
+      function hide() {
+        cursor.classList.remove('is-visible');
+      }
+
+      link.addEventListener('mouseenter', show);
+      link.addEventListener('mouseleave', hide);
+      link.addEventListener('mousemove', move);
+      window.addEventListener('scroll', hide, { passive: true });
     })();
   </script>
 </body>

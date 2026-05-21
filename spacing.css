@@ -57,6 +57,10 @@
   --home-cards-overlap: var(--space-32);
   --home-cards-overlap-md: var(--space-32);
 
+  /* About marquee */
+  --marquee-font-size: clamp(48px, 4vw, 64px);
+  --marquee-pad-y: var(--space-48);
+
   /* Popovers / tooltips */
   --popover-offset: var(--space-16);
   --popover-pad-y: var(--space-16);

@@ -1,0 +1,92 @@
+/* Back to top — shared (Sobeys + About) */
+
+.back-to-top {
+  position: fixed;
+  z-index: 80;
+  bottom: max(20px, env(safe-area-inset-bottom, 0px) + 12px);
+  right: max(20px, env(safe-area-inset-right, 0px) + 12px);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 14px 9px 12px;
+  font-family: var(--mono-serif, "Helvetica Neue", Helvetica, Arial, sans-serif);
+  font-size: 12px;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--about-ink-muted, rgba(0, 0, 0, 0.48));
+  text-decoration: none;
+  background: var(--about-chip-bg, rgba(253, 251, 247, 0.86));
+  border: 1px solid var(--about-chip-border, rgba(0, 0, 0, 0.07));
+  border-radius: 10px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(10px) saturate(1.02);
+  -webkit-backdrop-filter: blur(10px) saturate(1.02);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition:
+    opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.32s ease,
+    background 0.25s ease;
+}
+
+.back-to-top svg {
+  flex-shrink: 0;
+  opacity: 0.55;
+  transition: opacity 0.25s ease, transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.back-to-top.is-visible:hover,
+.back-to-top.is-visible:focus-visible {
+  color: var(--page-ink);
+  background: var(--about-chip-bg, rgba(252, 250, 246, 0.94));
+  border-color: var(--about-chip-border, rgba(0, 0, 0, 0.1));
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.07);
+}
+
+.back-to-top.is-visible:hover svg,
+.back-to-top.is-visible:focus-visible svg {
+  opacity: 0.85;
+}
+
+.back-to-top.is-visible:active {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.back-to-top:focus-visible {
+  outline: 1px solid rgba(0, 0, 0, 0.2);
+  outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  .back-to-top {
+    bottom: max(16px, env(safe-area-inset-bottom, 0px) + 10px);
+    right: max(16px, env(safe-area-inset-right, 0px) + 10px);
+    padding: 8px 12px 8px 10px;
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top {
+    transition-duration: 0.05s;
+  }
+
+  .back-to-top svg {
+    transition-duration: 0.05s;
+  }
+}

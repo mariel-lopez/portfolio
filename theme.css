@@ -24,10 +24,49 @@
   --about-chip-bg: rgba(253, 251, 247, 0.86);
   --about-chip-border: rgba(0, 0, 0, 0.07);
   --about-photo-bg: #dddddd;
+  /* Hero title: sharp top, soft bottom dissolve behind project cards */
+  --hero-title-fade: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 70%,
+    rgba(0, 0, 0, 0.98) 76%,
+    rgba(0, 0, 0, 0.92) 82%,
+    rgba(0, 0, 0, 0.78) 87%,
+    rgba(0, 0, 0, 0.55) 92%,
+    rgba(0, 0, 0, 0.28) 96.5%,
+    transparent 100%
+  );
+  --hero-card-top-blend: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--page-bg) 96%, transparent) 0%,
+    color-mix(in srgb, var(--page-bg) 68%, var(--surface-glass)) 10%,
+    color-mix(in srgb, var(--page-bg) 28%, var(--surface-glass)) 18%,
+    var(--surface-glass) 28%,
+    var(--surface-glass) 100%
+  );
 }
 
 html.dark-theme {
   color-scheme: dark;
+  --hero-title-fade: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 64%,
+    rgba(0, 0, 0, 0.96) 72%,
+    rgba(0, 0, 0, 0.86) 80%,
+    rgba(0, 0, 0, 0.64) 87%,
+    rgba(0, 0, 0, 0.36) 93%,
+    rgba(0, 0, 0, 0.12) 97.5%,
+    transparent 100%
+  );
+  --hero-card-top-blend: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--page-bg) 94%, transparent) 0%,
+    color-mix(in srgb, var(--page-bg) 58%, var(--surface-glass)) 12%,
+    color-mix(in srgb, var(--page-bg) 22%, var(--surface-glass)) 20%,
+    var(--surface-glass) 30%,
+    var(--surface-glass) 100%
+  );
   --page-bg: #0b0914;
   --page-ink: #ebe6f5;
   --page-ink-soft: rgba(235, 230, 245, 0.92);
@@ -96,9 +135,7 @@ html.dark-theme body {
 
 #pt-overlay {
   background: var(--overlay-bg) !important;
-  transition:
-    opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-    background-color 0.45s ease !important;
+  transition-property: opacity, background-color;
 }
 
 /* ── Nav ── */
@@ -238,10 +275,10 @@ html.dark-theme .theme-toggle .sun-icon {
 /* ── Homepage: hero title ── */
 html.dark-theme .big-hover-title,
 html.dark-theme .hero-title {
-  color: rgba(235, 228, 255, 0.9);
+  color: rgba(235, 228, 255, 0.84);
   text-shadow:
-    0 0.14em 0.35em color-mix(in srgb, var(--page-bg) 55%, transparent),
-    0 0.28em 0.7em color-mix(in srgb, var(--page-bg) 80%, transparent);
+    0 -0.05em 0.18em color-mix(in srgb, var(--page-bg) 48%, transparent),
+    0 0.08em 0.22em color-mix(in srgb, var(--page-bg) 68%, transparent);
 }
 
 /* ── Homepage: cards (readable contrast in dark mode) ── */
@@ -560,18 +597,13 @@ html.dark-theme .bg-noise {
 }
 
 /* ── Footer ── */
-html.dark-theme .footer-email,
 html.dark-theme .footer-email-row {
-  color: #ffffff;
+  color: var(--page-ink);
 }
 
-html.dark-theme .footer-email:hover,
-html.dark-theme .footer-email:focus {
-  color: #ffffff;
-}
-
-html.dark-theme .footer-email-copy {
-  color: inherit;
+html.dark-theme .footer-email-row:hover,
+html.dark-theme .footer-email-row:focus-within {
+  color: var(--hover-color, rgba(196, 172, 255, 0.92));
 }
 
 html.dark-theme .footer-social a {
@@ -685,6 +717,18 @@ html.dark-theme .back-to-top.is-visible:focus-visible {
 }
 
 html.dark-theme .back-to-top:focus-visible {
+  outline-color: rgba(255, 255, 255, 0.22);
+}
+
+html.dark-theme .hero-image-cursor,
+html.dark-theme .hero-image-cta {
+  color: var(--page-ink);
+  background: var(--about-chip-bg);
+  border-color: var(--about-chip-border);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+}
+
+html.dark-theme .hero-image--site-link:focus-visible {
   outline-color: rgba(255, 255, 255, 0.22);
 }
 
