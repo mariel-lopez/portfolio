@@ -28,6 +28,9 @@
       --mono-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
       --page-pad: 80px;
       --max-w: 1440px;
+      --about-role-col: 1.1fr;
+      --about-body-col: 2.4fr;
+      --about-col-gap: clamp(48px, 5vw, 72px);
     }
 
     body {
@@ -37,7 +40,7 @@
       background: var(--page-bg);
       color: var(--page-ink);
       min-height: 100vh;
-      overflow-x: hidden;
+      overflow-x: clip;
     }
 
     /* ── HERO HEADLINE ── */
@@ -49,24 +52,43 @@
       line-height: 0.95;
       color: var(--page-ink);
       margin-top: 0;
-      margin-bottom: 0;
-      max-width: 1200px;
+      margin-bottom: 32px;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       gap: 0;
+      overflow-wrap: anywhere;
     }
 
     .about-headline-line {
       display: block;
-      white-space: nowrap;
+      max-width: 100%;
+      min-width: 0;
+      text-wrap: balance;
+    }
+
+    @media (min-width: 861px) {
+      .about-headline-line {
+        white-space: nowrap;
+        text-wrap: wrap;
+      }
     }
 
     /* ── Intro (below hero, above photos) ── */
+    .about-main {
+      min-width: 0;
+      max-width: 100%;
+      overflow-x: clip;
+    }
+
     .about-intro {
       width: 100%;
       max-width: 100%;
-      margin: 24px 0 40px;
+      margin: 0 0 32px;
+      min-width: 0;
     }
 
     .about-intro p {
@@ -81,7 +103,7 @@
     }
 
     .about-intro p + p {
-      margin-top: 24px;
+      margin-top: 16px;
     }
 
     .about-headline-accent {
@@ -89,12 +111,35 @@
       font-style: italic;
     }
 
-    /* ── PHOTO ROW ── */
+    /* ── Photo row ── */
     .about-photos {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
-      margin-bottom: 100px;
+      margin-bottom: 32px;
+      min-width: 0;
+    }
+
+    @media (min-width: 861px) {
+      .quest-block {
+        display: grid;
+        grid-template-columns: var(--about-role-col) var(--about-body-col);
+        column-gap: var(--about-col-gap);
+        align-items: start;
+      }
+
+      .quest-heading {
+        grid-column: 1;
+      }
+
+      .quests-rows {
+        grid-column: 1 / -1;
+      }
+
+      .quest-row {
+        grid-template-columns: var(--about-role-col) var(--about-body-col);
+        column-gap: var(--about-col-gap);
+      }
     }
 
     .about-photo {
@@ -142,10 +187,12 @@
 
     .quests-section {
       position: relative;
-      margin-bottom: 80px;
+      margin-bottom: 0;
       background: transparent;
       border: none;
       box-shadow: none;
+      min-width: 0;
+      max-width: 100%;
     }
 
     .quests-section::before {
@@ -161,7 +208,7 @@
     }
 
     .quest-block {
-      margin-bottom: clamp(120px, 16vh, 200px);
+      margin-bottom: 32px;
       scroll-margin-top: 100px;
     }
 
@@ -173,14 +220,35 @@
       font-family: var(--mono-serif);
       font-size: clamp(2.75rem, 5vw, 5.25rem);
       font-weight: 700;
-      letter-spacing: -0.065em;
+      letter-spacing: -0.03em;
       line-height: 0.95;
       color: var(--page-ink);
-      margin: 0 0 clamp(52px, 6vw, 88px);
+      margin: 0 0 32px;
     }
 
     .quest-heading-inner {
-      display: inline;
+      display: inline-block;
+      max-width: 100%;
+      min-width: 0;
+      white-space: nowrap;
+      letter-spacing: inherit;
+    }
+
+    @media (max-width: 640px) {
+      .quest-heading,
+      .quest-heading-inner {
+        letter-spacing: -0.015em;
+      }
+
+      .quest-heading-inner {
+        font-size: clamp(1.65rem, 7.5vw, 2.35rem);
+      }
+    }
+
+    @media (max-width: 400px) {
+      .quest-heading-inner {
+        font-size: clamp(1.45rem, 6.8vw, 1.85rem);
+      }
     }
 
     .quest-heading-star {
@@ -188,6 +256,7 @@
       font-weight: 500;
       position: relative;
       bottom: 3px;
+      margin-inline: 0.22em;
     }
 
     .quests-rows {
@@ -198,8 +267,8 @@
 
     .quest-row {
       display: grid;
-      grid-template-columns: 1.1fr 2.4fr;
-      column-gap: clamp(48px, 5vw, 72px);
+      grid-template-columns: var(--about-role-col) var(--about-body-col);
+      column-gap: var(--about-col-gap);
       row-gap: 0;
       padding: 0;
       align-items: start;
@@ -220,6 +289,7 @@
       flex-direction: column;
       gap: 20px;
       min-width: 0;
+      max-width: 100%;
     }
 
     .quest-role {
@@ -304,7 +374,7 @@
       color: var(--about-ink-soft);
       line-height: 1.52;
       letter-spacing: -0.015em;
-      max-width: none;
+      max-width: 100%;
       min-width: 0;
     }
 
@@ -356,7 +426,7 @@
 
     /* ── MARQUEE (full-bleed; dividers stay in .content-shell) ── */
     .site-bottom {
-      margin-top: 40px;
+      margin-top: 32px;
       overflow-x: visible;
     }
 
@@ -415,10 +485,14 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 860px) {
+      .about-intro {
+        margin-bottom: 32px;
+      }
+
       .about-photos {
         grid-template-columns: 1fr;
         gap: 14px;
-        margin-bottom: 64px;
+        margin-bottom: 32px;
       }
 
       .about-photo {
@@ -439,11 +513,11 @@
 
       .quest-heading {
         font-size: clamp(2.1rem, 7vw, 3.25rem);
-        margin-bottom: clamp(36px, 8vw, 52px);
+        margin-bottom: 32px;
       }
 
       .quest-block {
-        margin-bottom: clamp(88px, 14vw, 120px);
+        margin-bottom: 32px;
       }
 
       .quests-rows {
@@ -485,14 +559,29 @@
 
     }
 
+    @media (max-width: 860px) {
+      .about-headline {
+        font-size: clamp(32px, 8.5vw, 64px);
+        letter-spacing: -0.06em;
+      }
+
+      .about-headline-line {
+        white-space: normal;
+        overflow-wrap: break-word;
+        word-break: normal;
+        hyphens: none;
+      }
+    }
+
     @media (max-width: 640px) {
       .about-headline {
-        font-size: clamp(24px, 8.25vw, 52px);
+        font-size: clamp(26px, 7.8vw, 44px);
+        letter-spacing: -0.055em;
       }
 
       .about-intro {
-        margin-top: 24px;
-        margin-bottom: 40px;
+        margin-top: 0;
+        margin-bottom: 32px;
       }
 
       .about-intro p {
@@ -503,7 +592,21 @@
 
       .about-photos {
         gap: 16px;
-        margin-bottom: 72px;
+        margin-bottom: 32px;
+      }
+
+      .quest-row,
+      .quest-right,
+      .quest-desc,
+      .quest-role,
+      .quests-rows {
+        min-width: 0;
+        max-width: 100%;
+      }
+
+      .quest-desc p {
+        overflow-wrap: break-word;
+        word-break: normal;
       }
 
       .about-photos > .about-photo {
@@ -518,7 +621,11 @@
       .about-photos > .about-photo:nth-child(3) { z-index: 3; }
     }
 
-    @media (max-width: 500px) {
+    @media (max-width: 400px) {
+      .about-headline {
+        font-size: clamp(22px, 6.9vw, 34px);
+        letter-spacing: -0.05em;
+      }
     }
 
     .back-to-top {
@@ -624,7 +731,7 @@
         </div>
         <div class="nav-right">
           <time class="nav-local-time" id="nav-local-time" datetime="" aria-label="New York local time">
-            <span class="nav-local-move" aria-label="Relocated from Toronto to New York">Toronto x New York</span><span class="nav-local-sep" aria-hidden="true">•</span><span class="nav-local-clock"></span>
+            <span class="nav-local-move" aria-label="Relocated from Toronto to New York">Toronto x New York</span><span class="nav-local-sep" aria-hidden="true">✦</span><span class="nav-local-clock"></span>
           </time>
           <div class="nav-links">
             <a class="nav-contact-link" href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener noreferrer">LinkedIn<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
@@ -670,7 +777,6 @@
       <p>That contrast taught me early on that perspective shapes how people move through the world, and continues to influence how I approach my designs and problem spaces today.</p>
     </div>
 
-    <!-- Photo row -->
     <div class="about-photos">
       <figure class="about-photo">
         <img src="about-img.jpeg" alt="Two people in front of a screen showing a Figma Makeathon presentation." loading="eager" />
@@ -679,7 +785,7 @@
         <img src="photo-mariel.jpg" alt="Portrait with the Brooklyn Bridge and Manhattan skyline in the background." loading="eager" />
       </figure>
       <figure class="about-photo">
-        <img src="photo-fan-right.jpg" alt="Looking up at a palm tree against a blue sky." loading="eager" />
+        <img src="design-event.png" alt="Speaking at a design-a-thon in front of a projected presentation screen." loading="eager" />
       </figure>
     </div>
 
@@ -752,10 +858,10 @@
   <!-- MARQUEE -->
   <div class="marquee-strip contact-marquee" aria-hidden="true">
     <div class="marquee-track">
-      <span class="marquee-text">LET’S MAKE COOL THINGS TOGETHER ·&nbsp;</span>
-      <span class="marquee-text">LET’S MAKE COOL THINGS TOGETHER ·&nbsp;</span>
-      <span class="marquee-text">LET’S MAKE COOL THINGS TOGETHER ·&nbsp;</span>
-      <span class="marquee-text">LET’S MAKE COOL THINGS TOGETHER ·&nbsp;</span>
+      <span class="marquee-text">LET’S MAKE COOL THINGS TOGETHER ✦&nbsp;</span>
+      <span class="marquee-text">LET’S MAKE COOL THINGS TOGETHER ✦&nbsp;</span>
+      <span class="marquee-text">LET’S MAKE COOL THINGS TOGETHER ✦&nbsp;</span>
+      <span class="marquee-text">LET’S MAKE COOL THINGS TOGETHER ✦&nbsp;</span>
     </div>
   </div>
 
