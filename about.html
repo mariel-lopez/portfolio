@@ -49,9 +49,31 @@
       line-height: 0.95;
       color: var(--page-ink);
       margin-top: 0;
-      margin-bottom: 72px;
+      margin-bottom: 0;
       max-width: 1200px;
       text-wrap: balance;
+    }
+
+    /* ── Intro (below hero, above photos) ── */
+    .about-intro {
+      width: 100%;
+      max-width: 100%;
+      margin: 24px 0 40px;
+    }
+
+    .about-intro p {
+      margin: 0;
+      font-family: var(--mono-serif);
+      font-size: clamp(24px, 2vw, 36px);
+      font-weight: 700;
+      color: var(--about-ink-soft);
+      line-height: 1.2;
+      letter-spacing: -0.04em;
+      text-wrap: balance;
+    }
+
+    .about-intro p + p {
+      margin-top: 24px;
     }
 
     .about-headline-accent {
@@ -67,6 +89,20 @@
       margin-bottom: 100px;
     }
 
+    .about-photo-link {
+      display: block;
+      min-width: 0;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      border-radius: 28px;
+    }
+
+    .about-photo-link:focus-visible {
+      outline: 2px solid rgba(0, 0, 0, 0.35);
+      outline-offset: 4px;
+    }
+
     .about-photo {
       position: relative;
       margin: 0;
@@ -76,6 +112,12 @@
       background: var(--about-photo-bg, #ddd);
       isolation: isolate;
       transition: box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @media (hover: hover) {
+      .about-photo-link:hover .about-photo {
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+      }
     }
 
     .about-photo img {
@@ -98,11 +140,13 @@
     }
 
     @media (hover: hover) {
-      .about-photo:hover::after {
+      .about-photo:hover::after,
+      .about-photo-link:hover .about-photo::after {
         box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
       }
 
-      .about-photo:hover .about-photo-caption {
+      .about-photo:hover .about-photo-caption,
+      .about-photo-link:hover .about-photo-caption {
         opacity: 1;
         visibility: visible;
         color: var(--about-ink-muted);
@@ -355,6 +399,14 @@
       color: var(--about-ink-strong);
     }
 
+    .quest-desc > p {
+      margin: 0;
+    }
+
+    .quest-desc > p:first-child + .quest-desc-lead {
+      margin-top: 14px;
+    }
+
     .quest-desc-lead {
       font-weight: 400;
       color: var(--about-ink-soft);
@@ -366,6 +418,26 @@
       font-weight: 400;
       color: var(--about-ink-soft);
       line-height: 1.55;
+    }
+
+    .quest-right--editorial {
+      gap: 0;
+    }
+
+    .quest-desc--editorial {
+      margin-top: 16px;
+      max-width: none;
+      line-height: 1.62;
+      font-weight: 400;
+      color: var(--about-ink-soft);
+    }
+
+    .quest-desc--editorial p {
+      margin: 0;
+    }
+
+    .quest-desc--editorial p + p {
+      margin-top: 14px;
     }
 
     /* ── MARQUEE (full-bleed; dividers stay in .content-shell) ── */
@@ -394,7 +466,7 @@
     .contact-marquee,
     .marquee-text {
       font-family: var(--mono-serif);
-      font-size: clamp(64px, 9vw, 140px);
+      font-size: clamp(51px, 7.2vw, 112px);
       font-weight: 700;
       letter-spacing: -0.04em;
       line-height: 0.9;
@@ -408,7 +480,7 @@
     @media (min-width: 1600px) {
       .contact-marquee,
       .marquee-text {
-        font-size: clamp(5rem, 8vw, 10rem);
+        font-size: clamp(4rem, 6.4vw, 8rem);
       }
     }
 
@@ -440,15 +512,15 @@
         aspect-ratio: 4 / 5;
       }
 
-      .about-photo:nth-child(1) img {
+      .about-photos > *:nth-child(1) img {
         object-position: center 58%;
       }
 
-      .about-photo:nth-child(2) img {
+      .about-photos > *:nth-child(2) img {
         object-position: center 52%;
       }
 
-      .about-photo:nth-child(3) img {
+      .about-photos > *:nth-child(3) img {
         object-position: center 30%;
       }
 
@@ -499,11 +571,23 @@
         color: var(--about-ink-soft);
       }
 
+      .quest-desc--editorial {
+        max-width: none;
+        line-height: 1.6;
+      }
+
     }
 
     @media (max-width: 640px) {
-      .about-headline {
-        margin-bottom: 44px;
+      .about-intro {
+        margin-top: 24px;
+        margin-bottom: 40px;
+      }
+
+      .about-intro p {
+        font-size: clamp(22px, 5.5vw, 28px);
+        line-height: 1.22;
+        letter-spacing: -0.035em;
       }
 
       .about-photos {
@@ -511,20 +595,20 @@
         margin-bottom: 72px;
       }
 
-      .about-photo {
+      .about-photos > *:nth-child(1) .about-photo,
+      .about-photos > .about-photo {
         position: sticky;
         top: 96px;
         background: var(--about-surface, #f5f5f2);
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
       }
 
-      .about-photo:nth-child(1) { z-index: 1; }
-      .about-photo:nth-child(2) { z-index: 2; }
-      .about-photo:nth-child(3) { z-index: 3; }
+      .about-photos > *:nth-child(1) { z-index: 1; }
+      .about-photos > *:nth-child(2) { z-index: 2; }
+      .about-photos > *:nth-child(3) { z-index: 3; }
     }
 
     @media (max-width: 500px) {
-      .about-headline { margin-bottom: 40px; }
     }
 
     .back-to-top {
@@ -666,17 +750,24 @@
   <main class="about-main about-hero content-shell">
 
     <!-- Hero headline -->
-    <h1 class="about-headline">Oh me? ✦ I'm a <span class="about-headline-accent">designer</span> by day and <span class="about-headline-accent">community builder</span> by night</h1>
+    <h1 class="about-headline"><span class="about-headline-accent">Designer</span> by day. <span class="about-headline-accent">Community builder</span> by night.</h1>
+
+    <div class="about-intro">
+      <p>I'm a product designer shaped by two very different worlds: the busy streets of Manila, Philippines and the quiet suburbs of Ontario, Canada.</p>
+      <p>That contrast taught me early on that perspective shapes how people move through the world, and continues to influence how I approach my designs and problem spaces today.</p>
+    </div>
 
     <!-- Photo row -->
     <div class="about-photos">
-      <figure class="about-photo">
-        <img src="about-img.jpeg" alt="Two people in front of a screen showing a Figma Makeathon presentation." loading="eager" />
-        <figcaption class="about-photo-caption">Hosted a Figma Makeathon</figcaption>
-      </figure>
+      <a class="about-photo-link" href="https://misty-saint-10438043.figma.site/" target="_blank" rel="noopener noreferrer" aria-label="Hosted a Figma Makeathon — view project site">
+        <figure class="about-photo">
+          <img src="about-img.jpeg" alt="Two people in front of a screen showing a Figma Makeathon presentation." loading="eager" />
+          <figcaption class="about-photo-caption">Hosted a Figma Makeathon</figcaption>
+        </figure>
+      </a>
       <figure class="about-photo">
         <img src="photo-mariel.jpg" alt="Portrait with the Brooklyn Bridge and Manhattan skyline in the background." loading="eager" />
-        <figcaption class="about-photo-caption">Me in NYC</figcaption>
+        <figcaption class="about-photo-caption">Me!</figcaption>
       </figure>
       <figure class="about-photo">
         <img src="photo-fan-right.jpg" alt="Looking up at a palm tree against a blue sky." loading="eager" />
@@ -696,12 +787,12 @@
               <div class="quest-title">Product Designer</div>
               <div class="quest-org"><a class="link-hover" href="https://www.ibm.com/consulting/ibmix" target="_blank" rel="noopener noreferrer">IBM iX<svg class="quest-org-link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></div>
             </div>
-            <div class="quest-right">
+            <div class="quest-right quest-right--editorial">
               <div class="quest-date">Mar 2022 – Present</div>
-              <div class="quest-desc">
-                <span style="font-weight:500;">Clients served:</span> Air Canada Sobeys Government of Canada<br><br>
-                Led 0→1 initiatives growth optimizations and design system development for clients in travel/transportation grocery retail and government impacting millions of users<br><br>
-                Passionate about reducing friction at critical decision points and aligning cross functional teams around clear product vision
+              <div class="quest-desc quest-desc--editorial">
+                <p><span style="font-weight:500;">Clients served:</span> Air Canada, Sobeys, Government of Canada</p>
+                <p>I've spent the past few years working across large-scale platforms, design systems, and complex customer experiences, learning how to navigate ambiguity, align cross-functional teams, and design within systems that impact millions of people.</p>
+                <p>I care deeply about doing meaningful work alongside ambitious, thoughtful people who are motivated by impact over ego.</p>
               </div>
             </div>
           </div>
@@ -718,11 +809,11 @@
               <div class="quest-title">Organizer</div>
               <div class="quest-org"><a class="link-hover" href="https://luma.com/user/mariel" target="_blank" rel="noopener noreferrer">Luma<svg class="quest-org-link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></div>
             </div>
-            <div class="quest-right">
+            <div class="quest-right quest-right--editorial">
               <div class="quest-date">Jan 2026 – Present</div>
-              <div class="quest-desc">
-                <p class="quest-desc-lead">Hosting AI-driven designathons in downtown Toronto for designers creatives and early-career technologists</p>
-                <p class="quest-desc-body">Built intimate community spaces focused on collaboration emerging AI workflows and meaningful industry connection bringing together 75+ attendees so far</p>
+              <div class="quest-desc quest-desc--editorial">
+                <p>I wanted to be part of a design community, but hadn't found one hosting the kinds of events I was excited about, so I decided to start one myself.</p>
+                <p>Since then, I've built a growing community focused on bringing designers together to share best practices, explore emerging AI workflows, and tackle fun design challenges collaboratively, bringing together 75+ attendees so far.</p>
               </div>
             </div>
           </div>
@@ -732,9 +823,12 @@
               <div class="quest-title">Mentor</div>
               <div class="quest-org"><a class="link-hover" href="https://adplist.org/mentors/mariel-lopez" target="_blank" rel="noopener noreferrer">ADPList<svg class="quest-org-link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></div>
             </div>
-            <div class="quest-right">
+            <div class="quest-right quest-right--editorial">
               <div class="quest-date">Feb 2023 – Present</div>
-              <div class="quest-desc">Mentored aspiring and early-career designers through personalized sessions focused on portfolio refinement UX strategy and career growth<br><br>Helped mentees translate abstract ideas into clear design narratives improve problem-solving skills and navigate ambiguity within the product design field</div>
+              <div class="quest-desc quest-desc--editorial">
+                <p>Mentorship has shaped me as a designer both early in my career and now. I owe so much to the insights, expertise, and feedback that has helped me become a better designer.</p>
+                <p>Now, 4+ years into my career, I've come to value community just as much as craft, and mentoring has become one of the most meaningful ways I've been able to give back.</p>
+              </div>
             </div>
           </div>
         </div>
