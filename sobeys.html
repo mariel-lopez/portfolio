@@ -661,8 +661,8 @@
     }
 
     @media (max-width: 768px) {
-      .hero {
-        padding-top: 0;
+      .hero.case-hero {
+        padding-top: var(--tablet-nav-clearance);
         padding-bottom: var(--space-48);
         gap: var(--space-24);
       }
@@ -687,6 +687,10 @@
     }
 
     @media (max-width: 640px) {
+      .hero.case-hero {
+        padding-top: var(--mobile-nav-clearance);
+      }
+
       .page { gap: 48px; }
 
       .back-to-top {

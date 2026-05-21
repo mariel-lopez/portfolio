@@ -30,7 +30,7 @@
   /* GLOBAL FIXED NAV CLEARANCE */
   --desktop-nav-clearance: 96px;
   --tablet-nav-clearance: 112px;
-  --mobile-nav-clearance: 148px;
+  --mobile-nav-clearance: 120px;
 }
 
 /* ── Content column (aligns dividers + body copy) ── */
