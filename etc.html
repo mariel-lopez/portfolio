@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Etc — Mariel Lopez</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="shortcut icon" href="favicon.ico" />
+  <script>!function(){try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('dark-theme');}catch(e){}}();</script>
+  <link rel="stylesheet" href="spacing.css" />
+  <link rel="stylesheet" href="nav.css" />
+  <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="page-transitions.css" />
+  <link rel="stylesheet" href="layout.css" />
+  <link rel="stylesheet" href="hover.css" />
+  <link rel="stylesheet" href="copy-email.css" />
+  <link rel="stylesheet" href="back-to-top.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    :root {
+      --mono-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --etc-tab-active: #111111;
+      --etc-tab-inactive: rgba(0, 0, 0, 0.22);
+      --etc-photo-placeholder: #d4d4d4;
+      --etc-light-bg: #f5f5f2;
+      --etc-viewer-max: 500px;
+    }
+
+    body.etc-page {
+      font-family: var(--mono-serif);
+      font-size: 16px;
+      font-weight: 400;
+      background: var(--page-bg);
+      color: var(--page-ink);
+      min-height: 100vh;
+      overflow-x: clip;
+    }
+
+    body.etc-tab-photography,
+    body.etc-tab-random {
+      background: var(--etc-light-bg);
+      color: #111111;
+    }
+
+    .home-hero-mono.navbar {
+      z-index: 10;
+    }
+
+    .etc-main {
+      position: relative;
+      z-index: 1;
+      flex: 1 0 auto;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      padding-bottom: var(--space-96);
+      overflow-x: clip;
+      text-align: left;
+    }
+
+    /* Two-column layout — left nav, right scrollable content (matches About rhythm) */
+    .etc-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-32);
+      align-items: start;
+      width: 100%;
+      min-width: 0;
+    }
+
+    .etc-sidebar {
+      min-width: 0;
+      padding-left: 0;
+    }
+
+    /* Tabs share the same left edge as the back-arrow cap (nav.css optical offset) */
+    .etc-sidebar .etc-tabs {
+      margin-left: 0;
+    }
+
+    .etc-content {
+      min-width: 0;
+      width: 100%;
+    }
+
+    .etc-tabs {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      gap: clamp(16px, 4vw, 32px);
+      margin: 0;
+      padding: 0;
+      border: 0;
+      list-style: none;
+    }
+
+    .etc-tab {
+      font-family: var(--mono-serif);
+      font-size: clamp(1.25rem, 6.4vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--etc-tab-active);
+      opacity: 0.28;
+      background: none;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      text-align: left;
+      transition: opacity 0.2s ease;
+      flex: 0 0 auto;
+    }
+
+    .etc-tab.is-active {
+      opacity: 1;
+    }
+
+    @media (min-width: 861px) {
+      .etc-layout {
+        /* Fixed sidebar width — “photography” is widest; stops column jump on tab change */
+        grid-template-columns: 12.25rem minmax(0, 1fr);
+        column-gap: clamp(40px, 5vw, 72px);
+        row-gap: 0;
+      }
+
+      .etc-sidebar {
+        position: sticky;
+        top: calc(var(--site-nav-height, 96px) + var(--space-16));
+        align-self: start;
+        z-index: 1;
+        width: 12.25rem;
+        max-width: 12.25rem;
+        flex-shrink: 0;
+      }
+
+      .etc-tabs {
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: start;
+        justify-items: start;
+        gap: var(--space-24);
+        width: 100%;
+      }
+
+      .etc-tab {
+        font-size: clamp(1.25rem, 2.1vw, 2.25rem);
+        white-space: nowrap;
+        width: 100%;
+        min-height: 1em;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .etc-tab {
+        font-size: clamp(1.1875rem, 6.8vw, 1.875rem);
+      }
+    }
+
+    @media (max-width: 400px) {
+      .etc-tab {
+        font-size: clamp(1.125rem, 7.2vw, 1.625rem);
+      }
+    }
+
+    .etc-tab:focus-visible {
+      outline: 2px solid var(--etc-tab-active);
+      outline-offset: 4px;
+    }
+
+    .etc-panel {
+      display: none !important;
+      width: 100%;
+      min-width: 0;
+    }
+
+    .etc-panel.is-active {
+      display: block !important;
+    }
+
+    .etc-panel--random.is-active {
+      display: flex !important;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .etc-writing-title {
+      font-size: clamp(1.35rem, 3.2vw, 2rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      color: var(--etc-tab-active);
+      max-width: min(28ch, 100%);
+    }
+
+    .etc-writing-body {
+      margin-top: var(--space-24);
+      font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+      line-height: 1.5;
+      color: var(--etc-tab-active);
+      max-width: min(52ch, 100%);
+    }
+
+    .etc-random-intro {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-16);
+      width: 100%;
+      max-width: min(44ch, 100%);
+      margin: 0 0 clamp(28px, 4.5vw, 48px);
+      padding-inline: 0;
+      text-align: left;
+      box-sizing: border-box;
+    }
+
+    .etc-random-intro p {
+      margin: 0;
+      font-size: clamp(0.9rem, 1.45vw, 1rem);
+      line-height: 1.55;
+      letter-spacing: -0.01em;
+      color: rgba(0, 0, 0, 0.58);
+    }
+
+    /* Album mosaic — compact, hand-placed grid */
+    .etc-album-mosaic {
+      display: grid;
+      grid-template-columns: repeat(4, auto);
+      justify-content: start;
+      align-items: center;
+      gap: clamp(18px, 2.8vw, 28px) clamp(14px, 2.2vw, 24px);
+      width: 100%;
+      max-width: 520px;
+      margin: 0;
+      padding: var(--space-8) 0 var(--space-16);
+    }
+
+    .etc-album-piece {
+      margin: 0;
+      justify-self: center;
+      transform: rotate(var(--etc-rot, 0deg));
+      transition:
+        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .etc-album-piece:nth-child(1) { --etc-rot: -2.4deg; margin-top: 6px; }
+    .etc-album-piece:nth-child(2) { --etc-rot: 1.8deg; margin-top: 14px; }
+    .etc-album-piece:nth-child(3) { --etc-rot: -1.2deg; }
+    .etc-album-piece:nth-child(4) { --etc-rot: 2.2deg; margin-top: -4px; }
+    .etc-album-piece:nth-child(5) { --etc-rot: -1.6deg; margin-top: 8px; }
+    .etc-album-piece:nth-child(6) { --etc-rot: 1.4deg; margin-top: -6px; }
+    .etc-album-piece:nth-child(7) { --etc-rot: 2deg; margin-top: 4px; }
+    .etc-album-piece:nth-child(8) { --etc-rot: -2.1deg; margin-top: 10px; }
+
+    .etc-album-piece:hover,
+    .etc-album-piece:focus-within {
+      transform: rotate(0deg) translateY(-3px);
+      z-index: 1;
+    }
+
+    .etc-album-art {
+      display: block;
+      width: var(--etc-album-w, 112px);
+      aspect-ratio: var(--etc-album-ar, 1 / 1);
+      border-radius: 14px;
+      border: 1px solid rgba(0, 0, 0, 0.07);
+      background: linear-gradient(145deg, #f0ebe3 0%, #d8d0c4 100%);
+      box-shadow:
+        0 4px 14px rgba(0, 0, 0, 0.045),
+        0 12px 28px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      transition: box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .etc-album-piece:hover .etc-album-art,
+    .etc-album-piece:focus-within .etc-album-art {
+      box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.07),
+        0 18px 40px rgba(0, 0, 0, 0.065);
+    }
+
+    .etc-album-piece[data-shape="portrait"] {
+      --etc-album-w: 96px;
+      --etc-album-ar: 2 / 3;
+    }
+
+    .etc-album-piece[data-shape="square"] {
+      --etc-album-w: 108px;
+      --etc-album-ar: 1 / 1;
+    }
+
+    .etc-album-piece:nth-child(3n+2) .etc-album-art {
+      background: linear-gradient(145deg, #e8e4f0 0%, #c8c0d8 100%);
+    }
+
+    .etc-album-piece:nth-child(3n) .etc-album-art {
+      background: linear-gradient(145deg, #e3ece8 0%, #c5d4cc 100%);
+    }
+
+    @media (max-width: 520px) {
+      .etc-album-mosaic {
+        grid-template-columns: repeat(3, auto);
+        max-width: 100%;
+        gap: 16px 20px;
+      }
+
+      .etc-album-piece[data-shape="square"] {
+        --etc-album-w: 96px;
+      }
+
+      .etc-album-piece[data-shape="portrait"] {
+        --etc-album-w: 84px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .etc-album-mosaic {
+        grid-template-columns: repeat(2, auto);
+      }
+
+      .etc-album-piece[data-shape="square"] {
+        --etc-album-w: 88px;
+      }
+
+      .etc-album-piece[data-shape="portrait"] {
+        --etc-album-w: 76px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .etc-album-piece,
+      .etc-album-art {
+        transition-duration: 0.05s;
+      }
+
+      .etc-album-piece:hover,
+      .etc-album-piece:focus-within {
+        transform: rotate(var(--etc-rot, 0deg));
+      }
+    }
+
+    /* Photography — featured frame (max 500×500) + full-width filmstrip (no edge clip) */
+    .etc-viewer {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      margin-inline: 0;
+      outline: none;
+    }
+
+    .etc-viewer-stage-wrap,
+    .etc-viewer-meta,
+    .etc-viewer-hint {
+      width: min(100%, var(--etc-viewer-max));
+      max-width: var(--etc-viewer-max);
+      margin-inline: 0;
+    }
+
+    .etc-viewer:focus-visible {
+      outline: 2px solid var(--etc-tab-active);
+      outline-offset: 6px;
+      border-radius: 8px;
+    }
+
+    .etc-viewer-stage-wrap {
+      position: relative;
+      width: min(100%, var(--etc-viewer-max));
+      max-width: var(--etc-viewer-max);
+      margin: 0 0 var(--space-32);
+      padding: 0;
+    }
+
+    .etc-viewer-stack {
+      position: absolute;
+      inset: 8% 6% -4% 10%;
+      border-radius: 22px;
+      background: var(--etc-photo-placeholder);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.08);
+      transform: rotate(-2.5deg);
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.55;
+    }
+
+    .etc-viewer-stage {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: var(--etc-viewer-max);
+      max-height: var(--etc-viewer-max);
+      margin: 0;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.07);
+      background: var(--etc-photo-placeholder);
+      box-shadow:
+        0 6px 22px rgba(0, 0, 0, 0.055),
+        0 18px 44px rgba(0, 0, 0, 0.07);
+      transform: rotate(1.25deg);
+      aspect-ratio: 4 / 3;
+    }
+
+    .etc-viewer-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      transition: opacity 0.35s ease;
+    }
+
+    .etc-viewer-image.is-fading {
+      opacity: 0;
+    }
+
+    .etc-viewer-meta {
+      text-align: left;
+      max-width: min(28ch, var(--etc-viewer-max));
+      margin-bottom: var(--space-32);
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .etc-viewer-title {
+      font-size: clamp(1.15rem, 2.6vw, 1.5rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: var(--etc-tab-active);
+    }
+
+    .etc-viewer-caption {
+      margin-top: 6px;
+      font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+      font-style: italic;
+      letter-spacing: -0.02em;
+      line-height: 1.35;
+      color: rgba(0, 0, 0, 0.52);
+    }
+
+    .etc-viewer-filmstrip {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: var(--space-16);
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      margin-inline: 0;
+      padding: var(--space-8) 0 var(--space-16);
+      overflow: visible;
+    }
+
+    .etc-thumb {
+      flex: 0 0 auto;
+      width: clamp(52px, 12vw, 72px);
+      padding: 0;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--etc-photo-placeholder);
+      cursor: pointer;
+      transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .etc-thumb img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    .etc-thumb:hover {
+      border-color: rgba(0, 0, 0, 0.22);
+    }
+
+    .etc-thumb.is-active {
+      border-color: var(--etc-tab-active);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .etc-thumb:focus-visible {
+      outline: 2px solid var(--etc-tab-active);
+      outline-offset: 3px;
+    }
+
+    .etc-viewer-hint {
+      display: block;
+      margin-top: var(--space-16);
+      font-size: 0.8125rem;
+      letter-spacing: 0.02em;
+      color: rgba(0, 0, 0, 0.38);
+      text-align: left;
+    }
+
+    html.dark-theme {
+      --etc-tab-active: #f5f5f2;
+      --etc-tab-inactive: rgba(245, 245, 242, 0.28);
+    }
+
+    html.dark-theme body.etc-tab-photography,
+    html.dark-theme body.etc-tab-random {
+      background: var(--etc-light-bg);
+      color: #111111;
+    }
+
+    html.dark-theme body.etc-tab-photography .etc-tab.is-active,
+    html.dark-theme body.etc-tab-random .etc-tab.is-active {
+      color: #111111;
+    }
+
+    html.dark-theme body.etc-tab-photography .etc-tab,
+    html.dark-theme body.etc-tab-random .etc-tab {
+      color: #111111;
+    }
+
+    html.dark-theme body.etc-tab-photography .etc-tab:not(.is-active),
+    html.dark-theme body.etc-tab-random .etc-tab:not(.is-active) {
+      opacity: 0.28;
+    }
+
+    html.dark-theme body.etc-tab-photography .etc-tab.is-active,
+    html.dark-theme body.etc-tab-random .etc-tab.is-active {
+      opacity: 1;
+    }
+
+    html.dark-theme body.etc-tab-random .etc-random-intro p {
+      color: rgba(0, 0, 0, 0.52);
+    }
+
+    html.dark-theme body.etc-tab-photography .etc-viewer-caption {
+      color: rgba(0, 0, 0, 0.48);
+    }
+
+    html.dark-theme body.etc-tab-photography .etc-viewer-hint {
+      color: rgba(0, 0, 0, 0.42);
+    }
+
+    @media (max-width: 900px) {
+      .etc-main {
+        padding-bottom: var(--space-64);
+      }
+
+      .etc-album-mosaic {
+        padding-inline: var(--space-8);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .etc-layout {
+        gap: var(--space-24);
+      }
+
+      .etc-tabs {
+        gap: var(--space-16) var(--space-24);
+      }
+
+      .etc-viewer-stage-wrap {
+        margin-bottom: var(--space-24);
+        width: 100%;
+        max-width: min(var(--etc-viewer-max), 100%);
+      }
+
+      .etc-viewer-stage {
+        border-radius: 22px;
+        transform: none;
+        max-height: min(var(--etc-viewer-max), calc(100vw - 2 * var(--content-pad)));
+      }
+
+      .etc-viewer-stack {
+        display: none;
+      }
+
+      .etc-viewer-meta {
+        margin-bottom: var(--space-24);
+      }
+
+      .etc-viewer-filmstrip {
+        justify-content: flex-start;
+        padding-inline: 0;
+      }
+
+      .etc-viewer-hint {
+        font-size: 0.75rem;
+      }
+
+      .etc-random-intro {
+        padding-inline: 0;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .etc-tabs {
+        gap: var(--space-16);
+      }
+
+      .etc-thumb {
+        width: 48px;
+        border-radius: 12px;
+      }
+
+      .etc-viewer-stage {
+        border-radius: 18px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .etc-viewer-image,
+      .etc-thumb {
+        transition-duration: 0.05s;
+      }
+
+      .etc-viewer-stage,
+      .etc-viewer-stack {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body class="etc-page">
+  <script src="transitions-boot.js"></script>
+
+  <!-- NAV -->
+  <div id="top" class="home-hero-mono navbar">
+    <header class="mono-header">
+      <nav class="mono-nav" aria-label="Main">
+        <div class="nav-left">
+          <p class="nav-page-line">
+            <a href="index.html" class="nav-back link-hover" aria-label="Back to home">
+              <svg class="nav-back-arrow" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 5-7 7 7 7"/></svg>
+              <span class="nav-back-label">Back</span>
+            </a>
+            <a href="index.html" class="nav-page-name link-hover" aria-label="Mariel Lopez, home">Mariel Lopez</a>
+          </p>
+        </div>
+        <div class="nav-right">
+          <time class="nav-local-time" id="nav-local-time" datetime="" aria-label="New York local time">
+            <span class="nav-local-move" aria-label="Currently">Currently</span><span class="nav-local-sep" aria-hidden="true">✦</span><span class="nav-local-clock"></span>
+          </time>
+          <div class="nav-links">
+            <a class="nav-contact-link" href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener noreferrer">LinkedIn<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+            <a class="nav-contact-link" href="https://drive.google.com/file/d/1HT2FcuIwYNYXt00IsOKhti0plwNZEdIb/view?usp=sharing" target="_blank" rel="noopener noreferrer">Resume<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+            <a class="nav-contact-link" href="mailto:mariellopezdesign@gmail.com">Contact<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle theme" aria-pressed="false">
+      <span class="theme-icon sun-icon" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.7"/>
+          <path d="M12 2V5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          <path d="M12 19V22" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          <path d="M2 12H5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          <path d="M19 12H22" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          <path d="M4.9 4.9L7 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          <path d="M17 17L19.1 19.1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          <path d="M17 7L19.1 4.9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          <path d="M4.9 19.1L7 17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="theme-icon moon-icon" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M20 14.5C19.2 14.8 18.4 15 17.5 15C13.4 15 10 11.6 10 7.5C10 6.6 10.2 5.8 10.5 5C7.1 5.7 4.5 8.7 4.5 12.3C4.5 16.5 7.9 20 12.2 20C15.8 20 18.8 17.4 20 14.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </button>
+  </div>
+
+  <main class="etc-main etc-hero content-shell" id="etc-main">
+    <section class="etc-writing" aria-label="Writing">
+      <h2 class="etc-writing-title">LOREM IPSUM</h2>
+      <p class="etc-writing-body">LOREM IPSUM</p>
+    </section>
+  </main>
+
+  <script src="mailto-links.js" defer></script>
+  <script src="transitions.js" defer></script>
+  <script src="copy-email.js" defer></script>
+  <script src="nav-scroll.js" defer></script>
+  <script src="theme.js" defer></script>
+  <script src="nav-clock.js" defer></script>
+
+</body>
+</html>

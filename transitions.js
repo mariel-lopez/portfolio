@@ -13,7 +13,7 @@
   if (!overlay || !wipe) return;
 
   var surfaceSelector =
-    '.home-hero-mono.navbar, .page, .about-main, .project-page-container, .site-bottom';
+    '.home-hero-mono.navbar, .page, .about-main, .etc-main, .project-page-container, .site-bottom';
 
   function surfaces() {
     var list = Array.prototype.slice.call(document.querySelectorAll(surfaceSelector));

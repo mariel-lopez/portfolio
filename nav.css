@@ -317,7 +317,7 @@
 /* ── Subpage nav (Sobeys, About) — same typography as homepage headline ── */
 .nav-page-line {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: var(--space-48);
   flex: 1;
   min-width: 0;
@@ -333,17 +333,24 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35em;
-  vertical-align: baseline;
   color: var(--nav-ink);
   text-decoration: none;
   white-space: nowrap;
+  line-height: 1;
 }
 
 .nav-back-arrow {
   flex-shrink: 0;
-  width: 0.82em;
-  height: 0.82em;
+  width: 15px;
+  height: 15px;
   display: block;
+  /* SVG viewBox leaves ~5px inset — align arrow tip with body/sidebar text below */
+  margin-left: -4px;
+}
+
+.nav-back-label {
+  display: inline-block;
+  line-height: 1.2;
 }
 
 .nav-page-name {
@@ -569,12 +576,23 @@
 
   .nav-page-line {
     flex: 1 1 auto;
+    flex-direction: column;
+    align-items: flex-start;
     min-width: 0;
-    gap: var(--space-24);
+    gap: 0.15em;
     font-size: 16px;
     font-weight: var(--nav-headline-weight);
     line-height: 1.25;
     letter-spacing: var(--nav-headline-tracking);
+  }
+
+  .nav-back,
+  .nav-back.link-hover {
+    align-self: flex-start;
+  }
+
+  .nav-page-name {
+    align-self: flex-start;
   }
 
 
@@ -656,7 +674,8 @@ body.home-page .page {
 
   body.case-page .case-hero,
   body.about-page .about-hero,
-  body.about-page main.about-hero {
+  body.about-page main.about-hero,
+  body.etc-page .etc-hero {
     padding-top: var(--desktop-nav-clearance);
   }
 
@@ -684,7 +703,8 @@ body.home-page .page {
 
   body.case-page .case-hero,
   body.about-page .about-hero,
-  body.about-page main.about-hero {
+  body.about-page main.about-hero,
+  body.etc-page .etc-hero {
     padding-top: 112px;
   }
 
@@ -702,6 +722,7 @@ body.home-page .page {
   .case-hero,
   .about-hero,
   .about-page main.about-hero,
+  .etc-page .etc-hero,
   .work-section {
     padding-top: var(--tablet-nav-clearance);
     margin-top: 0;
@@ -725,6 +746,7 @@ body.home-page .page {
   .case-hero,
   .about-hero,
   .about-page main.about-hero,
+  .etc-page .etc-hero,
   .work-section {
     padding-top: var(--mobile-nav-clearance);
     margin-top: 0;

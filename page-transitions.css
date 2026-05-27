@@ -76,6 +76,7 @@ html[data-pt-phase="leave"] .pt-page-surface,
 html[data-pt-phase="leave"] .home-hero-mono.navbar,
 html[data-pt-phase="leave"] .page,
 html[data-pt-phase="leave"] .about-main,
+html[data-pt-phase="leave"] .etc-main,
 html[data-pt-phase="leave"] .project-page-container,
 html[data-pt-phase="leave"] .site-bottom {
   opacity: 0;
@@ -100,6 +101,7 @@ html[data-pt-phase="enter"] .pt-page-surface,
 html[data-pt-phase="enter"] .home-hero-mono.navbar,
 html[data-pt-phase="enter"] .page,
 html[data-pt-phase="enter"] .about-main,
+html[data-pt-phase="enter"] .etc-main,
 html[data-pt-phase="enter"] .project-page-container,
 html[data-pt-phase="enter"] .site-bottom {
   opacity: 0;
@@ -132,12 +134,14 @@ html[data-pt-phase="enter-settle"] .pt-page-surface,
 html[data-pt-phase="enter-settle"] .home-hero-mono.navbar,
 html[data-pt-phase="enter-settle"] .page,
 html[data-pt-phase="enter-settle"] .about-main,
+html[data-pt-phase="enter-settle"] .etc-main,
 html[data-pt-phase="enter-settle"] .project-page-container,
 html[data-pt-phase="enter-settle"] .site-bottom,
 html[data-pt-phase="idle"] .pt-page-surface,
 html[data-pt-phase="idle"] .home-hero-mono.navbar,
 html[data-pt-phase="idle"] .page,
 html[data-pt-phase="idle"] .about-main,
+html[data-pt-phase="idle"] .etc-main,
 html[data-pt-phase="idle"] .project-page-container,
 html[data-pt-phase="idle"] .site-bottom {
   opacity: 1;
@@ -151,6 +155,7 @@ html[data-pt-phase="idle"] .site-bottom {
 .home-hero-mono.navbar,
 .page,
 .about-main,
+.etc-main,
 .project-page-container,
 .site-bottom {
   will-change: opacity, transform;
@@ -160,6 +165,7 @@ html[data-pt-phase="idle"] .pt-page-surface,
 html[data-pt-phase="idle"] .home-hero-mono.navbar,
 html[data-pt-phase="idle"] .page,
 html[data-pt-phase="idle"] .about-main,
+html[data-pt-phase="idle"] .etc-main,
 html[data-pt-phase="idle"] .project-page-container,
 html[data-pt-phase="idle"] .site-bottom {
   will-change: auto;
@@ -228,6 +234,7 @@ html[data-pt-phase="enter-settle"] .case-content > div[id^="case-"]:nth-child(n)
   .home-hero-mono.navbar,
   .page,
   .about-main,
+  .etc-main,
   .project-page-container,
   .site-bottom {
     transition-duration: 0.1s !important;
