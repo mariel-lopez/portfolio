@@ -10,6 +10,44 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="shortcut icon" href="favicon.ico" />
   <script>!function(){try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('dark-theme');}catch(e){}}();</script>
+  <script>
+    (async function () {
+      var ACCESS_KEY = 'etc_access_granted';
+      var PASSWORD_HASH = '143705b2daf4782f008a1fc7aedddf3ee66e8b42d295cf07cdc015ab93b90be9';
+      try {
+        if (sessionStorage.getItem(ACCESS_KEY) === 'true') return;
+      } catch (e) {}
+
+      if (!window.crypto || !window.crypto.subtle || !window.TextEncoder) {
+        window.alert('Unable to validate access.');
+        var unsupportedWeb = window.location.protocol.indexOf('http') === 0;
+        window.location.replace(unsupportedWeb ? '/' : 'index.html');
+        return;
+      }
+
+      var input = window.prompt('Enter password to access this page:');
+      if (input === null) {
+        var cancelledWeb = window.location.protocol.indexOf('http') === 0;
+        window.location.replace(cancelledWeb ? '/' : 'index.html');
+        return;
+      }
+
+      var data = new TextEncoder().encode(input);
+      var digest = await window.crypto.subtle.digest('SHA-256', data);
+      var hash = Array.from(new Uint8Array(digest)).map(function (b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+
+      if (hash === PASSWORD_HASH) {
+        try { sessionStorage.setItem(ACCESS_KEY, 'true'); } catch (e) {}
+        return;
+      }
+
+      window.alert('Incorrect password.');
+      var isWeb = window.location.protocol.indexOf('http') === 0;
+      window.location.replace(isWeb ? '/' : 'index.html');
+    })();
+  </script>
   <link rel="stylesheet" href="spacing.css" />
   <link rel="stylesheet" href="nav.css" />
   <link rel="stylesheet" href="theme.css" />
