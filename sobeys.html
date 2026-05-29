@@ -46,11 +46,8 @@
     }
 
     body {
-      font-size: 16px;
-      font-family: var(--mono-serif);
-      font-weight: 400;
       background: var(--page-bg);
-      color: var(--page-ink);
+      color: var(--body-color);
     }
 
     /* ── Project page shell (matches index / about grid) ── */
@@ -324,11 +321,11 @@
 
     .overview-value {
       font-family: var(--mono-serif);
-      font-size: 18px;
+      font-size: var(--body-font-size);
       font-weight: 400;
-      line-height: 1.65;
-      letter-spacing: -0.015em;
-      color: var(--page-ink);
+      line-height: var(--body-line-height);
+      letter-spacing: var(--body-letter-spacing);
+      color: var(--sobeys-ink-soft);
     }
 
     .overview-team {
@@ -372,10 +369,10 @@
 
     .stat-card-body {
       font-family: var(--mono-serif);
-      font-size: 18px;
+      font-size: var(--body-font-size);
       font-weight: 400;
-      line-height: 1.65;
-      color: var(--page-ink);
+      line-height: var(--body-line-height);
+      color: var(--sobeys-ink-soft);
     }
 
     .stat-card-body strong { font-weight: 500; }
@@ -419,10 +416,10 @@
 
     .section-body {
       font-family: var(--mono-serif);
-      font-size: 20px;
+      font-size: var(--body-font-size);
       font-weight: 400;
-      line-height: 1.7;
-      letter-spacing: -0.015em;
+      line-height: var(--body-line-height);
+      letter-spacing: var(--body-letter-spacing);
       color: var(--sobeys-ink-soft);
     }
 
@@ -550,10 +547,10 @@
 
     .learning-card p {
       font-family: var(--mono-serif);
-      font-size: 18px;
+      font-size: var(--body-font-size);
       font-weight: 400;
       color: var(--sobeys-ink-soft);
-      line-height: 1.65;
+      line-height: var(--body-line-height);
     }
 
     /* ── RESULT NUMBERS ── */
@@ -577,10 +574,10 @@
 
     .result-desc {
       font-family: var(--mono-serif);
-      font-size: 18px;
+      font-size: var(--body-font-size);
       font-weight: 400;
       color: var(--sobeys-ink-soft);
-      line-height: 1.4;
+      line-height: var(--body-line-height);
     }
 
     /* ── FOOTER LINK TOOLTIPS (kept for hover preview utility) ── */
@@ -674,7 +671,7 @@
       /* Content */
       .section-heading { font-size: 28px; }
       .callout-quote { font-size: 22px; }
-      .section-body { font-size: 18px; }
+      .section-body { font-size: var(--body-font-size); }
       .results-row { flex-direction: column; gap: 24px; }
       .learning-grid { grid-template-columns: 1fr; }
       .result-number { font-size: 40px; }

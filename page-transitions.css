@@ -173,8 +173,8 @@ html[data-pt-phase="idle"] .site-bottom {
 
 /* Subtle stagger for sections/cards inside entering surfaces */
 html[data-pt-phase="enter-settle"] .cards-grid .project-card,
-html[data-pt-phase="enter-settle"] .about-main > section,
-html[data-pt-phase="enter-settle"] .quest-row,
+html[data-pt-phase="enter-settle"] .about-main > .about-lead,
+html[data-pt-phase="enter-settle"] .about-main > .about-photos,
 html[data-pt-phase="enter-settle"] .stat-card,
 html[data-pt-phase="enter-settle"] .case-content > div[id^="case-"] {
   opacity: 0;
@@ -183,18 +183,15 @@ html[data-pt-phase="enter-settle"] .case-content > div[id^="case-"] {
 }
 
 html[data-pt-phase="enter-settle"] .cards-grid .project-card:nth-child(1),
-html[data-pt-phase="enter-settle"] .about-main > section:nth-child(1),
+html[data-pt-phase="enter-settle"] .about-main > .about-lead,
 html[data-pt-phase="enter-settle"] .stat-card:nth-child(1) { animation-delay: 60ms; }
 html[data-pt-phase="enter-settle"] .cards-grid .project-card:nth-child(2),
-html[data-pt-phase="enter-settle"] .about-main > section:nth-child(2),
+html[data-pt-phase="enter-settle"] .about-main > .about-photos,
 html[data-pt-phase="enter-settle"] .stat-card:nth-child(2) { animation-delay: 100ms; }
 html[data-pt-phase="enter-settle"] .cards-grid .project-card:nth-child(3),
-html[data-pt-phase="enter-settle"] .about-main > section:nth-child(3),
 html[data-pt-phase="enter-settle"] .stat-card:nth-child(3) { animation-delay: 140ms; }
 html[data-pt-phase="enter-settle"] .cards-grid .project-card:nth-child(n+4),
-html[data-pt-phase="enter-settle"] .about-main > section:nth-child(n+4),
 html[data-pt-phase="enter-settle"] .stat-card:nth-child(n+4),
-html[data-pt-phase="enter-settle"] .quest-row:nth-child(n+1),
 html[data-pt-phase="enter-settle"] .case-content > div[id^="case-"]:nth-child(n) {
   animation-delay: 180ms;
 }
@@ -242,8 +239,8 @@ html[data-pt-phase="enter-settle"] .case-content > div[id^="case-"]:nth-child(n)
   }
 
   html[data-pt-phase="enter-settle"] .cards-grid .project-card,
-  html[data-pt-phase="enter-settle"] .about-main > section,
-  html[data-pt-phase="enter-settle"] .quest-row,
+  html[data-pt-phase="enter-settle"] .about-main > .about-lead,
+  html[data-pt-phase="enter-settle"] .about-main > .about-photos,
   html[data-pt-phase="enter-settle"] .stat-card,
   html[data-pt-phase="enter-settle"] .case-content > div[id^="case-"] {
     animation: none;

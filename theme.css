@@ -4,6 +4,11 @@
   --page-bg: #f5f5f2;
   --page-ink: #111111;
   --page-ink-soft: rgba(17, 17, 17, 0.9);
+  /* Global body typography */
+  --body-font-size: clamp(0.95rem, 1.6vw, 1.0625rem);
+  --body-line-height: 1.6;
+  --body-letter-spacing: -0.01em;
+  --body-color: var(--page-ink-soft);
   --overlay-bg: #f5f5f2;
   --surface-glass: rgba(255, 255, 255, 0.78);
   --surface-glass-hover: rgba(255, 255, 255, 0.96);
@@ -117,11 +122,25 @@ html.dark-theme {
 
 /* ── Base page ── */
 body {
+  font-family: var(--mono-serif, "Helvetica Neue", Helvetica, Arial, sans-serif);
+  font-size: var(--body-font-size);
+  line-height: var(--body-line-height);
+  letter-spacing: var(--body-letter-spacing);
+  font-weight: 400;
   background-color: var(--page-bg) !important;
-  color: var(--page-ink) !important;
+  color: var(--body-color) !important;
   transition:
     background-color 0.5s cubic-bezier(0.22, 1, 0.36, 1),
     color 0.45s ease;
+}
+
+/* Reusable body text utility */
+.body-text {
+  font-family: inherit;
+  font-size: var(--body-font-size);
+  line-height: var(--body-line-height);
+  letter-spacing: var(--body-letter-spacing);
+  color: var(--body-color);
 }
 
 html.dark-theme body {
@@ -738,27 +757,16 @@ html.dark-theme .footer-social a.rolling-link.link-hover:focus-visible {
 }
 
 /* ── About page ── */
-.about-main.content-shell,
-.quests-section,
-.quest-block,
-.quests-rows {
+.about-main.content-shell {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
 }
 
-html.dark-theme .about-main.content-shell,
-html.dark-theme .quests-section,
-html.dark-theme .quest-block,
-html.dark-theme .quests-rows {
+html.dark-theme .about-main.content-shell {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
-}
-
-html.dark-theme .quests-section::before {
-  content: none !important;
-  display: none !important;
 }
 
 html.dark-theme h1.hero-title,
@@ -766,28 +774,12 @@ html.dark-theme .hero-title-accent {
   color: var(--page-ink);
 }
 
-html.dark-theme .quest-heading,
-html.dark-theme .quest-heading-inner,
-html.dark-theme .quest-title,
-html.dark-theme .quest-org,
-html.dark-theme .quest-org a,
 html.dark-theme .about-card-label {
   color: var(--page-ink);
 }
 
-html.dark-theme .quest-date {
-  color: var(--about-ink-muted);
-}
-
-html.dark-theme .quest-desc,
-html.dark-theme .quest-desc-lead,
-html.dark-theme .quest-desc-body,
 html.dark-theme .about-card-desc {
   color: var(--about-ink-soft);
-}
-
-html.dark-theme .quest-desc strong {
-  color: var(--about-ink-strong);
 }
 
 html.dark-theme .marquee-text {

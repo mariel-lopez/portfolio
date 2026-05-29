@@ -195,17 +195,6 @@
   transform: none !important;
 }
 
-/* Quest / inline links */
-.quest-org a.link-hover:hover,
-.quest-org a.link-hover:focus-visible {
-  color: var(--hover-color);
-}
-
-.quest-org a.link-hover:hover .quest-org-link-icon,
-.quest-org a.link-hover:focus-visible .quest-org-link-icon {
-  color: currentColor;
-}
-
 /* Footer social — muted default; hover matches nav (nav-ink) */
 .footer-social a.rolling-link.link-hover {
   color: var(--nav-muted, #777777);
@@ -242,8 +231,7 @@
   .hero-rotating-link,
   .hero-rotating-link:hover,
   .hero-rotating-link:focus-visible,
-  .hero-rotating-link-icon,
-  .quest-org a .quest-org-link-icon {
+  .hero-rotating-link-icon {
     transition-duration: 0.15s !important;
   }
 }

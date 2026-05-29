@@ -33,17 +33,12 @@
       --about-role-col: 1.1fr;
       --about-body-col: 2.4fr;
       --about-col-gap: clamp(48px, 5vw, 72px);
-      --about-photo-gap: 80px;
-      --about-quests-marquee-gap: 80px;
       --about-marquee-footer-gap: 32px;
     }
 
     body {
-      font-family: var(--mono-serif);
-      font-size: 16px;
-      font-weight: 400;
       background: var(--page-bg);
-      color: var(--page-ink);
+      color: var(--body-color);
       min-height: 100vh;
       overflow-x: clip;
     }
@@ -61,7 +56,7 @@
       gap: var(--space-24);
       align-items: start;
       width: 100%;
-      margin-bottom: var(--about-photo-gap);
+      margin: 0;
     }
 
     .about-lead > h1.hero-title {
@@ -94,7 +89,6 @@
         grid-template-columns: var(--about-role-col) var(--about-body-col);
         column-gap: var(--about-col-gap);
         row-gap: 0;
-        margin-bottom: var(--about-photo-gap);
       }
 
       .about-lead > h1.hero-title {
@@ -135,12 +129,11 @@
       display: block;
       width: 100%;
       max-width: none;
-      font-family: var(--mono-serif);
-      font-size: 16px;
+      font-size: var(--body-font-size);
       font-weight: 400;
       color: var(--about-ink-soft);
-      line-height: 1.75;
-      letter-spacing: -0.01em;
+      line-height: var(--body-line-height);
+      letter-spacing: var(--body-letter-spacing);
       text-wrap: normal;
       text-align: left;
       hyphens: none;
@@ -155,36 +148,15 @@
       font-style: italic;
     }
 
-    /* ── Photo row ── */
+    /* ── Photo gallery (equal inset above + below via single token) ── */
     .about-photos {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: var(--space-24);
       align-items: stretch;
-      margin-bottom: var(--about-photo-gap);
+      margin-block: var(--about-gallery-gap);
+      margin-inline: 0;
       min-width: 0;
-    }
-
-    @media (min-width: 861px) {
-      .quest-block {
-        display: grid;
-        grid-template-columns: var(--about-role-col) var(--about-body-col);
-        column-gap: var(--about-col-gap);
-        align-items: start;
-      }
-
-      .quest-heading {
-        grid-column: 1;
-      }
-
-      .quests-rows {
-        grid-column: 1 / -1;
-      }
-
-      .quest-row {
-        grid-template-columns: var(--about-role-col) var(--about-body-col);
-        column-gap: var(--about-col-gap);
-      }
     }
 
     .about-photo {
@@ -236,249 +208,6 @@
       }
     }
 
-    .quests-section {
-      position: relative;
-      margin-bottom: var(--about-quests-marquee-gap);
-      background: transparent;
-      border: none;
-      box-shadow: none;
-      min-width: 0;
-      max-width: 100%;
-    }
-
-    .quests-section::before {
-      content: none;
-      display: none;
-    }
-
-    .quest-block,
-    .quests-rows {
-      background: transparent;
-      border: none;
-      box-shadow: none;
-    }
-
-    .quest-block {
-      margin-bottom: 32px;
-      scroll-margin-top: var(--space-96);
-    }
-
-    .quest-block:last-child {
-      margin-bottom: 0;
-    }
-
-    .quest-heading {
-      font-family: var(--mono-serif);
-      font-size: clamp(1.5rem, 2.8vw, 2.5rem);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 0.95;
-      color: var(--page-ink);
-      margin: 0 0 32px;
-    }
-
-    .quest-heading-inner {
-      display: inline-flex;
-      align-items: baseline;
-      gap: 0.28em;
-      max-width: 100%;
-      min-width: 0;
-      white-space: nowrap;
-      letter-spacing: inherit;
-    }
-
-    @media (max-width: 640px) {
-      .quest-heading,
-      .quest-heading-inner {
-        letter-spacing: -0.015em;
-      }
-
-      .quest-heading-inner {
-        font-size: clamp(1.0625rem, 4.8vw, 1.5rem);
-      }
-    }
-
-    @media (max-width: 400px) {
-      .quest-heading-inner {
-        font-size: clamp(1rem, 4.5vw, 1.25rem);
-      }
-    }
-
-    .quest-heading-star {
-      font-size: 0.82em;
-      font-weight: 500;
-      letter-spacing: 0;
-      position: relative;
-      bottom: 4px;
-      margin: 0;
-      flex-shrink: 0;
-    }
-
-    .quests-rows {
-      display: flex;
-      flex-direction: column;
-      gap: clamp(56px, 7vw, 88px);
-    }
-
-    .quest-row {
-      display: grid;
-      grid-template-columns: var(--about-role-col) var(--about-body-col);
-      column-gap: var(--about-col-gap);
-      row-gap: 0;
-      padding: 0;
-      align-items: start;
-      border: none;
-    }
-
-    .quest-date {
-      font-family: var(--mono-serif);
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--about-ink-muted);
-      line-height: 1.4;
-      letter-spacing: -0.01em;
-    }
-
-    .quest-right {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-24);
-      min-width: 0;
-      max-width: 100%;
-    }
-
-    .quest-role {
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0;
-    }
-
-    .quest-title {
-      font-family: var(--mono-serif);
-      font-size: clamp(1.25rem, 1.85vw, 1.75rem);
-      font-weight: 700;
-      color: var(--page-ink);
-      line-height: 0.98;
-      letter-spacing: -0.045em;
-    }
-
-    .quest-org {
-      margin-top: 8px;
-      font-family: var(--mono-serif);
-      font-size: clamp(1rem, 1.2vw, 1.25rem);
-      font-weight: 600;
-      color: var(--page-ink);
-      line-height: 1.25;
-      letter-spacing: -0.035em;
-    }
-
-    .quest-org a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .quest-org a.link-hover {
-      display: inline-flex;
-      align-items: center;
-      gap: 0;
-    }
-
-    .quest-org a .quest-org-link-icon {
-      flex-shrink: 0;
-      display: block;
-      width: 0;
-      height: 0;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      align-self: center;
-      color: currentColor;
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transition:
-        opacity var(--hover-duration, 280ms) var(--hover-ease, ease),
-        width var(--hover-duration, 280ms) var(--hover-ease, ease),
-        height var(--hover-duration, 280ms) var(--hover-ease, ease),
-        margin-inline-start var(--hover-duration, 280ms) var(--hover-ease, ease),
-        visibility 0s linear var(--hover-duration, 280ms);
-    }
-
-    .quest-org a:hover .quest-org-link-icon,
-    .quest-org a:focus-visible .quest-org-link-icon {
-      width: 1em;
-      height: 1em;
-      margin-inline-start: 0.22em;
-      transform: translateY(0.07em);
-      opacity: 1;
-      visibility: visible;
-      transition:
-        opacity var(--hover-duration, 280ms) var(--hover-ease, ease),
-        width var(--hover-duration, 280ms) var(--hover-ease, ease),
-        height var(--hover-duration, 280ms) var(--hover-ease, ease),
-        margin-inline-start var(--hover-duration, 280ms) var(--hover-ease, ease),
-        visibility 0s;
-    }
-
-    .quest-desc {
-      font-family: var(--mono-serif);
-      font-size: clamp(0.9375rem, 1.08vw, 1.125rem);
-      font-weight: 400;
-      color: var(--about-ink-soft);
-      line-height: 1.52;
-      letter-spacing: -0.015em;
-      max-width: 100%;
-      min-width: 0;
-    }
-
-    .quest-desc strong {
-      font-weight: 500;
-      color: var(--about-ink-strong);
-    }
-
-    .quest-desc > p {
-      margin: 0;
-    }
-
-    .quest-desc > p:first-child + .quest-desc-lead {
-      margin-top: var(--space-16);
-    }
-
-    .quest-desc-lead {
-      font-weight: 400;
-      color: var(--about-ink-soft);
-      line-height: 1.45;
-    }
-
-    .quest-desc-body {
-      margin-top: var(--space-16);
-      font-weight: 400;
-      color: var(--about-ink-soft);
-      line-height: 1.55;
-    }
-
-    .quest-right--editorial {
-      gap: 0;
-    }
-
-    .quest-desc--editorial {
-      margin-top: 16px;
-      max-width: none;
-      line-height: 1.62;
-      font-weight: 400;
-      color: var(--about-ink-soft);
-    }
-
-    .quest-desc--editorial p {
-      margin: 0;
-    }
-
-    .quest-desc--editorial p + p {
-      margin-top: var(--space-16);
-    }
-
     /* ── MARQUEE (full-bleed; dividers stay in .content-shell) ── */
     .site-bottom {
       margin-top: 0;
@@ -492,7 +221,7 @@
       max-width: 100vw;
       margin-left: calc(50% - 50vw);
       margin-right: calc(50% - 50vw);
-      padding: var(--space-48) 0 var(--space-32);
+      padding: 0 0 var(--marquee-pad-y);
       border-top: none;
     }
 
@@ -538,8 +267,7 @@
       .marquee-track { animation: none; }
 
       .about-photo,
-      .about-photo::after,
-      .quest-org a .quest-org-link-icon {
+      .about-photo::after {
         transition-duration: 0.08s !important;
       }
     }
@@ -571,52 +299,6 @@
         object-position: 18% 32%;
       }
 
-      .quest-heading {
-        font-size: clamp(1.25rem, 4.2vw, 1.875rem);
-        margin-bottom: 32px;
-      }
-
-      .quest-block {
-        margin-bottom: 32px;
-      }
-
-      .quests-rows {
-        gap: clamp(40px, 8vw, 56px);
-      }
-
-      .quest-row {
-        grid-template-columns: 1fr;
-        gap: var(--space-24) 0;
-        padding: 0;
-      }
-
-      .quest-date {
-        font-size: clamp(0.8125rem, 2.4vw, 0.9375rem);
-      }
-
-      .quest-title {
-        font-size: clamp(1.0625rem, 4vw, 1.5rem);
-        letter-spacing: -0.042em;
-      }
-
-      .quest-org {
-        margin-top: var(--space-16);
-        font-size: clamp(0.9375rem, 3vw, 1.125rem);
-        font-weight: 600;
-      }
-
-      .quest-desc {
-        max-width: none;
-        font-size: clamp(0.9rem, 2.7vw, 1.05rem);
-        line-height: 1.52;
-        color: var(--about-ink-soft);
-      }
-
-      .quest-desc--editorial {
-        max-width: none;
-        line-height: 1.6;
-      }
-
     }
 
     @media (max-width: 860px) {
@@ -646,9 +328,9 @@
 
     @media (max-width: 640px) {
       .about-intro p {
-        font-size: 16px;
-        line-height: 1.75;
-        letter-spacing: -0.01em;
+        font-size: var(--body-font-size);
+        line-height: var(--body-line-height);
+        letter-spacing: var(--body-letter-spacing);
       }
 
       .about-intro p + p {
@@ -657,20 +339,6 @@
 
       .about-photos {
         gap: var(--space-16);
-      }
-
-      .quest-row,
-      .quest-right,
-      .quest-desc,
-      .quest-role,
-      .quests-rows {
-        min-width: 0;
-        max-width: 100%;
-      }
-
-      .quest-desc p {
-        overflow-wrap: break-word;
-        word-break: normal;
       }
 
       .about-photos > .about-photo {
@@ -752,7 +420,7 @@
         <div class="about-intro-copy">
           <p>By day, I'm a product designer who enjoys solving ambiguous, complex problems alongside people who are energized by working together towards a shared goal.</p>
           <p>Outside of work, I spend a lot of time bringing designers together through community events and meetups. So far, I've hosted gatherings for 75+ people to create spaces where designers can share ideas, learn from one another, and continue growing together.</p>
-          <p>Those experiences have reinforced something I learned early on: everyone's perspective shapes how they move through the world. That continues to influence how I approach design today, by bridging curiosity, and collaboration in the way I navigate problem spaces and build thoughtful product experiences.</p>
+          <p>Those experiences have reinforced something I learned early on: everyone's perspective shapes how they move through the world. That continues to influence how I approach design today: by bridging curiosity and collaboration in the way I navigate problem spaces and build thoughtful software experiences.</p>
         </div>
       </section>
     </div>
@@ -768,69 +436,6 @@
         <img src="design-event.png" alt="Speaking at a design-a-thon in front of a projected presentation screen." loading="eager" />
       </figure>
     </div>
-
-    <!-- Quests / experience -->
-    <section class="quests-section" aria-label="Experience">
-      <div class="quest-block" id="quests-main">
-        <h2 class="quest-heading">
-          <span class="quest-heading-inner"><span class="quest-heading-star" aria-hidden="true">✦</span><span>Main quests</span><span class="quest-heading-star" aria-hidden="true">✦</span></span>
-        </h2>
-        <div class="quests-rows">
-          <div class="quest-row">
-            <div class="quest-role">
-              <div class="quest-title">Product Designer</div>
-              <div class="quest-org"><a class="link-hover" href="https://www.ibm.com/consulting/ibmix" target="_blank" rel="noopener noreferrer">IBM iX<svg class="quest-org-link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></div>
-            </div>
-            <div class="quest-right quest-right--editorial">
-              <div class="quest-date">Mar 2022 – Present</div>
-              <div class="quest-desc quest-desc--editorial">
-                <p><span style="font-weight:500;">Clients served:</span> Air Canada, Sobeys, Government of Canada</p>
-                <p>I've spent the past few years working across large-scale platforms, design systems, and complex customer experiences, learning how to navigate ambiguity, align cross-functional teams, and design within systems that impact millions of people.</p>
-                <p>I care deeply about doing meaningful work alongside ambitious, thoughtful people who are motivated by impact.</p>
-                <p class="quest-resume-link">
-                  <a class="nav-contact-link" href="https://drive.google.com/file/d/1HT2FcuIwYNYXt00IsOKhti0plwNZEdIb/view?usp=sharing" target="_blank" rel="noopener noreferrer">Check out my resume<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="quest-block" id="quests-side">
-        <h2 class="quest-heading">
-          <span class="quest-heading-inner"><span class="quest-heading-star" aria-hidden="true">✦</span><span>Side quests</span><span class="quest-heading-star" aria-hidden="true">✦</span></span>
-        </h2>
-        <div class="quests-rows">
-          <div class="quest-row">
-            <div class="quest-role">
-              <div class="quest-title">Organizer</div>
-              <div class="quest-org"><a class="link-hover" href="https://luma.com/user/mariel" target="_blank" rel="noopener noreferrer">Luma<svg class="quest-org-link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></div>
-            </div>
-            <div class="quest-right quest-right--editorial">
-              <div class="quest-date">Jan 2026 – Present</div>
-              <div class="quest-desc quest-desc--editorial">
-                <p>I wanted to be part of a design community, but hadn't found one hosting the kinds of events I was excited about, so I decided to start one myself.</p>
-                <p>Since then, I've built a growing community focused on bringing designers together to share best practices, explore emerging AI workflows, and tackle fun design challenges collaboratively, bringing together 75+ attendees so far.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="quest-row">
-            <div class="quest-role">
-              <div class="quest-title">Mentor</div>
-              <div class="quest-org"><a class="link-hover" href="https://adplist.org/mentors/mariel-lopez" target="_blank" rel="noopener noreferrer">ADPList<svg class="quest-org-link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></div>
-            </div>
-            <div class="quest-right quest-right--editorial">
-              <div class="quest-date">Feb 2023 – Present</div>
-              <div class="quest-desc quest-desc--editorial">
-                <p>Mentorship has shaped me as a designer both early in my career and now. I owe so much to the insights, expertise, and feedback that has helped me become a better designer.</p>
-                <p>Now, 4+ years into my career, I've come to value community just as much as craft, and mentoring has become one of the most meaningful ways I've been able to give back.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
   </main>
 

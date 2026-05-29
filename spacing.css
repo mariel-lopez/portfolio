@@ -20,8 +20,9 @@
   --nav-row-gap: var(--space-16) var(--space-32);
   --nav-below-gap: var(--space-32);
   --nav-content-offset: calc(var(--space-96) + var(--nav-below-gap));
-  --nav-links-gap: var(--space-16);
-  --nav-right-gap: var(--space-32);
+  /* Inter-link gap: compact but scannable (24–32px on wide viewports) */
+  --nav-links-gap: clamp(24px, 1.5vw, 32px);
+  --nav-right-gap: var(--space-24);
   --nav-contact-gap: var(--space-16);
   --nav-meta-stack-gap: var(--space-16);
 
@@ -57,9 +58,12 @@
   --home-cards-overlap: var(--space-32);
   --home-cards-overlap-md: var(--space-32);
 
+  /* About page */
+  --about-gallery-gap: clamp(var(--space-48), 4vw, var(--space-64));
+
   /* About marquee */
   --marquee-font-size: clamp(48px, 4vw, 64px);
-  --marquee-pad-y: var(--space-48);
+  --marquee-pad-y: var(--space-32);
 
   /* Popovers / tooltips */
   --popover-offset: var(--space-16);
@@ -71,6 +75,7 @@
   :root {
     --content-pad: var(--space-48);
     --card-grid-gap: var(--space-24);
+    --nav-links-gap: 24px;
   }
 }
 
@@ -82,12 +87,16 @@
     --page-section-gap: 56px;
     --footer-margin-top: 40px;
     --footer-pad-top: 32px;
+    --nav-links-gap: 20px;
+    --about-gallery-gap: var(--space-48);
   }
 }
 
 @media (max-width: 640px) {
   :root {
     --content-pad: var(--space-24);
+    --about-gallery-gap: var(--space-32);
+    --nav-links-gap: 16px;
     --nav-pad-top-extra: var(--space-16);
     --nav-title-extra: calc(var(--space-16) + var(--nav-pad-top-extra));
     --nav-below-gap: var(--space-32);

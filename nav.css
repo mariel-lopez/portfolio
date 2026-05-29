@@ -31,6 +31,11 @@
   --desktop-nav-clearance: 96px;
   --tablet-nav-clearance: 112px;
   --mobile-nav-clearance: 120px;
+  /* Subpage mobile two-row nav clearance */
+  --subpage-nav-clearance-mobile: 132px;
+  --nav-subpage-row-gap: var(--space-16);
+  --nav-subpage-brand-gap: clamp(24px, 4vw, 48px);
+  --nav-subpage-links-gap: var(--nav-links-gap);
 }
 
 /* ── Content column (aligns dividers + body copy) ── */
@@ -474,6 +479,7 @@
 .nav-links {
   display: flex;
   align-items: center;
+  flex-wrap: nowrap;
   gap: var(--nav-links-gap);
   flex-shrink: 0;
   overflow: visible;
@@ -490,6 +496,7 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  white-space: nowrap;
   cursor: pointer;
   transition:
     color var(--hover-duration) var(--hover-ease),
@@ -518,6 +525,75 @@
   opacity: 1;
 }
 
+/* ── Subpage nav (About, Sobeys, Etc) — shared ── */
+.home-hero-mono.navbar:has(.nav-page-line) .mono-header {
+  align-items: flex-start;
+  padding-right: calc(var(--content-pad) + 36px + var(--space-16));
+}
+
+.home-hero-mono.navbar:has(.nav-page-line) .nav-local-time {
+  display: none;
+}
+
+.home-hero-mono.navbar:has(.nav-page-line) .theme-toggle {
+  top: max(var(--nav-pad-y), env(safe-area-inset-top, 0px));
+  right: var(--content-pad);
+}
+
+/* Desktop + tablet: single row — Back · name · links */
+@media (min-width: 641px) {
+  .home-hero-mono.navbar:has(.nav-page-line) .mono-nav {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: var(--nav-row-gap);
+    width: 100%;
+  }
+
+  .home-hero-mono.navbar:has(.nav-page-line) .nav-left {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+  }
+
+  .home-hero-mono.navbar:has(.nav-page-line) .nav-page-line {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: var(--nav-subpage-brand-gap);
+    width: auto;
+    min-width: 0;
+  }
+
+  .home-hero-mono.navbar:has(.nav-page-line) .nav-back,
+  .home-hero-mono.navbar:has(.nav-page-line) .nav-page-name {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .home-hero-mono.navbar:has(.nav-page-line) .nav-right {
+    display: flex;
+    flex: 0 0 auto;
+    width: auto;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    gap: var(--nav-subpage-links-gap);
+    margin-left: var(--space-16);
+  }
+
+  .home-hero-mono.navbar:has(.nav-page-line) .nav-links {
+    flex-wrap: nowrap;
+    gap: var(--nav-subpage-links-gap);
+  }
+
+  .home-hero-mono.navbar:has(.nav-page-line) .nav-contact-link {
+    white-space: nowrap;
+  }
+}
+
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .nav-local-time {
@@ -529,6 +605,11 @@
   .mono-nav {
     flex-wrap: nowrap;
     gap: var(--space-16) var(--space-24);
+  }
+
+  .nav-links {
+    flex-wrap: nowrap;
+    gap: var(--nav-links-gap);
   }
 }
 
@@ -574,28 +655,6 @@
     display: none;
   }
 
-  .nav-page-line {
-    flex: 1 1 auto;
-    flex-direction: column;
-    align-items: flex-start;
-    min-width: 0;
-    gap: 0.15em;
-    font-size: 16px;
-    font-weight: var(--nav-headline-weight);
-    line-height: 1.25;
-    letter-spacing: var(--nav-headline-tracking);
-  }
-
-  .nav-back,
-  .nav-back.link-hover {
-    align-self: flex-start;
-  }
-
-  .nav-page-name {
-    align-self: flex-start;
-  }
-
-
   .nav-right {
     flex-wrap: wrap;
     gap: var(--space-16) var(--space-16);
@@ -604,7 +663,8 @@
   }
 
   .nav-links {
-    gap: var(--space-16);
+    gap: var(--nav-links-gap);
+    flex-wrap: wrap;
   }
 }
 
@@ -705,7 +765,7 @@ body.home-page .page {
   body.about-page .about-hero,
   body.about-page main.about-hero,
   body.etc-page .etc-hero {
-    padding-top: 112px;
+    padding-top: var(--desktop-nav-clearance);
   }
 
   body.home-page .hero-title-wrapper {
@@ -722,7 +782,11 @@ body.home-page .page {
   .case-hero,
   .about-hero,
   .about-page main.about-hero,
-  .etc-page .etc-hero,
+  .etc-page .etc-hero {
+    padding-top: var(--tablet-nav-clearance);
+    margin-top: 0;
+  }
+
   .work-section {
     padding-top: var(--tablet-nav-clearance);
     margin-top: 0;
@@ -746,7 +810,11 @@ body.home-page .page {
   .case-hero,
   .about-hero,
   .about-page main.about-hero,
-  .etc-page .etc-hero,
+  .etc-page .etc-hero {
+    padding-top: var(--subpage-nav-clearance-mobile);
+    margin-top: 0;
+  }
+
   .work-section {
     padding-top: var(--mobile-nav-clearance);
     margin-top: 0;
@@ -762,6 +830,74 @@ body.home-page .page {
 
   .cards-grid .project-card:first-child {
     margin-top: 0;
+  }
+
+  /* Subpage mobile: two rows — Back + name (row 1); links (row 2) */
+  .home-hero-mono.navbar:has(.nav-page-line) {
+    --nav-subpage-row-gap: var(--space-16);
+    --nav-subpage-brand-gap: var(--space-24);
+    --nav-subpage-links-gap: var(--nav-links-gap);
+  }
+
+  .home-hero-mono.navbar:has(.nav-page-line) .mono-header {
+    padding-right: calc(var(--space-64) + 36px + var(--space-8));
+  }
+
+  .home-hero-mono.navbar:has(.nav-page-line) .mono-nav {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: var(--nav-subpage-row-gap);
+    width: 100%;
+  }
+
+  .home-hero-mono.navbar:has(.nav-page-line) .nav-left {
+    width: 100%;
+    min-width: 0;
+    flex: 0 0 auto;
+  }
+
+  .home-hero-mono.navbar:has(.nav-page-line) .nav-page-line {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--nav-subpage-brand-gap);
+    width: 100%;
+    font-size: 16px;
+    line-height: 1.25;
+  }
+
+  .home-hero-mono.navbar:has(.nav-page-line) .nav-back,
+  .home-hero-mono.navbar:has(.nav-page-line) .nav-page-name {
+    align-self: auto;
+    white-space: nowrap;
+  }
+
+  .home-hero-mono.navbar:has(.nav-page-line) .nav-right {
+    display: flex;
+    width: 100%;
+    flex: 0 0 auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: var(--nav-subpage-links-gap);
+  }
+
+  .home-hero-mono.navbar:has(.nav-page-line) .nav-links {
+    flex-wrap: wrap;
+    gap: var(--nav-subpage-links-gap);
+  }
+
+  .home-hero-mono.navbar:has(.nav-page-line) .theme-toggle {
+    top: max(calc(var(--space-16) + var(--nav-pad-top-extra)), env(safe-area-inset-top, 0px));
+    right: max(var(--space-16), env(safe-area-inset-right, 0px));
+  }
+}
+
+@media (max-width: 640px) and (min-width: 380px) {
+  .home-hero-mono.navbar:has(.nav-page-line) {
+    --nav-subpage-row-gap: var(--space-24);
   }
 }
 
