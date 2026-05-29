@@ -182,7 +182,7 @@ html.dark-theme .home-hero-mono.navbar::before {
 
 .theme-toggle {
   position: absolute;
-  top: max(var(--nav-pad-y), env(safe-area-inset-top, 0px));
+  top: max(var(--nav-pad-top), env(safe-area-inset-top, 0px));
   right: var(--content-pad);
   z-index: 2;
   width: 36px;
@@ -261,13 +261,18 @@ html.dark-theme .theme-toggle .sun-icon {
   transform: scale(1) rotate(0deg);
 }
 
+@media (max-width: 955px) {
+  .theme-toggle {
+    top: max(calc(var(--space-24) + var(--nav-pad-top-extra, 0px)), env(safe-area-inset-top, 0px));
+  }
+}
+
 @media (max-width: 640px) {
   .home-hero-mono.navbar:has(.theme-toggle) .mono-header {
     padding-right: var(--space-64);
   }
 
   .theme-toggle {
-    top: max(var(--nav-pad-y), env(safe-area-inset-top, 0px));
     right: max(var(--space-16), env(safe-area-inset-right, 0px));
   }
 }
@@ -772,6 +777,14 @@ html.dark-theme .about-main.content-shell {
 html.dark-theme h1.hero-title,
 html.dark-theme .hero-title-accent {
   color: var(--page-ink);
+}
+
+html.dark-theme body.about-page {
+  color: var(--page-ink);
+}
+
+html.dark-theme .about-intro p {
+  color: var(--about-ink-soft);
 }
 
 html.dark-theme .about-card-label {

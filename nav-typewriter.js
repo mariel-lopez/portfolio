@@ -5,12 +5,12 @@
 
   var phrases = [
     {
-      text: 'Product designer @ IBM iX',
+      text: 'Product Designer @ IBM Consulting',
       link: {
         type: 'partial',
-        href: 'https://www.ibm.com/consulting/ibmix',
+        href: 'https://www.ibm.com/consulting',
         linkStart: 20,
-        linkText: 'IBM iX'
+        linkText: 'IBM Consulting'
       }
     },
     {

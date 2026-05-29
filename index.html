@@ -977,15 +977,14 @@
       transition: color 0.3s ease;
     }
 
-    /* Nav-style cards (no image) — About only in second row */
-    .project-card--nav.about-card,
-    .project-card--nav.etc-card {
+    /* Nav-style cards (no image) — About in second row */
+    .project-card--nav.about-card {
       justify-content: flex-start;
       min-height: var(--card-min-row-secondary);
       height: 100%;
     }
 
-    /* Second row — shared title/tag spacing (Air Canada + Etc + About) */
+    /* Second row — shared title/tag spacing (Air Canada + About) */
     .cards-grid .second-row-card .card-footer {
       gap: var(--card-secondary-title-gap);
       padding: var(--space-16) var(--space-24) var(--space-24);
@@ -999,7 +998,7 @@
       margin-bottom: 0;
     }
 
-    /* Bottom row: Air Canada + Etc + About */
+    /* Bottom row: Air Canada + About (About spans 2 cols from 641px+) */
     .about-card {
       grid-column: span 1;
       min-height: var(--card-min-row-secondary);
@@ -1008,14 +1007,18 @@
       overflow: hidden;
     }
 
-    .air-canada-card,
-    .etc-card {
+    @media (min-width: 641px) {
+      .about-card {
+        grid-column: span 2;
+      }
+    }
+
+    .air-canada-card {
       grid-column: span 1;
     }
 
     .utility-card,
     .air-canada-card,
-    .etc-card,
     .second-row-card {
       min-height: var(--card-min-row-secondary);
       height: 100%;
@@ -1088,136 +1091,6 @@
       flex: 0 0 auto;
     }
 
-    /* Etc — same whisper-soft system as About; photo glimpse on hover */
-    .project-card.etc-card {
-      border-radius: 40px;
-      border: 1px solid rgba(0, 0, 0, 0.045);
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.42),
-        0 6px 22px rgba(0, 0, 0, 0.055),
-        0 18px 44px rgba(0, 0, 0, 0.048),
-        0 1px 3px rgba(0, 0, 0, 0.04);
-      background: #f7f5f0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .project-card.etc-card:hover,
-    .project-card.etc-card:focus-visible {
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.48),
-        0 14px 42px rgba(0, 0, 0, 0.092),
-        0 36px 76px rgba(0, 0, 0, 0.068),
-        0 4px 14px rgba(0, 0, 0, 0.045);
-    }
-
-    .etc-card.second-row-card,
-    .etc-card.project-card--nav {
-      min-height: var(--card-min-row-secondary);
-      height: 100%;
-      padding: 0;
-    }
-
-    .etc-card::before {
-      content: "";
-      position: absolute;
-      inset: -12%;
-      border-radius: inherit;
-      z-index: 0;
-      pointer-events: none;
-      background: #f5f5f2;
-      filter: blur(24px);
-      opacity: 0.88;
-      transform: scale(1.08) translateX(-4%);
-      transition:
-        transform 0.88s cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 0.88s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .etc-card:hover::before,
-    .etc-card:focus-visible::before {
-      transform: scale(1.14) translateX(4%);
-      opacity: 0.72;
-    }
-
-    .etc-card-photo {
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      z-index: 1;
-      pointer-events: none;
-      background: url("etc-hover.png") 50% 63% / cover no-repeat;
-      filter: saturate(0.88) contrast(0.93) brightness(1.06);
-      opacity: 0;
-      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-      transition-delay: 0.12s;
-    }
-
-    .etc-card:hover .etc-card-photo,
-    .etc-card:focus-visible .etc-card-photo {
-      opacity: 0.4;
-      filter: saturate(0.94) contrast(0.96) brightness(1.04);
-    }
-
-    .etc-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      border-radius: inherit;
-      pointer-events: none;
-      background: linear-gradient(to bottom,
-        rgba(247, 245, 240, 0.04) 0%,
-        rgba(247, 245, 240, 0.62) 100%);
-      opacity: 1;
-      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .etc-card:hover::after,
-    .etc-card:focus-visible::after {
-      background: linear-gradient(to bottom,
-        rgba(247, 245, 240, 0.02) 0%,
-        rgba(247, 245, 240, 0.36) 100%);
-    }
-
-    .etc-card-noise {
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      z-index: 3;
-      pointer-events: none;
-      background: url("textures/noise.png") repeat / 220px;
-      opacity: 0.028;
-      mix-blend-mode: multiply;
-    }
-
-    .etc-card-content {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      top: auto;
-      z-index: 4;
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      justify-content: flex-end;
-      min-height: 0;
-      max-height: none;
-      flex: 0 0 auto;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    .etc-card-content .card-footer {
-      width: 100%;
-      background: transparent;
-      border: none;
-      box-shadow: none;
-    }
-
     /* Icon in cards and links */
     .card-icon {
       display: inline-block;
@@ -1253,8 +1126,11 @@
         letter-spacing: -0.01em;
       }
 
-      /* Etc + About — equal height on tablet; Air Canada hugs 4:3 media + footer */
-      .etc-card.second-row-card,
+      /* About spans 2 cols; Air Canada hugs 4:3 media + footer */
+      .about-card {
+        grid-column: span 2;
+      }
+
       .about-card.second-row-card {
         display: flex;
         flex-direction: column;
@@ -1271,21 +1147,18 @@
         align-self: stretch;
       }
 
-      .project-card--nav.about-card.second-row-card,
-      .project-card--nav.etc-card.second-row-card {
+      .project-card--nav.about-card.second-row-card {
         min-height: var(--card-utility-h);
         padding: 0;
       }
 
-      /* 2-col tablet: One Pacific + Air Canada, then Etc + About */
       .project-card--accent-one-pacific,
-      .air-canada-card,
-      .about-card,
-      .etc-card {
+      .air-canada-card {
         grid-column: span 1;
       }
 
-      .cards-grid .project-card:nth-child(n+5) {
+      .cards-grid .about-card,
+      .cards-grid .project-card:nth-child(5) {
         align-self: stretch;
         min-height: var(--card-utility-h);
       }
@@ -1307,23 +1180,6 @@
       }
 
       .about-card::after {
-        background: linear-gradient(to bottom,
-          rgba(247, 245, 240, 0.02) 0%,
-          rgba(247, 245, 240, 0.36) 100%);
-      }
-
-      .etc-card::before {
-        transform: scale(1.14) translateX(4%);
-        opacity: 0.72;
-      }
-
-      .etc-card-photo {
-        opacity: 0.4;
-        filter: saturate(0.94) contrast(0.96) brightness(1.04);
-        transition-delay: 0s;
-      }
-
-      .etc-card::after {
         background: linear-gradient(to bottom,
           rgba(247, 245, 240, 0.02) 0%,
           rgba(247, 245, 240, 0.36) 100%);
@@ -1360,21 +1216,9 @@
         transform: scale(1.08) translateX(-4%) !important;
       }
 
-      .about-card-photo,
-      .etc-card-photo {
+      .about-card-photo {
         transition: opacity 0.12s ease !important;
         transition-delay: 0s !important;
-      }
-
-      .etc-card::before {
-        animation: none !important;
-        transition: opacity 0.12s ease !important;
-        transform: scale(1.08) translateX(-4%) !important;
-      }
-
-      .etc-card:hover::before,
-      .etc-card:focus-visible::before {
-        transform: scale(1.08) translateX(-4%) !important;
       }
 
       .big-hover-title {
@@ -1415,8 +1259,7 @@
 
     .cards-grid .project-card:last-child,
     .cards-grid .about-card,
-    .cards-grid .air-canada-card,
-    .cards-grid .etc-card {
+    .cards-grid .air-canada-card {
       margin-bottom: 0;
     }
 
@@ -1461,7 +1304,7 @@
         top: var(--site-nav-height);
       }
 
-      .cards-grid .project-card:not(.air-canada-card):not(.etc-card) .card-image {
+      .cards-grid .project-card:not(.air-canada-card):not(.about-card) .card-image {
         flex: 0 0 auto;
         height: var(--card-featured-media-h);
         min-height: var(--card-featured-media-h);
@@ -1470,7 +1313,7 @@
         overflow: hidden;
       }
 
-      .cards-grid .project-card:not(.air-canada-card):not(.etc-card) .card-image img {
+      .cards-grid .project-card:not(.air-canada-card):not(.about-card) .card-image img {
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -1523,8 +1366,7 @@
         display: none;
       }
 
-      /* Etc + About — equal height on mobile; Air Canada matches One Pacific media */
-      .etc-card.second-row-card,
+      /* About utility card — same height as other mobile cards; Air Canada matches One Pacific media */
       .about-card.second-row-card {
         min-height: var(--card-utility-h);
         height: auto;
@@ -1544,12 +1386,10 @@
       .cards-grid .project-card:nth-child(3) { z-index: 3; }
       .cards-grid .project-card:nth-child(4) { z-index: 4; }
       .cards-grid .project-card:nth-child(5) { z-index: 5; }
-      .cards-grid .project-card:nth-child(6) { z-index: 6; }
 
       .about-card,
       .utility-card,
-      .air-canada-card,
-      .etc-card {
+      .air-canada-card {
         grid-column: span 1;
       }
 
@@ -1574,7 +1414,7 @@
       }
     }
 
-    @media (max-width: 500px) {
+    @media (max-width: 955px) {
       .mono-nav { gap: var(--space-16) var(--space-16); }
     }
 
@@ -1825,7 +1665,7 @@
                 <span class="mono-logo-original">Mariel Lopez</span>
                 <span class="mono-logo-clone" aria-hidden="true">Mariel Lopez</span>
               </span>
-            </a><span class="hero-rotating">Product Designer @&nbsp;<a class="hero-rotating-link" href="https://www.ibm.com/consulting/ibmix" target="_blank" rel="noopener noreferrer"><span class="hero-rotating-link-label">IBM iX</span><svg class="hero-rotating-link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></span>
+            </a><span class="hero-rotating">Product Designer @&nbsp;<a class="hero-rotating-link" href="https://www.ibm.com/consulting" target="_blank" rel="noopener noreferrer"><span class="hero-rotating-link-label">IBM Consulting</span><svg class="hero-rotating-link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></span>
           </h1>
         </div>
         <div class="nav-right">
@@ -1920,7 +1760,7 @@
           </div>
         </a>
 
-        <!-- Row 2: Air Canada + Etc + About -->
+        <!-- Row 2: Air Canada + About (2-col span) -->
         <a class="project-card project-card--accent-air-canada air-canada-card utility-card second-row-card" href="mailto:mariellopezdesign@gmail.com" data-hover-title="Air Canada" aria-label="Air Canada — request case study via email">
           <div class="card-image card-image--logo">
             <img src="ac-logo.png" alt="Air Canada" loading="lazy" />
@@ -1935,22 +1775,6 @@
             </div>
           </div>
         </a>
-
-        <div class="project-card project-card--nav etc-card second-row-card" data-hover-title="Etc" aria-label="Etc — coming soon">
-          <div class="etc-card-photo" aria-hidden="true"></div>
-          <div class="etc-card-noise" aria-hidden="true"></div>
-          <div class="etc-card-content">
-            <div class="card-footer">
-              <div class="card-title-wrap">
-                <span class="card-title-original">Etc</span>
-                <span class="card-title-clone" aria-hidden="true">Etc</span>
-              </div>
-              <div class="card-tags">
-                <span class="card-pill">Coming soon</span>
-              </div>
-            </div>
-          </div>
-        </div>
 
         <a class="project-card project-card--nav about-card second-row-card" href="about.html" data-hover-title="About">
           <div class="about-card-photo" aria-hidden="true"></div>
@@ -2094,14 +1918,9 @@
       document.querySelectorAll('.work-section .project-card:not(.no-hover)').forEach(function (card) {
         card.addEventListener('mouseenter', function () {
           cursor.classList.add('is-visible');
-          var etc = card.classList.contains('etc-card');
-          cursor.classList.toggle('is-pill', etc);
-          cursor.setAttribute('data-label', etc ? 'Coming soon' : '');
         });
         card.addEventListener('mouseleave', function () {
           cursor.classList.remove('is-visible');
-          cursor.classList.remove('is-pill');
-          cursor.setAttribute('data-label', '');
         });
       });
     })();
