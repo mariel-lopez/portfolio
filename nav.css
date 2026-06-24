@@ -355,7 +355,7 @@
 .nav-local-move {
   display: inline-flex;
   align-items: center;
-  gap: 0.28em;
+  gap: 0.32em;
   color: inherit;
   white-space: nowrap;
   flex-shrink: 0;
@@ -363,10 +363,22 @@
 
 .nav-local-arrow {
   display: block;
-  width: 0.85em;
-  height: 0.85em;
+  width: 0.72em;
+  height: 0.54em;
   flex-shrink: 0;
   color: currentColor;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.35;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.nav-local-arrow path {
+  stroke: currentColor;
+  stroke-width: inherit;
+  stroke-linecap: inherit;
+  stroke-linejoin: inherit;
 }
 
 .nav-local-sep {
@@ -449,8 +461,12 @@
 .nav-right {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   gap: var(--nav-right-gap);
-  flex-shrink: 0;
+  row-gap: var(--space-8);
+  min-width: 0;
+  flex-shrink: 1;
   overflow: visible;
 }
 
@@ -460,7 +476,8 @@
   align-items: center;
   flex-wrap: nowrap;
   gap: var(--nav-links-gap);
-  flex-shrink: 0;
+  flex-shrink: 1;
+  min-width: 0;
   overflow: visible;
 }
 
@@ -554,8 +571,9 @@
     flex-direction: row;
     align-items: baseline;
     justify-content: flex-end;
-    flex-wrap: nowrap;
-    gap: var(--nav-subpage-links-gap);
+    flex-wrap: wrap;
+    gap: var(--nav-right-gap);
+    row-gap: var(--space-8);
     margin-left: var(--space-16);
   }
 
