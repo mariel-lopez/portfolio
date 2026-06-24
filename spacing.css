@@ -22,8 +22,8 @@
   --nav-row-gap: var(--space-16) var(--space-32);
   --nav-below-gap: var(--space-32);
   --nav-content-offset: calc(var(--space-96) + var(--nav-below-gap));
-  /* Inter-link gap: grouped nav cluster (20–24px on wide viewports) */
-  --nav-links-gap: clamp(20px, 1.2vw, 24px);
+  /* Inter-link gap: grouped nav cluster */
+  --nav-links-gap: clamp(12px, 0.75vw, 16px);
   --nav-right-gap: var(--space-24);
   --nav-contact-gap: var(--space-16);
   --nav-meta-stack-gap: var(--space-16);
@@ -77,7 +77,7 @@
   :root {
     --content-pad: var(--space-48);
     --card-grid-gap: var(--space-24);
-    --nav-links-gap: 20px;
+    --nav-links-gap: 14px;
   }
 }
 
@@ -89,7 +89,7 @@
     --page-section-gap: 56px;
     --footer-margin-top: 40px;
     --footer-pad-top: 32px;
-    --nav-links-gap: 20px;
+    --nav-links-gap: 14px;
     --about-gallery-gap: var(--space-48);
   }
 }
@@ -98,7 +98,7 @@
   :root {
     --content-pad: var(--space-24);
     --about-gallery-gap: var(--space-32);
-    --nav-links-gap: 18px;
+    --nav-links-gap: 12px;
     --nav-pad-top-extra: var(--space-16);
     --nav-title-extra: calc(var(--space-16) + var(--nav-pad-top-extra));
     --nav-below-gap: var(--space-32);
