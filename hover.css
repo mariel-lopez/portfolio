@@ -85,7 +85,7 @@
 .rolling-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.4em;
+  gap: 0;
   color: inherit;
   text-decoration: none;
   transition:
@@ -128,18 +128,6 @@
 .rolling-link:hover .rolling-link-text,
 .rolling-link:focus-visible .rolling-link-text {
   transform: none;
-}
-
-.rolling-link:not(.external-link) svg {
-  flex-shrink: 0;
-  transition:
-    color var(--hover-duration) var(--hover-ease),
-    opacity var(--hover-duration) var(--hover-ease);
-}
-
-.rolling-link.link-hover:not(.external-link):hover svg,
-.rolling-link.link-hover:not(.external-link):focus-visible svg {
-  opacity: 0.75;
 }
 
 /* ── Project cards — text color only ── */

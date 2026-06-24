@@ -38,7 +38,7 @@
 
   function createRotatingLink(href, label) {
     var anchor = document.createElement('a');
-    anchor.className = 'hero-rotating-link external-link';
+    anchor.className = 'hero-rotating-link link-with-arrow';
     anchor.href = href;
     anchor.target = '_blank';
     anchor.rel = 'noopener noreferrer';

@@ -1,0 +1,99 @@
+/* Site-wide icon system — Apple-style: typographic scale, currentColor, rounded strokes */
+
+:root {
+  --icon-stroke: 1.75;
+  --arrow-stroke: 2;
+  --icon-linecap: round;
+  --icon-linejoin: round;
+  --arrow-size: 0.62em;
+  --arrow-gap: 6px;
+  --ui-icon-size: 1em;
+}
+
+/* ── Shared stroke styling ── */
+.nav-back-arrow,
+.nav-local-arrow,
+.footer-email-copy-icon,
+.theme-icon svg,
+.ui-icon,
+.link-with-arrow .arrow {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: var(--icon-stroke);
+  stroke-linecap: var(--icon-linecap);
+  stroke-linejoin: var(--icon-linejoin);
+  color: currentColor;
+}
+
+.nav-back-arrow path,
+.nav-local-arrow path,
+.footer-email-copy-icon path,
+.footer-email-copy-icon rect,
+.footer-email-copy-icon circle,
+.theme-icon svg path,
+.theme-icon svg circle,
+.ui-icon path,
+.ui-icon circle,
+.ui-icon rect,
+.link-with-arrow .arrow path {
+  stroke: currentColor;
+  stroke-width: inherit;
+  stroke-linecap: inherit;
+  stroke-linejoin: inherit;
+}
+
+.link-with-arrow .arrow {
+  stroke-width: var(--arrow-stroke);
+}
+
+/* ── External-link arrows (nav, footer, hero) ── */
+.link-with-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+}
+
+.link-with-arrow-label,
+.hero-rotating-link-label {
+  display: inline-block;
+  line-height: inherit;
+}
+
+.link-with-arrow .arrow {
+  display: block;
+  width: var(--arrow-size);
+  height: var(--arrow-size);
+  flex-shrink: 0;
+  margin-inline-start: var(--arrow-gap);
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.link-with-arrow:hover .arrow,
+.link-with-arrow:focus-visible .arrow {
+  opacity: 1;
+}
+
+/* ── Inline UI icons (back, CTA, chips) ── */
+.ui-icon {
+  display: block;
+  width: var(--ui-icon-size);
+  height: var(--ui-icon-size);
+  flex-shrink: 0;
+}
+
+.nav-back .nav-back-arrow {
+  width: 0.95em;
+  height: 0.95em;
+}
+
+.hero-image-cta.link-with-arrow .arrow,
+.hero-image-cursor.link-with-arrow .arrow {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link-with-arrow .arrow {
+    transition-duration: 0.15s !important;
+  }
+}

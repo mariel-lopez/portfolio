@@ -95,7 +95,6 @@ html.dark-theme .footer-email-row:focus-within {
   width: 100%;
   height: 100%;
   display: block;
-  stroke-width: 2.1;
   transition: opacity 0.25s ease;
 }
 

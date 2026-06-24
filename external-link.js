@@ -9,11 +9,11 @@
 
   function createIcon() {
     var svg = document.createElementNS(SVG_NS, 'svg');
-    svg.setAttribute('class', 'external-link-icon');
-    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('class', 'arrow');
+    svg.setAttribute('viewBox', '5 5 14 14');
     svg.setAttribute('fill', 'none');
     svg.setAttribute('stroke', 'currentColor');
-    svg.setAttribute('stroke-width', '1.75');
+    svg.setAttribute('stroke-width', '2');
     svg.setAttribute('stroke-linecap', 'round');
     svg.setAttribute('stroke-linejoin', 'round');
     svg.setAttribute('aria-hidden', 'true');
@@ -30,7 +30,7 @@
   function createAnchor(href, label, options) {
     options = options || {};
     var anchor = document.createElement('a');
-    var className = 'external-link';
+    var className = 'link-with-arrow';
 
     if (options.className) {
       className += ' ' + options.className;

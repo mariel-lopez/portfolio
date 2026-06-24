@@ -311,11 +311,10 @@
 
 .nav-back-arrow {
   flex-shrink: 0;
-  width: 15px;
-  height: 15px;
+  width: 0.95em;
+  height: 0.95em;
   display: block;
-  /* SVG viewBox leaves ~5px inset — align arrow tip with body/sidebar text below */
-  margin-left: -4px;
+  margin-left: -0.22em;
 }
 
 .nav-back-label {
@@ -347,22 +346,37 @@
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 6px;
+  gap: 4px;
   width: auto;
   flex-shrink: 0;
   cursor: default;
 }
 
 .nav-local-move {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28em;
   color: inherit;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
+.nav-local-arrow {
+  display: block;
+  width: 0.85em;
+  height: 0.85em;
+  flex-shrink: 0;
+  color: currentColor;
+}
+
 .nav-local-sep {
   padding: 0;
+  margin: 0;
   letter-spacing: 0;
   flex: 0 0 auto;
+  font-size: 0.75em;
+  line-height: 1;
+  opacity: 0.8;
 }
 
 .nav-local-clock {
@@ -465,7 +479,7 @@
   line-height: var(--nav-meta-lh);
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 0;
   white-space: nowrap;
   cursor: pointer;
   transition:
