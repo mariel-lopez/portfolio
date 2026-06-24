@@ -81,15 +81,6 @@
   color: var(--hover-color);
 }
 
-.hero-rotating-link:hover .hero-rotating-link-icon,
-.hero-rotating-link:focus-visible .hero-rotating-link-icon {
-  width: 1em;
-  height: 1em;
-  margin-inline-start: 0.22em;
-  opacity: 1;
-  visibility: visible;
-}
-
 /* ── Rolling links ── */
 .rolling-link {
   display: inline-flex;
@@ -139,15 +130,15 @@
   transform: none;
 }
 
-.rolling-link svg {
+.rolling-link:not(.external-link) svg {
   flex-shrink: 0;
   transition:
     color var(--hover-duration) var(--hover-ease),
     opacity var(--hover-duration) var(--hover-ease);
 }
 
-.rolling-link.link-hover:hover svg,
-.rolling-link.link-hover:focus-visible svg {
+.rolling-link.link-hover:not(.external-link):hover svg,
+.rolling-link.link-hover:not(.external-link):focus-visible svg {
   opacity: 0.75;
 }
 
@@ -205,15 +196,6 @@
   color: var(--nav-ink, #111111);
 }
 
-.footer-social a.rolling-link.link-hover svg {
-  opacity: 0.58;
-}
-
-.footer-social a.rolling-link.link-hover:hover svg,
-.footer-social a.rolling-link.link-hover:focus-visible svg {
-  opacity: 1;
-}
-
 /* Misc */
 .hero-mono-scroll.link-hover:hover,
 .hero-mono-scroll.link-hover:focus-visible {
@@ -230,8 +212,7 @@
   .rolling-link:focus-visible,
   .hero-rotating-link,
   .hero-rotating-link:hover,
-  .hero-rotating-link:focus-visible,
-  .hero-rotating-link-icon {
+  .hero-rotating-link:focus-visible {
     transition-duration: 0.15s !important;
   }
 }

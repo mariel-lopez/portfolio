@@ -36,6 +36,7 @@
   --nav-subpage-row-gap: var(--space-16);
   --nav-subpage-brand-gap: clamp(24px, 4vw, 48px);
   --nav-subpage-links-gap: var(--nav-links-gap);
+  --nav-below-links-gap: var(--space-16);
 }
 
 /* ── Content column (aligns dividers + body copy) ── */
@@ -279,42 +280,6 @@
   cursor: pointer;
 }
 
-.hero-rotating-link-icon {
-  display: inline-block;
-  flex: 0 0 auto;
-  width: 0;
-  height: 0;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  vertical-align: baseline;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition:
-    opacity var(--hover-duration) var(--hover-ease),
-    width var(--hover-duration) var(--hover-ease),
-    height var(--hover-duration) var(--hover-ease),
-    margin-inline-start var(--hover-duration) var(--hover-ease),
-    visibility 0s linear var(--hover-duration);
-}
-
-.hero-rotating-link:hover .hero-rotating-link-icon,
-.hero-rotating-link:focus-visible .hero-rotating-link-icon {
-  width: 1em;
-  height: 1em;
-  margin-inline-start: 0.22em;
-  opacity: 1;
-  visibility: visible;
-  pointer-events: none;
-  transition:
-    opacity var(--hover-duration) var(--hover-ease),
-    width var(--hover-duration) var(--hover-ease),
-    height var(--hover-duration) var(--hover-ease),
-    margin-inline-start var(--hover-duration) var(--hover-ease),
-    visibility 0s;
-}
-
 .hero-rotating-link:focus-visible {
   outline: none;
 }
@@ -485,6 +450,11 @@
   overflow: visible;
 }
 
+/* Subpages (About, Sobeys, Etc): extra space below contact links before hero copy */
+.home-hero-mono.navbar:has(.nav-page-line) .nav-links {
+  margin-bottom: var(--nav-below-links-gap);
+}
+
 .nav-contact-link {
   font-family: var(--mono-serif);
   font-size: var(--nav-meta-size);
@@ -512,17 +482,6 @@
   outline: 1px solid rgba(0, 0, 0, 0.2);
   outline-offset: 3px;
   border-radius: 2px;
-}
-
-.nav-contact-link svg {
-  flex-shrink: 0;
-  opacity: 0.55;
-  transition: opacity var(--hover-duration) var(--hover-ease);
-}
-
-.nav-contact-link:hover svg,
-.nav-contact-link:focus-visible svg {
-  opacity: 1;
 }
 
 /* ── Subpage nav (About, Sobeys, Etc) — shared ── */
@@ -825,7 +784,7 @@ body.home-page .page {
   body.about-page .about-hero,
   body.about-page main.about-hero,
   body.etc-page .etc-hero {
-    padding-top: var(--desktop-nav-clearance);
+    padding-top: calc(var(--desktop-nav-clearance) + var(--nav-below-links-gap));
   }
 
   body.case-page main {
@@ -854,7 +813,7 @@ body.home-page .page {
   body.about-page .about-hero,
   body.about-page main.about-hero,
   body.etc-page .etc-hero {
-    padding-top: var(--desktop-nav-clearance);
+    padding-top: calc(var(--desktop-nav-clearance) + var(--nav-below-links-gap));
   }
 
   body.home-page .hero-title-wrapper {
@@ -872,7 +831,7 @@ body.home-page .page {
   .about-hero,
   .about-page main.about-hero,
   .etc-page .etc-hero {
-    padding-top: var(--tablet-nav-clearance);
+    padding-top: calc(var(--tablet-nav-clearance) + var(--nav-below-links-gap));
     margin-top: 0;
   }
 
@@ -900,7 +859,7 @@ body.home-page .page {
   .about-hero,
   .about-page main.about-hero,
   .etc-page .etc-hero {
-    padding-top: var(--subpage-nav-clearance-mobile);
+    padding-top: calc(var(--subpage-nav-clearance-mobile) + var(--nav-below-links-gap));
     margin-top: 0;
   }
 
