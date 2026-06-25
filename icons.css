@@ -6,7 +6,7 @@
   --icon-linecap: round;
   --icon-linejoin: round;
   --arrow-size: 0.62em;
-  --arrow-gap: 6px;
+  --arrow-gap: 4px;
   --ui-icon-size: 1em;
 }
 
@@ -48,23 +48,29 @@
 .link-with-arrow {
   display: inline-flex;
   align-items: center;
-  gap: 0;
+  gap: var(--arrow-gap);
+  flex-shrink: 0;
 }
 
 .link-with-arrow-label,
 .hero-rotating-link-label {
+  line-height: inherit;
+}
+
+.rolling-link.link-with-arrow .rolling-link-inner {
   display: inline-block;
   line-height: inherit;
 }
 
 .link-with-arrow .arrow {
   display: block;
+  flex: 0 0 auto;
   width: var(--arrow-size);
   height: var(--arrow-size);
-  flex-shrink: 0;
-  margin-inline-start: var(--arrow-gap);
+  margin: 0;
   opacity: 0;
   transition: opacity 180ms ease;
+  pointer-events: none;
 }
 
 .link-with-arrow:hover .arrow,
@@ -83,11 +89,6 @@
 .nav-back .nav-back-arrow {
   width: 0.95em;
   height: 0.95em;
-}
-
-.hero-image-cta.link-with-arrow .arrow,
-.hero-image-cursor.link-with-arrow .arrow {
-  opacity: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {

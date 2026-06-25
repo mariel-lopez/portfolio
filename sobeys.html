@@ -9,7 +9,7 @@
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="shortcut icon" href="favicon.png" />
-  <script>!function(){try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('dark-theme');}catch(e){}}();</script>
+  <script src="theme-boot.js"></script>
   <link rel="stylesheet" href="spacing.css" />
   <link rel="stylesheet" href="nav.css" />
   <link rel="stylesheet" href="theme.css" />
@@ -41,6 +41,9 @@
       --sobeys-stat-bg: #ffffff;
       --sobeys-surface-border: rgba(0, 0, 0, 0.08);
       --sobeys-visual-border: rgba(0, 0, 0, 0.1);
+      --border: var(--sobeys-visual-border);
+      --muted-text: var(--sobeys-label);
+      --text: var(--page-ink);
       --sobeys-live-ink: #111111;
       --sobeys-live-bg: rgba(0, 0, 0, 0.07);
       --sobeys-tag-border: rgba(0, 0, 0, 0.3);
@@ -49,16 +52,6 @@
     body {
       background: var(--page-bg);
       color: var(--body-color);
-    }
-
-    /* ── Project page shell (matches index / about grid) ── */
-    .project-page-container {
-      width: 100%;
-      max-width: var(--content-max);
-      margin: 0 auto;
-      padding-left: var(--content-pad);
-      padding-right: var(--content-pad);
-      box-sizing: border-box;
     }
 
     /* ── Case study hero — offset below fixed nav ── */
@@ -95,140 +88,23 @@
       }
     }
 
-    .hero-image--site-link {
+    .hero-image {
       position: relative;
       display: block;
       width: 100%;
+      margin: 0;
       border-radius: 32px;
       overflow: hidden;
-      margin-top: 12px;
       z-index: 1;
-      text-decoration: none;
-      color: inherit;
     }
 
-    .hero-image--site-link img {
+    .hero-image img {
       width: 100%;
       height: auto;
       display: block;
       object-fit: cover;
       border-radius: 32px;
       aspect-ratio: 16 / 10;
-      transition: opacity 0.25s ease;
-    }
-
-    .hero-image-cursor {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 120;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 9px 14px 9px 12px;
-      font-family: var(--mono-serif);
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      line-height: 1;
-      white-space: nowrap;
-      color: var(--about-ink-muted, rgba(0, 0, 0, 0.48));
-      background: var(--about-chip-bg, rgba(253, 251, 247, 0.92));
-      border: 1px solid var(--about-chip-border, rgba(0, 0, 0, 0.07));
-      border-radius: 10px;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
-      backdrop-filter: blur(10px) saturate(1.02);
-      -webkit-backdrop-filter: blur(10px) saturate(1.02);
-      pointer-events: none;
-      opacity: 0;
-      visibility: hidden;
-      transform: translate(-50%, -50%) scale(0.96);
-      transition:
-        opacity 0.22s cubic-bezier(0.22, 1, 0.36, 1),
-        visibility 0.22s cubic-bezier(0.22, 1, 0.36, 1),
-        transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
-        color 0.2s ease,
-        background 0.2s ease,
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-    }
-
-    .hero-image-cursor.is-visible {
-      opacity: 1;
-      visibility: visible;
-      transform: translate(-50%, -50%) scale(1);
-    }
-
-.hero-image-cursor-icon {
-  flex-shrink: 0;
-}
-
-    .hero-image-cta.link-with-arrow,
-    .hero-image-cursor.link-with-arrow {
-      gap: 0;
-    }
-
-    .hero-image-cta {
-      display: none;
-      gap: 6px;
-    }
-
-    @media (hover: hover) and (pointer: fine) {
-      .hero-image--site-link {
-        cursor: none;
-      }
-
-      .hero-image--site-link:hover img {
-        opacity: 0.94;
-      }
-    }
-
-    @media (hover: none), (pointer: coarse) {
-      .hero-image-cursor {
-        display: none !important;
-      }
-
-      .hero-image--site-link {
-        cursor: pointer;
-      }
-
-      .hero-image-cta {
-        display: inline-flex;
-        align-items: center;
-        position: absolute;
-        left: 50%;
-        bottom: 20px;
-        transform: translateX(-50%);
-        gap: 6px;
-        padding: 9px 14px 9px 12px;
-        font-family: var(--mono-serif);
-        font-size: 12px;
-        font-weight: 500;
-        letter-spacing: 0.04em;
-        line-height: 1;
-        white-space: nowrap;
-        color: var(--page-ink);
-        background: var(--about-chip-bg, rgba(253, 251, 247, 0.92));
-        border: 1px solid var(--about-chip-border, rgba(0, 0, 0, 0.07));
-        border-radius: 10px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-        backdrop-filter: blur(10px) saturate(1.02);
-        -webkit-backdrop-filter: blur(10px) saturate(1.02);
-        pointer-events: none;
-      }
-    }
-
-    .hero-image--site-link:focus-visible {
-      outline: 2px solid rgba(0, 0, 0, 0.2);
-      outline-offset: 4px;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .hero-image-cursor,
-      .hero-image--site-link img {
-        transition-duration: 0.05s;
-      }
     }
 
     .live-badge {
@@ -333,6 +209,10 @@
       color: var(--sobeys-ink-soft);
     }
 
+    .overview-value strong {
+      font-weight: 500;
+    }
+
     .overview-team {
       list-style: none;
       display: flex;
@@ -354,13 +234,9 @@
 
     .stat-card {
       flex: 1 0 0;
-      background: var(--sobeys-stat-bg);
-      border-radius: 26px;
-      padding: 32px;
       display: flex;
       flex-direction: column;
       gap: 12px;
-      border: 1px solid var(--sobeys-surface-border);
     }
 
     .stat-card-label {
@@ -391,8 +267,126 @@
       gap: 80px;
     }
 
+    /* ── Case study sections ── */
+    .case-study-section {
+      display: flex;
+      flex-direction: column;
+    }
+
     #case-identity-trust {
       scroll-margin-top: 96px;
+    }
+
+    /* ── Before/After comparison (Sobeys only) ── */
+    body.case-sobeys .before-after-comparison {
+      width: 100%;
+      margin: 16px 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    body.case-sobeys .case-study-image-card {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    body.case-sobeys .before-after-tabs {
+      position: static;
+      display: flex;
+      justify-content: flex-start;
+      width: auto;
+      padding: 0;
+      background: transparent;
+      transform: none;
+      z-index: auto;
+    }
+
+    body.case-sobeys .before-after-tab-list {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #fff;
+      box-shadow: none;
+    }
+
+    body.case-sobeys .before-after-tab {
+      border: 0;
+      background: transparent;
+      border-radius: 999px;
+      padding: 8px 28px;
+      font-family: var(--mono-serif);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: var(--muted-text);
+      cursor: pointer;
+      transition: background 200ms ease, color 200ms ease;
+    }
+
+    body.case-sobeys .before-after-tab:hover:not(.active) {
+      background: rgba(0, 0, 0, 0.04);
+      color: var(--text);
+    }
+
+    body.case-sobeys .before-after-tab.active {
+      background: #111;
+      color: #fff;
+    }
+
+    body.case-sobeys .before-after-tab.active:hover {
+      background: #111;
+      color: #fff;
+    }
+
+    body.case-sobeys .before-after-tab:focus-visible {
+      outline: 2px solid rgba(0, 0, 0, 0.18);
+      outline-offset: 2px;
+    }
+
+    body.case-sobeys .before-after-tab.active:focus-visible {
+      outline-color: rgba(255, 255, 255, 0.35);
+    }
+
+    html.dark-theme body.case-sobeys .before-after-tab-list {
+      box-shadow: none;
+    }
+
+    body.case-sobeys .case-study-image-card .tab-content {
+      display: none;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    body.case-sobeys .case-study-image-card .tab-content.active { display: block; }
+
+    body.case-sobeys .case-study-image-card img,
+    body.case-sobeys .case-study-image-card .tab-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+      object-fit: contain;
+      vertical-align: top;
+    }
+
+    body.case-sobeys .case-study-image-card .visual-caption {
+      padding: 14px 20px;
+      font-family: var(--mono-serif);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--sobeys-label);
+      border-top: 1px solid var(--sobeys-ui-border);
+      background: #fff;
     }
 
     .section-label {
@@ -452,71 +446,24 @@
       text-decoration-thickness: 1.5px;
     }
 
-    /* ── BEFORE/AFTER ── */
-    .visual-block {
-      border-radius: 26px;
-      overflow: hidden;
-      border: 1px solid var(--sobeys-visual-border);
-      margin-top: 24px;
+    /* ── White surface cards (Overview / Problem / Outcome, Outcome callout, Takeaways) ── */
+    .stat-card,
+    .callout,
+    .learning-card {
+      background: #ffffff;
+      border: 1px solid var(--sobeys-surface-border);
+      border-radius: 24px;
     }
 
-    .visual-tabs {
-      display: flex;
-      border-bottom: 1px solid var(--sobeys-ui-border);
-      background: var(--sobeys-ui-chrome);
+    .stat-card {
+      padding: 32px;
     }
 
-    .tab-button {
-      flex: 1;
-      padding: 16px 20px;
-      background: none;
-      border: none;
-      border-bottom: 2px solid transparent;
-      font-family: var(--mono-serif);
-      font-size: 16px;
-      font-weight: 400;
-      color: var(--sobeys-label);
-      cursor: pointer;
-      transition: color 0.2s, border-color 0.2s;
-      letter-spacing: 0.01em;
-    }
-
-    .tab-button:hover { color: var(--page-ink); }
-
-    .tab-button.active {
-      color: var(--page-ink);
-      border-bottom-color: var(--sobeys-ui-tab-active);
-      font-weight: 500;
-    }
-
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-
-    .tab-image {
-      width: 100%;
-      display: block;
-      object-fit: cover;
-    }
-
-    .visual-caption {
-      padding: 14px 20px;
-      font-family: var(--mono-serif);
-      font-size: 14px;
-      font-weight: 400;
-      color: var(--sobeys-label);
-      border-top: 1px solid var(--sobeys-ui-border);
-      background: var(--sobeys-ui-chrome);
-    }
-
-    /* ── CALLOUT ── */
     .callout {
       display: flex;
       flex-direction: column;
       gap: 12px;
-      background: var(--sobeys-bg-mist);
-      border-radius: 26px;
       padding: 40px;
-      border: 1px solid var(--sobeys-surface-border);
     }
 
     .callout-quote {
@@ -536,10 +483,7 @@
     }
 
     .learning-card {
-      background: var(--sobeys-bg-mist);
-      border-radius: 26px;
       padding: 32px;
-      border: 1px solid var(--sobeys-surface-border);
     }
 
     .learning-card h4 {
@@ -650,6 +594,10 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
+      .before-after-tab {
+        transition-duration: 0.05s !important;
+      }
+
       .mono-logo {
         transition-duration: 0.05s;
       }
@@ -694,12 +642,11 @@
         gap: var(--space-16);
       }
 
-      .hero-image--site-link {
+      .hero-image {
         border-radius: 24px;
-        margin-top: var(--space-16);
       }
 
-      .hero-image--site-link img {
+      .hero-image img {
         border-radius: 24px;
       }
     }
@@ -724,8 +671,9 @@
 
   <!-- NAV -->
   <div class="home-hero-mono navbar">
-    <header class="mono-header">
-      <nav class="mono-nav" aria-label="Main">
+    <header class="mono-header site-header">
+      <div class="page-container header-inner">
+      <nav class="mono-nav site-nav" aria-label="Main">
         <div class="nav-left">
           <p class="nav-page-line">
             <a href="index.html" class="nav-back link-hover" aria-label="Back to home">
@@ -739,13 +687,14 @@
           <time class="nav-local-time" id="nav-local-time" datetime="" aria-label="New York local time">
             <span class="nav-local-move" aria-label="Toronto to NYC"><span>Toronto</span><svg class="nav-local-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h6.5"/><path d="M8 5.5 11.5 8 8 10.5"/></svg><span>NYC</span></span><span class="nav-local-sep" aria-hidden="true">✦</span><span class="nav-local-clock"></span>
           </time>
-          <div class="nav-links">
-            <a class="nav-contact-link link-with-arrow" href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener noreferrer"><span class="link-with-arrow-label">LinkedIn</span><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
-            <a class="nav-contact-link link-with-arrow" href="https://drive.google.com/file/d/1HT2FcuIwYNYXt00IsOKhti0plwNZEdIb/view?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="link-with-arrow-label">Resume</span><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
-            <a class="nav-contact-link link-with-arrow" href="mailto:mariellopezdesign@gmail.com"><span class="link-with-arrow-label">Contact</span><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+          <div class="nav-links site-nav-links">
+            <a class="nav-contact-link site-nav-link link-with-arrow" href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener noreferrer"><span class="link-with-arrow-label">LinkedIn</span><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+            <a class="nav-contact-link site-nav-link link-with-arrow" href="https://drive.google.com/file/d/1HT2FcuIwYNYXt00IsOKhti0plwNZEdIb/view?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="link-with-arrow-label">Resume</span><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+            <a class="nav-contact-link site-nav-link link-with-arrow" href="mailto:mariellopezdesign@gmail.com"><span class="link-with-arrow-label">Contact</span><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
           </div>
         </div>
       </nav>
+      </div>
     </header>
     <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle theme" aria-pressed="false">
       <span class="theme-icon sun-icon" aria-hidden="true">
@@ -769,31 +718,16 @@
     </button>
   </div>
 
-  <main class="project-page-container">
+  <main class="project-page-container page-container">
     <section class="hero case-hero" id="top" aria-labelledby="case-hero-title">
       <div class="hero-content">
         <span class="live-badge"><span class="live-dot"></span>Live as of Sep 2025</span>
         <h1 class="hero-title" id="case-hero-title">Scaling Sobeys' digital shopping experience for <span class="hero-title-tail">1M+ monthly users</span></h1>
       </div>
 
-      <a
-        href="https://www.sobeys.com/"
-        class="hero-image hero-image--site-link"
-        id="hero-site-link"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Visit Sobeys.com — opens in a new tab"
-      >
-        <img src="sobeys-cover.png" alt="Sobeys homepage redesign" width="1440" height="900" loading="eager" decoding="async" />
-        <span class="hero-image-cta link-with-arrow" aria-hidden="true">
-          <span>Take me to the site</span>
-          <svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-        </span>
-      </a>
-      <span class="hero-image-cursor link-with-arrow" id="hero-image-cursor" aria-hidden="true">
-        <span>Take me to the site</span>
-        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      </span>
+      <figure class="hero-image">
+        <img src="sobeys-cover.png" alt="Sobeys homepage redesign" width="3840" height="2880" loading="eager" decoding="async" />
+      </figure>
     </section>
 
     <div class="page">
@@ -802,24 +736,24 @@
     <div class="overview-row" id="case-overview">
       <div class="overview-item">
         <p class="overview-label">Role</p>
-        <p class="overview-value">Senior Product Designer</p>
+        <p class="overview-value"><strong>Senior Product Designer</strong></p>
       </div>
       <div class="overview-item">
         <p class="overview-label">Timeline</p>
-        <p class="overview-value">6 months</p>
+        <p class="overview-value"><strong>8 months</strong></p>
       </div>
       <div class="overview-item">
         <p class="overview-label">Team</p>
         <ul class="overview-value overview-team">
-          <li class="overview-team-member">Shannon M. <span class="overview-team-role">(Product Design Manager)</span></li>
-          <li class="overview-team-member">Valerie C. <span class="overview-team-role">(Product Manager)</span></li>
-          <li class="overview-team-member">Avinash R. <span class="overview-team-role">(Technical Architect/Engineer)</span></li>
-          <li class="overview-team-member">Justin C. <span class="overview-team-role">(Design Intern)</span></li>
+          <li class="overview-team-member"><strong>Shannon M.</strong> <span class="overview-team-role">(Product Design Manager)</span></li>
+          <li class="overview-team-member"><strong>Valerie C.</strong> <span class="overview-team-role">(Product Manager)</span></li>
+          <li class="overview-team-member"><strong>Avinash R.</strong> <span class="overview-team-role">(Technical Architect/Engineer)</span></li>
+          <li class="overview-team-member"><strong>Justin C.</strong> <span class="overview-team-role">(Design Intern)</span></li>
         </ul>
       </div>
       <div class="overview-item">
         <p class="overview-label">Tools</p>
-        <p class="overview-value">Figma, FigJam,<br>ChatGPT</p>
+        <p class="overview-value"><strong>Figma</strong>, <strong>FigJam</strong>,<br><strong>ChatGPT</strong></p>
       </div>
     </div>
 
@@ -827,7 +761,7 @@
     <div class="stat-cards">
       <div class="stat-card">
         <p class="stat-card-label">Overview</p>
-        <p class="stat-card-body">Senior Product Designer working on key features to <strong>increase digital engagement</strong> &amp; <strong>drive in-store traffic</strong>. Empire hired IBM to redesign with a multichannel approach across Sobeys, IGA, Foodland, FreshCO, Safeway, and ThriftyFoods.</p>
+        <p class="stat-card-body">Empire hired IBM to redesign with a multichannel approach across Sobeys, IGA, Foodland, FreshCO, Safeway, and ThriftyFoods.</p>
       </div>
       <div class="stat-card">
         <p class="stat-card-label">Problem</p>
@@ -835,7 +769,7 @@
       </div>
       <div class="stat-card">
         <p class="stat-card-label">Outcome</p>
-        <p class="stat-card-body">Increased engagement by <strong>11</strong> percent month-over-month (Aug → Sep 2025). Shopping list now live on Sobeys and Safeway. Rolling out to IGA, ThriftyFoods, Foodland, and FreshCo soon.</p>
+        <p class="stat-card-body"><strong>2 platforms launched (so far).</strong> Serving <strong>1M+ monthly users</strong> as of Aug 2025.*</p>
       </div>
     </div>
 
@@ -843,42 +777,49 @@
     <div class="case-content">
 
       <!-- Identity & Trust -->
-      <div id="case-identity-trust">
+      <section class="case-study-section" id="case-identity-trust">
         <p class="section-label">Identity &amp; Trust</p>
         <h2 class="section-heading">Integrating <em>Scene+ loyalty</em> into the Sobeys account experience</h2>
         <div class="section-body">
           <p>Users lacked a clear pathway to view and connect their Scene+ account, limiting point accrual and reducing visibility into loyalty value.</p>
         </div>
-        <div class="visual-block">
-          <div class="visual-tabs">
-            <button class="tab-button active" onclick="switchTab(this, 'id-after')">After</button>
-            <button class="tab-button" onclick="switchTab(this, 'id-before')">Before</button>
+        <div class="before-after-comparison">
+          <div class="before-after-tabs" role="tablist" aria-label="Before and after comparison">
+            <div class="before-after-tab-list">
+              <button type="button" class="before-after-tab active" role="tab" aria-selected="true" onclick="switchTab(this, 'id-after')">After</button>
+              <button type="button" class="before-after-tab" role="tab" aria-selected="false" onclick="switchTab(this, 'id-before')">Before</button>
+            </div>
           </div>
+          <div class="case-study-image-card">
           <div class="tab-content active" id="id-after">
-            <img src="identity-after.avif" alt="After: Scene+ loyalty integration redesign" class="tab-image">
+            <img src="identity-after.png" alt="After: Scene+ loyalty integration redesign" class="tab-image" width="3840" height="2160" loading="lazy" decoding="async">
             <p class="visual-caption">After · Scene+ account experience redesign</p>
           </div>
           <div class="tab-content" id="id-before">
-            <img src="identity-before.webp" alt="Before: Scene+ account structure gaps" class="tab-image">
+            <img src="identity-before.png" alt="Before: Scene+ account structure gaps" class="tab-image" width="3840" height="2160" loading="lazy" decoding="async">
             <p class="visual-caption">Before · Scene+ account structure gaps causing poor experience</p>
           </div>
+          </div>
         </div>
-      </div>
+      </section>
 
       <div class="divider"></div>
 
       <!-- Conversion & Discovery -->
-      <div>
+      <section class="case-study-section">
         <p class="section-label">Conversion &amp; Discovery</p>
         <h2 class="section-heading">Leveraging visual hierarchy to drive promotions and loyalty on the <em>product details page</em></h2>
         <div class="section-body">
           <p>The previous experience lacked a product catalogue, limiting discovery to static flyer browsing. The redesign introduced a structured product catalogue with optimized visual hierarchy to highlight key deals and Scene+ offers while streamlining add-to-list and pickup/delivery options.</p>
         </div>
-        <div class="visual-block">
-          <div class="visual-tabs">
-            <button class="tab-button active" onclick="switchTab(this, 'conv-after')">After</button>
-            <button class="tab-button" onclick="switchTab(this, 'conv-before')">Before</button>
+        <div class="before-after-comparison">
+          <div class="before-after-tabs" role="tablist" aria-label="Before and after comparison">
+            <div class="before-after-tab-list">
+              <button type="button" class="before-after-tab active" role="tab" aria-selected="true" onclick="switchTab(this, 'conv-after')">After</button>
+              <button type="button" class="before-after-tab" role="tab" aria-selected="false" onclick="switchTab(this, 'conv-before')">Before</button>
+            </div>
           </div>
+          <div class="case-study-image-card">
           <div class="tab-content active" id="conv-after">
             <img src="conversion-after.avif" alt="After: Product details page" class="tab-image">
             <p class="visual-caption">After · Product details page with optimized visual hierarchy</p>
@@ -887,58 +828,67 @@
             <img src="conversion-before.webp" alt="Before: Sobeys lacked product pages" class="tab-image">
             <p class="visual-caption">Before · Sobeys lacked a product catalogue, limiting discovery</p>
           </div>
+          </div>
         </div>
-      </div>
+      </section>
 
       <div class="divider"></div>
 
       <!-- Discovery & Wayfinding -->
-      <div>
+      <section class="case-study-section">
         <p class="section-label">Discovery &amp; Wayfinding</p>
         <h2 class="section-heading">Redesigning the <em>store locator</em> to improve pricing accuracy and inventory confidence</h2>
         <div class="section-body">
           <p>The original experience prioritized a dense results grid, requiring users to scan multiple store cards to find relevant details. The redesign shifts to a selected-store model, surfacing key information, services, and primary actions within a focused context panel to reduce friction and improve clarity.</p>
         </div>
-        <div class="visual-block">
-          <div class="visual-tabs">
-            <button class="tab-button active" onclick="switchTab(this, 'disc-after')">After</button>
-            <button class="tab-button" onclick="switchTab(this, 'disc-before')">Before</button>
+        <div class="before-after-comparison">
+          <div class="before-after-tabs" role="tablist" aria-label="Before and after comparison">
+            <div class="before-after-tab-list">
+              <button type="button" class="before-after-tab active" role="tab" aria-selected="true" onclick="switchTab(this, 'disc-after')">After</button>
+              <button type="button" class="before-after-tab" role="tab" aria-selected="false" onclick="switchTab(this, 'disc-before')">Before</button>
+            </div>
           </div>
+          <div class="case-study-image-card">
           <div class="tab-content active" id="disc-after">
-            <img src="discovery-after.avif" alt="After: Redesigned store locator" class="tab-image">
+            <img src="locator-after.webp" alt="After: Redesigned store locator" class="tab-image" width="3840" height="2160" loading="lazy" decoding="async">
             <p class="visual-caption">After · Redesigned store locator with persistent store context</p>
           </div>
           <div class="tab-content" id="disc-before">
-            <img src="discovery-before.webp" alt="Before: Dense store locator" class="tab-image">
+            <img src="locator-before.webp" alt="Before: Dense store locator" class="tab-image" width="3840" height="2160" loading="lazy" decoding="async">
             <p class="visual-caption">Before · Dense results grid causing high cognitive load</p>
           </div>
+          </div>
         </div>
-      </div>
+      </section>
 
       <div class="divider"></div>
 
       <!-- Retention -->
-      <div>
+      <section class="case-study-section">
         <p class="section-label">Retention &amp; Habit Forming</p>
         <h2 class="section-heading">Designing the <em>shopping list</em> for long-term loyalty and retention</h2>
         <div class="section-body">
           <p>With only 5% adoption, the static and unusable shopping list failed to drive meaningful engagement. I reimagined the experience around a deals-first strategy, enabling effortless item saving and seamless redirection to Voila.ca for pickup or delivery, while positioning the tool for continuous usage and long-term customer loyalty.</p>
         </div>
-        <div class="visual-block">
-          <div class="visual-tabs">
-            <button class="tab-button active" onclick="switchTab(this, 'ret-after')">After</button>
-            <button class="tab-button" onclick="switchTab(this, 'ret-before')">Before</button>
+        <div class="before-after-comparison">
+          <div class="before-after-tabs" role="tablist" aria-label="Before and after comparison">
+            <div class="before-after-tab-list">
+              <button type="button" class="before-after-tab active" role="tab" aria-selected="true" onclick="switchTab(this, 'ret-after')">After</button>
+              <button type="button" class="before-after-tab" role="tab" aria-selected="false" onclick="switchTab(this, 'ret-before')">Before</button>
+            </div>
           </div>
+          <div class="case-study-image-card">
           <div class="tab-content active" id="ret-after">
-            <img src="retention-after.avif" alt="After: Redesigned shopping list" class="tab-image">
+            <img src="shoppinglist-after.webp" alt="After: Redesigned shopping list" class="tab-image" width="3840" height="2160" loading="lazy" decoding="async">
             <p class="visual-caption">After · Shopping list redesigned as a deals-first, habit-forming experience</p>
           </div>
           <div class="tab-content" id="ret-before">
-            <img src="retention-before.webp" alt="Before: Static shopping list" class="tab-image">
+            <img src="shoppinglist-before.webp" alt="Before: Static shopping list" class="tab-image" width="3840" height="2160" loading="lazy" decoding="async">
             <p class="visual-caption">Before · Static list with no inline deals, quantities, or actions</p>
           </div>
+          </div>
         </div>
-      </div>
+      </section>
 
       <div class="divider"></div>
 
@@ -957,7 +907,7 @@
       <!-- Outcome callout -->
       <div class="callout">
         <p class="stat-card-label">Outcome</p>
-        <p class="callout-quote">Increased engagement by <strong>11</strong> percent month-over-month. Shopping list now live on Sobeys and Safeway — rolling out across all six grocery brands.</p>
+        <p class="callout-quote"><strong>2 platforms launched (so far).</strong> Serving <strong>1M+ monthly users</strong> as of Aug 2025.*</p>
       </div>
 
       <!-- Key Learnings -->
@@ -967,11 +917,11 @@
         <div class="learning-grid">
           <div class="learning-card">
             <h4>Engagement requires incentive</h4>
-            <p>Users didn't disengage because they didn't need a shopping list — they disengaged because the experience offered no immediate value. Without visible savings, loyalty rewards, or a clear path to purchase, there was little incentive to return. Designing for engagement meant embedding tangible benefits directly within the list experience.</p>
+            <p>Users didn't disengage because they didn't need a shopping list. They disengaged because the experience offered no immediate value. Without visible savings, loyalty rewards, or a clear path to purchase, there was little incentive to return. Designing for engagement meant embedding tangible benefits directly within the list experience.</p>
           </div>
           <div class="learning-card">
             <h4>Loyalty is earned through utility</h4>
-            <p>Loyalty features must do more than exist — they must support real behaviours. By integrating pricing, rewards, and Voila.ca into the site, the experience became a functional bridge between browsing and purchase, reinforcing repeat engagement.</p>
+            <p>Loyalty features must do more than exist: They must support real behaviours. By integrating pricing, rewards, and Voila.ca into the site, the experience became a functional bridge between browsing and purchase, reinforcing repeat engagement.</p>
           </div>
         </div>
       </div>
@@ -985,25 +935,14 @@
         <button type="button" class="footer-email-copy" data-email="mariellopezdesign@gmail.com" aria-label="Copy email address">
           <span class="footer-email-copy-icons" aria-hidden="true">
             <svg class="footer-email-copy-icon footer-email-copy-icon--clipboard" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="3"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            <svg class="footer-email-copy-icon footer-email-copy-icon--check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
           </span>
-          <span class="footer-email-copy-feedback" aria-hidden="true">Email copied!</span>
         </button>
         <span class="footer-email-copy-status" role="status" aria-live="polite"></span>
       </div>
-      <nav class="footer-social" aria-label="Social links">
-        <a class="rolling-link link-hover link-with-arrow" href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener noreferrer">
-          <span class="rolling-link-inner"><span class="rolling-link-text">LinkedIn</span><span class="rolling-link-text duplicate" aria-hidden="true">LinkedIn</span></span>
-          <svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-        </a>
-        <a class="rolling-link link-hover link-with-arrow" href="https://luma.com/user/mariel" target="_blank" rel="noopener noreferrer">
-          <span class="rolling-link-inner"><span class="rolling-link-text">Luma</span><span class="rolling-link-text duplicate" aria-hidden="true">Luma</span></span>
-          <svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-        </a>
-        <a class="rolling-link link-hover link-with-arrow" href="https://x.com/marieldesigner" target="_blank" rel="noopener noreferrer">
-          <span class="rolling-link-inner"><span class="rolling-link-text">X (Twitter)</span><span class="rolling-link-text duplicate" aria-hidden="true">X (Twitter)</span></span>
-          <svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-        </a>
+      <nav class="site-nav-links" aria-label="Social links">
+        <a class="site-nav-link footer-link link-with-arrow" href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener noreferrer"><span class="link-with-arrow-label">LinkedIn</span><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+        <a class="site-nav-link footer-link link-with-arrow" href="https://luma.com/user/mariel" target="_blank" rel="noopener noreferrer"><span class="link-with-arrow-label">Luma</span><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+        <a class="site-nav-link footer-link link-with-arrow" href="https://x.com/marieldesigner" target="_blank" rel="noopener noreferrer"><span class="link-with-arrow-label">X (Twitter)</span><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
       </nav>
     </footer>
 
@@ -1022,10 +961,16 @@
   </a>
   <script>
     function switchTab(button, panelId) {
-      const block = button.closest('.visual-block');
-      block.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
-      block.querySelectorAll('.tab-content').forEach(p => p.classList.remove('active'));
+      const block = button.closest('.before-after-comparison');
+      block.querySelectorAll('.before-after-tab').forEach(function (b) {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      block.querySelectorAll('.tab-content').forEach(function (p) {
+        p.classList.remove('active');
+      });
       button.classList.add('active');
+      button.setAttribute('aria-selected', 'true');
       document.getElementById(panelId).classList.add('active');
     }
 
@@ -1065,33 +1010,6 @@
         var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
       });
-    })();
-
-    (function () {
-      var link = document.getElementById('hero-site-link');
-      var cursor = document.getElementById('hero-image-cursor');
-      if (!link || !cursor) return;
-
-      var canFollow = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-      if (!canFollow) return;
-
-      function move(e) {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-      }
-
-      function show() {
-        cursor.classList.add('is-visible');
-      }
-
-      function hide() {
-        cursor.classList.remove('is-visible');
-      }
-
-      link.addEventListener('mouseenter', show);
-      link.addEventListener('mouseleave', hide);
-      link.addEventListener('mousemove', move);
-      window.addEventListener('scroll', hide, { passive: true });
     })();
   </script>
 </body>

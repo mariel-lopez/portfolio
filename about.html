@@ -9,7 +9,7 @@
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="shortcut icon" href="favicon.png" />
-  <script>!function(){try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('dark-theme');}catch(e){}}();</script>
+  <script src="theme-boot.js"></script>
   <link rel="stylesheet" href="spacing.css" />
   <link rel="stylesheet" href="nav.css" />
   <link rel="stylesheet" href="theme.css" />
@@ -34,7 +34,9 @@
       --about-role-col: 1.1fr;
       --about-body-col: 2.4fr;
       --about-col-gap: clamp(48px, 5vw, 72px);
-      --about-marquee-footer-gap: 32px;
+      --about-marquee-footer-gap: clamp(96px, 8vw, 120px);
+      --about-footer-pad-bottom: clamp(40px, 5vw, 48px);
+      --about-footer-email-gap: clamp(12px, 1vw, 16px);
     }
 
     body.about-page {
@@ -99,11 +101,12 @@
       .about-lead {
         grid-template-columns: var(--about-role-col) var(--about-body-col);
         column-gap: var(--about-col-gap);
-        row-gap: 0;
+        row-gap: var(--space-32);
       }
 
       .about-lead > h1.hero-title {
         grid-column: 1;
+        grid-row: 1;
         container-type: inline-size;
         container-name: about-headline;
         font-size: clamp(1.25rem, 5.25cqi + 0.2rem, 2.25rem);
@@ -118,9 +121,11 @@
 
       .about-intro {
         grid-column: 2;
+        grid-row: 1;
         margin-block-start: 0;
         width: 100%;
-        max-width: 100%;
+        max-width: none;
+        align-self: start;
       }
     }
 
@@ -128,13 +133,13 @@
       margin: 0;
       min-width: 0;
       width: 100%;
-      max-width: 100%;
+      max-width: none;
     }
 
     .about-intro-copy {
       min-width: 0;
       width: 100%;
-      max-width: 100%;
+      max-width: none;
     }
 
     .about-intro p {
@@ -380,14 +385,47 @@
   </style>
   <link rel="stylesheet" href="layout.css" />
   <link rel="stylesheet" href="footer.css" />
+  <style>
+    /* About-only footer spacing — does not affect other pages */
+    body.about-page .marquee-strip {
+      padding-bottom: 0;
+    }
+
+    body.about-page .site-bottom > .content-shell {
+      padding-top: var(--about-marquee-footer-gap);
+    }
+
+    body.about-page .content-shell > .about-footer {
+      margin-top: 0;
+      padding-top: 0;
+      padding-bottom: var(--about-footer-pad-bottom);
+      align-items: center;
+    }
+
+    body.about-page .about-footer .footer-email-row {
+      align-items: center;
+      gap: var(--about-footer-email-gap);
+    }
+
+    @media (max-width: 640px) {
+      body.about-page .site-bottom > .content-shell {
+        padding-top: clamp(64px, 14vw, 96px);
+      }
+
+      body.about-page .content-shell > .about-footer {
+        padding-bottom: max(var(--about-footer-pad-bottom), env(safe-area-inset-bottom, 0px) + var(--space-16));
+      }
+    }
+  </style>
 </head>
 <body class="about-page">
   <script src="transitions-boot.js"></script>
 
   <!-- NAV -->
   <div id="top" class="home-hero-mono navbar">
-    <header class="mono-header">
-      <nav class="mono-nav" aria-label="Main">
+    <header class="mono-header site-header">
+      <div class="page-container header-inner">
+      <nav class="mono-nav site-nav" aria-label="Main">
         <div class="nav-left">
           <p class="nav-page-line">
             <a href="index.html" class="nav-back link-hover" aria-label="Back to home">
@@ -401,13 +439,14 @@
           <time class="nav-local-time" id="nav-local-time" datetime="" aria-label="New York local time">
             <span class="nav-local-move" aria-label="Toronto to NYC"><span>Toronto</span><svg class="nav-local-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h6.5"/><path d="M8 5.5 11.5 8 8 10.5"/></svg><span>NYC</span></span><span class="nav-local-sep" aria-hidden="true">✦</span><span class="nav-local-clock"></span>
           </time>
-          <div class="nav-links">
-            <a class="nav-contact-link link-with-arrow" href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener noreferrer"><span class="link-with-arrow-label">LinkedIn</span><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
-            <a class="nav-contact-link link-with-arrow" href="https://drive.google.com/file/d/1HT2FcuIwYNYXt00IsOKhti0plwNZEdIb/view?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="link-with-arrow-label">Resume</span><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
-            <a class="nav-contact-link link-with-arrow" href="mailto:mariellopezdesign@gmail.com"><span class="link-with-arrow-label">Contact</span><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+          <div class="nav-links site-nav-links">
+            <a class="nav-contact-link site-nav-link link-with-arrow" href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener noreferrer"><span class="link-with-arrow-label">LinkedIn</span><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+            <a class="nav-contact-link site-nav-link link-with-arrow" href="https://drive.google.com/file/d/1HT2FcuIwYNYXt00IsOKhti0plwNZEdIb/view?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="link-with-arrow-label">Resume</span><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+            <a class="nav-contact-link site-nav-link link-with-arrow" href="mailto:mariellopezdesign@gmail.com"><span class="link-with-arrow-label">Contact</span><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
           </div>
         </div>
       </nav>
+      </div>
     </header>
     <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle theme" aria-pressed="false">
       <span class="theme-icon sun-icon" aria-hidden="true">
@@ -432,7 +471,7 @@
   </div>
 
   <!-- MAIN -->
-  <main class="about-main about-hero content-shell">
+  <main class="about-main about-hero page-container">
 
     <div class="about-lead">
       <h1 class="hero-title">
@@ -482,25 +521,14 @@
       <button type="button" class="footer-email-copy" data-email="mariellopezdesign@gmail.com" aria-label="Copy email address">
         <span class="footer-email-copy-icons" aria-hidden="true">
           <svg class="footer-email-copy-icon footer-email-copy-icon--clipboard" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="3"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-          <svg class="footer-email-copy-icon footer-email-copy-icon--check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
         </span>
-        <span class="footer-email-copy-feedback" aria-hidden="true">Email copied!</span>
       </button>
       <span class="footer-email-copy-status" role="status" aria-live="polite"></span>
     </div>
-    <nav class="footer-social" aria-label="Social links">
-      <a class="rolling-link link-hover link-with-arrow" href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener noreferrer">
-        <span class="rolling-link-inner"><span class="rolling-link-text">LinkedIn</span><span class="rolling-link-text duplicate" aria-hidden="true">LinkedIn</span></span>
-        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      </a>
-      <a class="rolling-link link-hover link-with-arrow" href="https://luma.com/user/mariel" target="_blank" rel="noopener noreferrer">
-        <span class="rolling-link-inner"><span class="rolling-link-text">Luma</span><span class="rolling-link-text duplicate" aria-hidden="true">Luma</span></span>
-        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      </a>
-      <a class="rolling-link link-hover link-with-arrow" href="https://x.com/marieldesigner" target="_blank" rel="noopener noreferrer">
-        <span class="rolling-link-inner"><span class="rolling-link-text">X (Twitter)</span><span class="rolling-link-text duplicate" aria-hidden="true">X (Twitter)</span></span>
-        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      </a>
+    <nav class="site-nav-links" aria-label="Social links">
+        <a class="site-nav-link footer-link link-with-arrow" href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener noreferrer"><span class="link-with-arrow-label">LinkedIn</span><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+        <a class="site-nav-link footer-link link-with-arrow" href="https://luma.com/user/mariel" target="_blank" rel="noopener noreferrer"><span class="link-with-arrow-label">Luma</span><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+        <a class="site-nav-link footer-link link-with-arrow" href="https://x.com/marieldesigner" target="_blank" rel="noopener noreferrer"><span class="link-with-arrow-label">X (Twitter)</span><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
     </nav>
     </footer>
     </div>

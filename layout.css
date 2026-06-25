@@ -14,11 +14,39 @@ body {
   overflow-y: auto;
 }
 
+/* ── Global page container (1440px column) ── */
+.page-container,
+.content-shell {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: var(--content-pad);
+  box-sizing: border-box;
+  overflow-x: visible;
+}
+
+/* ── Header inner — same column as page content ── */
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-width: 0;
+}
+
+.mono-header,
+.site-header {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .page,
 .project-page-container,
 .about-main,
 .etc-main,
-.content-shell,
 .site-bottom {
   width: 100%;
   max-width: var(--content-max);
@@ -109,7 +137,7 @@ body:has(.etc-main) {
 }
 
 .site-bottom > .content-shell > .about-footer {
-  margin-top: var(--about-marquee-footer-gap, 32px);
+  margin-top: var(--footer-margin-top);
 }
 
 /* ── Sobeys: case content grows above footer ── */
@@ -212,4 +240,14 @@ h1.hero-title {
   h1.hero-title {
     line-height: 0.97;
   }
+}
+
+/* ── Body copy — full content column width ── */
+.section-body,
+.about-intro,
+.about-intro-copy,
+.body-copy {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
 }

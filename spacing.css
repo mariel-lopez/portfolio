@@ -10,7 +10,8 @@
   --space-96: 96px;
 
   /* Layout */
-  --content-pad: var(--space-64);
+  --content-max: 1440px;
+  --content-pad: clamp(24px, 4vw, 64px);
   --page-section-gap: 72px;
   --section-gap-large: var(--space-96);
 
@@ -22,8 +23,8 @@
   --nav-row-gap: var(--space-16) var(--space-32);
   --nav-below-gap: var(--space-32);
   --nav-content-offset: calc(var(--space-96) + var(--nav-below-gap));
-  /* Inter-link gap: grouped nav cluster */
-  --nav-links-gap: clamp(12px, 0.75vw, 16px);
+  /* Inter-link gap: grouped nav cluster (header + footer) */
+  --nav-links-gap: var(--space-24);
   --nav-right-gap: var(--space-24);
   --nav-contact-gap: var(--space-16);
   --nav-meta-stack-gap: var(--space-16);
@@ -47,13 +48,11 @@
   --card-max-mobile: calc(var(--space-96) * 3);
 
   /* Footer */
-  --footer-margin-top: 56px;
-  --footer-pad-top: 40px;
-  --footer-pad-bottom: 80px;
+  --footer-margin-top: 128px;
+  --footer-pad-top: 0;
+  --footer-pad-bottom: 56px;
   --footer-gap: var(--space-48);
-  --footer-divider-margin: 40px;
-  --footer-social-gap: var(--space-16);
-  --footer-email-gap: var(--space-16);
+  --footer-email-gap: 12px;
 
   /* Homepage hero */
   --home-hero-title-gap: var(--space-64);
@@ -75,9 +74,10 @@
 
 @media (max-width: 1024px) {
   :root {
-    --content-pad: var(--space-48);
     --card-grid-gap: var(--space-24);
-    --nav-links-gap: 14px;
+    --nav-links-gap: var(--space-24);
+    --footer-margin-top: 96px;
+    --footer-pad-bottom: 52px;
   }
 }
 
@@ -87,28 +87,25 @@
     --card-image-gap-below: var(--space-16);
     --card-footer-padding-mobile: var(--space-16) var(--space-16) var(--space-24);
     --page-section-gap: 56px;
-    --footer-margin-top: 40px;
-    --footer-pad-top: 32px;
-    --nav-links-gap: 14px;
+    --nav-links-gap: var(--space-24);
     --about-gallery-gap: var(--space-48);
   }
 }
 
 @media (max-width: 640px) {
   :root {
-    --content-pad: var(--space-24);
     --about-gallery-gap: var(--space-32);
-    --nav-links-gap: 12px;
+    --nav-links-gap: var(--space-24);
     --nav-pad-top-extra: var(--space-16);
     --nav-title-extra: calc(var(--space-16) + var(--nav-pad-top-extra));
     --nav-below-gap: var(--space-32);
-    /* Stacked nav: name + subtitle + link row + padding + clearance below links */
     --nav-mobile-clearance: var(--space-48);
     --nav-content-offset: calc(
       var(--space-96) + var(--nav-title-extra) + var(--space-96) + var(--nav-below-gap) + var(--nav-mobile-clearance)
     );
+    --footer-margin-top: 80px;
     --footer-gap: var(--space-48);
-    --footer-pad-bottom: var(--space-48);
+    --footer-pad-bottom: 48px;
     --home-hero-title-gap: 0;
     --nav-card-top-gap: 120px;
     --card-grid-gap-tight: var(--space-16);

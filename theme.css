@@ -1,6 +1,7 @@
 /* Galaxy night mode — sitewide tokens + overrides */
 
 :root {
+  color-scheme: light;
   --page-bg: #f5f5f2;
   --page-ink: #111111;
   --page-ink-soft: rgba(17, 17, 17, 0.9);
@@ -138,6 +139,14 @@ body {
     color 0.45s ease;
 }
 
+html:not(.dark-theme) body {
+  background-image:
+    radial-gradient(ellipse 75% 55% at 8% 105%, rgba(155, 205, 175, 0.09) 0%, transparent 52%),
+    radial-gradient(ellipse 65% 50% at 92% 102%, rgba(204, 153, 216, 0.07) 0%, transparent 48%),
+    radial-gradient(ellipse 55% 40% at 50% 100%, rgba(136, 153, 232, 0.05) 0%, transparent 45%);
+  background-attachment: fixed;
+}
+
 /* Reusable body text utility */
 .body-text {
   font-family: inherit;
@@ -161,9 +170,13 @@ html.dark-theme body {
   transition-property: opacity, background-color;
 }
 
-/* ── Nav ── */
+/* ── Nav + footer links ── */
 .nav-contact-link:hover,
-.nav-contact-link:focus-visible {
+.nav-contact-link:focus-visible,
+.site-nav-link:hover,
+.site-nav-link:focus-visible,
+.footer-link:hover,
+.footer-link:focus-visible {
   color: var(--nav-ink);
 }
 
@@ -179,15 +192,14 @@ html.dark-theme .home-hero-mono.navbar::before {
   );
 }
 
-/* ── Theme toggle — fixed top-right, glass pill ── */
-.home-hero-mono.navbar:has(.theme-toggle) .mono-header {
-  padding-right: calc(var(--content-pad) + var(--space-48));
-}
-
+/* ── Theme toggle — sits in page margin, does not inset nav links ── */
 .theme-toggle {
   position: absolute;
   top: max(var(--nav-pad-top), env(safe-area-inset-top, 0px));
-  right: var(--content-pad);
+  right: max(
+    var(--space-16),
+    calc((100vw - min(100vw, var(--content-max))) / 2 + var(--space-8))
+  );
   z-index: 2;
   width: 36px;
   height: 36px;
@@ -272,10 +284,6 @@ html.dark-theme .theme-toggle .sun-icon {
 }
 
 @media (max-width: 640px) {
-  .home-hero-mono.navbar:has(.theme-toggle) .mono-header {
-    padding-right: var(--space-64);
-  }
-
   .theme-toggle {
     right: max(var(--space-16), env(safe-area-inset-right, 0px));
   }
@@ -611,17 +619,12 @@ html.dark-theme .about-card:focus-visible {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.08),
     0 14px 42px rgba(0, 0, 0, 0.42),
-    0 32px 72px rgba(88, 52, 148, 0.22),
+    0 32px 72px rgba(0, 0, 0, 0.28),
     0 0 0 1px rgba(255, 255, 255, 0.06) inset !important;
 }
 
 html.dark-theme .about-card::before {
-  background: radial-gradient(
-    ellipse 130% 90% at 28% 18%,
-    rgba(108, 62, 198, 0.38) 0%,
-    rgba(42, 32, 68, 0.72) 42%,
-    rgba(18, 14, 32, 0.96) 100%
-  );
+  background: #1a1428;
   opacity: 0.9;
 }
 
@@ -756,15 +759,6 @@ html.dark-theme .footer-email-row:focus-within {
   color: var(--hover-color, rgba(196, 172, 255, 0.92));
 }
 
-html.dark-theme .footer-social a {
-  color: var(--nav-muted);
-}
-
-html.dark-theme .footer-social a.rolling-link.link-hover:hover,
-html.dark-theme .footer-social a.rolling-link.link-hover:focus-visible {
-  color: var(--nav-ink) !important;
-}
-
 /* ── About page ── */
 .about-main.content-shell {
   background: transparent !important;
@@ -851,18 +845,6 @@ html.dark-theme .back-to-top:focus-visible {
   outline-color: rgba(255, 255, 255, 0.22);
 }
 
-html.dark-theme .hero-image-cursor,
-html.dark-theme .hero-image-cta {
-  color: var(--page-ink);
-  background: var(--about-chip-bg);
-  border-color: var(--about-chip-border);
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
-}
-
-html.dark-theme .hero-image--site-link:focus-visible {
-  outline-color: rgba(255, 255, 255, 0.22);
-}
-
 /* ── Case study hero (Sobeys — in-flow layout) ── */
 .case-sobeys .hero .theme-toggle {
   position: relative !important;
@@ -880,6 +862,7 @@ html.dark-theme .project-hero,
 html.dark-theme .hero-mono--case,
 html.dark-theme .case-section,
 html.dark-theme .case-content,
+html.dark-theme .case-study-image-card,
 html.dark-theme .visual-block,
 html.dark-theme .tab-panel {
   color: var(--page-ink);
@@ -912,15 +895,33 @@ html.dark-theme .home-hero-mono .live-badge {
 html.dark-theme .case-tags,
 html.dark-theme .case-meta,
 html.dark-theme .visual-caption,
-html.dark-theme .tab-button {
+html.dark-theme .before-after-tab:not(.active) {
   color: var(--sobeys-label);
 }
 
-html.dark-theme .tab-button:hover,
-html.dark-theme .tab-button.active,
-html.dark-theme .tab-button.is-active,
-html.dark-theme .tab-button[aria-selected="true"] {
-  color: var(--page-ink) !important;
+html.dark-theme .before-after-tab-list {
+  background: var(--sobeys-bg-mist);
+  border-color: var(--sobeys-visual-border);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+}
+
+html.dark-theme .before-after-tab:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--page-ink);
+}
+
+html.dark-theme .before-after-tab.active,
+html.dark-theme .before-after-tab.active:hover {
+  background: #111;
+  color: #fff;
+}
+
+html.dark-theme .before-after-tab:focus-visible {
+  outline-color: rgba(235, 228, 255, 0.28);
+}
+
+html.dark-theme .before-after-tab.active:focus-visible {
+  outline-color: rgba(255, 255, 255, 0.35);
 }
 
 html.dark-theme .section-body a,
@@ -946,8 +947,10 @@ html.dark-theme .learning-card {
   border-color: var(--sobeys-surface-border) !important;
 }
 
+html.dark-theme .case-study-image-card,
 html.dark-theme .visual-block {
   border-color: var(--sobeys-visual-border) !important;
+  background: var(--sobeys-bg-mist);
 }
 
 html.dark-theme .case-divider,
@@ -959,7 +962,6 @@ html.dark-theme .ui-frame,
 html.dark-theme .mist-panel,
 html.dark-theme .callout,
 html.dark-theme .learning-card,
-html.dark-theme .visual-tabs,
 html.dark-theme .visual-caption {
   background: var(--sobeys-bg-mist);
   border-color: var(--surface-border);

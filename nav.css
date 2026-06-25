@@ -16,7 +16,6 @@
   --nav-title-extra: 0;
   --divider-color: rgba(0, 0, 0, 0.12);
   --divider: 1px solid var(--divider-color);
-  --content-max: 1440px;
   /* Hover tokens — match hover.css; defined here so nav works standalone */
   --hover-color: rgba(0, 0, 0, 0.55);
   --hover-duration: 0.3s;
@@ -37,16 +36,6 @@
   --nav-subpage-brand-gap: clamp(24px, 4vw, 48px);
   --nav-subpage-links-gap: var(--nav-links-gap);
   --nav-below-links-gap: var(--space-16);
-}
-
-/* ── Content column (aligns dividers + body copy) ── */
-.content-shell {
-  width: 100%;
-  max-width: var(--content-max);
-  margin-inline: auto;
-  padding-inline: var(--content-pad);
-  box-sizing: border-box;
-  overflow-x: visible;
 }
 
 /* ── Horizontal dividers (sitewide) ── */
@@ -147,26 +136,27 @@
   opacity: 1;
 }
 
-.home-hero-mono.navbar .mono-header {
+.home-hero-mono.navbar .mono-header,
+.home-hero-mono.navbar .site-header {
   position: relative;
   z-index: 1;
 }
 
-.mono-header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--nav-header-gap);
-  flex-wrap: wrap;
-  width: 100%;
-  max-width: var(--content-max);
-  margin: 0 auto;
-  padding: 0 var(--content-pad);
-  min-height: 0;
-  box-sizing: border-box;
+.mono-header,
+.site-header {
+  border: none;
+  background: transparent;
 }
 
-.mono-nav {
+.header-inner > .mono-nav,
+.header-inner > .site-nav {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+}
+
+.mono-nav,
+.site-nav {
   display: flex;
   flex: 1;
   min-width: 0;
@@ -272,7 +262,6 @@
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
-  gap: 0;
   white-space: nowrap;
   vertical-align: baseline;
   color: inherit;
@@ -455,9 +444,10 @@
 .nav-left {
   flex: 1;
   min-width: 0;
+  margin-left: 0;
 }
 
-/* ── Right column (contact + metadata) ── */
+/* ── Right-side nav cluster (identical on every page) ── */
 .nav-right {
   display: flex;
   align-items: center;
@@ -466,27 +456,27 @@
   gap: var(--nav-right-gap);
   row-gap: var(--space-8);
   min-width: 0;
-  flex-shrink: 1;
+  flex-shrink: 0;
+  margin-left: auto;
   overflow: visible;
 }
 
-/* ── Quiet contact links ── */
-.nav-links {
+.nav-links,
+.site-nav-links {
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
+  justify-content: flex-end;
   gap: var(--nav-links-gap);
-  flex-shrink: 1;
+  flex-shrink: 0;
   min-width: 0;
   overflow: visible;
 }
 
-/* Subpages (About, Sobeys, Etc): extra space below contact links before hero copy */
-.home-hero-mono.navbar:has(.nav-page-line) .nav-links {
-  margin-bottom: var(--nav-below-links-gap);
-}
-
-.nav-contact-link {
+/* ── Quiet contact links (sitewide — header + footer) ── */
+.nav-contact-link,
+.site-nav-link,
+.footer-link {
   font-family: var(--mono-serif);
   font-size: var(--nav-meta-size);
   font-weight: var(--nav-meta-weight);
@@ -496,8 +486,8 @@
   line-height: var(--nav-meta-lh);
   display: inline-flex;
   align-items: center;
-  gap: 0;
   white-space: nowrap;
+  flex-shrink: 0;
   cursor: pointer;
   transition:
     color var(--hover-duration) var(--hover-ease),
@@ -505,22 +495,23 @@
 }
 
 .nav-contact-link:hover,
-.nav-contact-link:focus-visible {
+.nav-contact-link:focus-visible,
+.site-nav-link:hover,
+.site-nav-link:focus-visible,
+.footer-link:hover,
+.footer-link:focus-visible {
   color: var(--nav-ink);
 }
 
-.nav-contact-link:focus-visible {
+.nav-contact-link:focus-visible,
+.site-nav-link:focus-visible,
+.footer-link:focus-visible {
   outline: 1px solid rgba(0, 0, 0, 0.2);
   outline-offset: 3px;
   border-radius: 2px;
 }
 
-/* ── Subpage nav (About, Sobeys, Etc) — shared ── */
-.home-hero-mono.navbar:has(.nav-page-line) .mono-header {
-  align-items: flex-start;
-  padding-right: calc(var(--content-pad) + 36px + var(--space-16));
-}
-
+/* ── Subpage nav (About, Sobeys, Etc) — left column only ── */
 @media (min-width: 956px) {
   .home-hero-mono.navbar:has(.nav-page-line) .nav-local-time {
     display: none;
@@ -529,12 +520,12 @@
 
 .home-hero-mono.navbar:has(.nav-page-line) .theme-toggle {
   top: max(var(--nav-pad-top), env(safe-area-inset-top, 0px));
-  right: var(--content-pad);
 }
 
-/* Desktop + tablet: single row — Back · name · links */
+/* Desktop: single row — Back · name on left; links unchanged on right */
 @media (min-width: 956px) {
-  .home-hero-mono.navbar:has(.nav-page-line) .mono-nav {
+  .home-hero-mono.navbar:has(.nav-page-line) .mono-nav,
+  .home-hero-mono.navbar:has(.nav-page-line) .site-nav {
     flex-direction: row;
     align-items: baseline;
     justify-content: space-between;
@@ -547,6 +538,7 @@
     flex: 1 1 auto;
     width: auto;
     min-width: 0;
+    margin-left: 0;
   }
 
   .home-hero-mono.navbar:has(.nav-page-line) .nav-page-line {
@@ -563,40 +555,14 @@
     flex-shrink: 0;
     white-space: nowrap;
   }
-
-  .home-hero-mono.navbar:has(.nav-page-line) .nav-right {
-    display: flex;
-    flex: 0 0 auto;
-    width: auto;
-    flex-direction: row;
-    align-items: baseline;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-    gap: var(--nav-right-gap);
-    row-gap: var(--space-8);
-    margin-left: var(--space-16);
-  }
-
-  .home-hero-mono.navbar:has(.nav-page-line) .nav-links {
-    flex-wrap: nowrap;
-    gap: var(--nav-subpage-links-gap);
-  }
-
-  .home-hero-mono.navbar:has(.nav-page-line) .nav-contact-link {
-    white-space: nowrap;
-  }
 }
 
 /* ── Responsive ── */
 @media (max-width: 1024px) {
-  .mono-nav {
+  .mono-nav,
+  .site-nav {
     flex-wrap: nowrap;
     gap: var(--space-16) var(--space-24);
-  }
-
-  .nav-links {
-    flex-wrap: nowrap;
-    gap: var(--nav-links-gap);
   }
 }
 
@@ -608,12 +574,14 @@
     padding-inline: 0;
   }
 
-  .home-hero-mono.navbar .mono-header {
+  .home-hero-mono.navbar .mono-header,
+  .home-hero-mono.navbar .site-header {
     overflow-x: clip;
     max-width: 100%;
   }
 
-  .mono-nav {
+  .mono-nav,
+  .site-nav {
     flex-direction: column;
     align-items: stretch;
     gap: var(--space-16);
@@ -660,36 +628,25 @@
     display: none;
   }
 
-  .nav-right {
-    display: flex;
+  .nav-links,
+  .site-nav-links {
     flex-wrap: wrap;
-    gap: var(--nav-links-gap);
-    align-items: center;
-    justify-content: flex-start;
   }
 
-  .nav-links {
-    gap: var(--nav-links-gap);
-    flex-wrap: wrap;
-    min-width: 0;
-  }
-
-  .nav-contact-link {
+  .nav-contact-link,
+  .site-nav-link,
+  .footer-link {
     white-space: nowrap;
   }
 
-  /* Subpage: row 1 Back + name; row 2 links */
+  /* Subpage mobile: row 1 Back + name; row 2 links (right cluster unchanged) */
   .home-hero-mono.navbar:has(.nav-page-line) {
     --nav-subpage-row-gap: var(--space-16);
     --nav-subpage-brand-gap: var(--space-24);
-    --nav-subpage-links-gap: var(--nav-links-gap);
   }
 
-  .home-hero-mono.navbar:has(.nav-page-line) .mono-header {
-    padding-right: calc(var(--space-64) + 36px + var(--space-8));
-  }
-
-  .home-hero-mono.navbar:has(.nav-page-line) .mono-nav {
+  .home-hero-mono.navbar:has(.nav-page-line) .mono-nav,
+  .home-hero-mono.navbar:has(.nav-page-line) .site-nav {
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
@@ -701,6 +658,7 @@
     width: 100%;
     min-width: 0;
     flex: 0 0 auto;
+    margin-left: 0;
   }
 
   .home-hero-mono.navbar:has(.nav-page-line) .nav-page-line {
@@ -718,22 +676,6 @@
   .home-hero-mono.navbar:has(.nav-page-line) .nav-page-name {
     align-self: auto;
     white-space: nowrap;
-  }
-
-  .home-hero-mono.navbar:has(.nav-page-line) .nav-right {
-    display: flex;
-    width: 100%;
-    flex: 0 0 auto;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: var(--nav-subpage-links-gap);
-  }
-
-  .home-hero-mono.navbar:has(.nav-page-line) .nav-links {
-    flex-wrap: wrap;
-    gap: var(--nav-subpage-links-gap);
   }
 
   .home-hero-mono.navbar:has(.nav-page-line) .theme-toggle {

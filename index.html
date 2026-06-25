@@ -9,7 +9,7 @@
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="shortcut icon" href="favicon.png" />
-  <script>!function(){try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('dark-theme');}catch(e){}}();</script>
+  <script src="theme-boot.js"></script>
   <link rel="stylesheet" href="spacing.css" />
   <link rel="stylesheet" href="nav.css" />
   <link rel="stylesheet" href="theme.css" />
@@ -101,7 +101,8 @@
     }
 
     .hero-sans-copy {
-      max-width: 34rem;
+      max-width: none;
+      width: 100%;
     }
 
     .hero-sans-lead {
@@ -216,8 +217,7 @@
       vertical-align: baseline;
     }
 
-    .hero-mono-star-keyword,
-    .footer-links a {
+    .hero-mono-star-keyword {
       color: #111;
       font-weight: 500;
       text-decoration: underline;
@@ -229,9 +229,7 @@
     }
 
     .hero-mono-star-keyword:hover,
-    .hero-mono-star-keyword:focus-visible,
-    .footer-links a:hover,
-    .footer-links a:focus-visible {
+    .hero-mono-star-keyword:focus-visible {
       color: #000;
       text-decoration-color: currentColor;
       text-decoration-thickness: 1.5px;
@@ -324,7 +322,7 @@
     .bg-blob {
       position: absolute;
       border-radius: 50%;
-      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     /* Accent blobs — hidden by default, revealed on card hover */
@@ -389,6 +387,20 @@
       filter: blur(60px);
     }
 
+    /* About — soft sky / steel blue */
+    .bg-accent-about-1 {
+      width: 60vw; height: 60vw;
+      top: -10%; right: -8%;
+      background: radial-gradient(circle, rgba(190, 214, 232, 0.56) 0%, rgba(190, 214, 232, 0.17) 40%, transparent 62%);
+      filter: blur(58px);
+    }
+    .bg-accent-about-2 {
+      width: 48vw; height: 48vw;
+      bottom: -10%; left: 8%;
+      background: radial-gradient(circle, rgba(168, 196, 218, 0.42) 0%, rgba(168, 196, 218, 0.11) 40%, transparent 62%);
+      filter: blur(62px);
+    }
+
     /* Fade out base blobs on any featured card hover */
     body:has(.project-card--accent-sobeys:hover) .bg-blob-1,
     body:has(.project-card--accent-sobeys:hover) .bg-blob-2,
@@ -401,7 +413,16 @@
     body:has(.project-card--accent-one-pacific:hover) .bg-blob-3,
     body:has(.project-card--accent-air-canada:hover) .bg-blob-1,
     body:has(.project-card--accent-air-canada:hover) .bg-blob-2,
-    body:has(.project-card--accent-air-canada:hover) .bg-blob-3 { opacity: 0; }
+    body:has(.project-card--accent-air-canada:hover) .bg-blob-3,
+    body:has(.project-card--accent-about:hover) .bg-blob-1,
+    body:has(.project-card--accent-about:hover) .bg-blob-2,
+    body:has(.project-card--accent-about:hover) .bg-blob-3,
+    body:has(.project-card--accent-air-canada:focus-visible) .bg-blob-1,
+    body:has(.project-card--accent-air-canada:focus-visible) .bg-blob-2,
+    body:has(.project-card--accent-air-canada:focus-visible) .bg-blob-3,
+    body:has(.project-card--accent-about:focus-visible) .bg-blob-1,
+    body:has(.project-card--accent-about:focus-visible) .bg-blob-2,
+    body:has(.project-card--accent-about:focus-visible) .bg-blob-3 { opacity: 0; }
 
     /* Fade in Sobeys blobs */
     body:has(.project-card--accent-sobeys:hover) .bg-accent-sobeys-1,
@@ -417,7 +438,15 @@
 
     /* Fade in Air Canada blobs */
     body:has(.project-card--accent-air-canada:hover) .bg-accent-air-canada-1,
-    body:has(.project-card--accent-air-canada:hover) .bg-accent-air-canada-2 { opacity: 1; }
+    body:has(.project-card--accent-air-canada:hover) .bg-accent-air-canada-2,
+    body:has(.project-card--accent-air-canada:focus-visible) .bg-accent-air-canada-1,
+    body:has(.project-card--accent-air-canada:focus-visible) .bg-accent-air-canada-2 { opacity: 1; }
+
+    /* Fade in About blobs */
+    body:has(.project-card--accent-about:hover) .bg-accent-about-1,
+    body:has(.project-card--accent-about:hover) .bg-accent-about-2,
+    body:has(.project-card--accent-about:focus-visible) .bg-accent-about-1,
+    body:has(.project-card--accent-about:focus-visible) .bg-accent-about-2 { opacity: 1; }
 
     @media (prefers-reduced-motion: reduce) {
       .bg-blob { transition: none !important; }
@@ -498,13 +527,10 @@
     .page {
       position: relative;
       z-index: 1;
-      padding: 0 var(--content-pad) 0;
       display: flex;
       flex-direction: column;
       align-items: stretch;
       gap: var(--page-section-gap);
-      max-width: var(--content-max);
-      margin: 0 auto;
       box-sizing: border-box;
       overflow-x: visible;
       overflow-y: visible;
@@ -537,7 +563,6 @@
 
     @media (min-width: 901px) {
       .home-page .cards-grid {
-        max-width: 1180px;
         width: 100%;
         margin-top: -8px;
         margin-left: auto;
@@ -711,6 +736,15 @@
         0 4px 14px rgba(160, 22, 42, 0.065);
     }
 
+    .project-card--accent-about:hover,
+    .project-card--accent-about:focus-visible {
+      box-shadow:
+        0 14px 42px rgba(0, 0, 0, 0.078),
+        0 36px 78px rgba(100, 145, 180, 0.18),
+        0 10px 36px rgba(80, 125, 160, 0.09),
+        0 4px 14px rgba(60, 100, 135, 0.045);
+    }
+
     @media (min-width: 901px) {
       .project-card--accent-air-canada:hover,
       .project-card--accent-air-canada:focus-visible {
@@ -740,11 +774,7 @@
 
     .project-card.about-card:hover,
     .project-card.about-card:focus-visible {
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.48),
-        0 14px 42px rgba(0, 0, 0, 0.092),
-        0 36px 76px rgba(0, 0, 0, 0.068),
-        0 4px 14px rgba(0, 0, 0, 0.045);
+      background: #f7f5f0;
     }
 
     /* Layer 1: Soft blurred gradient — wave shifts on hover */
@@ -761,23 +791,35 @@
       transform: scale(1.08) translateX(-4%);
       transition:
         transform 0.88s cubic-bezier(0.22, 1, 0.36, 1),
-        opacity   0.88s cubic-bezier(0.22, 1, 0.36, 1);
+        opacity 0.88s cubic-bezier(0.22, 1, 0.36, 1),
+        background 0.88s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .about-card:hover::before,
     .about-card:focus-visible::before {
+      background: #f5f5f2;
       transform: scale(1.14) translateX(4%);
       opacity: 0.72;
     }
 
-    /* Layer 2: Photo — emerges through the gradient on hover */
+    /* Layer 2: Photo — light white wash baked into the image layer */
     .about-card-photo {
       position: absolute;
       inset: 0;
       border-radius: inherit;
       z-index: 1;
       pointer-events: none;
-      background: url("photo-mariel2.jpeg") center 42% / cover no-repeat;
+      background-color: #f7f5f0;
+      background-image:
+        linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.78) 0%,
+          rgba(247, 245, 240, 0.82) 100%
+        ),
+        url("photo-mariel2.jpeg");
+      background-position: center, center 42%;
+      background-size: cover, cover;
+      background-repeat: no-repeat, no-repeat;
       filter: saturate(0.88) contrast(0.93) brightness(1.06);
       opacity: 0;
       transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1);
@@ -786,7 +828,7 @@
 
     .about-card:hover .about-card-photo,
     .about-card:focus-visible .about-card-photo {
-      opacity: 0.4;
+      opacity: 1;
       filter: saturate(0.94) contrast(0.96) brightness(1.04);
     }
 
@@ -1170,12 +1212,13 @@
 
       /* Touch / tablet — no hover; show photo glimpse by default */
       .about-card::before {
+        background: #f5f5f2;
         transform: scale(1.14) translateX(4%);
         opacity: 0.72;
       }
 
       .about-card-photo {
-        opacity: 0.4;
+        opacity: 1;
         filter: saturate(0.94) contrast(0.96) brightness(1.04);
         transition-delay: 0s;
       }
@@ -1199,8 +1242,7 @@
       .card-title-original,
       .card-title-clone,
       .card-image img,
-      .card-icon,
-      .footer-social a svg {
+      .card-icon {
         transition-duration: 0.05s !important;
       }
 
@@ -1648,6 +1690,8 @@
     <div class="bg-blob bg-accent bg-accent-pacific-2"></div>
     <div class="bg-blob bg-accent bg-accent-air-canada-1"></div>
     <div class="bg-blob bg-accent bg-accent-air-canada-2"></div>
+    <div class="bg-blob bg-accent bg-accent-about-1"></div>
+    <div class="bg-blob bg-accent bg-accent-about-2"></div>
   </div>
   <div class="bg-noise" aria-hidden="true"></div>
   <div class="hero-title-wrapper" aria-hidden="true">
@@ -1657,8 +1701,9 @@
   </div>
   <div id="custom-cursor" class="custom-cursor" aria-hidden="true"></div>
   <div class="home-hero-mono navbar">
-    <header class="mono-header">
-      <nav class="mono-nav" aria-label="Main">
+    <header class="mono-header site-header">
+      <div class="page-container header-inner">
+      <nav class="mono-nav site-nav" aria-label="Main">
         <div class="nav-left">
           <h1 class="hero-line">
             <a href="index.html" class="hero-name link-hover" aria-label="Mariel Lopez, home">
@@ -1673,13 +1718,14 @@
           <time class="nav-local-time" id="nav-local-time" datetime="" aria-label="New York local time">
             <span class="nav-local-move" aria-label="Toronto to NYC"><span>Toronto</span><svg class="nav-local-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h6.5"/><path d="M8 5.5 11.5 8 8 10.5"/></svg><span>NYC</span></span><span class="nav-local-sep" aria-hidden="true">✦</span><span class="nav-local-clock"></span>
           </time>
-          <div class="nav-links">
-            <a class="nav-contact-link link-with-arrow" href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener noreferrer"><span class="link-with-arrow-label">LinkedIn</span><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
-            <a class="nav-contact-link link-with-arrow" href="https://drive.google.com/file/d/1HT2FcuIwYNYXt00IsOKhti0plwNZEdIb/view?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="link-with-arrow-label">Resume</span><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
-            <a class="nav-contact-link link-with-arrow" href="mailto:mariellopezdesign@gmail.com"><span class="link-with-arrow-label">Contact</span><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+          <div class="nav-links site-nav-links">
+            <a class="nav-contact-link site-nav-link link-with-arrow" href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener noreferrer"><span class="link-with-arrow-label">LinkedIn</span><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+            <a class="nav-contact-link site-nav-link link-with-arrow" href="https://drive.google.com/file/d/1HT2FcuIwYNYXt00IsOKhti0plwNZEdIb/view?usp=sharing" target="_blank" rel="noopener noreferrer"><span class="link-with-arrow-label">Resume</span><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+            <a class="nav-contact-link site-nav-link link-with-arrow" href="mailto:mariellopezdesign@gmail.com"><span class="link-with-arrow-label">Contact</span><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
           </div>
         </div>
       </nav>
+      </div>
     </header>
     <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle theme" aria-pressed="false">
       <span class="theme-icon sun-icon" aria-hidden="true">
@@ -1703,7 +1749,7 @@
     </button>
   </div>
 
-  <div class="page">
+  <div class="page page-container">
 
     <!-- FEATURED WORK -->
     <div class="work-section" id="work">
@@ -1777,7 +1823,7 @@
           </div>
         </a>
 
-        <a class="project-card project-card--nav about-card second-row-card" href="about.html" data-hover-title="About">
+        <a class="project-card project-card--accent-about project-card--nav about-card second-row-card" href="about.html" data-hover-title="About">
           <div class="about-card-photo" aria-hidden="true"></div>
           <div class="about-card-noise" aria-hidden="true"></div>
           <div class="about-card-content">
@@ -1803,25 +1849,14 @@
         <button type="button" class="footer-email-copy" data-email="mariellopezdesign@gmail.com" aria-label="Copy email address">
           <span class="footer-email-copy-icons" aria-hidden="true">
             <svg class="footer-email-copy-icon footer-email-copy-icon--clipboard" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="3"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            <svg class="footer-email-copy-icon footer-email-copy-icon--check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
           </span>
-          <span class="footer-email-copy-feedback" aria-hidden="true">Email copied!</span>
         </button>
         <span class="footer-email-copy-status" role="status" aria-live="polite"></span>
       </div>
-      <nav class="footer-social" aria-label="Social links">
-        <a class="rolling-link link-hover link-with-arrow" href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener noreferrer">
-          <span class="rolling-link-inner"><span class="rolling-link-text">LinkedIn</span><span class="rolling-link-text duplicate" aria-hidden="true">LinkedIn</span></span>
-          <svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-        </a>
-        <a class="rolling-link link-hover link-with-arrow" href="https://luma.com/user/mariel" target="_blank" rel="noopener noreferrer">
-          <span class="rolling-link-inner"><span class="rolling-link-text">Luma</span><span class="rolling-link-text duplicate" aria-hidden="true">Luma</span></span>
-          <svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-        </a>
-        <a class="rolling-link link-hover link-with-arrow" href="https://x.com/marieldesigner" target="_blank" rel="noopener noreferrer">
-          <span class="rolling-link-inner"><span class="rolling-link-text">X (Twitter)</span><span class="rolling-link-text duplicate" aria-hidden="true">X (Twitter)</span></span>
-          <svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-        </a>
+      <nav class="site-nav-links" aria-label="Social links">
+        <a class="site-nav-link footer-link link-with-arrow" href="https://www.linkedin.com/in/mariel-lopez/" target="_blank" rel="noopener noreferrer"><span class="link-with-arrow-label">LinkedIn</span><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+        <a class="site-nav-link footer-link link-with-arrow" href="https://luma.com/user/mariel" target="_blank" rel="noopener noreferrer"><span class="link-with-arrow-label">Luma</span><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+        <a class="site-nav-link footer-link link-with-arrow" href="https://x.com/marieldesigner" target="_blank" rel="noopener noreferrer"><span class="link-with-arrow-label">X (Twitter)</span><svg class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
       </nav>
     </footer>
 
