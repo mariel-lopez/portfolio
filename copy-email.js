@@ -1,6 +1,11 @@
 (function () {
   var DEFAULT_EMAIL = 'mariellopezdesign@gmail.com';
-  var RESET_MS = 1800;
+  var TOAST_VISIBLE_MS = 2000;
+  var TOAST_ANIM_MS = 280;
+  var TOAST_MESSAGE = 'Copied to clipboard';
+
+  var hideTimer;
+  var unmountTimer;
 
   function copyFallback(text) {
     var ta = document.createElement('textarea');
@@ -27,52 +32,81 @@
     return Promise.resolve();
   }
 
+  function getToast() {
+    var toast = document.getElementById('copy-toast');
+    if (toast) return toast;
+
+    toast = document.createElement('div');
+    toast.id = 'copy-toast';
+    toast.className = 'copy-toast';
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
+    toast.setAttribute('aria-atomic', 'true');
+    toast.hidden = true;
+    toast.innerHTML =
+      '<span class="copy-toast-icon" aria-hidden="true">' +
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">' +
+          '<path d="M20 6 9 17l-5-5"/>' +
+        '</svg>' +
+      '</span>' +
+      '<span class="copy-toast-text"></span>';
+
+    document.body.appendChild(toast);
+    return toast;
+  }
+
+  function showCopyToast(message) {
+    var toast = getToast();
+    var text = toast.querySelector('.copy-toast-text');
+    if (text) text.textContent = message || TOAST_MESSAGE;
+
+    window.clearTimeout(hideTimer);
+    window.clearTimeout(unmountTimer);
+
+    toast.hidden = false;
+    requestAnimationFrame(function () {
+      toast.classList.add('is-visible');
+    });
+
+    hideTimer = window.setTimeout(function () {
+      toast.classList.remove('is-visible');
+      unmountTimer = window.setTimeout(function () {
+        toast.hidden = true;
+      }, TOAST_ANIM_MS);
+    }, TOAST_VISIBLE_MS);
+  }
+
+  function onCopySuccess(trigger, statusEl) {
+    showCopyToast(TOAST_MESSAGE);
+    if (statusEl) statusEl.textContent = TOAST_MESSAGE;
+    if (trigger) trigger.setAttribute('aria-label', TOAST_MESSAGE);
+
+    window.setTimeout(function () {
+      if (statusEl) statusEl.textContent = '';
+      if (trigger) trigger.setAttribute('aria-label', 'Copy email address');
+    }, TOAST_VISIBLE_MS + TOAST_ANIM_MS);
+  }
+
   document.querySelectorAll('.footer-email-copy').forEach(function (btn) {
     var email = btn.getAttribute('data-email') || DEFAULT_EMAIL;
     var row = btn.closest('.footer-email-row');
     var status = row ? row.querySelector('.footer-email-copy-status') : null;
-    var resetTimer;
 
     btn.addEventListener('click', function (e) {
       e.stopPropagation();
-      if (btn.classList.contains('is-copied')) return;
-
       copyText(email).then(function () {
-        window.clearTimeout(resetTimer);
-        btn.classList.add('is-copied');
-        btn.setAttribute('aria-label', 'Email copied!');
-        if (status) status.textContent = 'Email copied!';
-
-        resetTimer = window.setTimeout(function () {
-          btn.classList.remove('is-copied');
-          btn.setAttribute('aria-label', 'Copy email address');
-          if (status) status.textContent = '';
-        }, RESET_MS);
+        onCopySuccess(btn, status);
       });
     });
   });
 
   document.querySelectorAll('.nav-email-copy').forEach(function (link) {
     var email = link.getAttribute('data-email') || DEFAULT_EMAIL;
-    var wrap = link.closest('.nav-email-wrap');
-    var feedback = wrap ? wrap.querySelector('.nav-copy-feedback') : null;
-    var resetTimer;
 
     link.addEventListener('click', function (e) {
       e.preventDefault();
-
       copyText(email).then(function () {
-        if (!feedback) return;
-        window.clearTimeout(resetTimer);
-        feedback.classList.add('is-visible');
-        feedback.removeAttribute('aria-hidden');
-        link.setAttribute('aria-label', 'Email copied');
-
-        resetTimer = window.setTimeout(function () {
-          feedback.classList.remove('is-visible');
-          feedback.setAttribute('aria-hidden', 'true');
-          link.setAttribute('aria-label', 'Copy email address');
-        }, RESET_MS);
+        onCopySuccess(link, null);
       });
     });
   });

@@ -1,10 +1,5 @@
 /* Creates transition layers before first paint — load synchronously in <head> */
 !function () {
-  try {
-    var t = localStorage.getItem('theme');
-    if (t === 'dark') document.documentElement.classList.add('dark-theme');
-  } catch (e) {}
-
   var html = document.documentElement;
   html.setAttribute('data-pt-phase', 'enter');
 

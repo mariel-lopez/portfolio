@@ -1,0 +1,17 @@
+=== identity-before-22f920f2-c537-402e-8862-d3ce79a9cea3.png -> new-identity-before.webp ===
+Source dimensions: 1024 x 576
+Output dimensions (webp): 1024 x 576
+Source file size: 60607 bytes (0.06 MiB)
+WebP q95 method=6: 42806 bytes (0.04 MiB)
+WebP q100 method=6: 55482 bytes (0.05 MiB)
+PNG (lossless): 179159 bytes (0.17 MiB)
+Quality: PNG is lossless (better fidelity); WebP q95 is smaller by 136353 bytes.
+
+=== identity-after-eb789c26-7f3d-426e-894c-d7d24c2bd1c4.png -> new-identity-after.webp ===
+Source dimensions: 1024 x 576
+Output dimensions (webp): 1024 x 576
+Source file size: 94000 bytes (0.09 MiB)
+WebP q95 method=6: 69594 bytes (0.07 MiB)
+WebP q100 method=6: 87846 bytes (0.08 MiB)
+PNG (lossless): 280568 bytes (0.27 MiB)
+Quality: PNG is lossless (better fidelity); WebP q95 is smaller by 210974 bytes.

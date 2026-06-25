@@ -2,9 +2,13 @@
   var themeToggle = document.querySelector('[data-theme-toggle]');
   var root = document.documentElement;
 
-  var savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'dark') {
-    root.classList.add('dark-theme');
+  function applyTheme(theme) {
+    var isDark = theme === 'dark';
+    root.classList.toggle('dark-theme', isDark);
+    try {
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    } catch (e) {}
+    updateToggleUi();
   }
 
   function updateToggleUi() {
@@ -17,12 +21,9 @@
     themeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
   }
 
-  updateToggleUi();
+  applyTheme(localStorage.getItem('theme') === 'dark' ? 'dark' : 'light');
 
   themeToggle?.addEventListener('click', function () {
-    root.classList.toggle('dark-theme');
-    var isDark = root.classList.contains('dark-theme');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    updateToggleUi();
+    applyTheme(root.classList.contains('dark-theme') ? 'light' : 'dark');
   });
 })();
