@@ -363,13 +363,13 @@
 
 .nav-local-arrow {
   display: block;
-  width: 0.72em;
-  height: 0.54em;
+  width: 0.7em;
+  height: 0.7em;
   flex-shrink: 0;
   color: currentColor;
   fill: none;
   stroke: currentColor;
-  stroke-width: 1.35;
+  stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
