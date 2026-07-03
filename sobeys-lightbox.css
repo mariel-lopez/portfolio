@@ -1,0 +1,120 @@
+/* Sobeys case study image lightbox */
+
+body.case-sobeys .hero-image img,
+body.case-sobeys .case-study-image-card img {
+  cursor: zoom-in;
+}
+
+body.sobeys-lightbox-open {
+  overflow: hidden;
+}
+
+.sobeys-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding:
+    max(16px, env(safe-area-inset-top, 0px))
+    max(16px, env(safe-area-inset-right, 0px))
+    max(16px, env(safe-area-inset-bottom, 0px))
+    max(16px, env(safe-area-inset-left, 0px));
+  cursor: zoom-out;
+}
+
+.sobeys-lightbox[hidden] {
+  display: none !important;
+}
+
+.sobeys-lightbox__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(17, 17, 17, 0.44);
+  backdrop-filter: blur(14px) saturate(1.04);
+  -webkit-backdrop-filter: blur(14px) saturate(1.04);
+}
+
+.sobeys-lightbox__close {
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top, 0px));
+  right: max(16px, env(safe-area-inset-right, 0px));
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  background: rgba(253, 251, 247, 0.94);
+  color: #111111;
+  cursor: pointer;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.sobeys-lightbox__close:hover {
+  background: #ffffff;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.sobeys-lightbox__close:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.65);
+  outline-offset: 2px;
+}
+
+.sobeys-lightbox__close svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.sobeys-lightbox__stage {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 90vw;
+  max-height: 85vh;
+  pointer-events: none;
+}
+
+.sobeys-lightbox__image {
+  display: block;
+  max-width: 90vw;
+  max-height: 85vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 28px 72px rgba(0, 0, 0, 0.32);
+  pointer-events: auto;
+  cursor: default;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+html.dark-theme .sobeys-lightbox__close {
+  background: rgba(28, 28, 28, 0.92);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: #f5f5f2;
+}
+
+html.dark-theme .sobeys-lightbox__image {
+  background: #1a1a1a;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sobeys-lightbox__close {
+    transition: none;
+  }
+}

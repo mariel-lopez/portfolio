@@ -192,14 +192,9 @@ html.dark-theme .home-hero-mono.navbar::before {
   );
 }
 
-/* ── Theme toggle — sits in page margin, does not inset nav links ── */
+/* ── Theme toggle — in-flow inside .nav-right ── */
 .theme-toggle {
-  position: absolute;
-  top: max(var(--nav-pad-top), env(safe-area-inset-top, 0px));
-  right: max(
-    var(--space-16),
-    calc((100vw - min(100vw, var(--content-max))) / 2 + var(--space-8))
-  );
+  position: relative;
   z-index: 2;
   width: 36px;
   height: 36px;
@@ -275,18 +270,6 @@ html:not(.dark-theme) .theme-toggle .moon-icon {
 html.dark-theme .theme-toggle .sun-icon {
   opacity: 1;
   transform: scale(1) rotate(0deg);
-}
-
-@media (max-width: 955px) {
-  .theme-toggle {
-    top: max(calc(var(--space-24) + var(--nav-pad-top-extra, 0px)), env(safe-area-inset-top, 0px));
-  }
-}
-
-@media (max-width: 640px) {
-  .theme-toggle {
-    right: max(var(--space-16), env(safe-area-inset-right, 0px));
-  }
 }
 
 /* ── Homepage: hero title — full width, soft bottom fade via mask in index.html */
@@ -846,12 +829,6 @@ html.dark-theme .back-to-top:focus-visible {
 }
 
 /* ── Case study hero (Sobeys — in-flow layout) ── */
-.case-sobeys .hero .theme-toggle {
-  position: relative !important;
-  top: auto !important;
-  right: auto !important;
-}
-
 .case-sobeys .hero-topbar .mono-header {
   padding-right: 0 !important;
 }
