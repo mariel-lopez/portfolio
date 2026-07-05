@@ -329,6 +329,13 @@
   opacity: 0.72;
 }
 
+/* Location/time removed — hide if cached markup remains */
+.nav-local-time,
+.nav-local-place-link,
+#nav-local-time {
+  display: none !important;
+}
+
 /* ── Email copy feedback (popup card below Contact) ── */
 .nav-email-wrap {
   position: relative;
