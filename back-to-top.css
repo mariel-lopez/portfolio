@@ -9,7 +9,7 @@
   align-items: center;
   gap: 7px;
   padding: 9px 14px 9px 12px;
-  font-family: var(--mono-serif, "Helvetica Neue", Helvetica, Arial, sans-serif);
+  font-family: var(--mono-serif, "Apercu Pro", "Helvetica Neue", Helvetica, Geist, Arial, sans-serif);
   font-size: 12px;
   font-weight: 500;
   font-style: normal;

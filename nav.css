@@ -1,7 +1,7 @@
 /* Shared site nav — homepage is source of truth */
 
 :root {
-  --mono-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --mono-serif: "Apercu Pro", "Helvetica Neue", Helvetica, Geist, Arial, sans-serif;
   --nav-headline-size: clamp(17px, 1.55vw, 20px);
   --nav-meta-size: clamp(13px, 1.05vw, 15px);
   --nav-headline-weight: 600;

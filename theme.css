@@ -127,7 +127,7 @@ html.dark-theme {
 
 /* ── Base page ── */
 body {
-  font-family: var(--mono-serif, "Helvetica Neue", Helvetica, Arial, sans-serif);
+  font-family: var(--mono-serif, "Apercu Pro", "Helvetica Neue", Helvetica, Geist, Arial, sans-serif);
   font-size: var(--body-font-size);
   line-height: var(--body-line-height);
   letter-spacing: var(--body-letter-spacing);

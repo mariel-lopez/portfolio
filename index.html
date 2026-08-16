@@ -10,6 +10,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="shortcut icon" href="favicon.png" />
   <script src="theme-boot.js"></script>
+  <link rel="stylesheet" href="fonts.css" />
   <link rel="stylesheet" href="spacing.css" />
   <link rel="stylesheet" href="nav.css" />
   <link rel="stylesheet" href="theme.css" />
@@ -29,7 +30,7 @@
     }
 
     :root {
-      --mono-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --mono-serif: "Apercu Pro", "Helvetica Neue", Helvetica, Geist, Arial, sans-serif;
     }
 
     body {
@@ -1649,7 +1650,7 @@
     .custom-cursor.is-pill::after {
       content: attr(data-label);
       display: block;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: var(--mono-serif);
       font-size: 12px;
       font-weight: 500;
       letter-spacing: 0.04em;

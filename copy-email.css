@@ -149,7 +149,7 @@ html.dark-theme .footer-email-row:focus-within {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: var(--copy-toast-shadow);
-  font-family: var(--mono-serif, "Helvetica Neue", Helvetica, Arial, sans-serif);
+  font-family: var(--mono-serif, "Apercu Pro", "Helvetica Neue", Helvetica, Geist, Arial, sans-serif);
   font-size: 15px;
   font-weight: 500;
   line-height: 1.2;
