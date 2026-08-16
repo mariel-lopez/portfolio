@@ -782,7 +782,7 @@ html.dark-theme .marquee-text {
 
 html.dark-theme .about-photo {
   background: var(--about-photo-bg);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.32);
+  box-shadow: none;
 }
 
 @media (max-width: 640px) {
@@ -796,11 +796,16 @@ html.dark-theme .about-photo::after {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
+  html.dark-theme .about-photo:hover {
+    box-shadow:
+      0 22px 48px rgba(0, 0, 0, 0.45),
+      0 6px 16px rgba(0, 0, 0, 0.28);
+  }
+
   html.dark-theme .about-photo:hover::after {
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
   }
-
 }
 
 @media (hover: none) {
