@@ -10,6 +10,9 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="shortcut icon" href="favicon.png" />
   <script src="theme-boot.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="fonts.css" />
   <link rel="stylesheet" href="spacing.css" />
   <link rel="stylesheet" href="nav.css" />
@@ -82,9 +85,11 @@
     }
 
     .hero .hero-title {
+      font-family: "EB Garamond", "Times New Roman", Times, serif;
       font-size: clamp(2.25rem, 6.2cqi + 0.4rem, 4.5rem);
-      line-height: 0.92;
-      letter-spacing: -0.045em;
+      font-weight: 500;
+      line-height: 0.96;
+      letter-spacing: -0.02em;
       max-width: 14.5ch;
     }
 
@@ -411,6 +416,12 @@
       color: #fff;
     }
 
+    body.case-sobeys .before-after-tab:last-child.active,
+    body.case-sobeys .before-after-tab:last-child.active:hover {
+      background: #7a1c1c;
+      color: #fff;
+    }
+
     body.case-sobeys .before-after-tab:focus-visible {
       outline: 2px solid rgba(0, 0, 0, 0.18);
       outline-offset: 2px;
@@ -555,13 +566,13 @@
 
     .callout-quote {
       font-family: var(--mono-serif);
-      font-size: clamp(1.75rem, 2.4vw + 0.8rem, 2.75rem);
+      font-size: clamp(1.25rem, 1.6vw + 0.7rem, 2rem);
       font-weight: 400;
       line-height: 1.2;
       letter-spacing: -0.03em;
       color: var(--page-ink);
-      max-width: 18ch;
-      text-wrap: pretty;
+      max-width: none;
+      white-space: nowrap;
     }
 
     /* ── LEARNING CARDS ── */
@@ -800,8 +811,9 @@
 
       .section-heading { font-size: clamp(1.4rem, 3.5vw, 1.75rem); }
       .callout-quote {
-        font-size: clamp(1.5rem, 4vw, 2rem);
+        font-size: clamp(1.125rem, 3.6vw, 1.5rem);
         max-width: none;
+        white-space: normal;
       }
       .section-body { font-size: var(--body-font-size); max-width: none; }
       .results-row { flex-direction: column; gap: 24px; }
@@ -943,10 +955,10 @@
       <div class="overview-item">
         <p class="overview-label">Team</p>
         <ul class="overview-value overview-team">
-          <li class="overview-team-member"><strong>Shannon M.</strong> <span class="overview-team-role">(Product Design Manager)</span></li>
-          <li class="overview-team-member"><strong>Valerie C.</strong> <span class="overview-team-role">(Product Manager)</span></li>
-          <li class="overview-team-member"><strong>Avinash R.</strong> <span class="overview-team-role">(Technical Architect/Engineer)</span></li>
-          <li class="overview-team-member"><strong>Justin C.</strong> <span class="overview-team-role">(Design Intern)</span></li>
+          <li class="overview-team-member"><strong>Product Design Manager</strong></li>
+          <li class="overview-team-member"><strong>Product Manager</strong></li>
+          <li class="overview-team-member"><strong>Technical Architect/Engineer</strong></li>
+          <li class="overview-team-member"><strong>Design Intern</strong></li>
         </ul>
       </div>
       <div class="overview-item">

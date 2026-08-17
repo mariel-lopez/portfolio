@@ -898,6 +898,12 @@ html.dark-theme .before-after-tab.active:hover {
   color: #fff;
 }
 
+html.dark-theme .before-after-tab:last-child.active,
+html.dark-theme .before-after-tab:last-child.active:hover {
+  background: #8a2424;
+  color: #fff;
+}
+
 html.dark-theme .before-after-tab:focus-visible {
   outline-color: rgba(235, 228, 255, 0.28);
 }
