@@ -33,12 +33,8 @@
 
     :root {
       --mono-serif: "Apercu Pro", "Helvetica Neue", Helvetica, Geist, Arial, sans-serif;
-      --page-pad: 80px;
-      --max-w: 1440px;
-      --about-role-col: 1.1fr;
-      --about-body-col: 2.4fr;
-      --about-col-gap: clamp(48px, 5vw, 72px);
-      --about-marquee-footer-gap: clamp(96px, 8vw, 120px);
+      --display-serif: "EB Garamond", "Times New Roman", Times, serif;
+      --about-label-col: 9.5rem;
       --about-footer-pad-bottom: clamp(40px, 5vw, 48px);
       --about-footer-email-gap: clamp(12px, 1vw, 16px);
     }
@@ -47,7 +43,7 @@
       font-family: var(--mono-serif);
       font-size: 16px;
       font-weight: 400;
-      line-height: 1.75;
+      line-height: 1.7;
       letter-spacing: -0.01em;
       background: var(--page-bg);
       color: var(--page-ink);
@@ -56,172 +52,61 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── Intro lead: headline + body (2-col desktop) ── */
     .about-main {
       min-width: 0;
       max-width: 100%;
       overflow-x: clip;
+      padding-bottom: var(--space-64);
     }
 
     .about-lead {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: var(--space-32);
-      align-items: start;
       width: 100%;
-      margin: 0;
+      margin: 0 0 var(--space-48);
     }
 
     .about-lead > h1.hero-title {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.06em;
-      margin-block-end: 0;
-      min-width: 0;
-      font-family: "EB Garamond", "Times New Roman", Times, serif;
-      font-size: clamp(1.75rem, 7.2vw, 2.75rem);
+      display: block;
+      max-width: 18ch;
+      margin: 0;
+      font-family: var(--display-serif);
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
       font-weight: 500;
-      line-height: 0.96;
+      line-height: 1.05;
       letter-spacing: -0.02em;
       color: var(--page-ink);
-    }
-
-    .about-lead > h1.hero-title .hero-title-line:first-child,
-    .about-lead > h1.hero-title .hero-title-line:last-child {
-      white-space: nowrap;
-      text-wrap: nowrap;
-      overflow-wrap: normal;
-      word-break: keep-all;
-    }
-
-    .hero-title-line {
-      display: block;
-      max-width: 100%;
-      min-width: 0;
-    }
-
-    @media (min-width: 861px) {
-      .about-lead {
-        grid-template-columns: minmax(0, 1.35fr) minmax(0, 1.15fr);
-        column-gap: clamp(40px, 5vw, 80px);
-        row-gap: var(--space-32);
-        align-items: end;
-      }
-
-      .about-lead > h1.hero-title {
-        grid-column: 1;
-        grid-row: 1;
-        container-type: inline-size;
-        container-name: about-headline;
-        font-size: clamp(1.75rem, 3.6cqi + 0.7rem, 3.15rem);
-        font-weight: 500;
-        color: var(--page-ink);
-        padding-bottom: 0.12em;
-      }
-
-      .about-lead > h1.hero-title .hero-title-line {
-        white-space: nowrap;
-        text-wrap: nowrap;
-      }
-
-      .about-intro {
-        grid-column: 2;
-        grid-row: 1;
-        margin-block-start: 0;
-        width: 100%;
-        max-width: none;
-        align-self: end;
-      }
-    }
-
-    .about-intro {
-      margin: 0;
-      min-width: 0;
-      width: 100%;
-      max-width: none;
-    }
-
-    .about-intro-copy {
-      min-width: 0;
-      width: 100%;
-      max-width: 38rem;
-    }
-
-    .about-intro p {
-      margin: 0;
-      display: block;
-      width: 100%;
-      max-width: none;
-      font-family: var(--mono-serif);
-      font-size: var(--body-font-size, 16px);
-      font-weight: 400;
-      color: var(--about-ink-soft);
-      line-height: 1.7;
-      letter-spacing: -0.01em;
       text-wrap: pretty;
-      text-align: left;
-      hyphens: none;
-    }
-
-    .about-intro p + p {
-      margin-top: var(--space-24);
-    }
-
-    .about-intro strong {
-      font-weight: 600;
-      color: var(--page-ink);
     }
 
     .hero-title-accent {
-      color: inherit;
       font-style: italic;
       font-weight: 500;
     }
 
-    /* ── Photo gallery — staggered cards ── */
+    /* ── Photo gallery ── */
     .about-photos {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: var(--space-24);
-      align-items: end;
-      margin-block: clamp(var(--space-48), 5vw, var(--space-96));
-      margin-inline: 0;
-      padding-bottom: var(--space-16);
+      gap: var(--space-16);
+      align-items: stretch;
+      margin: 0 0 clamp(var(--space-64), 8vw, var(--space-96));
       min-width: 0;
-      perspective: 1200px;
     }
 
     .about-photo {
       position: relative;
       margin: 0;
-      border-radius: 28px;
+      border-radius: 20px;
       overflow: hidden;
       aspect-ratio: 3 / 4;
       width: 100%;
       min-height: 0;
       background: var(--about-photo-bg, #ddd);
       isolation: isolate;
-      cursor: default;
-      transform: translate3d(0, 0, 0) rotate(0deg);
+      transform: translate3d(0, 0, 0);
       box-shadow: 0 0 0 0 transparent;
       transition:
         transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
         box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-      will-change: transform;
-    }
-
-    .about-photos > .about-photo:nth-child(1) {
-      transform: translate3d(0, 18px, 0) rotate(-0.6deg);
-    }
-
-    .about-photos > .about-photo:nth-child(2) {
-      transform: translate3d(0, -10px, 0) rotate(0.35deg);
-      z-index: 1;
-    }
-
-    .about-photos > .about-photo:nth-child(3) {
-      transform: translate3d(0, 26px, 0) rotate(0.7deg);
     }
 
     .about-photo img {
@@ -252,21 +137,10 @@
     @media (hover: hover) and (pointer: fine) {
       .about-photo:hover {
         z-index: 3;
+        transform: translate3d(0, -8px, 0);
         box-shadow:
           0 18px 40px rgba(0, 0, 0, 0.12),
           0 4px 12px rgba(0, 0, 0, 0.06);
-      }
-
-      .about-photos > .about-photo:nth-child(1):hover {
-        transform: translate3d(0, -6px, 0) rotate(-0.6deg);
-      }
-
-      .about-photos > .about-photo:nth-child(2):hover {
-        transform: translate3d(0, -28px, 0) rotate(0.35deg);
-      }
-
-      .about-photos > .about-photo:nth-child(3):hover {
-        transform: translate3d(0, 2px, 0) rotate(0.7deg);
       }
 
       .about-photo:hover img {
@@ -276,216 +150,358 @@
       .about-photo:hover::after {
         box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
       }
-
-      .about-photo:focus-visible {
-        outline: 2px solid rgba(0, 0, 0, 0.2);
-        outline-offset: 3px;
-      }
     }
 
-    @media (hover: none) {
-      .about-photo:active::after {
-        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
-      }
+    /* ── Two-column bio ── */
+    .about-bio {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      width: 100%;
     }
 
-    /* ── MARQUEE (full-bleed; dividers stay in .content-shell) ── */
+    .about-daynight {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      align-items: start;
+      width: 100%;
+      padding: var(--space-48) 0;
+      border-top: 1px solid var(--divider-color, rgba(0, 0, 0, 0.12));
+    }
+
+    .about-daynight-col {
+      min-width: 0;
+      padding-right: clamp(24px, 4vw, 56px);
+    }
+
+    .about-daynight-col + .about-daynight-col {
+      padding-left: clamp(24px, 4vw, 56px);
+      padding-right: 0;
+    }
+
+    .about-daynight-col .about-block-label {
+      margin-bottom: var(--space-16);
+    }
+
+    .about-block {
+      display: grid;
+      grid-template-columns: var(--about-label-col) minmax(0, 1fr);
+      column-gap: clamp(32px, 6vw, 80px);
+      row-gap: var(--space-16);
+      padding: var(--space-48) 0;
+      border-top: 1px solid var(--divider-color, rgba(0, 0, 0, 0.12));
+    }
+
+    .about-block:last-of-type {
+      border-bottom: 1px solid var(--divider-color, rgba(0, 0, 0, 0.12));
+    }
+
+    .about-block-label {
+      font-family: var(--mono-serif);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--page-ink);
+      padding-top: 2px;
+    }
+
+    .about-block-body {
+      min-width: 0;
+      width: 100%;
+      max-width: none;
+    }
+
+    .about-copy p {
+      margin: 0;
+      font-family: var(--mono-serif);
+      font-size: var(--body-font-size, 16px);
+      font-weight: 400;
+      color: var(--about-ink-soft);
+      line-height: 1.7;
+      letter-spacing: -0.01em;
+      text-wrap: pretty;
+    }
+
+    .about-copy p + p {
+      margin-top: var(--space-24);
+    }
+
+    .about-copy a,
+    .about-job-org a {
+      color: var(--page-ink);
+      font-weight: 500;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(0, 0, 0, 0.28);
+    }
+
+    .about-copy a:hover,
+    .about-job-org a:hover {
+      text-decoration-color: currentColor;
+    }
+
+    .about-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-24);
+    }
+
+    .about-job {
+      display: grid;
+      grid-template-columns: minmax(6.5rem, 0.34fr) minmax(0, 1fr) auto;
+      column-gap: var(--space-24);
+      row-gap: 4px;
+      align-items: baseline;
+    }
+
+    .about-job-org,
+    .about-job-role,
+    .about-job-dates {
+      font-family: var(--mono-serif);
+      font-size: var(--body-font-size, 16px);
+      line-height: 1.5;
+    }
+
+    .about-job-org {
+      font-weight: 600;
+      color: var(--page-ink);
+    }
+
+    .about-job-role {
+      font-weight: 400;
+      color: var(--about-ink-soft);
+    }
+
+    .about-job-dates {
+      font-weight: 400;
+      color: var(--about-ink-muted);
+      white-space: nowrap;
+      letter-spacing: -0.01em;
+    }
+
+    .about-job-meta {
+      grid-column: 2 / -1;
+      font-family: var(--mono-serif);
+      font-size: 0.92em;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--about-ink-muted);
+      line-height: 1.45;
+    }
+
+    .about-edu {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .about-edu-school {
+      font-family: var(--mono-serif);
+      font-size: var(--body-font-size, 16px);
+      font-weight: 600;
+      line-height: 1.5;
+      color: var(--page-ink);
+    }
+
+    .about-edu-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: var(--space-24);
+    }
+
+    .about-edu-degree {
+      font-family: var(--mono-serif);
+      font-size: var(--body-font-size, 16px);
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--about-ink-soft);
+      min-width: 0;
+    }
+
+    .about-edu-dates {
+      font-family: var(--mono-serif);
+      font-size: var(--body-font-size, 16px);
+      font-weight: 400;
+      color: var(--about-ink-muted);
+      white-space: nowrap;
+    }
+
+    .about-job-note {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--about-ink-muted);
+    }
+
+    .about-etc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45em;
+    }
+
+    .about-etc-item {
+      font-family: var(--mono-serif);
+      font-size: var(--body-font-size, 16px);
+      font-weight: 400;
+      line-height: 1.55;
+      color: var(--page-ink);
+    }
+
+    .about-etc-item em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--about-ink-muted);
+    }
+
+    .about-entry-title {
+      font-family: var(--mono-serif);
+      font-size: var(--body-font-size, 16px);
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--page-ink);
+    }
+
+    .about-entry-sub {
+      font-family: var(--mono-serif);
+      font-size: var(--body-font-size, 16px);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--about-ink-muted);
+    }
+
+    .about-entry-clients {
+      flex-basis: 100%;
+      font-style: normal;
+      color: var(--about-ink-muted);
+    }
+
     .site-bottom {
       margin-top: 0;
       overflow-x: visible;
     }
 
-
-    .marquee-strip {
-      overflow: hidden;
-      width: 100vw;
-      max-width: 100vw;
-      margin-left: calc(50% - 50vw);
-      margin-right: calc(50% - 50vw);
-      padding: 0 0 var(--marquee-pad-y);
-      border-top: none;
+    /* ── Scroll reveal ── */
+    .about-reveal {
+      opacity: 0;
+      transform: translate3d(0, 28px, 0);
+      transition:
+        opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .marquee-track {
-      display: flex;
-      white-space: nowrap;
-      animation: marquee-scroll 45s linear infinite;
-      will-change: transform;
+    .about-reveal.is-visible {
+      opacity: 1;
+      transform: none;
     }
 
-    .contact-marquee,
-    .marquee-text {
-      display: inline-flex;
-      align-items: baseline;
-      gap: 0.4em;
-      font-family: var(--mono-serif);
-      font-size: var(--marquee-font-size);
-      font-weight: 700;
-      line-height: 0.9;
-      white-space: nowrap;
-      text-transform: uppercase;
-      color: var(--page-ink);
-      padding-right: 0.4em;
-      flex-shrink: 0;
+    .about-photos.about-reveal.is-visible .about-photo:nth-child(1) { transition-delay: 0ms; }
+    .about-photos.about-reveal.is-visible .about-photo:nth-child(2) { transition-delay: 80ms; }
+    .about-photos.about-reveal.is-visible .about-photo:nth-child(3) { transition-delay: 160ms; }
+
+    .about-photos .about-photo {
+      opacity: 0;
+      transform: translate3d(0, 24px, 0);
+      transition:
+        opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .marquee-phrase {
-      letter-spacing: -0.04em;
+    .about-photos.is-visible .about-photo {
+      opacity: 1;
+      transform: none;
     }
 
-    .marquee-sep {
-      letter-spacing: 0;
-      font-weight: 500;
-      flex-shrink: 0;
-    }
-
-    @keyframes marquee-scroll {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+    @media (hover: hover) and (pointer: fine) {
+      .about-photos.is-visible .about-photo:hover {
+        transform: translate3d(0, -8px, 0);
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .marquee-track { animation: none; }
-
-      .about-photo,
-      .about-photo img,
-      .about-photo::after {
+      .about-reveal,
+      .about-photos .about-photo {
+        opacity: 1 !important;
+        transform: none !important;
         transition: none !important;
-      }
-
-      .about-photos > .about-photo:nth-child(1),
-      .about-photos > .about-photo:nth-child(2),
-      .about-photos > .about-photo:nth-child(3) {
-        transform: none;
-      }
-
-      .about-photo:hover,
-      .about-photos > .about-photo:nth-child(1):hover,
-      .about-photos > .about-photo:nth-child(2):hover,
-      .about-photos > .about-photo:nth-child(3):hover {
-        transform: none;
-        box-shadow: none;
-      }
-
-      .about-photo:hover img {
-        transform: none;
       }
     }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 860px) {
-      .about-intro {
-        margin-block-start: 0;
-      }
-
-      .about-intro-copy {
-        max-width: none;
+      .about-lead > h1.hero-title {
+        max-width: 14ch;
+        font-size: clamp(2rem, 8vw, 2.75rem);
       }
 
       .about-photos {
         grid-template-columns: 1fr;
         gap: var(--space-16);
-        align-items: stretch;
-        perspective: none;
       }
 
-      .about-photo,
-      .about-photos > .about-photo:nth-child(1),
-      .about-photos > .about-photo:nth-child(2),
-      .about-photos > .about-photo:nth-child(3) {
+      .about-photo {
         aspect-ratio: 4 / 5;
-        transform: none;
       }
 
-      .about-photo:hover,
-      .about-photos > .about-photo:nth-child(1):hover,
-      .about-photos > .about-photo:nth-child(2):hover,
-      .about-photos > .about-photo:nth-child(3):hover {
-        transform: none;
-        box-shadow: none;
+      .about-photos > *:nth-child(1) img { object-position: center 58%; }
+      .about-photos > *:nth-child(2) img { object-position: center 52%; }
+      .about-photos > *:nth-child(3) img { object-position: 18% 32%; }
+
+      .about-daynight {
+        grid-template-columns: 1fr;
+        padding: 0;
       }
 
-      .about-photo:hover img {
-        transform: none;
+      .about-daynight-col {
+        padding: var(--space-32) 0;
       }
 
-      .about-photos > *:nth-child(1) img {
-        object-position: center 58%;
+      .about-daynight-col + .about-daynight-col {
+        padding-left: 0;
+        border-left: none;
+        border-top: 1px solid var(--divider-color, rgba(0, 0, 0, 0.12));
       }
 
-      .about-photos > *:nth-child(2) img {
-        object-position: center 52%;
+      .about-block {
+        grid-template-columns: 1fr;
+        padding: var(--space-32) 0;
+        row-gap: var(--space-12);
       }
 
-      .about-photos > *:nth-child(3) img {
-        object-position: 18% 32%;
+      .about-job {
+        grid-template-columns: 1fr auto;
       }
 
-      .about-lead > h1.hero-title {
-        font-size: clamp(1.5rem, 6.2vw, 2.15rem);
+      .about-job-role {
+        grid-column: 1 / 2;
       }
 
-      .about-lead > h1.hero-title .hero-title-line:first-child,
-      .about-lead > h1.hero-title .hero-title-line:last-child {
-        white-space: nowrap;
-        overflow-wrap: normal;
-        word-break: keep-all;
+      .about-job-dates {
+        grid-column: 2;
+        grid-row: 1;
       }
 
-      .about-lead {
-        gap: var(--space-24);
-      }
-    }
-
-    @media (max-width: 400px) {
-      .about-lead > h1.hero-title {
-        font-size: clamp(1.25rem, 6.8vw, 1.65rem);
+      .about-job-meta {
+        grid-column: 1 / -1;
       }
     }
 
     @media (max-width: 640px) {
-      body.about-page {
-        font-size: 16px;
+      .about-job-dates {
+        white-space: normal;
+        text-align: right;
       }
-
-      .about-intro p {
-        font-size: 16px;
-        line-height: 1.75;
-        letter-spacing: -0.01em;
-      }
-
-      .about-intro p + p {
-        margin-top: var(--space-24);
-      }
-
-      .about-photos {
-        gap: var(--space-16);
-      }
-
-      .about-photos > .about-photo {
-        position: sticky;
-        top: 96px;
-        background: var(--about-surface, #f5f5f2);
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
-        transform: none;
-      }
-
-      .about-photos > .about-photo:nth-child(1) { z-index: 1; }
-      .about-photos > .about-photo:nth-child(2) { z-index: 2; }
-      .about-photos > .about-photo:nth-child(3) { z-index: 3; }
     }
-
   </style>
   <link rel="stylesheet" href="layout.css" />
   <link rel="stylesheet" href="footer.css" />
   <style>
-    /* About-only footer spacing — does not affect other pages */
-    body.about-page .marquee-strip {
-      padding-bottom: 0;
-    }
-
     body.about-page .site-bottom > .content-shell {
-      padding-top: var(--about-marquee-footer-gap);
+      padding-top: var(--space-48);
     }
 
     body.about-page .content-shell > .about-footer {
@@ -501,10 +517,6 @@
     }
 
     @media (max-width: 640px) {
-      body.about-page .site-bottom > .content-shell {
-        padding-top: clamp(64px, 14vw, 96px);
-      }
-
       body.about-page .content-shell > .about-footer {
         padding-bottom: max(var(--about-footer-pad-bottom), env(safe-area-inset-bottom, 0px) + var(--space-16));
       }
@@ -563,22 +575,13 @@
   <!-- MAIN -->
   <main class="about-main about-hero page-container">
 
-    <div class="about-lead">
+    <div class="about-lead about-reveal">
       <h1 class="hero-title">
-        <span class="hero-title-line"><span class="hero-title-accent">Designer</span> by day.</span>
-        <span class="hero-title-line"><span class="hero-title-accent">Community builder</span> by night.</span>
+        <span class="hero-title-accent">Designer</span> by day, <span class="hero-title-accent">community builder</span> by night.
       </h1>
-
-      <section class="about-intro" aria-label="About">
-        <div class="about-intro-copy">
-          <p>By day, I'm a product designer who enjoys solving ambiguous, complex problems alongside people who are energized by working together towards a shared goal.</p>
-          <p>Outside of work, I spend a lot of time bringing designers together through community events and meetups. So far, I've hosted gatherings for <strong>100+ designers</strong> to create spaces where people can share ideas, learn from one another, and continue growing together.</p>
-          <p>Those experiences have reinforced something I learned early on, that everyone's perspective shapes how they move through the world. That continues to influence how I approach design today: by bridging curiosity and collaboration in the way I navigate problem spaces and build thoughtful software experiences.</p>
-        </div>
-      </section>
     </div>
 
-    <div class="about-photos">
+    <div class="about-photos about-reveal">
       <figure class="about-photo">
         <img src="about-img.jpeg" alt="Two people in front of a screen showing a Figma Makeathon presentation." loading="eager" />
       </figure>
@@ -590,20 +593,85 @@
       </figure>
     </div>
 
+    <div class="about-bio">
+      <div class="about-daynight about-reveal">
+        <section class="about-daynight-col" aria-labelledby="about-by-day">
+          <h2 class="about-block-label" id="about-by-day">By day</h2>
+          <div class="about-copy">
+            <p>I’ve been a product designer at <a href="https://www.ibm.com/consulting/ibmix" target="_blank" rel="noopener noreferrer">IBM iX</a>, where I’ve been fortunate enough to help large enterprises accelerate their digital presence into the future.</p>
+            <p>My work has spanned from building a design system and 0-to-1 customer-facing experiences for Sobeys, to defining the B2B corporate booking flow dashboard for Air Canada, and creating the style guide for Canadians to properly renew their passports online (with the Government of Canada).</p>
+            <p>I’ve also had the opportunity to design a 0-to-1 website for One Pacific by the Bay, where I shaped the direction from discovery, research, design, and building with the help of AI tools.</p>
+          </div>
+        </section>
+        <section class="about-daynight-col" aria-labelledby="about-by-night">
+          <h2 class="about-block-label" id="about-by-night">By night</h2>
+          <div class="about-copy">
+            <p>When I first got into design, what helped me most in being more comfortable as a designer were the times I got to connect with like-minded people over dinner or coffee. Over the last couple of years, I noticed a lack of intimate events centred around design in the city so I decided to do something about it.</p>
+            <p>So far, over 100+ attendees have attended across 3+ events. Softwares sponsored by Figma and Cursor.</p>
+          </div>
+        </section>
+      </div>
+
+      <section class="about-block about-reveal" aria-labelledby="about-experience">
+        <h2 class="about-block-label" id="about-experience">Experience</h2>
+        <div class="about-block-body">
+          <ul class="about-list">
+            <li class="about-job">
+              <p class="about-job-org"><a href="https://www.ibm.com/consulting/ibmix" target="_blank" rel="noopener noreferrer">IBM iX</a></p>
+              <p class="about-job-role">Product Designer</p>
+              <p class="about-job-dates">Mar 2022 – Present</p>
+              <p class="about-job-meta">Sobeys, Air Canada, Government of Canada, CIBC</p>
+            </li>
+            <li class="about-job">
+              <p class="about-job-org"><a href="https://luma.com/iteratewithus" target="_blank" rel="noopener noreferrer">iterate</a></p>
+              <p class="about-job-role">Lead Organizer</p>
+              <p class="about-job-dates">Jan 2026 – Present</p>
+            </li>
+            <li class="about-job">
+              <p class="about-job-org"><a href="https://onepacificbythebay.com/" target="_blank" rel="noopener noreferrer">One Pacific by the Bay</a></p>
+              <p class="about-job-role">Sole Product Designer</p>
+              <p class="about-job-dates">Nov 2025 – Feb 2026</p>
+            </li>
+            <li class="about-job">
+              <p class="about-job-org"><a href="https://shopee.com" target="_blank" rel="noopener noreferrer">Shopee</a></p>
+              <p class="about-job-role">Marketing and Public Relations Intern</p>
+              <p class="about-job-dates">Aug 2020 – Dec 2020</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="about-block about-reveal" aria-labelledby="about-education">
+        <h2 class="about-block-label" id="about-education">Education</h2>
+        <div class="about-block-body">
+          <ul class="about-list">
+            <li class="about-edu">
+              <p class="about-edu-school">McMaster University</p>
+              <p class="about-edu-degree">Honors Bachelor of Arts, Communication Studies with a Minor in Sociology</p>
+            </li>
+            <li class="about-edu">
+              <p class="about-edu-school">UX+ University</p>
+              <p class="about-edu-degree">Certificate, User Experience Design</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="about-block about-reveal" aria-labelledby="about-etc">
+        <h2 class="about-block-label" id="about-etc">Etc</h2>
+        <div class="about-block-body">
+          <ul class="about-etc-list">
+            <li class="about-etc-item">Design Mentor, ADPList <em>(Design mentorship platform)</em></li>
+            <li class="about-etc-item">Product Design Judge, Western University Founders Network <em>(Western's largest student-run technology club)</em></li>
+            <li class="about-etc-item">UX/UI Hackathon Judge, UDesign @ University of Toronto <em>(Student-run creative club)</em></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
   </main>
 
   <div class="site-bottom">
-  <!-- MARQUEE -->
-  <div class="marquee-strip contact-marquee" aria-hidden="true">
-    <div class="marquee-track">
-      <span class="marquee-text"><span class="marquee-phrase">LET’S MAKE COOL THINGS TOGETHER</span><span class="marquee-sep" aria-hidden="true">✦</span></span>
-      <span class="marquee-text"><span class="marquee-phrase">LET’S MAKE COOL THINGS TOGETHER</span><span class="marquee-sep" aria-hidden="true">✦</span></span>
-      <span class="marquee-text"><span class="marquee-phrase">LET’S MAKE COOL THINGS TOGETHER</span><span class="marquee-sep" aria-hidden="true">✦</span></span>
-      <span class="marquee-text"><span class="marquee-phrase">LET’S MAKE COOL THINGS TOGETHER</span><span class="marquee-sep" aria-hidden="true">✦</span></span>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
     <div class="content-shell">
   <footer class="about-footer">
     <div class="footer-email-row">
@@ -674,6 +742,25 @@
       });
     })();
 
+    (function () {
+      var nodes = document.querySelectorAll('.about-reveal');
+      if (!nodes.length) return;
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        nodes.forEach(function (el) { el.classList.add('is-visible'); });
+        return;
+      }
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        });
+      }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+
+      nodes.forEach(function (el) { io.observe(el); });
+    })();
   </script>
 </body>
 </html>

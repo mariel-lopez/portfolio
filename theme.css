@@ -764,8 +764,28 @@ html.dark-theme body.about-page {
   color: var(--page-ink);
 }
 
-html.dark-theme .about-intro p {
+html.dark-theme .about-copy p,
+html.dark-theme .about-job-role {
   color: var(--about-ink-soft);
+}
+
+html.dark-theme .about-edu-degree {
+  color: var(--about-ink-soft);
+}
+
+html.dark-theme .about-job-dates,
+html.dark-theme .about-job-meta,
+html.dark-theme .about-job-note,
+html.dark-theme .about-entry-sub,
+html.dark-theme .about-edu-dates,
+html.dark-theme .about-etc-item em {
+  color: var(--about-ink-muted);
+}
+
+html.dark-theme .about-copy a,
+html.dark-theme .about-job-org a {
+  color: var(--page-ink);
+  text-decoration-color: rgba(255, 255, 255, 0.28);
 }
 
 html.dark-theme .about-card-label {
