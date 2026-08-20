@@ -1,4 +1,4 @@
-/* Galaxy night mode — sitewide tokens + overrides */
+/* Sitewide theme tokens + overrides */
 
 :root {
   color-scheme: light;
@@ -23,10 +23,6 @@
   --card-meta-ink: rgba(0, 0, 0, 0.52);
   --noise-opacity: 0.045;
   --noise-blend: multiply;
-  --theme-toggle-glow: transparent;
-  --theme-toggle-bg: rgba(255, 255, 255, 0.55);
-  --theme-toggle-border: rgba(0, 0, 0, 0.08);
-  --theme-toggle-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
   --about-ink-muted: rgba(0, 0, 0, 0.45);
   --about-ink-soft: rgba(0, 0, 0, 0.58);
   --about-ink-strong: rgba(0, 0, 0, 0.66);
@@ -97,10 +93,6 @@ html.dark-theme {
   --card-meta-ink: rgba(235, 226, 255, 0.78);
   --noise-opacity: 0.06;
   --noise-blend: soft-light;
-  --theme-toggle-glow: rgba(140, 110, 220, 0.35);
-  --theme-toggle-bg: rgba(28, 22, 44, 0.72);
-  --theme-toggle-border: rgba(255, 255, 255, 0.12);
-  --theme-toggle-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
   --sobeys-ui-tab-active: #ebe6f5;
   --sobeys-label: rgba(214, 204, 235, 0.55);
   --sobeys-ink: #ebe6f5;
@@ -192,85 +184,6 @@ html.dark-theme .home-hero-mono.navbar::before {
   );
 }
 
-/* ── Theme toggle — in-flow inside .nav-right ── */
-.theme-toggle {
-  position: relative;
-  z-index: 2;
-  width: 36px;
-  height: 36px;
-  margin: 0;
-  padding: 0;
-  border: 1px solid var(--theme-toggle-border);
-  border-radius: 999px;
-  background: var(--theme-toggle-bg);
-  backdrop-filter: blur(14px) saturate(1.15);
-  -webkit-backdrop-filter: blur(14px) saturate(1.15);
-  box-shadow: var(--theme-toggle-shadow);
-  color: var(--nav-muted);
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  overflow: hidden;
-  transition:
-    color 0.3s ease,
-    background 0.35s ease,
-    border-color 0.35s ease,
-    box-shadow 0.35s ease,
-    transform 0.25s ease;
-}
-
-.theme-toggle:hover {
-  color: var(--nav-ink);
-  border-color: rgba(128, 100, 200, 0.22);
-  box-shadow:
-    var(--theme-toggle-shadow),
-    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
-}
-
-html.dark-theme .theme-toggle:hover {
-  color: var(--nav-ink);
-  box-shadow:
-    var(--theme-toggle-shadow),
-    0 0 20px var(--theme-toggle-glow);
-}
-
-.theme-toggle:focus-visible {
-  outline: 1px solid rgba(128, 100, 200, 0.45);
-  outline-offset: 3px;
-}
-
-.theme-toggle:active {
-  transform: scale(0.96);
-}
-
-.theme-icon {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transform: scale(0.82) rotate(-12deg);
-  transition:
-    opacity 0.28s ease,
-    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.theme-icon svg {
-  display: block;
-}
-
-html:not(.dark-theme) .theme-toggle .moon-icon {
-  opacity: 1;
-  transform: scale(1) rotate(0deg);
-}
-
-html.dark-theme .theme-toggle .sun-icon {
-  opacity: 1;
-  transform: scale(1) rotate(0deg);
-}
 
 /* ── Homepage: hero title — full width, soft bottom fade via mask in index.html */
 .hero-title-wrapper,

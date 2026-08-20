@@ -38,7 +38,6 @@
   --nav-below-links-gap: var(--space-16);
   --nav-header-links-gap: var(--space-24);
   --nav-header-cluster-gap: var(--space-32);
-  --nav-toggle-gap: var(--space-32);
   --nav-header-item-height: 40px;
   --nav-brand-gap: var(--space-8);
   --nav-subpage-content-gap: var(--space-32);
@@ -422,17 +421,6 @@
   justify-content: center;
 }
 
-.home-hero-mono.navbar .nav-right .theme-toggle {
-  position: relative;
-  top: auto;
-  right: auto;
-  flex-shrink: 0;
-  align-self: center;
-  width: 36px;
-  height: 36px;
-  min-width: 36px;
-}
-
 .home-hero-mono.navbar .nav-links,
 .home-hero-mono.navbar .site-nav-links {
   display: flex;
@@ -594,10 +582,10 @@
   .home-hero-mono.navbar .mono-nav,
   .home-hero-mono.navbar .site-nav {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
-      "brand toggle"
-      "nav nav";
+      "brand"
+      "nav";
     row-gap: var(--nav-mobile-stack-gap);
     column-gap: var(--space-16);
     align-items: start;
@@ -630,12 +618,6 @@
     flex-wrap: nowrap;
     width: 100%;
     gap: var(--nav-mobile-home-links-gap);
-  }
-
-  .home-hero-mono.navbar .nav-right .theme-toggle {
-    grid-area: toggle;
-    justify-self: end;
-    align-self: start;
   }
 
   /* Homepage — 8px between intro block and nav links */
@@ -755,10 +737,6 @@
 /* ── GLOBAL FIXED NAV CLEARANCE ── */
 body {
   padding-top: 0;
-}
-
-.theme-toggle {
-  z-index: 9999;
 }
 
 /* Prevent double-spacing on wrappers */
