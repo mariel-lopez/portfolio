@@ -64,6 +64,99 @@
   font-display: swap;
 }
 
+/* Bernhard Gothic URW — display titles */
+
+@font-face {
+  font-family: "Bernhard Gothic URW";
+  src:
+    url("bernhard-gothic-urw/BernhardGothicURW-ExtraLight.woff2") format("woff2"),
+    url("bernhard-gothic-urw/BernhardGothicURW-ExtraLight.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bernhard Gothic URW";
+  src:
+    url("bernhard-gothic-urw/BernhardGothicURW-Light.woff2") format("woff2"),
+    url("bernhard-gothic-urw/BernhardGothicURW-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bernhard Gothic URW";
+  src:
+    url("bernhard-gothic-urw/BernhardGothicURW-Light.woff2") format("woff2"),
+    url("bernhard-gothic-urw/BernhardGothicURW-Light.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bernhard Gothic URW";
+  src:
+    url("bernhard-gothic-urw/BernhardGothicURW-Medium.woff2") format("woff2"),
+    url("bernhard-gothic-urw/BernhardGothicURW-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bernhard Gothic URW";
+  src:
+    url("bernhard-gothic-urw/BernhardGothicURW-Heavy.woff2") format("woff2"),
+    url("bernhard-gothic-urw/BernhardGothicURW-Heavy.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bernhard Gothic URW";
+  src:
+    url("bernhard-gothic-urw/BernhardGothicURW-Heavy.woff2") format("woff2"),
+    url("bernhard-gothic-urw/BernhardGothicURW-Heavy.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bernhard Gothic URW";
+  src:
+    url("bernhard-gothic-urw/BernhardGothicURW-Heavy.woff2") format("woff2"),
+    url("bernhard-gothic-urw/BernhardGothicURW-Heavy.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bernhard Gothic URW";
+  src:
+    url("bernhard-gothic-urw/BernhardGothicURW-ExtraHeavy.woff2") format("woff2"),
+    url("bernhard-gothic-urw/BernhardGothicURW-ExtraHeavy.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bernhard Gothic URW";
+  src:
+    url("bernhard-gothic-urw/BernhardGothicURW-Ultra.woff2") format("woff2"),
+    url("bernhard-gothic-urw/BernhardGothicURW-Ultra.woff") format("woff");
+  font-weight: 950;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --mono-serif: "Apercu Pro", "Helvetica Neue", Helvetica, Geist, Arial, sans-serif;
+  --display-serif: "Bernhard Gothic URW", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
