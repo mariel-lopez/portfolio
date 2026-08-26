@@ -9,6 +9,15 @@
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="shortcut icon" href="favicon.png" />
+  <style>
+    /* Hide case study until password unlock — blocks content flash / open-in-new-tab peek */
+    html:not(.pw-unlocked) body {
+      visibility: hidden !important;
+    }
+    html:not(.pw-unlocked) .pw-modal {
+      visibility: visible !important;
+    }
+  </style>
   <link rel="stylesheet" href="password-gate.css" />
   <script src="password-gate.js"></script>
   <script>
@@ -17,10 +26,19 @@
         window.location.replace(window.location.protocol.indexOf('http') === 0 ? '/' : 'index.html');
         return;
       }
+
+      if (window.PortfolioPassword.isGranted()) {
+        document.documentElement.classList.add('pw-unlocked');
+        return;
+      }
+
       var ok = await window.PortfolioPassword.unlock(null, {
         title: 'Enter password'
       });
-      if (ok) return;
+      if (ok) {
+        document.documentElement.classList.add('pw-unlocked');
+        return;
+      }
       var isWeb = window.location.protocol.indexOf('http') === 0;
       window.location.replace(isWeb ? '/' : 'index.html');
     })();

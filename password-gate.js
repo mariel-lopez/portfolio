@@ -231,6 +231,17 @@
     });
   }
 
+  function resolveHref(link) {
+    return link.getAttribute('data-protected-href') || link.getAttribute('href') || link.href;
+  }
+
+  function resolveTarget(link, href) {
+    var explicit = link.getAttribute('target');
+    if (explicit) return explicit;
+    if (/^https?:\/\//i.test(href) || String(href).indexOf('//') === 0) return '_blank';
+    return '_self';
+  }
+
   function bindProtectedLinks(root) {
     var scope = root || document;
     var links = scope.querySelectorAll('[data-password-gate]');
@@ -241,8 +252,8 @@
       link.setAttribute('data-pw-bound', 'true');
 
       link.addEventListener('click', function (e) {
-        var href = link.getAttribute('data-protected-href') || link.href;
-        var target = link.getAttribute('target') || (link.hasAttribute('data-protected-href') ? '_blank' : '_self');
+        var href = resolveHref(link);
+        var target = resolveTarget(link, href);
         var needsGate = !isGranted();
 
         if (!needsGate && !link.hasAttribute('data-protected-href')) return;
