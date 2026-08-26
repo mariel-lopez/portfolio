@@ -9,10 +9,17 @@
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="shortcut icon" href="favicon.png" />
+  <link rel="stylesheet" href="password-gate.css" />
   <script src="password-gate.js"></script>
   <script>
     (async function () {
-      var ok = await window.PortfolioPassword.unlock();
+      if (!window.PortfolioPassword) {
+        window.location.replace(window.location.protocol.indexOf('http') === 0 ? '/' : 'index.html');
+        return;
+      }
+      var ok = await window.PortfolioPassword.unlock(null, {
+        title: 'Enter password'
+      });
       if (ok) return;
       var isWeb = window.location.protocol.indexOf('http') === 0;
       window.location.replace(isWeb ? '/' : 'index.html');
