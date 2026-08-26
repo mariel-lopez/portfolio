@@ -1750,7 +1750,7 @@
           </div>
         </a>
 
-        <a class="project-card project-card--accent-design-systems" href="https://www.figma.com/deck/Sec5BHYFpoc6wfvJEchXHn/Sobeys-%7C-Design-system--Public-?node-id=21-3087&viewport=401%2C246%2C0.24&t=h57Xp4S5bA1gz9wt-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1" target="_blank" rel="noopener noreferrer" data-hover-title="Design Systems">
+        <a class="project-card project-card--accent-design-systems" href="https://www.figma.com/deck/Sec5BHYFpoc6wfvJEchXHn/Sobeys-%7C-Design-system--Public-?node-id=21-3087&viewport=401%2C246%2C0.24&t=h57Xp4S5bA1gz9wt-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1" target="_blank" rel="noopener noreferrer" data-hover-title="Design Systems" data-password-gate>
           <div class="card-image">
             <img src="ds-cover.png" alt="Design System" />
           </div>
@@ -1839,11 +1839,34 @@
 
   </div>
   <!-- PASSWORD MODAL -->
+  <script src="password-gate.js"></script>
   <script src="external-link.js" defer></script>
   <script src="mailto-links.js" defer></script>
   <script src="transitions.js" defer></script>
   <script src="copy-email.js" defer></script>
   <script src="nav-scroll.js" defer></script>
+
+  <script>
+    (function () {
+      var links = document.querySelectorAll('[data-password-gate]');
+      if (!links.length || !window.PortfolioPassword) return;
+
+      links.forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          if (window.PortfolioPassword.isGranted()) return;
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          var href = link.href;
+          var target = link.getAttribute('target') || '_self';
+          window.PortfolioPassword.unlock().then(function (ok) {
+            if (!ok) return;
+            if (target === '_blank') window.open(href, '_blank', 'noopener,noreferrer');
+            else window.location.href = href;
+          });
+        }, true);
+      });
+    })();
+  </script>
 
   <script>
     // Single giant hero title: default “Hey world”; cards swap via data-hover-title
