@@ -157,10 +157,6 @@ html.dark-theme body {
   background-attachment: fixed;
 }
 
-#pt-overlay {
-  background: var(--overlay-bg) !important;
-  transition-property: opacity, background-color;
-}
 
 /* ── Nav + footer links ── */
 .nav-contact-link:hover,

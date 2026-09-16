@@ -72,7 +72,7 @@
         '</form>' +
       '</div>';
 
-    document.body.appendChild(modal);
+    (document.body || document.documentElement).appendChild(modal);
 
     inputEl = modal.querySelector('#pw-modal-input');
     errorEl = modal.querySelector('[data-pw-error]');
@@ -123,7 +123,7 @@
     }
 
     modal.classList.remove('is-open');
-    document.body.classList.remove('pw-modal-open');
+    if (document.body) document.body.classList.remove('pw-modal-open');
 
     var finish = function () {
       modal.hidden = true;
@@ -165,7 +165,7 @@
 
     modal.hidden = false;
     modal.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('pw-modal-open');
+    if (document.body) document.body.classList.add('pw-modal-open');
 
     requestAnimationFrame(function () {
       modal.classList.add('is-open');
@@ -264,9 +264,14 @@
         var go = function () {
           if (target === '_blank') {
             window.open(href, '_blank', 'noopener,noreferrer');
-          } else {
-            window.location.href = href;
+            return;
           }
+          if (window.PortfolioProgress && typeof window.PortfolioProgress.go === 'function') {
+            window.PortfolioProgress.go(href);
+            return;
+          }
+          if (window.PortfolioProgress) window.PortfolioProgress.start();
+          window.location.href = href;
         };
 
         if (!needsGate) {
