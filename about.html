@@ -57,12 +57,13 @@
     .about-lead {
       width: 100%;
       margin: 0 0 var(--space-48);
+      text-align: center;
     }
 
     .about-lead > h1.hero-title {
       display: block;
       max-width: 18ch;
-      margin: 0;
+      margin: 0 auto;
       font-family: var(--display-serif);
       font-size: clamp(2.25rem, 5vw, 3.5rem);
       font-weight: 500;
@@ -77,31 +78,42 @@
       font-weight: 500;
     }
 
-    /* ── Photo gallery ── */
+    /* ── Photo album ── */
+    .about-album {
+      position: relative;
+      width: 100%;
+      max-width: 820px;
+      margin: 0 auto var(--space-16);
+    }
+
     .about-photos {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: var(--space-16);
-      align-items: stretch;
-      margin: 0 0 clamp(var(--space-64), 8vw, var(--space-96));
-      min-width: 0;
+      position: relative;
+      display: block;
+      width: 100%;
+      height: clamp(300px, 44vw, 430px);
+      margin: 0;
     }
 
     .about-photo {
-      position: relative;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: min(46%, 300px);
       margin: 0;
+      border: 0;
       border-radius: 20px;
       overflow: hidden;
       aspect-ratio: 3 / 4;
-      width: 100%;
-      min-height: 0;
       background: var(--about-photo-bg, #ddd);
-      isolation: isolate;
-      transform: translate3d(0, 0, 0);
-      box-shadow: 0 0 0 0 transparent;
-      transition:
-        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-        box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: 0 22px 48px rgba(17, 17, 17, 0.16);
+      cursor: pointer;
+      transform-origin: center center;
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .about-photo::after,
+    html.dark-theme .about-photo::after {
+      display: none;
     }
 
     .about-photo img {
@@ -110,81 +122,204 @@
       object-fit: cover;
       object-position: center top;
       display: block;
-      transform: scale(1.001);
-      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .about-photos > *:nth-child(3) img {
-      object-position: 22% 38%;
-    }
-
-    .about-photo::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
       pointer-events: none;
+    }
+
+    .about-photo-caption {
+      position: absolute;
+      left: 50%;
+      right: auto;
+      bottom: 14px;
       z-index: 2;
-      transition: box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+      width: max-content;
+      max-width: calc(100% - 24px);
+      margin: 0;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-family: var(--mono-serif);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      text-align: center;
+      color: #fff;
+      background: #111;
+      transform: translateX(-50%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease;
+    }
+
+    .about-photo:hover .about-photo-caption,
+    .about-photo:focus .about-photo-caption,
+    .about-photo:focus-visible .about-photo-caption {
+      opacity: 1;
+    }
+
+    .about-photos > *:nth-child(1) img { object-position: center 58%; }
+    .about-photos > *:nth-child(2) img { object-position: center 52%; }
+    .about-photos > *:nth-child(3) img { object-position: 18% 32%; }
+
+    .about-photo[data-slot="front"] {
+      z-index: 3;
+      transform: translate(-50%, -50%) rotate(-1.5deg) scale(1);
+    }
+
+    .about-photo[data-slot="left"] {
+      z-index: 1;
+      transform: translate(-58%, -51%) rotate(-7deg) scale(0.94);
+    }
+
+    .about-photo[data-slot="right"] {
+      z-index: 2;
+      transform: translate(-42%, -49%) rotate(6.5deg) scale(0.94);
     }
 
     @media (hover: hover) and (pointer: fine) {
-      .about-photo:hover {
-        z-index: 3;
-        transform: translate3d(0, -8px, 0);
-        box-shadow:
-          0 18px 40px rgba(0, 0, 0, 0.12),
-          0 4px 12px rgba(0, 0, 0, 0.06);
+      .about-photos:hover .about-photo[data-slot="front"],
+      .about-photos:focus-within .about-photo[data-slot="front"] {
+        transform: translate(-50%, -50%) rotate(-1.5deg) scale(1.04);
       }
 
-      .about-photo:hover img {
-        transform: scale(1.04);
+      .about-photos:hover .about-photo[data-slot="left"],
+      .about-photos:focus-within .about-photo[data-slot="left"] {
+        transform: translate(-118%, -52%) rotate(-11deg) scale(0.88);
       }
 
-      .about-photo:hover::after {
-        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+      .about-photos:hover .about-photo[data-slot="right"],
+      .about-photos:focus-within .about-photo[data-slot="right"] {
+        transform: translate(18%, -48%) rotate(10deg) scale(0.88);
       }
     }
 
-    /* ── Two-column bio ── */
+    html.dark-theme .about-photo {
+      box-shadow: 0 22px 48px rgba(0, 0, 0, 0.45);
+    }
+
+    .about-album-controls {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      gap: var(--space-16);
+      margin: var(--space-8) 0 0;
+      min-height: 2.25em;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease;
+    }
+
+    .about-photos:hover ~ .about-album-controls,
+    .about-album:focus-within .about-album-controls,
+    .about-album-controls:hover,
+    .about-album-controls:focus-within {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    @media (hover: none) {
+      .about-album-controls {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .about-photo[data-slot="left"] {
+        transform: translate(-96%, -52%) rotate(-10deg) scale(0.86);
+      }
+
+      .about-photo[data-slot="right"] {
+        transform: translate(-4%, -48%) rotate(9deg) scale(0.86);
+      }
+    }
+
+    .about-album-btn {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      padding: 8px 4px;
+      border-radius: 4px;
+      font-family: var(--mono-serif);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--page-ink);
+      cursor: pointer;
+    }
+
+    .about-album-btn:hover {
+      color: var(--page-ink);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .about-album-btn:focus-visible {
+      color: var(--page-ink);
+      outline: 2px solid var(--page-ink);
+      outline-offset: 3px;
+    }
+
+    /* ── Bio ── */
     .about-bio {
       display: flex;
       flex-direction: column;
-      gap: 0;
+      align-items: center;
       width: 100%;
+      max-width: 38rem;
+      margin: 0 auto;
+      text-align: center;
     }
 
     .about-block {
-      display: grid;
-      grid-template-columns: var(--about-label-col) minmax(0, 1fr);
-      column-gap: clamp(32px, 6vw, 80px);
-      row-gap: var(--space-16);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
       padding: var(--space-48) 0;
-      border-top: 1px solid var(--divider-color, rgba(0, 0, 0, 0.12));
     }
 
-    .about-block:last-of-type {
-      border-bottom: 1px solid var(--divider-color, rgba(0, 0, 0, 0.12));
+    .about-block:first-of-type {
+      padding-top: var(--space-8);
     }
 
     .about-block-label {
-      font-family: var(--mono-serif);
-      font-size: 15px;
-      font-weight: 600;
+      font-family: var(--display-serif);
+      font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+      font-style: italic;
+      font-weight: 500;
       letter-spacing: -0.02em;
       color: var(--page-ink);
-      padding-top: 2px;
+      margin-bottom: var(--space-16);
+      white-space: nowrap;
+    }
+
+    .about-block-emoji {
+      font-size: 0.72em;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1;
+      margin-left: 0.3em;
+      opacity: 0;
+      transition: opacity 180ms ease;
+      pointer-events: none;
+    }
+
+    .about-block:hover .about-block-emoji,
+    .about-block:focus-within .about-block-emoji {
+      opacity: 1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .about-block-emoji {
+        transition: none;
+      }
     }
 
     .about-block-body {
       min-width: 0;
       width: 100%;
-      max-width: none;
     }
 
     .about-copy p {
-      margin: 0;
+      margin: 0 auto;
       font-family: var(--mono-serif);
       font-size: var(--body-font-size, 16px);
       font-weight: 400;
@@ -198,9 +333,7 @@
       margin-top: var(--space-24);
     }
 
-    .about-copy a,
-    .about-job-org a,
-    .about-etc-item a {
+    .about-copy a {
       color: var(--page-ink);
       font-weight: 500;
       text-decoration: underline;
@@ -209,147 +342,63 @@
       text-decoration-color: rgba(0, 0, 0, 0.28);
     }
 
-    .about-copy a:hover,
-    .about-job-org a:hover,
-    .about-etc-item a:hover {
+    .about-copy a:hover {
       text-decoration-color: currentColor;
     }
 
-    .about-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-24);
+    .about-cta {
+      margin: var(--space-24) 0 0;
     }
 
-    .about-job {
-      display: grid;
-      grid-template-columns: minmax(6.5rem, 0.34fr) minmax(0, 1fr) auto;
-      column-gap: var(--space-24);
-      row-gap: 4px;
-      align-items: baseline;
-    }
-
-    .about-job-org,
-    .about-job-role,
-    .about-job-dates {
-      font-family: var(--mono-serif);
-      font-size: var(--body-font-size, 16px);
-      line-height: 1.5;
-    }
-
-    .about-job-org {
-      font-weight: 600;
-      color: var(--page-ink);
-    }
-
-    .about-job-role {
-      font-weight: 400;
-      color: var(--about-ink-soft);
-    }
-
-    .about-job-dates {
-      font-weight: 400;
-      color: var(--about-ink-muted);
-      white-space: nowrap;
-      letter-spacing: -0.01em;
-    }
-
-    .about-job-meta {
-      grid-column: 2 / -1;
-      font-family: var(--mono-serif);
-      font-size: 0.92em;
-      font-style: italic;
-      font-weight: 400;
-      color: var(--about-ink-muted);
-      line-height: 1.45;
-    }
-
-    .about-edu {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .about-edu-school {
-      font-family: var(--mono-serif);
-      font-size: var(--body-font-size, 16px);
-      font-weight: 600;
-      line-height: 1.5;
-      color: var(--page-ink);
-    }
-
-    .about-edu-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: var(--space-24);
-    }
-
-    .about-edu-degree {
-      font-family: var(--mono-serif);
-      font-size: var(--body-font-size, 16px);
-      font-weight: 400;
-      line-height: 1.5;
-      color: var(--about-ink-soft);
-      min-width: 0;
-    }
-
-    .about-edu-dates {
-      font-family: var(--mono-serif);
-      font-size: var(--body-font-size, 16px);
-      font-weight: 400;
-      color: var(--about-ink-muted);
-      white-space: nowrap;
-    }
-
-    .about-job-note {
-      font-style: italic;
-      font-weight: 400;
-      color: var(--about-ink-muted);
-    }
-
-    .about-etc-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.45em;
-    }
-
-    .about-etc-item {
-      font-family: var(--mono-serif);
-      font-size: var(--body-font-size, 16px);
-      font-weight: 400;
-      line-height: 1.55;
-      color: var(--page-ink);
-    }
-
-    .about-etc-item em {
-      font-style: italic;
-      font-weight: 400;
-      color: var(--about-ink-muted);
-    }
-
-    .about-entry-title {
-      font-family: var(--mono-serif);
-      font-size: var(--body-font-size, 16px);
+    .about-copy .about-cta a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4em;
       font-weight: 500;
-      line-height: 1.5;
       color: var(--page-ink);
+      text-decoration: none;
     }
 
-    .about-entry-sub {
-      font-family: var(--mono-serif);
-      font-size: var(--body-font-size, 16px);
-      font-weight: 400;
+    .about-cta-arrow {
+      width: 0.72em;
+      height: 0.72em;
+      flex-shrink: 0;
+    }
+
+    .about-copy .about-cta a:focus-visible {
+      outline: 2px solid var(--page-ink);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .about-quote {
+      width: 100%;
+      max-width: 32rem;
+      margin: var(--space-64) auto 0;
+      text-align: center;
+    }
+
+    .about-quote blockquote {
+      margin: 0;
+    }
+
+    .about-quote blockquote p {
+      font-family: var(--display-serif);
+      font-size: clamp(1.2rem, 2.2vw, 1.55rem);
       font-style: italic;
-      line-height: 1.5;
-      color: var(--about-ink-muted);
+      font-weight: 500;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+      color: var(--page-ink);
+      text-wrap: pretty;
     }
 
-    .about-entry-clients {
-      flex-basis: 100%;
-      font-style: normal;
+    .about-quote figcaption {
+      margin-top: var(--space-16);
+      font-family: var(--mono-serif);
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
       color: var(--about-ink-muted);
     }
 
@@ -372,35 +421,25 @@
       transform: none;
     }
 
-    .about-photos.about-reveal.is-visible .about-photo:nth-child(1) { transition-delay: 0ms; }
-    .about-photos.about-reveal.is-visible .about-photo:nth-child(2) { transition-delay: 80ms; }
-    .about-photos.about-reveal.is-visible .about-photo:nth-child(3) { transition-delay: 160ms; }
-
-    .about-photos .about-photo {
+    .about-album.about-reveal {
       opacity: 0;
-      transform: translate3d(0, 24px, 0);
-      transition:
-        opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
-        transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
-        box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: translate3d(0, 28px, 0);
     }
 
-    .about-photos.is-visible .about-photo {
+    .about-album.about-reveal.is-visible {
       opacity: 1;
       transform: none;
     }
 
-    @media (hover: hover) and (pointer: fine) {
-      .about-photos.is-visible .about-photo:hover {
-        transform: translate3d(0, -8px, 0);
-      }
-    }
-
     @media (prefers-reduced-motion: reduce) {
       .about-reveal,
-      .about-photos .about-photo {
+      .about-album.about-reveal {
         opacity: 1 !important;
         transform: none !important;
+        transition: none !important;
+      }
+
+      .about-photo {
         transition: none !important;
       }
     }
@@ -412,46 +451,27 @@
       }
 
       .about-photos {
-        grid-template-columns: 1fr;
-        gap: var(--space-16);
+        height: clamp(280px, 68vw, 400px);
       }
 
       .about-photo {
-        aspect-ratio: 4 / 5;
+        width: min(58%, 240px);
       }
 
-      .about-photos > *:nth-child(1) img { object-position: center 58%; }
-      .about-photos > *:nth-child(2) img { object-position: center 52%; }
-      .about-photos > *:nth-child(3) img { object-position: 18% 32%; }
+      @media (hover: hover) and (pointer: fine) {
+        .about-photos:hover .about-photo[data-slot="left"],
+        .about-photos:focus-within .about-photo[data-slot="left"] {
+          transform: translate(-102%, -52%) rotate(-10deg) scale(0.86);
+        }
+
+        .about-photos:hover .about-photo[data-slot="right"],
+        .about-photos:focus-within .about-photo[data-slot="right"] {
+          transform: translate(2%, -48%) rotate(9deg) scale(0.86);
+        }
+      }
 
       .about-block {
-        grid-template-columns: 1fr;
         padding: var(--space-32) 0;
-        row-gap: var(--space-12);
-      }
-
-      .about-job {
-        grid-template-columns: 1fr auto;
-      }
-
-      .about-job-role {
-        grid-column: 1 / 2;
-      }
-
-      .about-job-dates {
-        grid-column: 2;
-        grid-row: 1;
-      }
-
-      .about-job-meta {
-        grid-column: 1 / -1;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .about-job-dates {
-        white-space: normal;
-        text-align: right;
       }
     }
   </style>
@@ -519,21 +539,30 @@
       </h1>
     </div>
 
-    <div class="about-photos about-reveal">
-      <figure class="about-photo">
-        <img src="about-img.jpeg" alt="Two people in front of a screen showing a Figma Makeathon presentation." loading="eager" />
-      </figure>
-      <figure class="about-photo">
-        <img src="photo-mariel.jpg" alt="Portrait with the Brooklyn Bridge and Manhattan skyline in the background." loading="eager" />
-      </figure>
-      <figure class="about-photo">
-        <img src="design-event.png" alt="Speaking at a design-a-thon in front of a projected presentation screen." loading="eager" />
-      </figure>
+    <div class="about-album about-reveal" aria-label="Photo album">
+      <div class="about-photos" id="about-photos" tabindex="0">
+        <figure class="about-photo" data-slot="left" tabindex="0">
+          <img src="about-img.jpeg" alt="Two people in front of a screen showing a Figma Makeathon presentation." loading="eager" />
+          <figcaption class="about-photo-caption">My second designathon with my friend Lydia</figcaption>
+        </figure>
+        <figure class="about-photo" data-slot="front" tabindex="0">
+          <img src="photo-mariel.jpg" alt="Portrait with the Brooklyn Bridge and Manhattan skyline in the background." loading="eager" />
+          <figcaption class="about-photo-caption">Me in NYC!</figcaption>
+        </figure>
+        <figure class="about-photo" data-slot="right" tabindex="0">
+          <img src="design-event.png" alt="Speaking at a design-a-thon in front of a projected presentation screen." loading="eager" />
+          <figcaption class="about-photo-caption">My first designathon</figcaption>
+        </figure>
+      </div>
+      <div class="about-album-controls">
+        <button type="button" class="about-album-btn" data-album-prev aria-label="Previous photo">Previous</button>
+        <button type="button" class="about-album-btn" data-album-next aria-label="Next photo">Next</button>
+      </div>
     </div>
 
     <div class="about-bio">
       <section class="about-block about-reveal" aria-labelledby="about-by-day">
-        <h2 class="about-block-label" id="about-by-day">By day</h2>
+        <h2 class="about-block-label" id="about-by-day">By day <span class="about-block-emoji" aria-hidden="true">☀️</span></h2>
         <div class="about-block-body about-copy">
           <p>I’ve been a product designer at <a href="https://www.ibm.com/consulting/ibmix" target="_blank" rel="noopener noreferrer">IBM iX</a>, where I’ve been fortunate enough to help large enterprises accelerate their digital presence into the future.</p>
           <p>My work has spanned from building a design system and 0-to-1 customer-facing experiences for <a href="https://www.sobeys.com" target="_blank" rel="noopener noreferrer">Sobeys</a>, to defining the B2B corporate booking flow dashboard for <a href="https://www.aircanada.com" target="_blank" rel="noopener noreferrer">Air Canada</a>, and creating the style guide for Canadians to properly renew their passports online (with the <a href="https://www.canada.ca/en/immigration-refugees-citizenship/news/2026/07/canada-expands-online-passport-renewal-to-all-eligible-adults.html" target="_blank" rel="noopener noreferrer">IRCC</a>).</p>
@@ -543,65 +572,26 @@
       </section>
 
       <section class="about-block about-reveal" aria-labelledby="about-by-night">
-        <h2 class="about-block-label" id="about-by-night">By night</h2>
+        <h2 class="about-block-label" id="about-by-night">By night <span class="about-block-emoji" aria-hidden="true">🌙</span></h2>
         <div class="about-block-body about-copy">
           <p>When I first got into design, what helped me most in feeling comfortable as a designer were the times I got to connect with like-minded people over dinner or coffee.</p>
-          <p>I noticed a lack of intimate, design-centred events in the city, so I started one myself. It's called iterate, and it's grown to over 100 attendees across 3+ events, with software sponsorship from Figma and Cursor. It's been something I'm really proud to have created and I'm so excited to see what comes next!</p>
-        </div>
-      </section>
-
-      <section class="about-block about-reveal" aria-labelledby="about-experience">
-        <h2 class="about-block-label" id="about-experience">Experience</h2>
-        <div class="about-block-body">
-          <ul class="about-list">
-            <li class="about-job">
-              <p class="about-job-org"><a href="https://www.ibm.com/consulting/ibmix" target="_blank" rel="noopener noreferrer">IBM iX</a></p>
-              <p class="about-job-role">Product Designer</p>
-              <p class="about-job-dates">Mar 2022 – Present</p>
-              <p class="about-job-meta">Sobeys, Air Canada, Government of Canada, CIBC</p>
-            </li>
-            <li class="about-job">
-              <p class="about-job-org"><a href="https://onepacificbythebay.com/" target="_blank" rel="noopener noreferrer">One Pacific by the Bay</a></p>
-              <p class="about-job-role">Sole Product Designer</p>
-              <p class="about-job-dates">Nov 2025 – Feb 2026</p>
-            </li>
-            <li class="about-job">
-              <p class="about-job-org"><a href="https://shopee.com" target="_blank" rel="noopener noreferrer">Shopee</a></p>
-              <p class="about-job-role">Marketing and Public Relations Intern</p>
-              <p class="about-job-dates">Aug 2020 – Dec 2020</p>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <section class="about-block about-reveal" aria-labelledby="about-education">
-        <h2 class="about-block-label" id="about-education">Education</h2>
-        <div class="about-block-body">
-          <ul class="about-list">
-            <li class="about-edu">
-              <p class="about-edu-school">McMaster University</p>
-              <p class="about-edu-degree">Honors Bachelor of Arts, Communication Studies with a Minor in Sociology</p>
-            </li>
-            <li class="about-edu">
-              <p class="about-edu-school">UX+ University</p>
-              <p class="about-edu-degree">Certificate, User Experience Design</p>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <section class="about-block about-reveal" aria-labelledby="about-etc">
-        <h2 class="about-block-label" id="about-etc">Etc</h2>
-        <div class="about-block-body">
-          <ul class="about-etc-list">
-            <li class="about-etc-item">Lead Organizer, <a href="https://luma.com/iteratewithus" target="_blank" rel="noopener noreferrer">iterate</a> <em>(Toronto AI design events)</em></li>
-            <li class="about-etc-item">Design Mentor, ADPList <em>(Design mentorship platform)</em></li>
-            <li class="about-etc-item">Product Design Judge, Western University Founders Network <em>(Western's largest student-run technology club)</em></li>
-            <li class="about-etc-item">UX/UI Hackathon Judge, UDesign @ University of Toronto <em>(Student-run creative club)</em></li>
-          </ul>
+          <p>I noticed a lack of intimate, design-centred events in the city, so I started one myself. It's called iterate, and it's grown to over 100 attendees across 3+ events, with software sponsorship from Figma and Cursor. It's been something I'm really proud to have created and I'm so excited to see what I'm inspired to build next!</p>
+          <p class="about-cta">
+            <a class="link-hover" href="https://luma.com/iteratewithus" target="_blank" rel="noopener noreferrer">
+              Check out our events
+              <svg class="about-cta-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+            </a>
+          </p>
         </div>
       </section>
     </div>
+
+    <figure class="about-quote about-reveal">
+      <blockquote>
+        <p>Design is not just what it looks like and feels like. Design is how it works.</p>
+      </blockquote>
+      <figcaption>— Steve Jobs</figcaption>
+    </figure>
 
   </main>
 
@@ -693,6 +683,57 @@
       }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
 
       nodes.forEach(function (el) { io.observe(el); });
+    })();
+
+    (function () {
+      var root = document.getElementById('about-photos');
+      if (!root) return;
+      var photos = Array.prototype.slice.call(root.querySelectorAll('.about-photo'));
+      var n = photos.length;
+      if (!n) return;
+      var front = photos.findIndex(function (el) { return el.getAttribute('data-slot') === 'front'; });
+      if (front < 0) front = 0;
+
+      function apply() {
+        photos.forEach(function (el, i) {
+          var d = (i - front + n) % n;
+          var slot = d === 0 ? 'front' : d === 1 ? 'right' : 'left';
+          el.setAttribute('data-slot', slot);
+          el.setAttribute('aria-hidden', slot === 'front' ? 'false' : 'true');
+        });
+      }
+
+      function go(delta) {
+        front = (front + delta + n) % n;
+        apply();
+      }
+
+      apply();
+
+      root.addEventListener('click', function (event) {
+        var photo = event.target.closest('.about-photo');
+        if (!photo) return;
+        var index = photos.indexOf(photo);
+        if (index < 0) return;
+        if (index === front) go(1);
+        else {
+          front = index;
+          apply();
+        }
+      });
+
+      document.querySelector('[data-album-prev]').addEventListener('click', function () { go(-1); });
+      document.querySelector('[data-album-next]').addEventListener('click', function () { go(1); });
+
+      root.addEventListener('keydown', function (event) {
+        if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          go(1);
+        } else if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          go(-1);
+        }
+      });
     })();
   </script>
 </body>
