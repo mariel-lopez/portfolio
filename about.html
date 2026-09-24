@@ -125,37 +125,6 @@
       pointer-events: none;
     }
 
-    .about-photo-caption {
-      position: absolute;
-      left: 50%;
-      right: auto;
-      bottom: 14px;
-      z-index: 2;
-      width: max-content;
-      max-width: calc(100% - 24px);
-      margin: 0;
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-family: var(--mono-serif);
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: -0.02em;
-      line-height: 1.3;
-      text-align: center;
-      color: #fff;
-      background: #111;
-      transform: translateX(-50%);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.22s ease;
-    }
-
-    .about-photo:hover .about-photo-caption,
-    .about-photo:focus .about-photo-caption,
-    .about-photo:focus-visible .about-photo-caption {
-      opacity: 1;
-    }
-
     .about-photos > *:nth-child(1) img { object-position: center 58%; }
     .about-photos > *:nth-child(2) img { object-position: center 52%; }
     .about-photos > *:nth-child(3) img { object-position: 18% 32%; }
@@ -543,15 +512,12 @@
       <div class="about-photos" id="about-photos" tabindex="0">
         <figure class="about-photo" data-slot="left" tabindex="0">
           <img src="about-img.jpeg" alt="Two people in front of a screen showing a Figma Makeathon presentation." loading="eager" />
-          <figcaption class="about-photo-caption">My second designathon with my friend Lydia</figcaption>
         </figure>
         <figure class="about-photo" data-slot="front" tabindex="0">
           <img src="photo-mariel.jpg" alt="Portrait with the Brooklyn Bridge and Manhattan skyline in the background." loading="eager" />
-          <figcaption class="about-photo-caption">Me in NYC!</figcaption>
         </figure>
         <figure class="about-photo" data-slot="right" tabindex="0">
           <img src="design-event.png" alt="Speaking at a design-a-thon in front of a projected presentation screen." loading="eager" />
-          <figcaption class="about-photo-caption">My first designathon</figcaption>
         </figure>
       </div>
       <div class="about-album-controls">
@@ -567,7 +533,7 @@
           <p>I’m a product designer at <a href="https://www.ibm.com/consulting/ibmix" target="_blank" rel="noopener noreferrer">IBM iX</a>, where I’ve been fortunate enough to help large enterprises accelerate their digital presence into the future.</p>
           <p>My work has spanned from building a design system and 0-to-1 customer-facing experiences for <a href="https://www.sobeys.com" target="_blank" rel="noopener noreferrer">Sobeys</a>, to defining the B2B corporate booking flow dashboard for <a href="https://www.aircanada.com" target="_blank" rel="noopener noreferrer">Air Canada</a>, and creating the style guide for Canadians to properly renew their passports online (with the <a href="https://www.canada.ca/en/immigration-refugees-citizenship/news/2026/07/canada-expands-online-passport-renewal-to-all-eligible-adults.html" target="_blank" rel="noopener noreferrer">IRCC</a>).</p>
           <p>I also designed a 0-to-1 website for One Pacific by the Bay, owning the full lifecycle solo, from discovery, research, design, and build, while using AI tools like Cursor throughout the process.</p>
-          <p>In summary, I'm energized by breaking things down, then building it back up one iteration at a time.</p>
+          <p>In summary, I'm energized by breaking things down then building it back up, one iteration at a time.</p>
         </div>
       </section>
 
