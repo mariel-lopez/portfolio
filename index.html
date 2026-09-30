@@ -1489,6 +1489,7 @@
       align-items: flex-start;
       box-sizing: border-box;
       padding-inline: var(--content-pad);
+      padding-top: 0.12em;
     }
 
     /* Gradient mask — sharp top, soft bottom melt into cards (no text blur) */
@@ -1498,7 +1499,8 @@
       max-width: 100%;
       text-align: center;
       overflow: visible;
-      padding: 0.06em 0.18em 0.85em;
+      padding: 0.28em 0.22em 0;
+      margin-bottom: -10px;
       box-sizing: content-box;
       -webkit-mask-image: var(--hero-title-fade);
       mask-image: var(--hero-title-fade);
@@ -1521,13 +1523,13 @@
       width: max-content;
       max-width: 100%;
       margin-inline: auto;
-      padding: 0.02em 0.12em 0;
+      padding: 0.18em 0.16em 0;
       box-sizing: content-box;
       font-family: var(--display-serif);
       font-size: clamp(3.25rem, calc((100vw - clamp(3.5rem, 11vw, 9rem)) / 9.25), 11rem);
       font-weight: 500;
       letter-spacing: -0.02em;
-      line-height: 0.95;
+      line-height: 1.18;
       color: rgba(17, 17, 17, 0.9);
       text-shadow:
         0 -0.06em 0.2em color-mix(in srgb, var(--page-bg) 40%, transparent),
@@ -1555,14 +1557,14 @@
       .hero-title {
         font-size: clamp(2.75rem, calc((100vw - 3rem) / 8.5), 5.5rem);
         white-space: normal;
-        line-height: 1.05;
+        line-height: 1.2;
         text-wrap: balance;
       }
     }
 
     @media (min-width: 986px) and (max-width: 1200px) {
       .hero-title-inner {
-        padding-bottom: 0.72em;
+        padding-bottom: 0;
       }
     }
 
@@ -1575,7 +1577,7 @@
       }
 
       .hero-title-inner {
-        padding-bottom: 0.95em;
+        padding-bottom: 0;
         -webkit-mask-size: 100% 108%;
         mask-size: 100% 108%;
       }
@@ -1600,7 +1602,7 @@
       }
 
       .hero-title-inner {
-        padding-bottom: 1.05em;
+        padding-bottom: 0;
       }
     }
 

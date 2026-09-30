@@ -808,7 +808,7 @@ body.home-page .page {
   /* Homepage title/cards also need nav clearance */
   body.home-page .hero-title-wrapper {
     margin-top: var(--desktop-nav-clearance);
-    padding-top: 0;
+    padding-top: 0.2em;
   }
 
   body.home-page .work-section {
@@ -840,6 +840,7 @@ body.home-page .page {
 
   body.home-page .hero-title-wrapper {
     margin-top: 112px;
+    padding-top: 0.22em;
   }
 }
 
