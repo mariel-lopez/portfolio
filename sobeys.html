@@ -107,7 +107,7 @@
       align-items: flex-start;
       gap: var(--space-24);
       z-index: 5;
-      max-width: min(920px, 100%);
+      max-width: 100%;
       width: 100%;
       position: relative;
       container-type: inline-size;
@@ -116,31 +116,21 @@
 
     .hero .hero-title {
       font-family: var(--display-serif);
-      font-size: clamp(2.25rem, 6.2cqi + 0.4rem, 4.5rem);
+      font-size: clamp(2rem, 4.4cqi + 0.3rem, 3.5rem);
       font-weight: 500;
-      line-height: 0.96;
-      letter-spacing: -0.02em;
-      max-width: 14.5ch;
-    }
-
-    .hero-title-tail {
-      white-space: nowrap;
-    }
-
-    @container hero-content (max-width: 420px) {
-      .hero-title-tail {
-        white-space: normal;
-      }
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      max-width: none;
     }
 
     .hero-image {
       position: relative;
       display: block;
-      width: 100vw;
-      max-width: 100vw;
-      margin-left: calc(50% - 50vw);
-      margin-right: calc(50% - 50vw);
-      border-radius: 0;
+      width: 100%;
+      max-width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+      border-radius: 24px;
       overflow: hidden;
       z-index: 1;
     }
@@ -150,7 +140,7 @@
       height: auto;
       display: block;
       object-fit: cover;
-      border-radius: 0;
+      border-radius: 24px;
       aspect-ratio: 16 / 9;
       animation: hero-cover-in 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
@@ -792,7 +782,7 @@
 
       .hero .hero-title {
         max-width: none;
-        font-size: clamp(2rem, 7vw, 3.25rem);
+        font-size: clamp(1.7rem, 6.2vw, 2.5rem);
       }
 
       .hero-image--site-link img { aspect-ratio: 4 / 3; }
@@ -908,9 +898,12 @@
   </style>
   <link rel="stylesheet" href="layout.css" />
   <link rel="stylesheet" href="footer.css" />
+  <link rel="stylesheet" href="case-study.css" />
 </head>
 <body class="case-sobeys case-page">
   <script src="transitions-boot.js"></script>
+  <a class="skip-link" href="#case-overview">Skip to case study</a>
+  <progress class="case-read-progress" max="100" value="0" aria-hidden="true"></progress>
 
   <!-- NAV -->
   <div class="home-hero-mono navbar">
@@ -941,8 +934,11 @@
   <main class="project-page-container page-container">
     <section class="hero case-hero" id="top" aria-labelledby="case-hero-title">
       <div class="hero-content">
-        <span class="live-badge"><span class="live-dot"></span>Live as of Sep 2025</span>
-        <h1 class="hero-title" id="case-hero-title">Scaling Sobeys' digital shopping experience for <span class="hero-title-tail">1M+ monthly users</span></h1>
+        <span class="live-badge"><span class="live-dot" aria-hidden="true"></span>Live as of Sep 2025</span>
+        <h1 class="hero-title" id="case-hero-title">
+          <span class="hero-title-line">Scaling Sobeys' digital shopping experience</span>
+          <span class="hero-title-line">for 1M+ monthly users</span>
+        </h1>
       </div>
 
       <figure class="hero-image">
@@ -953,7 +949,7 @@
     <div class="page">
 
     <!-- OVERVIEW -->
-    <div class="overview-row" id="case-overview">
+    <div class="overview-row" id="case-overview" tabindex="-1">
       <div class="overview-item">
         <p class="overview-label">Role</p>
         <p class="overview-value"><strong>Senior Product Designer</strong></p>
@@ -1006,18 +1002,18 @@
           </div>
         </div>
         <div class="before-after-comparison">
-          <div class="before-after-tabs" role="tablist" aria-label="Before and after comparison">
-            <div class="before-after-tab-list">
-              <button type="button" class="before-after-tab active" role="tab" aria-selected="true" onclick="switchTab(this, 'id-after')">After</button>
-              <button type="button" class="before-after-tab" role="tab" aria-selected="false" onclick="switchTab(this, 'id-before')">Before</button>
+          <div class="before-after-tabs">
+            <div class="before-after-tab-list" role="tablist" aria-label="Identity before and after">
+              <button type="button" class="before-after-tab active" id="id-after-tab" role="tab" aria-selected="true" aria-controls="id-after" tabindex="0" onclick="switchTab(this, 'id-after')">After</button>
+              <button type="button" class="before-after-tab" id="id-before-tab" role="tab" aria-selected="false" aria-controls="id-before" tabindex="-1" onclick="switchTab(this, 'id-before')">Before</button>
             </div>
           </div>
           <div class="case-study-image-card">
-          <div class="tab-content active" id="id-after">
+          <div class="tab-content active" id="id-after" role="tabpanel" aria-labelledby="id-after-tab">
             <img src="identity-after.png" alt="After: Scene+ loyalty integration redesign" class="tab-image" width="3840" height="2160" loading="lazy" decoding="async">
             <p class="visual-caption">After · Scene+ account experience redesign</p>
           </div>
-          <div class="tab-content" id="id-before">
+          <div class="tab-content" id="id-before" role="tabpanel" aria-labelledby="id-before-tab" hidden>
             <img src="identity-before.png" alt="Before: Scene+ account structure gaps" class="tab-image" width="3840" height="2160" loading="lazy" decoding="async">
             <p class="visual-caption">Before · Scene+ account structure gaps causing poor experience</p>
           </div>
@@ -1028,7 +1024,7 @@
       <div class="divider"></div>
 
       <!-- Conversion & Discovery -->
-      <section class="case-study-section">
+      <section class="case-study-section" id="case-conversion">
         <div class="case-study-intro">
           <p class="section-label">Conversion &amp; Discovery</p>
           <h2 class="section-heading">Leveraging visual hierarchy to drive promotions and loyalty on the <em>product details page</em></h2>
@@ -1037,18 +1033,18 @@
           </div>
         </div>
         <div class="before-after-comparison">
-          <div class="before-after-tabs" role="tablist" aria-label="Before and after comparison">
-            <div class="before-after-tab-list">
-              <button type="button" class="before-after-tab active" role="tab" aria-selected="true" onclick="switchTab(this, 'conv-after')">After</button>
-              <button type="button" class="before-after-tab" role="tab" aria-selected="false" onclick="switchTab(this, 'conv-before')">Before</button>
+          <div class="before-after-tabs">
+            <div class="before-after-tab-list" role="tablist" aria-label="Product page before and after">
+              <button type="button" class="before-after-tab active" id="conv-after-tab" role="tab" aria-selected="true" aria-controls="conv-after" tabindex="0" onclick="switchTab(this, 'conv-after')">After</button>
+              <button type="button" class="before-after-tab" id="conv-before-tab" role="tab" aria-selected="false" aria-controls="conv-before" tabindex="-1" onclick="switchTab(this, 'conv-before')">Before</button>
             </div>
           </div>
           <div class="case-study-image-card">
-          <div class="tab-content active" id="conv-after">
+          <div class="tab-content active" id="conv-after" role="tabpanel" aria-labelledby="conv-after-tab">
             <img src="conversion-after.avif" alt="After: Product details page" class="tab-image">
             <p class="visual-caption">After · Product details page with optimized visual hierarchy</p>
           </div>
-          <div class="tab-content" id="conv-before">
+          <div class="tab-content" id="conv-before" role="tabpanel" aria-labelledby="conv-before-tab" hidden>
             <img src="conversion-before.webp" alt="Before: Sobeys lacked product pages" class="tab-image">
             <p class="visual-caption">Before · Sobeys lacked a product catalogue, limiting discovery</p>
           </div>
@@ -1059,7 +1055,7 @@
       <div class="divider"></div>
 
       <!-- Discovery & Wayfinding -->
-      <section class="case-study-section">
+      <section class="case-study-section" id="case-locator">
         <div class="case-study-intro">
           <p class="section-label">Discovery &amp; Wayfinding</p>
           <h2 class="section-heading">Redesigning the <em>store locator</em> to improve pricing accuracy and inventory confidence</h2>
@@ -1068,18 +1064,18 @@
           </div>
         </div>
         <div class="before-after-comparison">
-          <div class="before-after-tabs" role="tablist" aria-label="Before and after comparison">
-            <div class="before-after-tab-list">
-              <button type="button" class="before-after-tab active" role="tab" aria-selected="true" onclick="switchTab(this, 'disc-after')">After</button>
-              <button type="button" class="before-after-tab" role="tab" aria-selected="false" onclick="switchTab(this, 'disc-before')">Before</button>
+          <div class="before-after-tabs">
+            <div class="before-after-tab-list" role="tablist" aria-label="Store locator before and after">
+              <button type="button" class="before-after-tab active" id="disc-after-tab" role="tab" aria-selected="true" aria-controls="disc-after" tabindex="0" onclick="switchTab(this, 'disc-after')">After</button>
+              <button type="button" class="before-after-tab" id="disc-before-tab" role="tab" aria-selected="false" aria-controls="disc-before" tabindex="-1" onclick="switchTab(this, 'disc-before')">Before</button>
             </div>
           </div>
           <div class="case-study-image-card">
-          <div class="tab-content active" id="disc-after">
+          <div class="tab-content active" id="disc-after" role="tabpanel" aria-labelledby="disc-after-tab">
             <img src="locator-after.webp" alt="After: Redesigned store locator" class="tab-image" width="3840" height="2160" loading="lazy" decoding="async">
             <p class="visual-caption">After · Redesigned store locator with persistent store context</p>
           </div>
-          <div class="tab-content" id="disc-before">
+          <div class="tab-content" id="disc-before" role="tabpanel" aria-labelledby="disc-before-tab" hidden>
             <img src="locator-before.webp" alt="Before: Dense store locator" class="tab-image" width="3840" height="2160" loading="lazy" decoding="async">
             <p class="visual-caption">Before · Dense results grid causing high cognitive load</p>
           </div>
@@ -1090,7 +1086,7 @@
       <div class="divider"></div>
 
       <!-- Retention -->
-      <section class="case-study-section">
+      <section class="case-study-section" id="case-list">
         <div class="case-study-intro">
           <p class="section-label">Retention &amp; Habit Forming</p>
           <h2 class="section-heading">Designing the <em>shopping list</em> for long-term loyalty and retention</h2>
@@ -1099,18 +1095,18 @@
           </div>
         </div>
         <div class="before-after-comparison">
-          <div class="before-after-tabs" role="tablist" aria-label="Before and after comparison">
-            <div class="before-after-tab-list">
-              <button type="button" class="before-after-tab active" role="tab" aria-selected="true" onclick="switchTab(this, 'ret-after')">After</button>
-              <button type="button" class="before-after-tab" role="tab" aria-selected="false" onclick="switchTab(this, 'ret-before')">Before</button>
+          <div class="before-after-tabs">
+            <div class="before-after-tab-list" role="tablist" aria-label="Shopping list before and after">
+              <button type="button" class="before-after-tab active" id="ret-after-tab" role="tab" aria-selected="true" aria-controls="ret-after" tabindex="0" onclick="switchTab(this, 'ret-after')">After</button>
+              <button type="button" class="before-after-tab" id="ret-before-tab" role="tab" aria-selected="false" aria-controls="ret-before" tabindex="-1" onclick="switchTab(this, 'ret-before')">Before</button>
             </div>
           </div>
           <div class="case-study-image-card">
-          <div class="tab-content active" id="ret-after">
+          <div class="tab-content active" id="ret-after" role="tabpanel" aria-labelledby="ret-after-tab">
             <img src="shoppinglist-after.webp" alt="After: Redesigned shopping list" class="tab-image" width="3840" height="2160" loading="lazy" decoding="async">
             <p class="visual-caption">After · Shopping list redesigned as a deals-first, habit-forming experience</p>
           </div>
-          <div class="tab-content" id="ret-before">
+          <div class="tab-content" id="ret-before" role="tabpanel" aria-labelledby="ret-before-tab" hidden>
             <img src="shoppinglist-before.webp" alt="Before: Static shopping list" class="tab-image" width="3840" height="2160" loading="lazy" decoding="async">
             <p class="visual-caption">Before · Static list with no inline deals, quantities, or actions</p>
           </div>
@@ -1121,7 +1117,7 @@
       <div class="divider"></div>
 
       <!-- AI / Process -->
-      <div class="case-prose">
+      <div class="case-prose" id="case-process">
         <p class="section-label">Process</p>
         <h2 class="section-heading">Leveraging AI to move faster and think deeper</h2>
         <div class="section-body">
@@ -1132,14 +1128,17 @@
 
       <div class="divider"></div>
 
-      <!-- Outcome callout -->
-      <div class="callout">
+      <section class="impact" id="case-outcome" aria-labelledby="case-outcome-title">
         <p class="stat-card-label">Outcome</p>
-        <p class="callout-quote"><strong>2 platforms launched (so far).</strong> Serving <strong>1M+ monthly users</strong> as of Aug 2025.*</p>
-      </div>
+        <p class="impact-figure" id="case-outcome-title">
+          <span class="impact-number">1M+</span>
+          monthly users
+        </p>
+        <p class="impact-note">2 platforms launched so far · as of Aug 2025<sup>*</sup></p>
+      </section>
 
       <!-- Key Learnings -->
-      <div class="case-prose">
+      <div class="case-prose" id="case-learnings">
         <p class="section-label">Key Learnings &amp; Reflection</p>
         <h2 class="section-heading">Main takeaways</h2>
         <div class="learning-grid">
@@ -1181,63 +1180,48 @@
   <script src="transitions.js" defer></script>
   <script src="copy-email.js" defer></script>
   <script src="nav-scroll.js" defer></script>
+  <script src="case-study.js" defer></script>
   <script src="sobeys-lightbox.js" defer></script>
-  <a href="#top" class="back-to-top" id="back-to-top" aria-label="Back to top">
-    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
-    <span>Back to top</span>
-  </a>
+  <aside class="case-toc is-minimized" id="case-toc" aria-label="On this page" aria-hidden="true" inert>
+    <button type="button" class="case-toc-toggle" id="case-toc-toggle" aria-expanded="false" aria-controls="case-toc-panel" aria-labelledby="case-toc-label">
+      <span class="case-chapters-label" id="case-toc-label">Jump to</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+    <div class="case-toc-panel" id="case-toc-panel" aria-hidden="true">
+      <div class="case-toc-panel-inner">
+      <nav class="case-chapters" aria-label="Case study sections">
+        <ol class="case-toc-list">
+          <li><a href="#case-identity-trust">Identity</a></li>
+          <li><a href="#case-conversion">Conversion</a></li>
+          <li><a href="#case-locator">Wayfinding</a></li>
+          <li><a href="#case-list">Retention</a></li>
+          <li><a href="#case-process">Process</a></li>
+          <li><a href="#case-outcome">Outcome</a></li>
+          <li><a href="#case-learnings">Learnings</a></li>
+        </ol>
+      </nav>
+      <a href="#top" class="case-toc-top" id="back-to-top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+        <span>Back to top</span>
+      </a>
+      </div>
+    </div>
+  </aside>
   <script>
     function switchTab(button, panelId) {
       const block = button.closest('.before-after-comparison');
       block.querySelectorAll('.before-after-tab').forEach(function (b) {
-        b.classList.remove('active');
-        b.setAttribute('aria-selected', 'false');
+        var on = b === button;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+        b.setAttribute('tabindex', on ? '0' : '-1');
       });
       block.querySelectorAll('.tab-content').forEach(function (p) {
-        p.classList.remove('active');
+        var on = p.id === panelId;
+        p.classList.toggle('active', on);
+        p.hidden = !on;
       });
-      button.classList.add('active');
-      button.setAttribute('aria-selected', 'true');
-      document.getElementById(panelId).classList.add('active');
     }
-
-    (function () {
-      var btn = document.getElementById('back-to-top');
-      if (!btn) return;
-
-      function maxScroll() {
-        return Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-      }
-
-      function pastThreshold() {
-        var m = maxScroll();
-        if (m <= 1) return false;
-        return window.scrollY >= m * 0.15;
-      }
-
-      var ticking = false;
-      function sync() {
-        ticking = false;
-        btn.classList.toggle('is-visible', pastThreshold());
-      }
-
-      function onScrollOrResize() {
-        if (!ticking) {
-          ticking = true;
-          requestAnimationFrame(sync);
-        }
-      }
-
-      window.addEventListener('scroll', onScrollOrResize, { passive: true });
-      window.addEventListener('resize', onScrollOrResize, { passive: true });
-      sync();
-
-      btn.addEventListener('click', function (e) {
-        e.preventDefault();
-        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
-      });
-    })();
   </script>
 </body>
 </html>

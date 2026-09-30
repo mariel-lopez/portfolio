@@ -1,7 +1,7 @@
 (function () {
-  if (!document.body.classList.contains('case-sobeys')) return;
+  if (!document.body.classList.contains('case-page')) return;
 
-  var IMAGE_SELECTOR = '.hero-image img, .case-study-image-card img';
+  var IMAGE_SELECTOR = '.hero-image img, .case-study-visual img, .case-problem-visual img, .case-study-image-card img, .principle-visual img';
   var lastTrigger = null;
 
   var overlay = document.createElement('div');
@@ -27,9 +27,12 @@
 
   function isExpandable(img) {
     if (!img || !img.matches(IMAGE_SELECTOR)) return false;
-    if (img.closest('.hero-image')) return true;
+    if (img.closest('[hidden]')) return false;
+    var panel = img.closest('[role="tabpanel"]');
+    if (panel && panel.hidden) return false;
     var tab = img.closest('.tab-content');
-    return Boolean(tab && tab.classList.contains('active'));
+    if (tab && !tab.classList.contains('active')) return false;
+    return true;
   }
 
   function setExpanded(trigger) {

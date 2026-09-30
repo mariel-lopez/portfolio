@@ -1,7 +1,10 @@
 /* Sobeys case study image lightbox */
 
-body.case-sobeys .hero-image img,
-body.case-sobeys .case-study-image-card img {
+.case-page .hero-image img,
+.case-page .case-study-visual img,
+.case-page .case-problem-visual img,
+.case-page .case-study-image-card img,
+.case-page .principle-visual img {
   cursor: zoom-in;
 }
 
@@ -95,7 +98,7 @@ body.sobeys-lightbox-open {
   height: auto;
   object-fit: contain;
   border-radius: 20px;
-  background: #ffffff;
+  background: transparent;
   box-shadow: 0 28px 72px rgba(0, 0, 0, 0.32);
   pointer-events: auto;
   cursor: default;
@@ -110,7 +113,7 @@ html.dark-theme .sobeys-lightbox__close {
 }
 
 html.dark-theme .sobeys-lightbox__image {
-  background: #1a1a1a;
+  background: transparent;
 }
 
 @media (prefers-reduced-motion: reduce) {

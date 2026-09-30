@@ -5,7 +5,7 @@
 
   var phrases = [
     {
-      text: 'Product Designer @ IBM iX',
+      text: 'Product Designer',
       link: {
         type: 'partial',
         href: 'https://www.ibm.com/consulting/ibmix',
