@@ -11,9 +11,11 @@
   <link rel="shortcut icon" href="favicon.png" />
   <script>
     (async function () {
-      var ACCESS_KEY = 'etc_access_granted';
-      var PASSWORD_HASH = '143705b2daf4782f008a1fc7aedddf3ee66e8b42d295cf07cdc015ab93b90be9';
+      var ACCESS_KEY = 'etc_access_granted_v2';
+      var PASSWORD_SALT = 'mariellopez-portfolio-v2';
+      var PASSWORD_HASH = '334e0bc83ec9e6e364add8e848166dba1d8c496f0c536e9e3dc5dae7bdaedca9';
       try {
+        sessionStorage.removeItem('etc_access_granted');
         if (sessionStorage.getItem(ACCESS_KEY) === 'true') return;
       } catch (e) {}
 
@@ -31,7 +33,7 @@
         return;
       }
 
-      var data = new TextEncoder().encode(input);
+      var data = new TextEncoder().encode(PASSWORD_SALT + '\0' + input);
       var digest = await window.crypto.subtle.digest('SHA-256', data);
       var hash = Array.from(new Uint8Array(digest)).map(function (b) {
         return b.toString(16).padStart(2, '0');

@@ -2,9 +2,14 @@
 (function (global) {
   'use strict';
 
-  var PASSWORD_HASH = '143705b2daf4782f008a1fc7aedddf3ee66e8b42d295cf07cdc015ab93b90be9';
+  var PASSWORD_SALT = 'mariellopez-portfolio-v2';
+  var PASSWORD_HASH = '334e0bc83ec9e6e364add8e848166dba1d8c496f0c536e9e3dc5dae7bdaedca9';
   var TTL_MS = 30 * 24 * 60 * 60 * 1000;
-  var CASE_ACCESS_KEY = 'portfolio_case_access';
+  var CASE_ACCESS_KEY = 'portfolio_case_access_v2';
+  var LOCKOUT_AFTER = 8;
+  var LOCKOUT_MS = 15000;
+  var failCount = 0;
+  var lockUntil = 0;
 
   var modal = null;
   var inputEl = null;
@@ -39,14 +44,25 @@
     } catch (e) {}
   }
 
+  function hashesEqual(a, b) {
+    if (typeof a !== 'string' || typeof b !== 'string' || a.length !== b.length) return false;
+    var diff = 0;
+    for (var i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+    return diff === 0;
+  }
+
   function hashPassword(input) {
-    var data = new TextEncoder().encode(input);
+    var data = new TextEncoder().encode(PASSWORD_SALT + '\0' + input);
     return window.crypto.subtle.digest('SHA-256', data).then(function (digest) {
       return Array.from(new Uint8Array(digest)).map(function (b) {
         return b.toString(16).padStart(2, '0');
       }).join('');
     });
   }
+
+  try {
+    localStorage.removeItem('portfolio_case_access');
+  } catch (e) {}
 
   function ensureModal() {
     if (modal) return modal;
@@ -180,6 +196,11 @@
   function submitCurrent() {
     if (!pending || !inputEl) return;
 
+    if (Date.now() < lockUntil) {
+      setError('Too many attempts. Please wait a moment.');
+      return;
+    }
+
     var value = inputEl.value;
     if (!value) {
       setError('Please enter a password.');
@@ -199,12 +220,20 @@
       .then(function (hash) {
         submitBtn.disabled = false;
         cancelBtn.disabled = false;
-        if (hash === PASSWORD_HASH) {
+        if (hashesEqual(hash, PASSWORD_HASH)) {
+          failCount = 0;
           grant(CASE_ACCESS_KEY);
           closeModal(true);
           return;
         }
-        setError('Incorrect password. Try again.');
+        failCount += 1;
+        if (failCount >= LOCKOUT_AFTER) {
+          lockUntil = Date.now() + LOCKOUT_MS;
+          failCount = 0;
+          setError('Too many attempts. Please wait a moment.');
+        } else {
+          setError('Incorrect password. Try again.');
+        }
         inputEl.select();
         inputEl.focus();
       })
@@ -292,7 +321,6 @@
   global.PortfolioPassword = {
     CASE_ACCESS_KEY: CASE_ACCESS_KEY,
     isGranted: isGranted,
-    grant: grant,
     unlock: unlock,
     bindProtectedLinks: bindProtectedLinks
   };
