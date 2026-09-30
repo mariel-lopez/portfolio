@@ -3,10 +3,32 @@
   var html = document.documentElement;
   var DURATION = 700;
 
+  function applyOrigin(x, y) {
+    var ox = typeof x === 'number' && isFinite(x) ? x : 50;
+    var oy = typeof y === 'number' && isFinite(y) ? y : 38;
+    html.style.setProperty('--pt-ox', ox + '%');
+    html.style.setProperty('--pt-oy', oy + '%');
+  }
+
+  applyOrigin(50, 38);
+
+  function rememberOrigin(x, y) {
+    applyOrigin(x, y);
+    try {
+      sessionStorage.setItem('pt-ox', String(x));
+      sessionStorage.setItem('pt-oy', String(y));
+    } catch (e) {}
+  }
+
   try {
     if (sessionStorage.getItem('pt-nav') === '1') {
       html.classList.add('pt-from-nav');
       sessionStorage.removeItem('pt-nav');
+      var ox = parseFloat(sessionStorage.getItem('pt-ox'));
+      var oy = parseFloat(sessionStorage.getItem('pt-oy'));
+      sessionStorage.removeItem('pt-ox');
+      sessionStorage.removeItem('pt-oy');
+      applyOrigin(ox, oy);
     }
   } catch (e) {}
 
@@ -53,6 +75,7 @@
   }
 
   window.PortfolioProgress = {
+    setOrigin: rememberOrigin,
     start: markLeave,
     go: function (href) {
       markLeave();

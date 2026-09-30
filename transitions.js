@@ -175,9 +175,21 @@
     html.style.overflow = '';
   });
 
+  function captureOrigin(e) {
+    if (e.clientX == null || e.clientY == null) return;
+    var x = (e.clientX / Math.max(1, window.innerWidth)) * 100;
+    var y = (e.clientY / Math.max(1, window.innerHeight)) * 100;
+    if (window.PortfolioProgress && typeof window.PortfolioProgress.setOrigin === 'function') {
+      window.PortfolioProgress.setOrigin(x, y);
+    }
+  }
+
+  document.addEventListener('pointerdown', captureOrigin, true);
+
   document.addEventListener('click', function (e) {
     var a = e.target.closest('a[href]');
     if (!isInternalNavLink(a, e)) return;
+    captureOrigin(e);
     e.preventDefault();
     runLeave(a.href);
   });
