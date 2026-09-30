@@ -3,9 +3,9 @@
   'use strict';
 
   var PASSWORD_SALT = 'mariellopez-portfolio-v2';
-  var PASSWORD_HASH = '334e0bc83ec9e6e364add8e848166dba1d8c496f0c536e9e3dc5dae7bdaedca9';
+  var PASSWORD_HASH = '22af7702635f2377642213e8635eeec686ecfb169865653ac3ccfb2baa59dd10';
   var TTL_MS = 30 * 24 * 60 * 60 * 1000;
-  var CASE_ACCESS_KEY = 'portfolio_case_access_v2';
+  var CASE_ACCESS_KEY = 'portfolio_case_access_v3';
   var LOCKOUT_AFTER = 8;
   var LOCKOUT_MS = 15000;
   var failCount = 0;
@@ -52,7 +52,7 @@
   }
 
   function hashPassword(input) {
-    var data = new TextEncoder().encode(PASSWORD_SALT + '\0' + input);
+    var data = new TextEncoder().encode(PASSWORD_SALT + '\0' + String(input).trim());
     return window.crypto.subtle.digest('SHA-256', data).then(function (digest) {
       return Array.from(new Uint8Array(digest)).map(function (b) {
         return b.toString(16).padStart(2, '0');
@@ -62,6 +62,7 @@
 
   try {
     localStorage.removeItem('portfolio_case_access');
+    localStorage.removeItem('portfolio_case_access_v2');
   } catch (e) {}
 
   function ensureModal() {
