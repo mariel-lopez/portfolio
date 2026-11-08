@@ -234,8 +234,7 @@
 }
 
 .hero-rotating {
-  display: inline-flex;
-  align-items: baseline;
+  display: inline;
   margin: 0;
   color: var(--nav-muted);
   font-weight: var(--nav-meta-weight);

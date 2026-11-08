@@ -74,7 +74,7 @@
 
 .hero-rotating-link:hover,
 .hero-rotating-link:focus-visible {
-  color: var(--hover-color);
+  color: var(--nav-ink);
 }
 
 /* ── Rolling links ── */
